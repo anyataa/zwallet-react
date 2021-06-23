@@ -1,0 +1,74 @@
+// Setting Color
+.bg-primary {
+  background-color: rgb(250, 252, 255);
+}
+
+.bg-secondary {
+  background-color: #6379f4;
+}
+.bg-grey {
+  background-color: #dadada;
+}
+
+.bg-white {
+  background-color: #fff !important;
+}
+
+.bg-red {
+  background-color: #ff5b37;
+}
+
+.border-secondary {
+  border: 2px solid #6379f4;
+}
+
+.col-primary {
+  color: #e5e5e5;
+}
+
+.col-secondary {
+  color: #6379f4;
+}
+
+.col-white {
+  color: #fff !important;
+}
+
+.col-white50 {
+  color: #221619;
+}
+.col-mid-grey {
+  color: #88888f;
+}
+.col-grey {
+  color: #7a7886;
+}
+
+.col-dark-grey {
+  color: #3a3d42;
+}
+
+.col-red {
+  color: #ff5b37;
+}
+.col-green {
+  color: #1ec15f;
+}
+.text-center {
+  text-align: center;
+}
+// Setting Container
+
+// .container {
+//   width: 100%;
+//   //   set 100ch since almost all screen is fullscreen
+//   height: 100vh;
+//   padding-right: var(--bs-gutter-x, 0.75rem);
+//   padding-left: var(--bs-gutter-x, 0.75rem);
+//   margin-right: auto;
+//   margin-left: auto;
+//   justify-content: center;
+//   align-items: center;
+//   display: flex;
+//   flex-direction: column;
+// }

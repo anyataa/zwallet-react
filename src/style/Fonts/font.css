@@ -1,0 +1,22 @@
+@font-face {
+  font-family: "Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Nunito Regular"),
+    url("./NunitoSans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "SemiBold";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Nunito Semi Bold"),
+    url("./NunitoSans-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Bold";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Nunito Bold"), url("./NunitoSans-Bold.ttf") format("truetype");
+}

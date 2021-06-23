@@ -1,0 +1,20 @@
+import React from "react";
+import "../style/transfer.css";
+import "../style/dashboard.css";
+import "../style/global.css";
+import "../style/navBar.css";
+import NavBar from "../component/NavBar";
+import ListContact from "../component/ListContact";
+import { Footer } from "../component/Footer";
+import Dashboard from "../component/Dashboard";
+
+export const TransferList = () => {
+  return (
+    <div className="container">
+      <Dashboard></Dashboard>
+      <NavBar></NavBar>
+      <ListContact></ListContact>
+      <Footer></Footer>
+    </div>
+  );
+};

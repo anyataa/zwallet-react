@@ -1,0 +1,44 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": [{
+    "name": "Samuel Suhi",
+    "phone" : "+62 813-8492-9994",
+    "image": "./../asset/image/friend1.png",
+    "pin": "12121"
+  }, 
+  {
+    "name": "Lara Croft",
+    "phone" : "+62 813-8492-9994",
+    "image": "./../asset/image/friend1.png",
+    "pin": "12121"
+  },{
+    "name": "Henry Jufry",
+    "phone" : "+62 813-8342-3294",
+    "image": "./../asset/image/friend1.png",
+    "pin": "12121"
+  },{
+    "name": "John Keating",
+    "phone" : "+62 824-8232-9932",
+    "image": "./../asset/image/friend1.png",
+    "pin": "12121"
+  },{
+    "name": "Anya Tamara",
+    "phone" : "+62 834-2222-9322",
+    "image": "./../asset/image/friend1.png",
+    "pin": "12121"
+  }]
+  
+}
