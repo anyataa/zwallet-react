@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import "../style/transfer.css";
 import "../style/dashboard.css";
 import "../style/global.css";
@@ -8,13 +8,15 @@ import ListContact from "../component/ListContact";
 import { Footer } from "../component/Footer";
 import Dashboard from "../component/Dashboard";
 
-export const TransferList = () => {
-  return (
-    <div className="container">
-      <Dashboard></Dashboard>
-      <NavBar></NavBar>
-      <ListContact></ListContact>
-      <Footer></Footer>
-    </div>
-  );
-};
+export default class TransferListLayout extends Component {
+  render() {
+    return (
+      <div className="container">
+        <Dashboard></Dashboard>
+        <NavBar></NavBar>
+        <ListContact></ListContact>
+        <Footer></Footer>
+      </div>
+    );
+  }
+}

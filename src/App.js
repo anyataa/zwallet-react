@@ -1,10 +1,8 @@
-import ListContact from "./component/ListContact";
-import NavBar from "./component/NavBar";
-import { TransferList } from "./layout/TransferListLayout";
+import TransferListLayout from "./layout/TransferListLayout";
 function App() {
   return (
     <div className="App">
-      <TransferList></TransferList>
+      <TransferListLayout></TransferListLayout>
     </div>
   );
 }

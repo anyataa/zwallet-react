@@ -16,7 +16,7 @@ export default function NavBar() {
           </div>
           <div className="profile-img">
             <input id="notif-btn" type="checkbox" hidden={true} />
-            <label for="notif-btn">
+            <label htmlFor="notif-btn">
               <h2 className="fa fa-bell icon-notif">
                 {" "}
                 <FaBell></FaBell>

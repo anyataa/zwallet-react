@@ -8,31 +8,51 @@ import "../style/navBar.css";
 export default class ListContact extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: [] };
+    this.state = { data: [], query: "" };
   }
-  handleChange = () => {
-    axios.get("http://localhost:4000/profile").then((res) => {
-      // console.log(res);
+
+  // Get user data for the list
+  fetchProfile = () => {
+    axios.get("http://localhost:8000/profile").then((res) => {
       this.setState({ data: res.data });
     });
   };
 
+  // Query based on the input
+  queryContact = (input) => {
+    this.setState(() => ({ query: input.target.value.trim() }));
+  };
+
   componentDidMount() {
-    this.handleChange();
+    this.fetchProfile();
   }
   render() {
+    const { query, data } = this.state;
+    const { queryContact } = this;
+    const showContact =
+      query === ""
+        ? data
+        : data.filter((d) =>
+            d.name.toLowerCase().includes(query.toLowerCase())
+          );
     return (
       <div className="right">
-        {this.state.data.map((data) => (
-          <div className="transfer-item-wrapper" key={data.name}>
+        <input
+          onChange={(e) => queryContact(e)}
+          placeholder="Search Contact"
+        ></input>
+        {/* Debugging */}
+        {query}
+        {showContact.map((contact) => (
+          <div className="transfer-item-wrapper" key={contact.name}>
             <img
               src={require("./../asset/image/friend1.png").default}
               alt="friend profile"
               className="transfer-contact-image"
             ></img>
             <div className="transer-contact">
-              <p className="transfer-primary-text">{data.name}</p>
-              <p className="transfer-secondary-text">{data.phone}</p>
+              <p className="transfer-primary-text">{contact.name}</p>
+              <p className="transfer-secondary-text">{contact.phone}</p>
             </div>
           </div>
         ))}
