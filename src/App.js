@@ -6,7 +6,6 @@ import NotFound404 from "./layout/404";
 import DashboardLayout from "./layout/DashboardLayout";
 import LandingPage from "./layout/LandingPage";
 import "./style/global.css";
-import Login from "./layout/Login";
 function App() {
   return (
     <div className="App">
