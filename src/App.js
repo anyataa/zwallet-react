@@ -18,7 +18,6 @@ function App() {
         <Route path="/dashboard" component={DashboardLayout} />
         <Route path="/landingPage" component={LandingPage} />
         <Route path="/login" component={Login} />
-
         <Route path="*" component={NotFound404} />
       </Switch>
     </BrowserRouter>
