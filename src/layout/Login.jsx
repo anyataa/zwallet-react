@@ -26,7 +26,7 @@ const Login = () => {
     <div className='login-container'>
       <Hero />
       <div className='login-right'>
-        
+
         <div>
           <p className="login-text-box-top">Start Accessing Banking Needs<br/> All Devices and All Platforms<br/> With 30.000+ Users</p>
           <p class="login-text-box-bottom">Transfering money is eassier than ever, you can access Zwallet wherever you are. Desktop, laptop, mobile phone? we cover all of that for you!</p>
