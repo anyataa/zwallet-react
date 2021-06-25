@@ -13,32 +13,61 @@
       "postId": 1
     }
   ],
-  "profile": [{
-    "name": "Samuel Suhi",
-    "phone" : "+62 813-8492-9994",
-    "image": "./../asset/image/friend1.png",
-    "pin": "12121"
-  }, 
-  {
-    "name": "Lara Croft",
-    "phone" : "+62 813-8492-9994",
-    "image": "./../asset/image/friend1.png",
-    "pin": "12121"
-  },{
-    "name": "Henry Jufry",
-    "phone" : "+62 813-8342-3294",
-    "image": "./../asset/image/friend1.png",
-    "pin": "12121"
-  },{
-    "name": "John Keating",
-    "phone" : "+62 824-8232-9932",
-    "image": "./../asset/image/friend1.png",
-    "pin": "12121"
-  },{
-    "name": "Anya Tamara",
-    "phone" : "+62 834-2222-9322",
-    "image": "./../asset/image/friend1.png",
-    "pin": "12121"
-  }]
-  
+  "user": [
+    {
+      "id": 1,
+      "email": "Samuel@mail.com",
+      "password": "123",
+      "name": "Samuel Suhi",
+      "username": "SamSushi",
+      "phone": "+62 813-8492-9994",
+      "image": "./../asset/image/friend1.png",
+      "pin": "12121",
+      "balance": 50.000
+    },
+    {
+      "id": 2,
+      "name": "Lara Croft",
+      "password": "123",
+      "username": "LaraCroft",
+      "email": "LaraCroft@mail.com",
+      "phone": "+62 813-8492-9994",
+      "image": "./../asset/image/friend1.png",
+      "pin": "12121",
+      "balance": 150.000
+    },
+    {
+      "id": 3,
+      "name": "Henry Jufry",
+      "password": "123",
+      "username": "Hajufry",
+      "email": "Henry12@mail.com",
+      "phone": "+62 813-8342-3294",
+      "image": "./../asset/image/friend1.png",
+      "pin": "12121",
+      "balance": 500.000
+    },
+    {
+      "id": 4,
+      "name": "John Keating",
+      "password": "123",
+      "username": "Jkeats",
+      "email": "JohnKeats@mail.com",
+      "phone": "+62 824-8232-9932",
+      "image": "./../asset/image/friend1.png",
+      "pin": "12121",
+      "balance": 250.000
+    },
+    {
+      "id": 5,
+      "password": "123",
+      "name": "Anya Tamara",
+      "username": "anyatmr",
+      "email": "Anyatmr@mail.com",
+      "phone": "+62 834-2222-9322",
+      "image": "./../asset/image/friend1.png",
+      "pin": "12121",
+      "balance": 125.000
+    }
+  ]
 }
