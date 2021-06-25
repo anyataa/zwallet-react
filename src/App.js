@@ -1,6 +1,7 @@
 import TransferListLayout from "./layout/TransferListLayout";
 
 import { Route, Switch } from "react-router-dom";
+import Login from "./layout/Login";
 import NotFound404 from "./layout/404";
 import DashboardLayout from "./layout/DashboardLayout";
 import LandingPage from "./layout/LandingPage";
@@ -17,6 +18,7 @@ function App() {
         <Route path="/dashboard" component={DashboardLayout}/>
         <Route path="/landingPage" component={LandingPage}/>
         <Route path="/login" component={Login}/>
+  
         <Route path="*" component={NotFound404}/>
       </Switch>
     </div>
