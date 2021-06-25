@@ -5,6 +5,7 @@ import Partner from '../LandingPage/Partner';
 import Feature from '../LandingPage/Feature';
 import Review from '../LandingPage/Review';
 import Footer from '../LandingPage/Footer';
+import '../../style/landingPage.css'
 
 
 const LandingPage = () => {
