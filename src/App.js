@@ -1,4 +1,4 @@
-// import TransferListLayout from "./layout/TransferListLayout";
+import TransferListLayout from "./layout/TransferListLayout";
 
 import { Route, Switch } from "react-router-dom";
 import NotFound404 from "./layout/404";
@@ -13,11 +13,11 @@ function App() {
       by the person in charge, feel free to add more. Yet pls do not delete. 
       If you need to do so. Pls informed in the group */}
       <Switch>
-        <Route path="/transfer" component={TransferListLayout}></Route>
-        <Route path="/dashboard" component={DashboardLayout}></Route>
-        <Route path="/landingPage" component={LandingPage}></Route>
-        <Route path="/login" component={Login}></Route>
-        <Route path="*" component={NotFound404}></Route>
+        <Route path="/transfer" component={TransferListLayout}/>
+        <Route path="/dashboard" component={DashboardLayout}/>
+        <Route path="/landingPage" component={LandingPage}/>
+        <Route path="/login" component={Login}/>
+        <Route path="*" component={NotFound404}/>
       </Switch>
     </div>
   );
