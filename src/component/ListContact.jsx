@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "../style/transfer.css";
-import "../style/dashboard.css";
+// import "../style/dashboard.css";
 import "../style/global.css";
 import "../style/navBar.css";
 
