@@ -1,5 +1,6 @@
+
+import { Route, Switch } from "react-router-dom";
 import Login from "./layout/Login";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
 import NotFound404 from "./layout/404";
 import DashboardLayout from "./layout/DashboardLayout";
 import LandingPage from "./layout/LandingPage";
@@ -7,7 +8,7 @@ import TransferListLayout from "./layout/TransferListLayout";
 import "./style/global.css";
 function App() {
   return (
-    <BrowserRouter className="App">
+    <div className="App">
       {/* Code below allows un-accessible page to be developed 
       by the person in charge, feel free to add more. Yet pls do not delete. 
       If you need to do so. Pls informed in the group */}
@@ -18,7 +19,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="*" component={NotFound404} />
       </Switch>
-    </BrowserRouter>
+    </div>
   );
 }
 
