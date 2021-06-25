@@ -13,7 +13,7 @@ function App() {
       by the person in charge, feel free to add more. Yet pls do not delete. 
       If you need to do so. Pls informed in the group */}
       <Switch>
-        <Route path="/transfer" component={TransferListLayout} />
+        {/* <Route path="/transfer" component={TransferListLayout} /> */}
         <Route path="/dashboard" component={DashboardLayout} />
         <Route path="/landingPage" component={LandingPage} />
         <Route path="/login" component={Login} />
