@@ -13,7 +13,7 @@ export default class ListContact extends Component {
 
   // Get user data for the list
   fetchProfile = () => {
-    axios.get("http://localhost:8000/profile").then((res) => {
+    axios.get("http://localhost:4000/profile").then((res) => {
       this.setState({ data: res.data });
     });
   };

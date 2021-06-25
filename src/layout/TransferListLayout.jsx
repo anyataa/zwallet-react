@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import "../style/transfer.css";
-import "../style/dashboard.css";
 import "../style/global.css";
-import "../style/navBar.css";
 import NavBar from "../component/NavBar";
 import ListContact from "../component/ListContact";
 import { Footer } from "../component/Footer";
