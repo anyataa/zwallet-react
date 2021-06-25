@@ -12,10 +12,10 @@ export default class TransferListLayout extends Component {
   render() {
     return (
       <div className="container">
-        <Dashboard></Dashboard>
-        <NavBar></NavBar>
-        <ListContact></ListContact>
-        <Footer></Footer>
+        <Dashboard />
+        <NavBar />
+        <ListContact />
+        <Footer />
       </div>
     );
   }
