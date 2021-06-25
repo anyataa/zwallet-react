@@ -37,9 +37,11 @@
   align-items: center;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
+  /* background-color: red; */
+  margin-top: 20px;
 }
 
-.transfer-item-wrapper:hover{
+.transfer-item-wrapper:hover {
   cursor: pointer;
 }
 

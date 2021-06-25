@@ -5,18 +5,24 @@ import "../style/dashboard.css";
 import "../style/global.css";
 import "../style/navBar.css";
 
+
 export default class ListContact extends Component {
   constructor(props) {
     super(props);
     this.state = { data: [], query: "" };
   }
 
-  // Get user data for the list
-  fetchProfile = () => {
-    axios.get("http://localhost:4000/profile").then((res) => {
-      this.setState({ data: res.data });
-    });
-  };
+
+// Get user data for the list
+fetchProfile = () => {
+  axios.get("http://localhost:4000/user").then((res) => {
+    this.setState({ data: res.data });
+    console.log(res.data)
+    // Local storage set item will soon be removed once Redux is implemented
+    localStorage.setItem('data', JSON.stringify(res.data))
+  });
+};
+
 
   // Query based on the input
   queryContact = (input) => {
@@ -36,13 +42,12 @@ export default class ListContact extends Component {
             d.name.toLowerCase().includes(query.toLowerCase())
           );
     return (
-      <div className="right">
+      <div className="right-transfer">
         <input
+        class="transfer-input"
           onChange={(e) => queryContact(e)}
           placeholder="Search Contact"
         ></input>
-        {/* Debugging */}
-        {query}
         {showContact.map((contact) => (
           <div className="transfer-item-wrapper" key={contact.name}>
             <img
