@@ -5,11 +5,13 @@ import "../style/dashboard.css";
 import "../style/global.css";
 import "../style/navBar.css";
 
+
 export default class ListContact extends Component {
   constructor(props) {
     super(props);
     this.state = { data: [], query: "" };
   }
+
 
 // Get user data for the list
 fetchProfile = () => {
@@ -20,6 +22,7 @@ fetchProfile = () => {
     localStorage.setItem('data', JSON.stringify(res.data))
   });
 };
+
 
   // Query based on the input
   queryContact = (input) => {
@@ -45,8 +48,6 @@ fetchProfile = () => {
           onChange={(e) => queryContact(e)}
           placeholder="Search Contact"
         ></input>
-        {/* Debugging */}
-        {query}
         {showContact.map((contact) => (
           <div className="transfer-item-wrapper" key={contact.name}>
             <img
