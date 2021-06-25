@@ -6,6 +6,7 @@ import Feature from '../LandingPage/Feature';
 import Review from '../LandingPage/Review';
 import Footer from '../LandingPage/Footer';
 
+
 const LandingPage = () => {
     return (
         <div>

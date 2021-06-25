@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 
 export default class BalanceSeeAll extends Component {
   render() {
@@ -7,12 +8,19 @@ export default class BalanceSeeAll extends Component {
         <div className="left-dash-bottom-container">
           <div className="balance-detail">
             <div className="row-balance">
-              <i className="fa fa-arrow-down" />
+              <i>
+                <FaArrowDown className="col-green"></FaArrowDown>
+              </i>
+
               <p>Income</p>
               <h2>Rp2.120.000 </h2>
             </div>
             <div className="row-balance">
-              <i className="fa fa-arrow-up" />
+              <i>
+                {" "}
+                <FaArrowUp className="col-red"></FaArrowUp>
+              </i>
+
               <p>Outcome</p>
               <h2>Rp1.120.000 </h2>
             </div>
