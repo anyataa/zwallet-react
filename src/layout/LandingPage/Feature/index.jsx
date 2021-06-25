@@ -3,12 +3,12 @@ import React from 'react';
 
 const Feature = () => {
     return (
-        <div class="landing-feature">
-            <div class="left-feature">
+        <div className="landing-feature">
+            <div className="left-feature">
             </div>
-            <div class="right-feature">
+            <div className="right-feature">
                 <div>
-                    <p class="feature-title">All The <span>Great</span> Zwallet Features.</p>
+                    <p className="feature-title">All The <span>Great</span> Zwallet Features.</p>
                 </div>
             </div>
         </div>
