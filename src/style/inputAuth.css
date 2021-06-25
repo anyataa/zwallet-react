@@ -1,0 +1,23 @@
+.input-box{
+  display: flex;
+  align-items: center;
+  border-bottom: 1.5px solid rgba(169, 169, 169, 0.6);
+}
+
+.input {
+  width: 373px;
+  height: 37px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 27px;
+  color: #3A3D42;
+  border: none;
+  outline: none;
+}
+
+.input::placeholder{
+  font-family: 'Nunito Sans Regular';
+  font-size: 16px;
+  line-height: 23px;
+  color: rgba(169, 169, 169, 0.8);
+}
