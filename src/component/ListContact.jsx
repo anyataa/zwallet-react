@@ -12,7 +12,6 @@ export default class ListContact extends Component {
     this.state = { data: [], query: "" };
   }
 
-
 // Get user data for the list
 fetchProfile = () => {
   axios.get("http://localhost:4000/user").then((res) => {
@@ -22,7 +21,6 @@ fetchProfile = () => {
     localStorage.setItem('data', JSON.stringify(res.data))
   });
 };
-
 
   // Query based on the input
   queryContact = (input) => {
