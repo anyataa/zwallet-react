@@ -5,6 +5,7 @@ import "../style/dashboard.css";
 import "../style/global.css";
 import "../style/navBar.css";
 
+
 export default class ListContact extends Component {
   constructor(props) {
     super(props);
@@ -13,8 +14,11 @@ export default class ListContact extends Component {
 
   // Get user data for the list
   fetchProfile = () => {
-    axios.get("http://localhost:4000/profile").then((res) => {
+    axios.get("http://localhost:4000/user").then((res) => {
       this.setState({ data: res.data });
+      console.log(res.data)
+      // Local storage set item will soon be removed once Redux is implemented
+      localStorage.setItem('data', JSON.stringify(res.data))
     });
   };
 
@@ -41,8 +45,6 @@ export default class ListContact extends Component {
           onChange={(e) => queryContact(e)}
           placeholder="Search Contact"
         ></input>
-        {/* Debugging */}
-        {query}
         {showContact.map((contact) => (
           <div className="transfer-item-wrapper" key={contact.name}>
             <img
