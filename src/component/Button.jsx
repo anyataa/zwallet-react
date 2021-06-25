@@ -3,7 +3,7 @@ import '../style/Button.css'
 
 const Button = ({onClick, disabled}) => {
   return (
-    <button class="login-btn" disabled={disabled} onClick={onClick}>Login</button>
+    <button className="login-btn" disabled={disabled} onClick={onClick}>Login</button>
   )
 }
 
