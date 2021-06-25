@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import "../../../style/landingPage.css";
 
 const About = () => {
     return (

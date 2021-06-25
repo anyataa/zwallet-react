@@ -1,5 +1,5 @@
 import React from 'react';
-import "../../../style/navBar.css";
+import "../../../style/landingPage.css";
 
 const Partner = () => {
     return (
