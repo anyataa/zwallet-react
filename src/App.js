@@ -1,5 +1,3 @@
-// import TransferListLayout from "./layout/TransferListLayout";
-
 import Login from "./layout/Login";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import NotFound404 from "./layout/404";
