@@ -36,8 +36,9 @@ export default class ListContact extends Component {
             d.name.toLowerCase().includes(query.toLowerCase())
           );
     return (
-      <div className="right">
+      <div className="right-transfer">
         <input
+        class="transfer-input"
           onChange={(e) => queryContact(e)}
           placeholder="Search Contact"
         ></input>
