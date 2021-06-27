@@ -53,6 +53,7 @@ this.setState((currentState) => ({container : "right"}))
           );
     return (
       <div className={this.state.container}>
+        {/* Dangerzone , must be changed ! */}
         {window.location.href === "http://localhost:3000/transfer" && (
           <input
             className="transfer-input"
@@ -69,7 +70,6 @@ this.setState((currentState) => ({container : "right"}))
               style={{ textDecoration: "none" }}
             >
               <div className="transfer-item-wrapper" key={contact.id}>
-                {contact.id}
                 <img
                   src={`https://randomuser.me/api/portraits/men/${contact.id}.jpg`}
                   alt="friend profile"
