@@ -9,6 +9,7 @@ const Header = () => {
           <p className="header-subtitle">Awesome App For Saving <span>Time.</span></p>
           <p className="header-description">We bring you a mobile app for banking problems that oftenly wasting much
                     of your times.</p>
+          <button className="try-it-btn">Try It Free</button>
       </div>
       <div className="right-header">
           <button className="login-btn-land">Login</button>
