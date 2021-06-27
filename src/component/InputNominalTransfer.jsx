@@ -19,9 +19,11 @@ const goToConfirmation = function() {
       <div class="transfer-item-wrapper">
           {console.log(props)}
         <img
-          src={require("../asset/image/Samuel-Suhi.svg").default}
+          src={`https://randomuser.me/api/portraits/men/${props.transferTo[0].id}.jpg`}
           alt=""
           class="transfer-contact-image"
+          width="70px"
+          
         />
         <div className="transer-contact">
           <p className="transfer-primary-text">{props.transferTo[0].name}</p>
