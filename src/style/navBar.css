@@ -104,6 +104,10 @@
   display: flex;
 }
 
+.profile-container .profile-img img {
+  border-radius: 10px;
+}
+
 .profile-container .profile-img .icon-notif {
   color: black;
   cursor: pointer;

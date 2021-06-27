@@ -78,6 +78,9 @@
     align-items: center;
     // background-color: purple;
     display: flex;
+    img {
+      border-radius: 10px;
+    }
     .icon-notif {
       color: black;
       cursor: pointer;
