@@ -2,7 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 The design pattern for this project is MVC. 
-In the possible way the function to fetch and manipulate data in a specific format will be divided from the view controller (view.jsx)
+In the possible way the function to fetch and manipulate data in a specific format will be divided from the view controller (view.jsx).
+The component in this project use rfac and use-state to control the state. While, the layout is rcc to ensure the ease in understanding which one is layout and which one is component.
 
 
 ## This project use several libaray:
