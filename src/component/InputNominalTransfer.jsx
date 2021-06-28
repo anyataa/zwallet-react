@@ -67,9 +67,7 @@ const goToConfirmation = function() {
             <Link onClick={props.setContainerList} to="/transfer" style={{ textDecoration: "none" }}>
               <input type="button" value="Back" className="transfer-btn" />
             </Link>
-           
               <input onClick={goToConfirmation} type="button" value="Continue" className="transfer-btn" />
-  
           </div>
     </>
   );

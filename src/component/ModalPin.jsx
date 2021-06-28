@@ -1,57 +1,61 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FaTimes } from 'react-icons/fa'
+import { pinHandler } from '../global'
 
 
-export const ModalPin = () => {
+export const ModalPin = (props) => {
+
+   
     //   Pin control
-    var pin = document.getElementsByClassName("transfer-input-pin");
-    const pinHandler = (index) => {
-        if (pin[index].value < 0) {
-          pin[index].value = null;
-        } else if (pin[index].value > 9) {
-          pin[index].value = pin[index].value[1];
-        } else if (pin[index].value.length > 1) {
-          pin[index].value = pin[index].value[1];
-        }
-      
-        // if (pin[index].value.length > 0 && index < 5) {
-        //   pin[index + 1].focus();
-        //   // anya: izin nambah ini ya, supaya berubah warna kalo uda diinput
-        //   // thanks, kalo ngebug kasi tau ya. biar diperbaiki
-        //   pin[index].classList.add("border-secondary");
-        //   console.log('move right')
-        // }
+    const [BorderColor, setBorderColor] = useState("rgba(66, 63, 63, 0.4")
+    const [ButtonDisabled, setButtonDisabled] = useState(true)
+    const [PinValue, setPinValue] = useState("")
+    const [PinTotal, setPinTotal] = useState([{
+        value: null},
+        {value: null},
+        {value: null},
+        {value: null},
+        {value: null},
+        {value: null}])
 
-      
-        pin[index].addEventListener("keyup", (event) => {
-          if (event.code == "Backspace" && index > 0) {
-            pin[index - 1].focus();
-            console.log('move left')
-          } else { pin[index + 1].focus();}
-        });
-      
-        if (pin[index].value.length > 0) {
-          pin[index].style.borderColor = "#6379F4";
-        } else {
-          pin[index].style.borderColor = "rgba(66, 63, 63, 0.4)";
+        const validatePin = () => {
+            console.log("in")
+          // let pinUser='123456'
+          // if (pinUser == PinValue ){
+          //     console.log('true In')
+          // } else {
+          //     console.log("in")
+          // }
         }
-      
-        if (
-          pin[0].value.length > 0 &&
-          pin[1].value.length > 0 &&
-          pin[2].value.length > 0 &&
-          pin[3].value.length > 0 &&
-          pin[4].value.length > 0 &&
-          pin[5].value.length > 0
-        ) {
-          document.getElementById("pin-btn").removeAttribute("disabled");
-        } else {
-          document.getElementById("pin-btn").setAttribute("disabled", "");
-        }
-      };
+    
+
+    const pinHandler = (e, index) => {
+            if (e.target.value != null) {
+              let current = PinTotal
+              current[index]={value:e.target.value}
+            //   console.log("current",current)
+            //   console.log("pinTotal",current)
+              setPinTotal(current)
+              setBorderColor("#6379F4")
+              let pin = PinTotal[0].value+PinTotal[1].value+PinTotal[2].value+PinTotal[3].value+PinTotal[4].value+PinTotal[5].value
+            //   console.log(pin)
+              if (pin.length==6){
+                setPinValue(pin)
+                console.log("This is Pin Value:",PinValue)
+                setButtonDisabled(false)
+              } else {
+                setButtonDisabled(true)
+              }
+            } 
+          
+          };
+
     return (
         // set display to flex for debugging
-        <div id="modal" style={{display:"flex"}}>
+        <div id="modal" 
+        style={{display:props.showModal}}
+        >
+            {console.log(props)}
         <div class="pin-confirmation-box">
           <div class="modal-close-icon-wrapper">
             <p class="transfer-primary-text">Enter PIN to Transfer</p>
@@ -62,45 +66,24 @@ export const ModalPin = () => {
             continue transferring money.
           </p>
           <div class="transfer-pin-input-wrapper">
-            <input
-              type="number"
+              {PinTotal.map((element, index) => { return  <input
+              type="number"  
               class="transfer-input-pin"
-              oninput={pinHandler(0)}
-            />
-            <input
-              type="number"
-              class="transfer-input-pin"
-              oninput={pinHandler(1)}
-            />
-            <input
-              type="number"
-              class="transfer-input-pin"
-              oninput={pinHandler(2)}
-              
-            />
-            <input
-              type="number"
-              class="transfer-input-pin"
-              oninput={pinHandler(3)}
-            />
-            <input
-              type="number"
-              class="transfer-input-pin"
-              oninput={pinHandler(4)}
-            />
-            <input
-              type="number"
-              class="transfer-input-pin"
-              oninput={pinHandler(5)}
-            />
+              value={PinTotal.value}
+                key={index}
+                style={{borderColor:BorderColor}}
+              onChange={e => pinHandler(e,index)}
+            />})}
           </div>
           <input
             type="button"
             value="Continue"
             class="transfer-btn"
             id="pin-btn"
-            disabled
-            onclick="pinValidation()"
+            disabled={ButtonDisabled}
+            // Pin Validation
+            onclick
+            ={e => validatePin()}
           />
         </div>
       </div>
