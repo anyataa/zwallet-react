@@ -6,6 +6,7 @@ import DashboardLayout from "./layout/DashboardLayout";
 import LandingPage from "./layout/LandingPage";
 import TransferListLayout from "./layout/TransferListLayout";
 import "./style/global.css";
+import SignUp from "./layout/SignUp";
 function App() {
   return (
     <div className="App">
@@ -17,6 +18,7 @@ function App() {
         <Route path="/dashboard" component={DashboardLayout} />
         <Route path="/landingPage" component={LandingPage} />
         <Route path="/login" component={Login} />
+        <Route path="/signUp" component={SignUp} />
         <Route path="*" component={NotFound404} />
       </Switch>
     </div>

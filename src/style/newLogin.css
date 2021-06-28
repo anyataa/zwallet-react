@@ -1,6 +1,6 @@
 .login-container{
   display: flex;
-  min-height: 100wh;
+  min-height: 100vh;
 }
 
 .login-right {
@@ -44,8 +44,6 @@
   font-size: 18px;
   margin-bottom: 25px;
 }
-
-
 
 .bottom-text {
   font-size: 16px;
