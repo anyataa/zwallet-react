@@ -1,10 +1,29 @@
 # Zwallet React Version
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The ddesign pattern for this project is MVC. 
+In the possible way the function to fetch and manipulate data in a specific format will be divided from the view controller (view.jsx)
 
-## Available Scripts
 
-In the project directory, you can run:
+## This project use several libaray:
+- react-router-dom
+- chart-js
+- json-server (db.json (inside the repo))
+
+## If you run this project for the first time:
+run: `npm install`
+this command used for installing the library used in the project
+
+## virtual DB:
+in order to act like fetching data from database this project use json-server
+to run this please make sure to install the json-server command as global in your pc
+
+run json-server:
+1. go inside the repo folder after you clone it
+2. inside zwallet-react folder, type: `json-server -p 4000 db.json` in the terminal
+
+
+## In the project directory, you can run:
 
 ### `yarn start`
 
