@@ -84,12 +84,12 @@
       "id": 7,
       "email": "evan@mail.com",
       "password": "evan",
-      "name": "",
+      "name": "Evander",
       "username": "Rednave",
-      "phone": "",
+      "phone": "+62 812-3333-2222",
       "image": "",
       "pin": "000000",
-      "balance": 0
+      "balance": 100000
     }
   ],
   "transaction": [

@@ -30,10 +30,14 @@ export default function Dashboard() {
           <p className="label label-size">Top Up</p>
         </div>
         </Link>
+        <Link style={{textDecoration:"none"}} to='/profil' >
+
         <div className="item-wrapper">
           <i className="fas fa-user label-size"></i>
           <p className="label label-size">Profile</p>
         </div>
+        </Link>
+        
       </div>
       <div className="item-wrapper">
         <img src="../assets/images/log-out.svg" alt="" />
