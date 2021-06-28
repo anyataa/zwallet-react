@@ -4,6 +4,10 @@ import NotFound404 from "./layout/404";
 import DashboardLayout from "./layout/DashboardLayout";
 import LandingPage from "./layout/LandingPage";
 import TransferListLayout from "./layout/TransferListLayout";
+import ResetPassword from "./layout/ResetPassword";
+import CreateNewPassword from "./layout/CreateNewPassword";
+import PinSuccess from "./layout/PinSuccess";
+import CreatePin from "./layout/CreatePin";
 import "./style/global.css";
 import { TransferConfirmation } from "./component/TransferConfirmation";
 function App() {
@@ -18,6 +22,10 @@ function App() {
         <Route path="/dashboard" component={DashboardLayout} />
         <Route path="/landingPage" component={LandingPage} />
         <Route path="/login" component={Login} />
+        <Route path="/resetPassword" component={ResetPassword} />
+        <Route path="/createNewPassword" component={CreateNewPassword} />
+        <Route path="/pinSuccess" component={PinSuccess} />
+        <Route path="/createPin" component={CreatePin} />
         <Route path="*" component={NotFound404} />
       </Switch>
     </div>
