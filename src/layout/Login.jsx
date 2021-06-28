@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useReducer, useState } from "react";
 import Hero from "../component/Hero";
 import InputAuth from "../component/InputAuth";
 import { emailValidation } from "../global";
@@ -16,10 +16,6 @@ const Login = () => {
   const [errorMsg, setErrorMsg] = useState('');
 
   const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
-  
-  useEffect(() => {
-    
-  }, [])
 
   const buttonHandler = () => {
     if (email && password) {
