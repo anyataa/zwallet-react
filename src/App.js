@@ -10,6 +10,7 @@ import PinSuccess from "./layout/PinSuccess";
 import CreatePin from "./layout/CreatePin";
 import "./style/global.css";
 import { TransferConfirmation } from "./component/TransferConfirmation";
+import TopUpLayout from "./layout/TopUpLayout";
 function App() {
   return (
     <div className="App">
@@ -17,10 +18,13 @@ function App() {
       by the person in charge, feel free to add more. Yet pls do not delete. 
       If you need to do so. Pls informed in the group */}
       <Switch>
+        {/* Will be deleted */}
         <Route path="/transfer" component={TransferListLayout} />
         <Route path="/transfer/:id" component={TransferConfirmation} />
         <Route path="/dashboard" component={DashboardLayout} />
-        <Route path="/landingPage" component={LandingPage} />
+        <Route path="/topup" component={TopUpLayout}></Route>
+        {/* End of will be deleted */}
+        <Route path="/" component={LandingPage} />
         <Route path="/login" component={Login} />
         <Route path="/resetPassword" component={ResetPassword} />
         <Route path="/createNewPassword" component={CreateNewPassword} />

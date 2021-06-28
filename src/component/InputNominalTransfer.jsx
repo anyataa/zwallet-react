@@ -2,6 +2,8 @@ import React, { } from "react";
 import "../style/transfer.css";
 import "../style/navBar.css";
 import { Link } from "react-router-dom";
+import { formatRupiah } from "../global";
+import { ModalPin } from "./ModalPin";
 
 export const InputNominalTransfer = (props) => {
 const setAmountInput= function(e) {
@@ -11,6 +13,8 @@ const setAmountInput= function(e) {
 const goToConfirmation = function() {
     props.setInputDisapear(false)
 }
+
+
 
 
   return (
@@ -23,7 +27,7 @@ const goToConfirmation = function() {
           alt=""
           class="transfer-contact-image"
           width="70px"
-          
+
         />
         <div className="transer-contact">
           <p className="transfer-primary-text">{props.transferTo[0].name}</p>
@@ -39,7 +43,9 @@ const goToConfirmation = function() {
         </p>
         <div className="transfer-input-amount-wrapper2">
           <input onChange={e => (setAmountInput(e))} value={props.amount} type="text" id="transfer-input-amount" placeholder="0.00" />
-          <p className="transfer-primary-text">Rp120.000 Available</p>
+          <p className="transfer-primary-text">Rp{props.amount? props.transferTo[0].balance - props.amount: props.transferTo[0].balance} Available</p>
+          {/* Check if amount exceeding the balance */}
+          {}
           <div className="transfer-input-notes-wrapper">
             <img
               src="../assets/images/pen.svg"
@@ -63,7 +69,7 @@ const goToConfirmation = function() {
             </Link>
            
               <input onClick={goToConfirmation} type="button" value="Continue" className="transfer-btn" />
-           
+  
           </div>
     </>
   );

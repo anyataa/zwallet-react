@@ -75,9 +75,9 @@ const setContainerBefore = function()  {
             <Link to="/transfer" style={{ textDecoration: "none" }}>
               <input onClick={setContainerBefore}  type="button" value="Back" className="transfer-btn" />
             </Link>
-            <Link to="/transfer" style={{ textDecoration: "none" }}>
-              <input type="button" value="Continue" className="transfer-btn" />
-            </Link>
+            {/* <Link to="/transfer" style={{ textDecoration: "none" }}> */}
+              <input onClick type="button" value="Continue" className="transfer-btn" />
+            {/* </Link> */}
           </div>
         </div>
       )}

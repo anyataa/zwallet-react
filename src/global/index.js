@@ -8,6 +8,31 @@ export const emailValidation = (email) => {
   }
 };
 
+// rupiah format
+export const formatRupiah = (prefix, Initalinput) => {
+  var number_string = Initalinput.replace(/[^,\d]/g, "").toString(),
+    split = number_string.split(","),
+    sisa = split[0].length % 3,
+    rupiah = split[0].substr(0, sisa),
+    ribuan = split[0].substr(sisa).match(/\d{3}/gi),
+    separator = "";
+
+  if (Initalinput.value.length > 0) {
+    Initalinput.style.textIndent = 0;
+    Initalinput.style.textAlign = "center";
+  } else {
+    Initalinput.style.textIndent = "44.5%";
+    Initalinput.style.textAlign = "left";
+  }
+
+  if (ribuan) {
+    separator = sisa ? "." : "";
+    rupiah += separator + ribuan.join(".");
+  }
+
+  rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+  return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
+};
 // Fetch Data
 export const setFriendsData = () => {
   axios.get("http://localhost:4000/user").then((res) => {
