@@ -13,6 +13,7 @@ import SignUp from "./layout/SignUp";
 
 import { TransferConfirmation } from "./component/TransferConfirmation";
 import TopUpLayout from "./layout/TopUpLayout";
+import { ProfilLayout } from "./layout/ProfilLayout";
 function App() {
   return (
     <div className="App">
@@ -23,10 +24,11 @@ function App() {
         {/* Will be deleted */}
         <Route path="/transfer" component={TransferListLayout} />
         <Route path="/transfer/:id" component={TransferConfirmation} />
+        <Route path="/profil" component={ProfilLayout} />
         <Route path="/dashboard" component={DashboardLayout} />
         <Route path="/topup" component={TopUpLayout}></Route>
         {/* End of will be deleted */}
-        <Route path="/" component={LandingPage} />
+        <Route exact path="/" component={LandingPage} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
         <Route path="/resetPassword" component={ResetPassword} />
