@@ -24,10 +24,12 @@ export default function Dashboard() {
           <p className="label label-size">Transfer</p>
         </div>
         </Link>
+        <Link style={{textDecoration:"none"}} to='/topup' >
         <div className="item-wrapper">
           <i className="fas fa-plus label-size"></i>
           <p className="label label-size">Top Up</p>
         </div>
+        </Link>
         <div className="item-wrapper">
           <i className="fas fa-user label-size"></i>
           <p className="label label-size">Profile</p>
