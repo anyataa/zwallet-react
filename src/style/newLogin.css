@@ -36,8 +36,7 @@
   color: rgba(58, 61, 66, 0.8);
 }
 
-#text-validation{
-  display: none;
+.text-validation{
   text-align: center;
   color: #FF5B37;
   font-weight: 600;

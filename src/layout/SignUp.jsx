@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { Link } from 'react-router-dom'
+import React, { useReducer, useState } from "react";
+import { Link, Redirect } from 'react-router-dom'
 import { emailValidation } from '../global'
 import InputAuth from "../component/InputAuth";
 import Button from '../component/Button'
 import Hero from '../component/Hero'
+import axios from "axios";
 
 const SignUp = () => {
   const [username, setUsername] = useState();
@@ -12,15 +13,61 @@ const SignUp = () => {
 
   const [isVisible, setIsVisible] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
+  const [errorMsg, setErrorMsg] = useState('');
+
+  const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
   const buttonHandler = () => {
-    if (email && password) {
+    if (username && email && password) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
     }
-    console.log(isDisabled);
   };
+
+  const onRegister = () => {
+    if(emailValidation(email)){
+      axios.get(`http://localhost:4000/user?email=${email}`)
+      .then(res => {
+        if(res.data.length > 0){
+          console.log('masuk')
+          setErrorMsg('Email is not available, please try another email!')
+        }else{
+          axios.get('http://localhost:4000/user')
+          .then(res => {
+            axios.post('http://localhost:4000/user', {
+              id: res.data[res.data.length-1].id + 1,
+              email,
+              password,
+              name: "",
+              username,
+              phone: '',
+              image: '',
+              pin: '000000',
+              balance: 0
+            })
+            .then(res => {
+              console.log(res.data)
+              localStorage.setItem('userData', JSON.stringify(res.data))
+              forceUpdate();
+            })
+            .catch(err => {
+              console.log(err)
+            })
+          })
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }else{
+      setErrorMsg('Email Format Invalid')
+    }
+  }
+  
+  if(JSON.parse(localStorage.getItem('userData'))){
+    return <Redirect to='/dashboard'/>
+  }
 
   return (
     <div className="login-container">
@@ -67,8 +114,10 @@ const SignUp = () => {
           Forgot Password?
         </a>
         <div>
-          {/* <p id="text-validation">Email or Password Invalid</p> */}
-          <Button disabled={isDisabled} onClick={() => emailValidation(email)}>
+          {
+            errorMsg ? <p className="text-validation">{errorMsg}</p> : null
+          }
+          <Button disabled={isDisabled} onClick={onRegister}>
             Sign Up
           </Button>
         </div>

@@ -5,17 +5,18 @@ import '../style/navBar.css'
 
 
 export default function Dashboard() {
+  
   return (
     <div className="left">
       <div className="left-top">
-        <Link to='/dashboard' >
+        <Link style={{textDecoration:"none"}} to='/dashboard' >
         <div className="item-wrapper">
           <i className="label-size">
             <FaBorderAll></FaBorderAll>
           </i>
           <p className="label label-size">Dashboard</p>
         </div></Link>
-        <Link to='/transfer' >
+        <Link style={{textDecoration:"none"}}  to='/transfer' >
         <div className="item-wrapper active">
           <i className="label-size">
             <FaLongArrowAltUp></FaLongArrowAltUp>

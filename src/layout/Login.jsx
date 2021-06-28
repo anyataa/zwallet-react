@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import Hero from "../component/Hero";
 import InputAuth from "../component/InputAuth";
 import { emailValidation } from "../global";
 import "../style/newLogin.css";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Button from "../component/Button";
+import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState();
@@ -12,6 +13,13 @@ const Login = () => {
 
   const [isVisible, setIsVisible] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
+  const [errorMsg, setErrorMsg] = useState('');
+
+  const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
+  
+  useEffect(() => {
+    
+  }, [])
 
   const buttonHandler = () => {
     if (email && password) {
@@ -19,8 +27,28 @@ const Login = () => {
     } else {
       setIsDisabled(true);
     }
-    console.log(isDisabled);
   };
+
+  const onLogin = () => {
+    if(emailValidation(email)){
+      axios.get(`http://localhost:4000/user?email=${email}&password=${password}`)
+      .then(res => {
+        res.data.length > 0 ?
+        localStorage.setItem('userData', JSON.stringify(res.data[0]))
+        : setErrorMsg('Email or Password Incorrect')
+        forceUpdate();
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }else{
+      setErrorMsg('Email Format Invalid')
+    }
+  }
+  
+  if(JSON.parse(localStorage.getItem('userData'))){
+    return <Redirect to='/dashboard'/>
+  }
 
   return (
     <div className="login-container">
@@ -60,8 +88,10 @@ const Login = () => {
           Forgot Password?
         </a>
         <div>
-          {/* <p id="text-validation">Email or Password Invalid</p> */}
-          <Button disabled={isDisabled} onClick={() => emailValidation(email)}>
+          {
+            errorMsg ? <p className='text-validation'>{errorMsg}</p> : null
+          }
+          <Button disabled={isDisabled} onClick={onLogin}>
             Login
           </Button>
         </div>

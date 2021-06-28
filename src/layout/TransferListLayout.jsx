@@ -11,7 +11,9 @@ export default class TransferListLayout extends Component {
       <div className="container">
         <Dashboard />
         <NavBar />
+       
         <ListContact />
+
         <Footer />
       </div>
     );

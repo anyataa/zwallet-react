@@ -104,6 +104,10 @@
   display: flex;
 }
 
+.profile-container .profile-img img {
+  border-radius: 10px;
+}
+
 .profile-container .profile-img .icon-notif {
   color: black;
   cursor: pointer;
@@ -137,7 +141,7 @@
 .wrapper-notification {
   position: fixed;
   left: 63%;
-  height: 70vh;
+  height: 60vh;
   width: 25vw;
   border-radius: 20px;
   background-color: white;

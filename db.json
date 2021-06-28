@@ -23,7 +23,7 @@
       "phone": "+62 813-8492-9994",
       "image": "./../asset/image/friend1.png",
       "pin": "12121",
-      "balance": 50.000
+      "balance": 50000
     },
     {
       "id": 2,
@@ -34,7 +34,7 @@
       "phone": "+62 813-8492-9994",
       "image": "./../asset/image/friend1.png",
       "pin": "12121",
-      "balance": 150.000
+      "balance": 150000
     },
     {
       "id": 3,
@@ -45,7 +45,7 @@
       "phone": "+62 813-8342-3294",
       "image": "./../asset/image/friend1.png",
       "pin": "12121",
-      "balance": 500.000
+      "balance": 500000
     },
     {
       "id": 4,
@@ -56,18 +56,74 @@
       "phone": "+62 824-8232-9932",
       "image": "./../asset/image/friend1.png",
       "pin": "12121",
-      "balance": 250.000
+      "balance": 250000
     },
     {
       "id": 5,
       "password": "123",
-      "name": "Anya Tamara",
-      "username": "anyatmr",
-      "email": "Anyatmr@mail.com",
+      "name": "Samuel Jacob",
+      "username": "Samsam",
+      "email": "Samr@mail.com",
       "phone": "+62 834-2222-9322",
       "image": "./../asset/image/friend1.png",
       "pin": "12121",
-      "balance": 125.000
+      "balance": 125000
+    },
+    {
+      "id": 6,
+      "password": "123",
+      "name": "Miko Jana",
+      "username": "Mikja",
+      "email": "Miko@mail.com",
+      "phone": "+62 812-3333-2222",
+      "image": "./../asset/image/friend1.png",
+      "pin": "12121",
+      "balance": 25000
+    },
+    {
+      "id": 7,
+      "email": "evan@mail.com",
+      "password": "evan",
+      "name": "",
+      "username": "Rednave",
+      "phone": "",
+      "image": "",
+      "pin": "000000",
+      "balance": 0
+    }
+  ],
+  "transaction": [
+    {
+      "id": 1,
+      "to": "Netflix",
+      "type": 1,
+      "detail": "Subscription",
+      "total": 98000,
+      "logo": "./../Assets/netflix.svg"
+    },
+    {
+      "id": 2,
+      "to": "Jota Clive",
+      "type": 0,
+      "detail": "Transfer",
+      "total": 50000,
+      "logo": "./../Assets/friend1.png"
+    },
+    {
+      "id": 3,
+      "to": "Adobe",
+      "type": 1,
+      "detail": "Subscription",
+      "total": 95000,
+      "logo": "./../Assets/adobe.svg"
+    },
+    {
+      "id": 1,
+      "to": "Hana Michael",
+      "type": 0,
+      "detail": "Subscription",
+      "total": 85000,
+      "logo": "./../Assets/adobe.svg"
     }
   ]
 }
