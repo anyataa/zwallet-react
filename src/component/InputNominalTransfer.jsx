@@ -3,6 +3,7 @@ import "../style/transfer.css";
 import "../style/navBar.css";
 import { Link } from "react-router-dom";
 import { formatRupiah } from "../global";
+import { ModalPin } from "./ModalPin";
 
 export const InputNominalTransfer = (props) => {
 const setAmountInput= function(e) {
@@ -68,7 +69,7 @@ const goToConfirmation = function() {
             </Link>
            
               <input onClick={goToConfirmation} type="button" value="Continue" className="transfer-btn" />
-           
+  
           </div>
     </>
   );
