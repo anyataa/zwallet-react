@@ -12,7 +12,7 @@ import "./style/global.css";
 import SignUp from "./layout/SignUp";
 
 import { TransferConfirmation } from "./component/TransferConfirmation";
-import TopUpLayout from "./layout/TopUpLayout";
+import TopUp from "./layout/TopUp";
 import { ProfilLayout } from "./layout/ProfilLayout";
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
         <Route path="/transfer/:id" component={TransferConfirmation} />
         <Route path="/profil" component={ProfilLayout} />
         <Route path="/dashboard" component={DashboardLayout} />
-        <Route path="/topup" component={TopUpLayout}></Route>
+        <Route path="/topup" component={TopUp}></Route>
         {/* End of will be deleted */}
         <Route exact path="/" component={LandingPage} />
         <Route path="/login" component={Login} />
