@@ -10,8 +10,8 @@ export const ModalPin = (props) => {
     const [BorderColor, setBorderColor] = useState("rgba(66, 63, 63, 0.4")
     const [ButtonDisabled, setButtonDisabled] = useState(true)
     const [PinValue, setPinValue] = useState("")
-    const [PinTotal, setPinTotal] = useState([{
-        value: null},
+    const [PinTotal, setPinTotal] = useState([
+        {value: null},
         {value: null},
         {value: null},
         {value: null},
@@ -83,7 +83,7 @@ export const ModalPin = (props) => {
             disabled={ButtonDisabled}
             // Pin Validation
             onclick
-            ={e => validatePin()}
+            ={validatePin}
           />
         </div>
       </div>

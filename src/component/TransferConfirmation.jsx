@@ -82,7 +82,7 @@ const setContainerBefore = function()  {
           </div>
         </div>
       )}
-      <ModalPin showModal={HandlePopModal} ></ModalPin>
+      {/* <ModalPin showModal={HandlePopModal} ></ModalPin> */}
     </div>
   );
 };

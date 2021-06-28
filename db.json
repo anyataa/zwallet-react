@@ -79,18 +79,8 @@
       "image": "./../asset/image/friend1.png",
       "pin": "12121",
       "balance": 25000
-    },
-    {
-      "id": 7,
-      "email": "evan@mail.com",
-      "password": "evan",
-      "name": "Evander",
-      "username": "Rednave",
-      "phone": "+62 812-3333-2222",
-      "image": "",
-      "pin": "000000",
-      "balance": 100000
     }
+  
   ],
   "transaction": [
     {
