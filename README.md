@@ -9,6 +9,7 @@ The component in this project use rfac and use-state to control the state. While
 ## This project use several libaray:
 - react-router-dom
 - chart-js
+- react-icon
 - json-server (db.json (inside the repo))
 
 ## If you run this project for the first time:
