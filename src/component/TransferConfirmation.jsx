@@ -39,7 +39,7 @@ const setContainerBefore = function()  {
           <p className="transfer-primary-text">Transfer To</p>
           <div className="transfer-item-wrapper">
             <img
-              src={require("../asset/image/Samuel-Suhi.svg").default}
+              src={`https://randomuser.me/api/portraits/men/${selectedContact[0].id}.jpg`}
               alt=""
               className="transfer-contact-image"
             />

@@ -61,13 +61,24 @@
     {
       "id": 5,
       "password": "123",
-      "name": "Anya Tamara",
-      "username": "anyatmr",
-      "email": "Anyatmr@mail.com",
+      "name": "Samuel Jacob",
+      "username": "Samsam",
+      "email": "Samr@mail.com",
       "phone": "+62 834-2222-9322",
       "image": "./../asset/image/friend1.png",
       "pin": "12121",
       "balance": 125000
+    },
+    {
+      "id": 6,
+      "password": "123",
+      "name": "Miko Jana",
+      "username": "Mikja",
+      "email": "Miko@mail.com",
+      "phone": "+62 812-3333-2222",
+      "image": "./../asset/image/friend1.png",
+      "pin": "12121",
+      "balance": 25000
     }
   ],
   "transaction" : [
