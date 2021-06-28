@@ -9,6 +9,8 @@ import CreateNewPassword from "./layout/CreateNewPassword";
 import PinSuccess from "./layout/PinSuccess";
 import CreatePin from "./layout/CreatePin";
 import "./style/global.css";
+import SignUp from "./layout/SignUp";
+
 import { TransferConfirmation } from "./component/TransferConfirmation";
 import TopUpLayout from "./layout/TopUpLayout";
 function App() {
@@ -26,6 +28,7 @@ function App() {
         {/* End of will be deleted */}
         <Route path="/" component={LandingPage} />
         <Route path="/login" component={Login} />
+        <Route path="/signup" component={SignUp} />
         <Route path="/resetPassword" component={ResetPassword} />
         <Route path="/createNewPassword" component={CreateNewPassword} />
         <Route path="/pinSuccess" component={PinSuccess} />
