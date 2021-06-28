@@ -1,7 +1,7 @@
 # Zwallet React Version
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-The ddesign pattern for this project is MVC. 
+The design pattern for this project is MVC. 
 In the possible way the function to fetch and manipulate data in a specific format will be divided from the view controller (view.jsx)
 
 
