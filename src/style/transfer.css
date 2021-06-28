@@ -20,11 +20,22 @@
   position: absolute;
   margin-left: 18px;
 }
-
+.set-transfer-button-confirmation {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  float: right;
+  justify-content: space-between;
+  flex-direction: row;
+  /* background-color: palegoldenrod; */
+}
+.add-margin-top-tranfer-confirmation {
+  margin-top: 10%;
+}
 .transfer-input {
   outline: none;
   height: 54px;
-  width: 100%;
+  width: 95%;
   font-size: 16px;
   background: rgba(58, 61, 66, 0.1);
   border-radius: 12px;
@@ -37,9 +48,11 @@
   align-items: center;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
+  /* background-color: red; */
+  margin-top: 20px;
 }
 
-.transfer-item-wrapper:hover{
+.transfer-item-wrapper:hover {
   cursor: pointer;
 }
 
