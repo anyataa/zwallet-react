@@ -1,13 +1,13 @@
-import React, { useEffect, useReducer, useState } from "react";
-import Hero from "../component/Hero";
+import React, { useReducer, useState } from "react";
+import { Link, Redirect } from 'react-router-dom'
+import { emailValidation } from '../global'
 import InputAuth from "../component/InputAuth";
-import { emailValidation } from "../global";
-import "../style/newLogin.css";
-import { Link, Redirect } from "react-router-dom";
-import Button from "../component/Button";
+import Button from '../component/Button'
+import Hero from '../component/Hero'
 import axios from "axios";
 
-const Login = () => {
+const SignUp = () => {
+  const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
@@ -16,27 +16,46 @@ const Login = () => {
   const [errorMsg, setErrorMsg] = useState('');
 
   const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
-  
-  useEffect(() => {
-    
-  }, [])
 
   const buttonHandler = () => {
-    if (email && password) {
+    if (username && email && password) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
     }
   };
 
-  const onLogin = () => {
+  const onRegister = () => {
     if(emailValidation(email)){
-      axios.get(`http://localhost:4000/user?email=${email}&password=${password}`)
+      axios.get(`http://localhost:4000/user?email=${email}`)
       .then(res => {
-        res.data.length > 0 ?
-        localStorage.setItem('userData', JSON.stringify(res.data[0]))
-        : setErrorMsg('Email or Password Incorrect')
-        forceUpdate();
+        if(res.data.length > 0){
+          console.log('masuk')
+          setErrorMsg('Email is not available, please try another email!')
+        }else{
+          axios.get('http://localhost:4000/user')
+          .then(res => {
+            axios.post('http://localhost:4000/user', {
+              id: res.data[res.data.length-1].id + 1,
+              email,
+              password,
+              name: "",
+              username,
+              phone: '',
+              image: '',
+              pin: '000000',
+              balance: 0
+            })
+            .then(res => {
+              console.log(res.data)
+              localStorage.setItem('userData', JSON.stringify(res.data))
+              forceUpdate();
+            })
+            .catch(err => {
+              console.log(err)
+            })
+          })
+        }
       })
       .catch(err => {
         console.log(err)
@@ -68,6 +87,13 @@ const Login = () => {
         </div>
 
         <InputAuth
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Enter your Username"
+          onKeyUp={buttonHandler}
+        />
+        <InputAuth
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -89,19 +115,19 @@ const Login = () => {
         </a>
         <div>
           {
-            errorMsg ? <p className='text-validation'>{errorMsg}</p> : null
+            errorMsg ? <p className="text-validation">{errorMsg}</p> : null
           }
-          <Button disabled={isDisabled} onClick={onLogin}>
-            Login
+          <Button disabled={isDisabled} onClick={onRegister}>
+            Sign Up
           </Button>
         </div>
         <p className="bottom-text">
-          Don’t have an account? Let’s{" "}
-          <Link style={{ textDecoration: "none" }}>Sign Up</Link>
+          Already have an account? Let’s&nbsp;
+          <Link style={{ textDecoration: "none" }}>Login</Link>
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default SignUp

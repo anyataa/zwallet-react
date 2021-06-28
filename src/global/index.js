@@ -2,9 +2,9 @@ import axios from "axios";
 // Email validation in login page and sign up
 export const emailValidation = (email) => {
   if (email.includes("@") == false) {
-    alert("format email salah");
+    return false;
   } else {
-    alert("format benar");
+    return true;
   }
 };
 
