@@ -4,8 +4,16 @@ import NotFound404 from "./layout/404";
 import DashboardLayout from "./layout/DashboardLayout";
 import LandingPage from "./layout/LandingPage";
 import TransferListLayout from "./layout/TransferListLayout";
+import ResetPassword from "./layout/ResetPassword";
+import CreateNewPassword from "./layout/CreateNewPassword";
+import PinSuccess from "./layout/PinSuccess";
+import CreatePin from "./layout/CreatePin";
 import "./style/global.css";
+import SignUp from "./layout/SignUp";
+
 import { TransferConfirmation } from "./component/TransferConfirmation";
+import TopUp from "./layout/TopUp";
+import { ProfilLayout } from "./layout/ProfilLayout";
 function App() {
   return (
     <div className="App">
@@ -13,11 +21,20 @@ function App() {
       by the person in charge, feel free to add more. Yet pls do not delete. 
       If you need to do so. Pls informed in the group */}
       <Switch>
+        {/* Will be deleted */}
         <Route path="/transfer" component={TransferListLayout} />
         <Route path="/transfer/:id" component={TransferConfirmation} />
+        <Route path="/profil" component={ProfilLayout} />
         <Route path="/dashboard" component={DashboardLayout} />
-        <Route path="/landingPage" component={LandingPage} />
+        <Route path="/topup" component={TopUp}></Route>
+        {/* End of will be deleted */}
+        <Route exact path="/" component={LandingPage} />
         <Route path="/login" component={Login} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/resetPassword" component={ResetPassword} />
+        <Route path="/createNewPassword" component={CreateNewPassword} />
+        <Route path="/pinSuccess" component={PinSuccess} />
+        <Route path="/createPin" component={CreatePin} />
         <Route path="*" component={NotFound404} />
       </Switch>
     </div>

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { InputNominalTransfer } from "./InputNominalTransfer";
+import { ModalPin } from "./ModalPin";
 
 export const TransferConfirmation = (props) => {
+  const [HandlePopModal, setHandlePopModal] = useState("flex")
   const params = window.location.href.slice(-1);
   const selectedContact = props.data.filter(
     (dataDetail) => dataDetail.id == params
@@ -35,7 +37,6 @@ const setContainerBefore = function()  {
         </InputNominalTransfer>
       ) : (
         <div>
-          
           <p className="transfer-primary-text">Transfer To</p>
           <div className="transfer-item-wrapper">
             <img
@@ -75,12 +76,13 @@ const setContainerBefore = function()  {
             <Link to="/transfer" style={{ textDecoration: "none" }}>
               <input onClick={setContainerBefore}  type="button" value="Back" className="transfer-btn" />
             </Link>
-            <Link to="/transfer" style={{ textDecoration: "none" }}>
-              <input type="button" value="Continue" className="transfer-btn" />
-            </Link>
+            {/* <Link to="/transfer" style={{ textDecoration: "none" }}> */}
+              <input onClick={e => setHandlePopModal("flex")} type="button" value="Continue" className="transfer-btn" />
+            {/* </Link> */}
           </div>
         </div>
       )}
+      <ModalPin showModal={HandlePopModal} ></ModalPin>
     </div>
   );
 };
