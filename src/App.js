@@ -1,4 +1,4 @@
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useRouteMatch } from "react-router-dom";
 import Login from "./layout/Login";
 import NotFound404 from "./layout/404";
 import DashboardLayout from "./layout/DashboardLayout";
@@ -21,8 +21,10 @@ import NewPin from "./layout/NewPin";
 
 import { PersonalInfoLayout } from "./layout/PersonalInfoLayout";
 import TransferStatus from "./layout/TransferStatus";
+import ListContact from "./component/ListContact";
 
 function App() {
+
   return (
     <div className="App">
       {/* Code below allows un-accessible page to be developed 
@@ -31,8 +33,8 @@ function App() {
       <Switch>
         {/* Will be deleted */}
         <Route path="/personalinfo" component={PersonalInfoLayout}></Route>
-        <Route path="/transfer" component={TransferListLayout} />
-        <Route path="/transfer/:id" component={TransferConfirmation} />
+        <Route path="/transfer" component={TransferListLayout}/>
+        {/* <Route path="/transfer/:id" component={TransferConfirmation}/> */}
         <Route path="/profil" component={ProfilLayout} />
         <Route path="/dashboard" component={DashboardLayout} />
         <Route path="/topup" component={TopUp}></Route>
