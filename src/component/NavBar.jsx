@@ -1,18 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../style/navBar.css";
 import { FaArrowDown, FaArrowUp, FaBell } from "react-icons/fa";
 export default function NavBar() {
+const [UserData, setUserData] = useState({})
+
+useEffect(() => {
+  setUserData(JSON.parse(localStorage.getItem("userData")))
+}, [])
+
   return (
     <div className="nav-container">
       <nav>
         <h2 className="col-secondary">Zwallet</h2>
         <div className="profile-container">
           <div className="profile-img">
-            <img src="./../Assets/profil.png" alt="" />
+            <img src={`https://randomuser.me/api/portraits/men/${UserData.id}.jpg`} alt="" width="50px" />
           </div>
           <div className="profile-data">
-            <h3>Robert Chandler</h3>
-            <p className="col-white50">+62 8139 3877 7946</p>
+            <h3>{UserData.name}</h3>
+            <p className="col-white50">{UserData.phone}</p>
           </div>
           <div className="profile-img">
             <input id="notif-btn" type="checkbox" hidden={true} />
