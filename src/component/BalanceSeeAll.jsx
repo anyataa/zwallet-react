@@ -5,6 +5,7 @@ import DynamicChart from "./Chart";
 import { Link } from "react-router-dom";
 
 export default class BalanceSeeAll extends Component {
+  
   render() {
     return (
       <div className="profile-bottom-container">
