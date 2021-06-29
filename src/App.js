@@ -20,6 +20,7 @@ import ChangePin from "./layout/ChangePin";
 import NewPin from "./layout/NewPin";
 
 import { PersonalInfoLayout } from "./layout/PersonalInfoLayout";
+import TransferStatus from "./layout/TransferStatus";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/changePassword" component={ChangePassword}></Route>
         <Route path="/changePin" component={ChangePin}></Route>
         <Route path="/newPin" component={NewPin}></Route>
+        <Route path="/transferStatus" component={TransferStatus}></Route>
         {/* End of will be deleted */}
         <Route exact path="/" component={LandingPage} />
         <Route path="/login" component={Login} />
