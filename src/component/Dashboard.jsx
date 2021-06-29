@@ -39,7 +39,7 @@ export default function Dashboard() {
         </Link>
         
       </div>
-      <div className="item-wrapper">
+      <div className="item-wrapper" onClick={() => localStorage.removeItem("userData")}>
         <img src="../assets/images/log-out.svg" alt="" />
         <p className="label">Logout</p>
       </div>

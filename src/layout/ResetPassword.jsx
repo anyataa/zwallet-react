@@ -3,6 +3,7 @@ import Hero from "../component/Hero";
 import InputAuth from "../component/InputAuth";
 import "../style/newLogin.css";
 import Button from "../component/Button";
+import { Link } from 'react-router-dom';
 
 const ResetPassword = () => {
   const [email, setEmail] = useState();
@@ -29,7 +30,7 @@ const ResetPassword = () => {
             <br />  Password In a Minutes.
           </p>
           <p className="login-text-box-bottom">
-          To reset your password, you must type your e-mail and we will send a link to your email and you will be directed to the reset password screens.
+            To reset your password, you must type your e-mail and we will send a link to your email and you will be directed to the reset password screens.
           </p>
         </div>
 
@@ -41,9 +42,11 @@ const ResetPassword = () => {
           onKeyUp={buttonHandler}
         />
         <div>
-          <Button disabled={isDisabled}>
-            Confirm
-          </Button>
+          <Link to="/createNewPassword">
+            <Button disabled={isDisabled}>
+              Confirm
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
