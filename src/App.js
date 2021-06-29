@@ -25,6 +25,7 @@ import { PersonalInfoLayout } from "./layout/PersonalInfoLayout";
 
 import { setFriendsData } from "./global";
 import { SeeAllFriends } from "./layout/SeeAllFriends";
+import { SeeAllTransaction } from "./layout/SeeAllTransaction"
 
 import TransferStatus from "./layout/TransferStatus";
 
