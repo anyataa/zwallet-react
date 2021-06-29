@@ -29,7 +29,7 @@ const TransferListLayout = () => {
         <Route path={`${path}`} component={ListContact} exact/>
         <Route path={`${path}/:id`} component={InputNominalTransfer} exact/>
         <Route path={`${path}/:id/confirmation`} render={(props) => <TransferConfirmation {...props} setModalToggle={() => setModalToggle(prevState => !prevState)} />} />
-        <Route path={`${path}/:id/status`} component={TransferStatus} />
+        <Route path={`${path}/status/:status`} component={TransferStatus} exact/>
       </Switch>
       {/* <ListContact setModalToggle={() => setModalToggle(prevState => !prevState)}/> */}
       {/* <TransferConfirmation/> */}

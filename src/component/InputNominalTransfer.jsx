@@ -23,7 +23,7 @@ export const InputNominalTransfer = (props) => {
   
   const onContinue = () => {
     if(nominalTransfer && noteTransfer){
-      localStorage.setItem('transfer-data', JSON.stringify({nominalTransfer, noteTransfer, balance: data.balance - nominalTransfer}))
+      localStorage.setItem('transfer-data', JSON.stringify({id: data.id, name: data.name, phone: data.phone, nominalTransfer, noteTransfer, balance: data.balance - nominalTransfer}))
     }
   }
 
