@@ -9,34 +9,33 @@ import { TransferConfirmation } from "./TransferConfirmation";
 export default class ListContact extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: [], query: "", id: "" , container:"right" };
+    this.state = { data: [], query: "", id: "", container: "right" };
   }
 
-  url = "https://randomuser.me/api/portraits/men/1.jpg"
+  url = "https://randomuser.me/api/portraits/men/1.jpg";
 
   // set  state data for friends list based on localstorage
   fetchProfile = () => {
-    
     if (localStorage.getItem("friends-data")) {
-      this.setState((currentState) => ({
+      this.setState({
         data: JSON.parse(localStorage.getItem("friends-data")),
-      }));
+      });
     }
   };
 
   // Query based on the input based on state
   queryContact = (input) => {
-    this.setState((currentState) => ({ query: input.target.value.trim()}));
+    this.setState({ query: input.target.value.trim() });
   };
-setContainer= () => {
-  if (this.state.container == "") {
-this.setState((currentState) => ({container : "right"}))
-  } else {
-    this.setState((currentState) => ({container: ""}))
-  }
-  console.log("right:", this.state.container)
-  
-}
+
+  setContainer = () => {
+    if (this.state.container == "") {
+      this.setState({ container: "right" });
+    } else {
+      this.setState({ container: "" });
+    }
+    console.log("right:", this.state.container);
+  };
 
   componentDidMount() {
     this.fetchProfile();
@@ -59,13 +58,13 @@ this.setState((currentState) => ({container : "right"}))
             className="transfer-input"
             onChange={(e) => queryContact(e)}
             placeholder="Search Contact"
-          ></input>
+          />
         )}
 
         {window.location.href === "http://localhost:3000/transfer" ? (
           showContact.map((contact) => (
             <Link
-            onClick={this.setContainer}
+              onClick={this.setContainer}
               to={`/transfer/${contact.id}`}
               style={{ textDecoration: "none" }}
             >
@@ -75,7 +74,7 @@ this.setState((currentState) => ({container : "right"}))
                   alt="friend profile"
                   className="transfer-contact-image"
                   width={"60px"}
-                ></img>
+                />
                 <div className="transer-contact">
                   <p className="transfer-primary-text">{contact.name}</p>
                   <p className="transfer-secondary-text">{contact.phone}</p>
@@ -85,8 +84,12 @@ this.setState((currentState) => ({container : "right"}))
             // do the else if window.href is not exact /transfer
           ))
         ) : (
-          <TransferConfirmation data={data} setContainer={() => this.setContainer()} container={this.state.container}>
-          </TransferConfirmation>
+          <TransferConfirmation
+            data={data}
+            setContainer={() => this.setContainer()}
+            container={this.state.container}
+            setModalToggle={this.props.setModalToggle}
+          />
         )}
       </div>
     );

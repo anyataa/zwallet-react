@@ -1,40 +1,37 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { InputNominalTransfer } from "./InputNominalTransfer";
-import { ModalPin } from "./ModalPin";
 
 export const TransferConfirmation = (props) => {
-  const [HandlePopModal, setHandlePopModal] = useState("flex")
   const params = window.location.href.slice(-1);
   const selectedContact = props.data.filter(
     (dataDetail) => dataDetail.id == params
   );
 
-// checkLocal
+  // checkLocal
 
-const setContainerBefore = function()  {
-    props.setContainer()
-    console.log("triggered")
-}
-// Setstate
+  const setContainerBefore = function () {
+    props.setContainer();
+    console.log("triggered");
+  };
+  // Setstate
   const [isNoInput, setNoInput] = useState(true);
-  const [nominalTransfer, setNominalTransfer] = useState()
-  const [noteTransfer, setNoteTransfer] = useState("")
-  const setBalanceLeft = (selectedContact[0].balance) - nominalTransfer
+  const [nominalTransfer, setNominalTransfer] = useState();
+  const [noteTransfer, setNoteTransfer] = useState("");
+  const setBalanceLeft = selectedContact[0].balance - nominalTransfer;
 
- 
   return (
     <div className="right">
-      {isNoInput  ? (
-        <InputNominalTransfer 
-        setAmount={setNominalTransfer}
-         amount={nominalTransfer}
-         setNoteTransfer= {setNoteTransfer}
-         noteTransferIn={noteTransfer}
-        setInputDisapear={setNoInput} 
-         transferTo={selectedContact} 
-         setContainerList={setContainerBefore} >
-        </InputNominalTransfer>
+      {isNoInput ? (
+        <InputNominalTransfer
+          setAmount={setNominalTransfer}
+          amount={nominalTransfer}
+          setNoteTransfer={setNoteTransfer}
+          noteTransferIn={noteTransfer}
+          setInputDisapear={setNoInput}
+          transferTo={selectedContact}
+          setContainerList={setContainerBefore}
+        />
       ) : (
         <div>
           <p className="transfer-primary-text">Transfer To</p>
@@ -68,21 +65,28 @@ const setContainerBefore = function()  {
           </div>
           <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
             <p className="transfer-secondary-text">Notes</p>
-            <p   className="transfer-primary-text">
-              {noteTransfer}
-            </p>
+            <p className="transfer-primary-text">{noteTransfer}</p>
           </div>
           <div className="set-transfer-button-confirmation">
             <Link to="/transfer" style={{ textDecoration: "none" }}>
-              <input onClick={setContainerBefore}  type="button" value="Back" className="transfer-btn" />
+              <input
+                onClick={setContainerBefore}
+                type="button"
+                value="Back"
+                className="transfer-btn"
+              />
             </Link>
             {/* <Link to="/transfer" style={{ textDecoration: "none" }}> */}
-              <input onClick={e => setHandlePopModal("flex")} type="button" value="Continue" className="transfer-btn" />
+            <input
+              onClick={props.setModalToggle}
+              type="button"
+              value="Continue"
+              className="transfer-btn"
+            />
             {/* </Link> */}
           </div>
         </div>
       )}
-      <ModalPin showModal={HandlePopModal} ></ModalPin>
     </div>
   );
 };
