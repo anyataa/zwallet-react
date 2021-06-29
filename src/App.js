@@ -23,6 +23,11 @@ import AddPhone from "./layout/AddPhone";
 
 import { PersonalInfoLayout } from "./layout/PersonalInfoLayout";
 
+import { setFriendsData } from "./global";
+import { SeeAllFriends } from "./layout/SeeAllFriends";
+
+import TransferStatus from "./layout/TransferStatus";
+
 function App() {
   return (
     <div className="App">
@@ -31,6 +36,8 @@ function App() {
       If you need to do so. Pls informed in the group */}
       <Switch>
         {/* Will be deleted */}
+        <Route path="/seealltransaction" component={SeeAllTransaction}></Route>
+        <Route path="/friendslist" component={SeeAllFriends}></Route>
         <Route path="/personalinfo" component={PersonalInfoLayout}></Route>
         <Route path="/transfer" component={TransferListLayout} />
         <Route path="/transfer/:id" component={TransferConfirmation} />
@@ -42,6 +49,7 @@ function App() {
         <Route path="/newPin" component={NewPin}></Route>
         <Route path="/managePhone" component={ManagePhone}></Route>
         <Route path="/addPhone" component={AddPhone}></Route>
+        <Route path="/transferStatus" component={TransferStatus}></Route>
         {/* End of will be deleted */}
         <Route exact path="/" component={LandingPage} />
         <Route path="/login" component={Login} />

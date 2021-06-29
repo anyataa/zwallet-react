@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaArrowUp, FaPlus, FaTicketAlt, FaWallet } from "react-icons/fa";
 
 export default function Balance() {
+  const [UserData, setUserData] = useState(localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')) : {balance: 0})
+  const [BalanceFormat, setBalanceFormat] = useState(Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0}).format(123456))
+  useEffect(() => {
+ setBalanceFormat(Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" }).format(UserData? UserData.balance : 0))
+   
+  }, [])
   return (
     <div className="profile-top-container set-margin-for-dash">
       <div className="margin-profile-container">
+      
         <div className="balance-detail">
           <div className="row-balance">
             <h3>Balance</h3>
-            <h1 className="col-white">Rp120.000</h1>
+            <h1 className="col-white">{BalanceFormat}</h1>
             <p>+62 813-9387-7946</p>
           </div>
           <div className="row-balance">
