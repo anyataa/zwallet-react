@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaArrowUp, FaPlus, FaTicketAlt, FaWallet } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Balance() {
   const [UserData, setUserData] = useState(localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')) : {balance: 0})
@@ -19,24 +20,33 @@ export default function Balance() {
             <p>+62 813-9387-7946</p>
           </div>
           <div className="row-balance">
-            <div onclick="goToRetrieve()" className="button-alpha">
+          <Link style={{textDecoration:"none"}}>
+          <div onclick="goToRetrieve()" className="button-alpha">
               <FaWallet></FaWallet>
               <h3>Retrieve</h3>
             </div>
-            <div onclick="goToSubscription()" className="button-alpha">
+          </Link>
+           <Link style={{textDecoration:"none"}}>
+           <div onclick="goToSubscription()" className="button-alpha">
               <FaTicketAlt></FaTicketAlt>
               <h3 style={{ fontSize: "18px" }}>Subscription</h3>
             </div>
+           </Link>
           </div>
           <div className="row-balance">
+            <Link style={{textDecoration:"none"}} to="/transfer">
             <div className="button-alpha">
               <FaArrowUp></FaArrowUp>
               <h3>Transfer</h3>
             </div>
-            <div className="button-alpha">
+            </Link>
+           <Link style={{textDecoration:"none"}} to='/topup'>
+           <div className="button-alpha">
               <FaPlus></FaPlus>
               <h3>Top Up</h3>
             </div>
+           </Link>
+           
           </div>
         </div>
       </div>

@@ -7,6 +7,7 @@ import "../style/Font/style.css"
 import NavBar from "../component/NavBar"
 import Dashboard from "../component/Dashboard"
 import { FiTrash } from "react-icons/fi"
+import { Link } from 'react-router-dom'
 
 const ManagePhone = () => {
 
@@ -35,7 +36,10 @@ const ManagePhone = () => {
                                 </div>
                             </li>
                             <div className="input-create-new-button bg-secondary col-white">
+                                <Link style={{textDecoration:"none", color:"white"}} to='/addPhone'>
                                 <but>Add Phone Number</but>
+                                </Link>
+                               
                             </div>
                         </ul>
                     </div>

@@ -82,7 +82,7 @@ export const PersonalInfoLayout = () => {
                       disabled
                     />
                   </div>
-                  <Link className="col-secondary" to='/profil/managephone'> Manage</Link>
+                  <Link className="col-secondary" to='/managePhone'> Manage</Link>
                   
                 </div>
               </div>

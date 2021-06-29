@@ -42,7 +42,7 @@ const ChangePassword = () => {
             </p>
           </div>
         </div>
-        <div className="bottom-personal-information-container">
+        <div className="bottom-personal-information-container2">
           <InputAuth
             type={isVisible ? "text" : "password"}
             value={password}
