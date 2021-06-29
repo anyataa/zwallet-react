@@ -5,6 +5,7 @@ import "../style/global.css";
 import "../style/navBar.css";
 import { Link } from "react-router-dom";
 import { TransferConfirmation } from "./TransferConfirmation";
+import TransferStatus from "../layout/TransferStatus";
 
 export default class ListContact extends Component {
   constructor(props) {
@@ -25,7 +26,7 @@ export default class ListContact extends Component {
 
   // Query based on the input based on state
   queryContact = (input) => {
-    this.setState({ query: input.target.value.trim() });
+    this.setState({ query: input.trim()});
   };
 
   setContainer = () => {
@@ -53,22 +54,24 @@ export default class ListContact extends Component {
     return (
       <div className={this.state.container}>
         {/* Dangerzone , must be changed ! */}
-        {window.location.href === "http://localhost:3000/transfer" && (
+        {window.location.pathname === "/transfer" && (
           <input
+            value={query}
             className="transfer-input"
-            onChange={(e) => queryContact(e)}
+            onChange={(e) => queryContact(e.target.value)}
             placeholder="Search Contact"
           />
         )}
-
-        {window.location.href === "http://localhost:3000/transfer" ? (
+        {console.log(window.location)}
+        {window.location.pathname === "/transfer" ? (
           showContact.map((contact) => (
             <Link
               onClick={this.setContainer}
               to={`/transfer/${contact.id}`}
               style={{ textDecoration: "none" }}
+              key={contact.id}
             >
-              <div className="transfer-item-wrapper" key={contact.id}>
+              <div className="transfer-item-wrapper">
                 <img
                   src={`https://randomuser.me/api/portraits/men/${contact.id}.jpg`}
                   alt="friend profile"
