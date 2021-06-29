@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import Hero from "../component/Hero";
 import "../style/newLogin.css";
 import "../style/transfer.css";
-import Button from "../component/Button";
+import Pin from "../component/Pin"
 
 const ResetPassword = () => {
-    const [isDisabled, setIsDisabled] = useState(true);
 
     return (
         <div className="login-container">
@@ -22,37 +21,8 @@ const ResetPassword = () => {
                     </p>
                 </div>
 
-                <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <input
-                        type="number"
-                        className="transfer-input-pin"
-                    />
-                    <input
-                        type="number"
-                        className="transfer-input-pin"
-                    />
-                    <input
-                        type="number"
-                        className="transfer-input-pin"
-                    />
-                    <input
-                        type="number"
-                        className="transfer-input-pin"
-                    />
-                    <input
-                        type="number"
-                        className="transfer-input-pin"
-                    />
-                    <input
-                        type="number"
-                        className="transfer-input-pin"
-                    />
-                </div>
-
                 <div>
-                    <Button disabled={isDisabled}>
-                        Confirm
-                    </Button>
+                    <Pin buttonValue="Confirm" />
                 </div>
             </div>
         </div>
