@@ -110,9 +110,9 @@ const SignUp = () => {
           isVisible={isVisible}
           password
         />
-        <a className="text" style={{ textDecoration: "none" }}>
+        <Link to='/resetPassword' className="text" style={{ textDecoration: "none" }}>
           Forgot Password?
-        </a>
+        </Link>
         <div>
           {
             errorMsg ? <p className="text-validation">{errorMsg}</p> : null
@@ -123,7 +123,7 @@ const SignUp = () => {
         </div>
         <p className="bottom-text">
           Already have an account? Let’s&nbsp;
-          <Link style={{ textDecoration: "none" }}>Login</Link>
+          <Link to='/login' style={{ textDecoration: "none" }}>Login</Link>
         </p>
       </div>
     </div>

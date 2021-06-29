@@ -80,9 +80,9 @@ const Login = () => {
           isVisible={isVisible}
           password
         />
-        <a className="text" style={{ textDecoration: "none" }}>
+        <Link to='/resetPassword' className="text" style={{ textDecoration: "none" }}>
           Forgot Password?
-        </a>
+        </Link>
         <div>
           {
             errorMsg ? <p className='text-validation'>{errorMsg}</p> : null
@@ -93,7 +93,7 @@ const Login = () => {
         </div>
         <p className="bottom-text">
           Don’t have an account? Let’s{" "}
-          <Link style={{ textDecoration: "none" }}>Sign Up</Link>
+          <Link to='/signup' style={{ textDecoration: "none" }}>Sign Up</Link>
         </p>
       </div>
     </div>
