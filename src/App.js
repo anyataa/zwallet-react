@@ -14,6 +14,7 @@ import SignUp from "./layout/SignUp";
 import { TransferConfirmation } from "./component/TransferConfirmation";
 import TopUp from "./layout/TopUp";
 import { ProfilLayout } from "./layout/ProfilLayout";
+import { PersonalInfoLayout } from "./layout/PersonalInfoLayout";
 function App() {
   return (
     <div className="App">
@@ -22,6 +23,7 @@ function App() {
       If you need to do so. Pls informed in the group */}
       <Switch>
         {/* Will be deleted */}
+        <Route path="/personalinfo" component={PersonalInfoLayout}></Route>
         <Route path="/transfer" component={TransferListLayout} />
         <Route path="/transfer/:id" component={TransferConfirmation} />
         <Route path="/profil" component={ProfilLayout} />
