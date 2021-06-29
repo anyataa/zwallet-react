@@ -1,19 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { setTransactionData } from '../global'
+import { Link } from 'react-router-dom'
 
 export const BalanceTransaction = (props) => {
     const [Transaction, setTransaction] = useState([])
     useEffect(() => {setTransactionData();   setTransaction(JSON.parse(localStorage.getItem("transaction-data")))}, [])
     return (
-        <div className="right-dash-bottom-container">
-          {console.log(Transaction)}
-        <div className="see-all-contact">
-          <h2>Transaction History</h2>
-          <a href="./transactionHistoryPage.html" className="col-secondary">
-            See All
-          </a>
-        </div>
-        {/* Contact list */}
         <div className="contact-list-container">
             {Transaction.map((to) => ( <div className="custom-profile-view">
             <div className="profile-container">
@@ -28,9 +20,7 @@ export const BalanceTransaction = (props) => {
             {to.type > 0 ? <h2 className="col-red">-{to.total}</h2> : <h2 className="col-green">+{to.total}</h2> }
           </div>))}
           {/* MAPPING DONE, TODO: Image and Color Classification */}
-         
-       
         </div>
-      </div>
+ 
     )
 }

@@ -20,6 +20,9 @@ import ChangePin from "./layout/ChangePin";
 import NewPin from "./layout/NewPin";
 
 import { PersonalInfoLayout } from "./layout/PersonalInfoLayout";
+import { setFriendsData } from "./global";
+import { SeeAllFriends } from "./layout/SeeAllFriends";
+import { SeeAllTransaction } from "./layout/SeeAllTransaction";
 
 function App() {
   return (
@@ -29,6 +32,8 @@ function App() {
       If you need to do so. Pls informed in the group */}
       <Switch>
         {/* Will be deleted */}
+        <Route path="/seealltransaction" component={SeeAllTransaction}></Route>
+        <Route path="/friendslist" component={SeeAllFriends}></Route>
         <Route path="/personalinfo" component={PersonalInfoLayout}></Route>
         <Route path="/transfer" component={TransferListLayout} />
         <Route path="/transfer/:id" component={TransferConfirmation} />
