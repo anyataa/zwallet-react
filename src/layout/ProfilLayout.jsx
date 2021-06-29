@@ -7,14 +7,13 @@ import { Link } from "react-router-dom";
 
 export const ProfilLayout = () => {
   const [UserData, setUserData] = useState({});
-  const [FriendsData, setFriendsData] = useState([])
+  const [FriendsData, setFriendsData] = useState([]);
 
   useEffect(() => {
-    setUserData(JSON.parse(localStorage.getItem("userData")))
+    setUserData(JSON.parse(localStorage.getItem("userData")));
     setFriendsData(JSON.parse(localStorage.getItem("friends-data")));
-    
   }, []);
-  
+
   return (
     <div className="container">
       <Dashboard></Dashboard>
@@ -49,47 +48,52 @@ export const ProfilLayout = () => {
             <div className="left-profile-bottom-container">
               <ul>
                 {/* <!-- 1 --> */}
-               <Link to='/personalinfo'>
-               <li>
+                <Link to="/personalinfo">
+                  <li>
                     <div className="card-notification ">
                       <h2>Personal Information</h2>
                       <i class="fa fa-arrow-right">
-                      <FaArrowRight></FaArrowRight>
+                        <FaArrowRight></FaArrowRight>
                       </i>
                     </div>
                   </li>
-               </Link>
-              
-         
+                </Link>
+
                 {/* <!-- 2 --> */}
-                <a href="./changePassword.html">
-                  <li>
+                <Link to='/changePassword'>
+                <li>
                     <div className="card-notification ">
                       <h2>Change Password</h2>
                       <i className="fa fa-arrow-right">
-                      <FaArrowRight></FaArrowRight>
+                        <FaArrowRight></FaArrowRight>
                       </i>
                     </div>
                   </li>
-                </a>
+                </Link>
+           
+              
+               
                 {/* <!-- 3 --> */}
-                <a href="./newPIN.html">
-                  <li>
+                <Link to='changePin'>
+                <li>
                     <div className="card-notification ">
                       <h2>Change PIN</h2>
                       <i class="fa fa-arrow-right">
-                         <FaArrowRight></FaArrowRight>
+                        <FaArrowRight></FaArrowRight>
                       </i>
                     </div>
                   </li>
-                </a>
+                </Link>
+              
+                
+        
                 {/* <!-- 4 --> */}
                 <a href="./landingpage.html">
                   <li>
                     <div className="card-notification ">
                       <h2>Log Out</h2>
                       <i className="fa fa-arrow-right">
-                      <FaArrowRight></FaArrowRight>
+                        <FaArrowRight></FaArrowRight>
                       </i>
                     </div>
                   </li>
@@ -100,23 +104,29 @@ export const ProfilLayout = () => {
             <div className="right-profile-bottom-container">
               <div className="see-all-contact">
                 <h2>Contacts Info</h2>
-                <a href="./seeAllFriends.html" className="col-secondary">
+                <Link to="/friendslist" className="col-secondary">
                   See All
-                </a>
+                </Link>
               </div>
               {/* <!-- Contact --> */}
               <div className="contact-list-container">
+                {FriendsData.filter((friend) => UserData.id != friend.id)
+                  .slice(1 - 5)
+                  .map((friend) => (
+                    <div className="profile-container">
+                      <div className="profile-img">
+                        <img
+                          src={`https://randomuser.me/api/portraits/men/${friend.id}.jpg`}
+                          alt=""
+                        />
+                      </div>
+                      <div className="profile-data">
+                        <h3>{friend.name}</h3>
+                        <p className="col-white50">{friend.phone}</p>
+                      </div>
+                    </div>
+                  ))}
 
-                  {FriendsData.filter(friend => UserData.id != friend.id).slice(1-5).map(friend => ( <div className="profile-container">
-                  <div className="profile-img">
-                    <img src={`https://randomuser.me/api/portraits/men/${friend.id}.jpg`} alt="" />
-                  </div>
-                  <div className="profile-data">
-                    <h3>{friend.name}</h3>
-                    <p className="col-white50">{friend.phone}</p>
-                  </div>
-                </div>))}
-             
                 {/* <!-- End Contact List --> */}
               </div>
             </div>
