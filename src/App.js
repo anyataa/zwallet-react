@@ -14,7 +14,13 @@ import SignUp from "./layout/SignUp";
 import { TransferConfirmation } from "./component/TransferConfirmation";
 import TopUp from "./layout/TopUp";
 import { ProfilLayout } from "./layout/ProfilLayout";
+
+import ChangePassword from "./layout/ChangePassword";
+import ChangePin from "./layout/ChangePin";
+import NewPin from "./layout/NewPin";
+
 import { PersonalInfoLayout } from "./layout/PersonalInfoLayout";
+
 function App() {
   return (
     <div className="App">
@@ -29,6 +35,9 @@ function App() {
         <Route path="/profil" component={ProfilLayout} />
         <Route path="/dashboard" component={DashboardLayout} />
         <Route path="/topup" component={TopUp}></Route>
+        <Route path="/changePassword" component={ChangePassword}></Route>
+        <Route path="/changePin" component={ChangePin}></Route>
+        <Route path="/newPin" component={NewPin}></Route>
         {/* End of will be deleted */}
         <Route exact path="/" component={LandingPage} />
         <Route path="/login" component={Login} />
