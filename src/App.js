@@ -18,6 +18,8 @@ import { ProfilLayout } from "./layout/ProfilLayout";
 import ChangePassword from "./layout/ChangePassword";
 import ChangePin from "./layout/ChangePin";
 import NewPin from "./layout/NewPin";
+import ManagePhone from "./layout/ManagePhone";
+import AddPhone from "./layout/AddPhone";
 
 import { PersonalInfoLayout } from "./layout/PersonalInfoLayout";
 import { setFriendsData } from "./global";
@@ -43,6 +45,8 @@ function App() {
         <Route path="/changePassword" component={ChangePassword}></Route>
         <Route path="/changePin" component={ChangePin}></Route>
         <Route path="/newPin" component={NewPin}></Route>
+        <Route path="/managePhone" component={ManagePhone}></Route>
+        <Route path="/addPhone" component={AddPhone}></Route>
         {/* End of will be deleted */}
         <Route exact path="/" component={LandingPage} />
         <Route path="/login" component={Login} />
