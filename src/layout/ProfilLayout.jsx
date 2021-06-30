@@ -30,9 +30,6 @@ export const ProfilLayout = () => {
   }
 
   return (
-    <div className="container">
-      <Dashboard></Dashboard>
-      <NavBar></NavBar>
       <div className="right-top-up">
         <div className="profile-page-container">
           <div className="profile-top-container2">
@@ -63,19 +60,19 @@ export const ProfilLayout = () => {
             <div className="left-profile-bottom-container">
               <ul>
                 {/* <!-- 1 --> */}
-                <Link to="/personalinfo">
+                <Link to="/profil/personalinfo">
                   <li>
                     <div className="card-notification ">
                       <h2>Personal Information</h2>
                       <i class="fa fa-arrow-right">
-                        <FaArrowRight></FaArrowRight>
+                        <FaArrowRight/>
                       </i>
                     </div>
                   </li>
                 </Link>
 
                 {/* <!-- 2 --> */}
-                <Link to='/changePassword'>
+                <Link to='/profil/changePassword'>
                 <li>
                     <div className="card-notification ">
                       <h2>Change Password</h2>
@@ -89,12 +86,12 @@ export const ProfilLayout = () => {
               
                
                 {/* <!-- 3 --> */}
-                <Link to='changePin'>
+                <Link to='/profil/changePin'>
                 <li>
                     <div className="card-notification ">
                       <h2>Change PIN</h2>
                       <i class="fa fa-arrow-right">
-                        <FaArrowRight></FaArrowRight>
+                        <FaArrowRight/>
                       </i>
                     </div>
                   </li>
@@ -108,7 +105,7 @@ export const ProfilLayout = () => {
                     <div className="card-notification ">
                       <h2>Log Out</h2>
                       <i className="fa fa-arrow-right">
-                        <FaArrowRight></FaArrowRight>
+                        <FaArrowRight/>
                       </i>
                     </div>
                   </li>
@@ -150,7 +147,10 @@ export const ProfilLayout = () => {
           </div>
         </div>
       </div>
-      <Footer></Footer>
-    </div>
+    // <div className="container">
+    //   <Dashboard></Dashboard>
+    //   <NavBar></NavBar>
+    //   <Footer></Footer>
+    // </div>
   );
 };

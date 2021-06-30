@@ -10,14 +10,14 @@ import InputAuth from "../component/InputAuth";
 import Button from "../component/Button";
 import { ModalStatus } from '../component/ModalStatus'
 
-const AddPhone = () => {
+const AddPhone = ({setDisplay, display}) => {
     const [phone, setPhone] = useState();
 
     const [ShowModal, setShowModal] = useState(false)
+    // const [StyleModal, setStyleModal] = useState("none")
 
     const [isDisabled, setIsDisabled] = useState(true);
 
-    const [StyleModal, setStyleModal] = useState("none")
 
     const buttonHandler = () => {
         if (phone) {
@@ -29,9 +29,6 @@ const AddPhone = () => {
     };
 
     return (
-        <div className="container">
-            <Dashboard />
-            <NavBar />
             <div className="right-change-password">
                 <div className="personal-information-top-container">
                     <div className="set-to-left">
@@ -52,16 +49,18 @@ const AddPhone = () => {
                         onKeyUp={buttonHandler}
                     />
                     <br />
-                    <Button style={{cursor:'pointer'}}  disabled={isDisabled} onClick={e => setStyleModal("flex")} >
+                    <Button style={{cursor:'pointer'}}  disabled={isDisabled} onClick={setDisplay} >
                         Add Phone Number
                     </Button>
                     {/* {StyleModal} */}
                 
                 </div>
             </div>
-            <Footer />
-             <ModalStatus setDisplay={setStyleModal} display={StyleModal} activity="Add Phone Number"></ModalStatus> 
-        </div>
+        // <div className="container">
+        //     <Dashboard />
+        //     <NavBar />
+        //     <Footer />
+        // </div>
     )
 }
 

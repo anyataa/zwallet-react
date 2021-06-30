@@ -10,9 +10,6 @@ import Pin from "../component/Pin";
 
 const ChangePin = () => {
   return (
-    <div className="container">
-      <Dashboard />
-      <NavBar />
       <div className="right-change-pin">
         <div className="personal-information-top-container">
           <div className="set-to-left">
@@ -29,8 +26,11 @@ const ChangePin = () => {
           </div>
         </div>
       </div>
-      <Footer />
-    </div>
+    // <div className="container">
+    //   <Dashboard />
+    //   <NavBar />
+    //   <Footer />
+    // </div>
   );
 };
 

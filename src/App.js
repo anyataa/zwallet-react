@@ -27,6 +27,7 @@ import { SeeAllTransaction } from "./layout/SeeAllTransaction";
 
 import TransferStatus from "./layout/TransferStatus";
 import ListContact from "./component/ListContact";
+import ProfileListLayout from "./layout/ProfileListLayout";
 
 function App() {
 
@@ -36,20 +37,21 @@ function App() {
       by the person in charge, feel free to add more. Yet pls do not delete. 
       If you need to do so. Pls informed in the group */}
       <Switch>
+        <Route path="/transfer" component={TransferListLayout}/>
+        <Route path="/profil" component={ProfileListLayout} />
+
         {/* Will be deleted */}
         <Route path="/seealltransaction" component={SeeAllTransaction}></Route>
         <Route path="/friendslist" component={SeeAllFriends}></Route>
-        <Route path="/personalinfo" component={PersonalInfoLayout}></Route>
-        <Route path="/transfer" component={TransferListLayout}/>
+        {/* <Route path="/personalinfo" component={PersonalInfoLayout}></Route> */}
         {/* <Route path="/transfer/:id" component={TransferConfirmation}/> */}
-        <Route path="/profil" component={ProfilLayout} />
+        {/* <Route path="/changePassword" component={ChangePassword}></Route> */}
+        {/* <Route path="/changePin" component={ChangePin}></Route> */}
+        {/* <Route path="/managePhone" component={ManagePhone}></Route> */}
+        {/* <Route path="/addPhone" component={AddPhone}></Route> */}
         <Route path="/dashboard" component={DashboardLayout} />
         <Route path="/topup" component={TopUp}></Route>
-        <Route path="/changePassword" component={ChangePassword}></Route>
-        <Route path="/changePin" component={ChangePin}></Route>
         <Route path="/newPin" component={NewPin}></Route>
-        <Route path="/managePhone" component={ManagePhone}></Route>
-        <Route path="/addPhone" component={AddPhone}></Route>
         <Route path="/transferStatus" component={TransferStatus}></Route>
         {/* End of will be deleted */}
         <Route exact path="/" component={LandingPage} />

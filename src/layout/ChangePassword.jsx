@@ -30,9 +30,6 @@ const ChangePassword = () => {
   };
 
   return (
-    <div className="container">
-      <Dashboard />
-      <NavBar />
       <div className="right-change-password">
         <div className="personal-information-top-container">
           <div className="set-to-left">
@@ -82,10 +79,13 @@ const ChangePassword = () => {
           </div>
         </div>
       </div>
+    // <div className="container">
+    //   <Dashboard />
+    //   <NavBar />
 
-      <Footer />
-      <ModalStatus setDisplay={setStyleModal} display={StyleModal} activity="Change Password"></ModalStatus> 
-    </div>
+    //   <Footer />
+    //   <ModalStatus setDisplay={setStyleModal} display={StyleModal} activity="Change Password"></ModalStatus> 
+    // </div>
   );
 };
 
