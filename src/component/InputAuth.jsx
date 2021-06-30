@@ -6,11 +6,17 @@ import { FiPhone } from 'react-icons/fi'
 import '../style/inputAuth.css'
 
 const InputAuth = ({type, value, placeholder, onChange, password, ifClicked, isVisible, onKeyUp, phone}) => {
-
+  const changeColor = () => {
+    if(value){
+      return '#6379F4'
+    }else{
+      return 'rgba(169, 169, 169, 0.6)'
+    }
+  }
   return (
-    <div className='input-box'>
+    <div className='input-box' style={{borderBottomColor: changeColor()}}>
       {
-        type == 'email' ? <HiMail/> : type == 'password' || password ? <BsLockFill/> : phone ? <FiPhone/> : <BsPeopleCircle/>
+        type == 'email' ? <HiMail color={changeColor()}/> : type == 'password' || password ? <BsLockFill color={changeColor()}/> : phone ? <FiPhone color={changeColor()}/> : <BsPeopleCircle color={changeColor()}/>
       }
       {
         phone ? <p>+62</p> : null
@@ -20,9 +26,9 @@ const InputAuth = ({type, value, placeholder, onChange, password, ifClicked, isV
         password ?
         (
           isVisible ?
-          <AiOutlineEye onClick={ifClicked}/>
+          <AiOutlineEye onClick={ifClicked} color={changeColor()}/>
           :
-          <AiOutlineEyeInvisible onClick={ifClicked}/>
+          <AiOutlineEyeInvisible onClick={ifClicked} color={changeColor()}/>
         )
         :
         null

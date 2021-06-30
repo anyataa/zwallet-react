@@ -1,6 +1,5 @@
 * {
   margin: 0;
-  /* font-family: "Nunito Sans", sans-serif; */
 }
 
 .container {
@@ -38,6 +37,7 @@
   cursor: pointer;
   align-items: center;
   transition: 0.5s ease;
+  color: rgba(58, 61, 66, 0.8);
 }
 
 .active {
@@ -46,7 +46,7 @@
 }
 
 .label {
-  font-family: Nunito Sans;
+  font-family: "Nunito Sans", sans-serif;
   font-style: normal;
   font-weight: bold;
   line-height: 31px;
