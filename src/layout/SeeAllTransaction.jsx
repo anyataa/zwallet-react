@@ -10,6 +10,7 @@ export const SeeAllTransaction = () => {
         <div className="container">
         <Dashboard />
         <div className='right'>
+          <p style={{fontSize:'25px'}} className='col-grey'>Today</p>
         <BalanceTransaction></BalanceTransaction>
         </div>
  

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Button from "../component/Button"
+import { Link } from 'react-router-dom'
 
 
 export const Pin = (props) => {
@@ -70,7 +71,10 @@ export const Pin = (props) => {
             onclick
             ={e => validatePin()}
           /> */}
+          <Link to={props.goTo}> 
           <Button disabled={ButtonDisabled} onClick={validatePin}>{props.buttonValue}</Button>
+          </Link>
+          
           <br/>
           <br/>
           </div>

@@ -47,14 +47,14 @@ export const PersonalInfoLayout = () => {
             <li>
               <div class="card-notification">
                 <p class="col-grey">First Name</p>
-                <input class="col-dark-grey" type="text" value={(FirstName)[0]} />
+                <input class="col-dark-grey" type="text" onChange={e => setFirstName(e.target.value)} value={(FirstName)} />
               </div>
             </li>
             {/* <!-- 2 --> */}
             <li>
               <div class="card-notification">
                 <p class="col-grey">Last Name</p>
-                <input class="col-dark-grey" type="text" value={(FirstName)[1]} />
+                <input class="col-dark-grey" type="text" value={(FirstName)} />
               </div>
             </li>
             {/* <!-- 3 --> */}
@@ -82,7 +82,7 @@ export const PersonalInfoLayout = () => {
                       disabled
                     />
                   </div>
-                  <Link className="col-secondary" to='/profil/managephone'> Manage</Link>
+                  <Link className="col-secondary" to='/managephone'> Manage</Link>
                   
                 </div>
               </div>

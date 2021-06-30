@@ -932,9 +932,10 @@
 .bottom-personal-information-container input {
   border: none;
   outline: none;
-  height: 2rem;
-  font-size: 24px;
+  height: 37px;
+  font-size: 16px;
   width: 100%;
+  padding-bottom: 10px;
   cursor: pointer;
 }
 
@@ -1057,6 +1058,25 @@
   color: #221619;
 }
 
+.bottom-personal-information-container2 {
+  width: 60%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-bottom: 10%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
 .right-change-password {
   margin-top: 2rem;
   width: 65%;
@@ -1082,6 +1102,7 @@
 }
 
 .right-change-password .bottom-personal-information-container {
+  background-color: transparent;
   width: 60%;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -1091,9 +1112,6 @@
       -ms-flex-align: center;
           align-items: center;
   padding: 15%;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
 }
 
 .success-change-password {

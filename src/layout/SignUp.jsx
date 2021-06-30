@@ -66,7 +66,7 @@ const SignUp = () => {
   }
   
   if(JSON.parse(localStorage.getItem('userData'))){
-    return <Redirect to='/dashboard'/>
+    return <Redirect to='/createpin'/>
   }
 
   return (

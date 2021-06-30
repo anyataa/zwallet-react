@@ -20,12 +20,10 @@ import ChangePin from "./layout/ChangePin";
 import NewPin from "./layout/NewPin";
 import ManagePhone from "./layout/ManagePhone";
 import AddPhone from "./layout/AddPhone";
-
 import { PersonalInfoLayout } from "./layout/PersonalInfoLayout";
-
-import { setFriendsData } from "./global";
 import { SeeAllFriends } from "./layout/SeeAllFriends";
-import { SeeAllTransaction } from "./layout/SeeAllTransaction"
+
+import { SeeAllTransaction } from "./layout/SeeAllTransaction";
 
 import TransferStatus from "./layout/TransferStatus";
 import ListContact from "./component/ListContact";

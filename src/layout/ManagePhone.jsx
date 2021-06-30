@@ -7,6 +7,7 @@ import "../style/Font/style.css"
 import NavBar from "../component/NavBar"
 import Dashboard from "../component/Dashboard"
 import { FiTrash } from "react-icons/fi"
+import { Link } from 'react-router-dom'
 
 const ManagePhone = () => {
 
@@ -29,13 +30,17 @@ const ManagePhone = () => {
                             <li>
                                 <div className="card-notification">
                                     <p className="col-grey">Primary</p>
-                                    <input className="col-dark-grey" type="number" value="813456829333" />
+                                    {/* Change Phone based on Local Storage */}
+                                    <input className="col-dark-grey"  type="number" value="813456829333" />
                                     <h3 className="col-dark-grey">+62</h3>
-                                    <button className="col-grey"><FiTrash/></button>
+                                    {/* <button className="col-grey button-trash" ><FiTrash/></button> */}
                                 </div>
                             </li>
-                            <div className="input-create-new-button bg-secondary col-white">
-                                <but>Add Phone Number</but>
+                            <div className="input-create-new-button bg-secondary col-white" style={{height:'4rem'}}>
+                                <Link style={{textDecoration:"none", color:"white"}} to='/addPhone'>
+                                <but >Add Phone Number</but>
+                                </Link>
+                               
                             </div>
                         </ul>
                     </div>

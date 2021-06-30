@@ -22,7 +22,7 @@ const ResetPassword = () => {
                 </div>
 
                 <div>
-                    <Pin buttonValue="Confirm" />
+                    <Pin goTo='/pinsuccess' buttonValue="Confirm" />
                 </div>
             </div>
         </div>

@@ -14,23 +14,24 @@ const NewPin = () => {
     <div className="container">
       <Dashboard />
       <NavBar />
-      <div className="right-change-password">
+      <div className="right-change-pin">
         <div className="personal-information-top-container">
           <div className="set-to-left">
-            <h1 className="col-dark-grey">Change PIN</h1>
+            <h1 className="col-dark-grey">Create New Pin</h1>
             <p className="col-grey">
-              Type your new 6 digits security PIN to use in Zwallet.
+            Type your new 6 digits security PIN to use in Zwallet.
             </p>
           </div>
-          <div style={{display: 'flex', flexDirection: 'column', paddingTop: '50%', paddingRight: '35%'}}>
-          <Pin buttonValue="Change PIN" />
-          <br/>
-          <br/>
+        </div>
+        <div className="row-pin-group">
+          <div className="pin-group center-pin-group">
+            <Pin goTo='/dashboard' buttonValue="Change Pin" />
           </div>
         </div>
       </div>
       <Footer />
     </div>
+   
   )
 }
 

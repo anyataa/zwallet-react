@@ -11,7 +11,7 @@ const Chart = () => {
        setChartData({
        labels: ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"],
        datasets: [{
-                         label: '# of Votes',
+                         label: '',
                          data: [100000, 120000, 110000, 50000, 10000, 120000, 124000, 134000],
                          barPercentage: 0.2,
                          backgroundColor: [
@@ -49,7 +49,7 @@ return(
                     options={{
                         responsive:true,
                         maintainAspectRatio: true ,
-                        title: { text: "THICCNESS SCALE", display: false },
+                        title: { text: "THICCKNESS SCALE", display: false },
                         legend: {
                             display: false,
                             fontSize: 0,
