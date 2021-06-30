@@ -14,7 +14,8 @@ import { ProfilLayout } from './ProfilLayout'
 const ProfileListLayout = () => {
   const { path } = useRouteMatch()
 
-  const [StyleModal, setStyleModal] = useState("none")
+  const [modalToggle, setModalToggle] = useState(false)
+  const [activity, setActivity] = useState('')
 
   return (
     <div className="container">
@@ -26,9 +27,9 @@ const ProfileListLayout = () => {
         <Route path={`${path}/changePassword`} component={ChangePassword} />
         <Route path={`${path}/changePin`} component={ChangePin} />
         <Route path={`${path}/managephone`} component={ManagePhone} />
-        <Route path={`${path}/addPhone`} component={AddPhone} />
+        <Route path={`${path}/addPhone`} render={(props) => <AddPhone {...props} setDisplay={() => setModalToggle(prevState => !prevState)} display={modalToggle}/>} />
       </Switch>
-      <ModalStatus setDisplay={() => setStyleModal('flex')} display={StyleModal} activity="Add Phone Number"></ModalStatus> 
+      <ModalStatus setDisplay={() => setModalToggle(prevState => !prevState)} display={modalToggle} activity={activity} ></ModalStatus> 
 
       <Footer />
     </div>
