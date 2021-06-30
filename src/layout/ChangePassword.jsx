@@ -8,16 +8,17 @@ import NavBar from "../component/NavBar";
 import Dashboard from "../component/Dashboard";
 import InputAuth from "../component/InputAuth";
 import Button from "../component/Button";
+import { ModalStatus } from "../component/ModalStatus";
 
 const ChangePassword = () => {
   const [password, setPassword] = useState();
   const [newPassword, setNewPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
-
   const [isVisible, setIsVisible] = useState(false);
   const [isNewVisible, setIsNewVisible] = useState(false);
   const [isConfirmVisible, setIsConfirmVisible] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
+  const [StyleModal, setStyleModal] = useState("none")
 
   const buttonHandler = () => {
     if (password && newPassword && confirmPassword) {
@@ -77,12 +78,13 @@ const ChangePassword = () => {
           />
          
           <div>
-            <Button disabled={isDisabled}>Change Password</Button>
+            <Button onClick={e => setStyleModal("flex")} disabled={isDisabled}>Change Password</Button>
           </div>
         </div>
       </div>
 
       <Footer />
+      <ModalStatus setDisplay={setStyleModal} display={StyleModal} activity="Change Password"></ModalStatus> 
     </div>
   );
 };

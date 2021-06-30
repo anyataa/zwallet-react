@@ -25,7 +25,7 @@ const ChangePin = () => {
         </div>
         <div className="row-pin-group">
           <div className="pin-group center-pin-group">
-            <Pin buttonValue="Continue" />
+            <Pin goTo='/newpin' buttonValue="Continue" />
           </div>
         </div>
       </div>
