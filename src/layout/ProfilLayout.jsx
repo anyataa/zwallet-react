@@ -1,11 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import Dashboard from "../component/Dashboard";
 import { Footer } from "../component/Footer";
 import NavBar from "../component/NavBar";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 export const ProfilLayout = () => {
+  const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
+  function doLogOut()  {
+    localStorage.removeItem("userData")
+    forceUpdate()
+    console.log('in dashboard')
+    
+  }
+  
   const [UserData, setUserData] = useState({});
   const [FriendsData, setFriendsData] = useState([]);
 
@@ -13,6 +21,13 @@ export const ProfilLayout = () => {
     setUserData(JSON.parse(localStorage.getItem("userData")));
     setFriendsData(JSON.parse(localStorage.getItem("friends-data")));
   }, []);
+
+
+  if  (!JSON.parse(localStorage.getItem('userData') )){
+    console.log('in if')
+    return <Redirect to='/login'/>
+    
+  }
 
   return (
     <div className="container">
@@ -88,7 +103,7 @@ export const ProfilLayout = () => {
                 
         
                 {/* <!-- 4 --> */}
-                <a href="./landingpage.html">
+                <a onClick={doLogOut}>
                   <li>
                     <div className="card-notification ">
                       <h2>Log Out</h2>

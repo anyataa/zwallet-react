@@ -17,7 +17,7 @@ const AddPhone = () => {
 
     const [isDisabled, setIsDisabled] = useState(true);
 
-    const [StyleModal, setStyleModal] = useState("flex")
+    const [StyleModal, setStyleModal] = useState("none")
 
     const buttonHandler = () => {
         if (phone) {

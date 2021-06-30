@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useReducer } from "react";
 import { FaBorderAll, FaLongArrowAltUp } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import '../style/navBar.css'
 
 
 export default function Dashboard() {
+  
+const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
+function doLogOut()  {
+  localStorage.removeItem("userData")
+  forceUpdate()
+  console.log('in dashboard')
+  
+}
+
+  if  (!JSON.parse(localStorage.getItem('userData') )){
+    console.log('in if')
+    return <Redirect to='/login'/>
+    
+  }
   
   return (
     <div className="left">
@@ -39,7 +53,7 @@ export default function Dashboard() {
         </Link>
         
       </div>
-      <div className="item-wrapper" onClick={() => localStorage.removeItem("userData")}>
+      <div className="item-wrapper" onClick={doLogOut}>
         <img src="../assets/images/log-out.svg" alt="" />
         <p className="label">Logout</p>
       </div>
