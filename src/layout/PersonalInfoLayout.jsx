@@ -11,7 +11,8 @@ export const PersonalInfoLayout = () => {
     const [Email, setEmail] = useState("")
     useEffect(() => {
         setUserData(JSON.parse(localStorage.getItem('userData')))
-        setFirstName((JSON.parse(localStorage.getItem('userData')).name).split(" "))
+        setFirstName((JSON.parse(localStorage.getItem('userData')).name).split(" ")[0])
+        setLastName((JSON.parse(localStorage.getItem('userData')).name).split(" ")[1])
         setEmail((JSON.parse(localStorage.getItem('userData')).email))
 
     
@@ -54,7 +55,7 @@ export const PersonalInfoLayout = () => {
             <li>
               <div class="card-notification">
                 <p class="col-grey">Last Name</p>
-                <input class="col-dark-grey" type="text" value={(FirstName)} />
+                <input class="col-dark-grey" type="text" onChange={e => setLastName(e.target.value)} value={(LastName)} />
               </div>
             </li>
             {/* <!-- 3 --> */}
