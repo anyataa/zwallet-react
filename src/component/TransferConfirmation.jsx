@@ -38,11 +38,11 @@ export const TransferConfirmation = (props) => {
           <p className="transfer-primary-text">Details</p>
           <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
             <p className="transfer-secondary-text">Amount</p>
-            <p className="transfer-primary-text">Rp. {transferData.nominalTransfer}</p>
+            <p className="transfer-primary-text">{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" }).format(transferData? transferData.nominalTransfer : 0)}</p>
           </div>
           <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
             <p className="transfer-secondary-text">Balance Left</p>
-            <p className="transfer-primary-text">Rp. {transferData.balance}</p>
+            <p className="transfer-primary-text">{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" }).format(transferData? transferData.balance : 0)}</p>
           </div>
           <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
             <p className="transfer-secondary-text">Date & Time</p>
