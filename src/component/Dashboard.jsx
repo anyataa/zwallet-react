@@ -1,18 +1,21 @@
 import React, { useReducer } from "react";
-import { FaBorderAll, FaLongArrowAltUp } from "react-icons/fa";
-import { Link, Redirect } from "react-router-dom";
+import { FaBorderAll, FaLongArrowAltUp, FaPlus, FaUserAlt } from "react-icons/fa";
+import { Link, Redirect, useRouteMatch } from "react-router-dom";
 import '../style/navBar.css'
 
 
 export default function Dashboard() {
   
-const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
-function doLogOut()  {
-  localStorage.removeItem("userData")
-  forceUpdate()
-  console.log('in dashboard')
-  
-}
+  const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
+
+  const { path, url } = useRouteMatch()
+console.log(useRouteMatch())
+  function doLogOut()  {
+    localStorage.removeItem("userData")
+    forceUpdate()
+    console.log('in dashboard')
+    
+  }
 
   if  (!JSON.parse(localStorage.getItem('userData') )){
     console.log('in if')
@@ -24,30 +27,26 @@ function doLogOut()  {
     <div className="left">
       <div className="left-top">
         <Link style={{textDecoration:"none"}} to='/dashboard' >
-        <div className="item-wrapper">
-          <i className="label-size">
-            <FaBorderAll></FaBorderAll>
-          </i>
+        <div className={path == '/dashboard' ? "item-wrapper active" : "item-wrapper"}>
+            <FaBorderAll className="label-size"/>
           <p className="label label-size">Dashboard</p>
         </div></Link>
         <Link style={{textDecoration:"none"}}  to='/transfer' >
-        <div className="item-wrapper active">
-          <i className="label-size">
-            <FaLongArrowAltUp></FaLongArrowAltUp>
-          </i>
+        <div className={path == '/transfer' ? "item-wrapper active" : "item-wrapper"}>
+          <FaLongArrowAltUp className="label-size"/>
           <p className="label label-size">Transfer</p>
         </div>
         </Link>
         <Link style={{textDecoration:"none"}} to='/topup' >
-        <div className="item-wrapper">
-          <i className="fas fa-plus label-size"></i>
+        <div className={path == '/topup' ? "item-wrapper active" : "item-wrapper"}>
+          <FaPlus className="label-size"/>
           <p className="label label-size">Top Up</p>
         </div>
         </Link>
         <Link style={{textDecoration:"none"}} to='/profil' >
 
-        <div className="item-wrapper">
-          <i className="fas fa-user label-size"></i>
+        <div className={path == '/profil' ? "item-wrapper active" : "item-wrapper"}>
+          <FaUserAlt className="label-size"/>
           <p className="label label-size">Profile</p>
         </div>
         </Link>
