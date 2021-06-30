@@ -10,7 +10,7 @@ import InputAuth from "../component/InputAuth";
 import Button from "../component/Button";
 import { ModalStatus } from "../component/ModalStatus";
 
-const ChangePassword = () => {
+const ChangePassword = (props) => {
   const [password, setPassword] = useState();
   const [newPassword, setNewPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
@@ -75,7 +75,7 @@ const ChangePassword = () => {
           />
          
           <div>
-            <Button onClick={e => setStyleModal("flex")} disabled={isDisabled}>Change Password</Button>
+            <Button onClick={props.setDisplay} disabled={isDisabled}>Change Password</Button>
           </div>
         </div>
       </div>

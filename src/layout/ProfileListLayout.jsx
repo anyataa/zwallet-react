@@ -24,12 +24,12 @@ const ProfileListLayout = () => {
       <Switch>
         <Route path={`${path}`} component={ProfilLayout} exact/>
         <Route path={`${path}/personalinfo`} component={PersonalInfoLayout} exact/>
-        <Route path={`${path}/changePassword`} component={ChangePassword} />
-        <Route path={`${path}/changePin`} component={ChangePin} />
+        <Route path={`${path}/changePassword`} render={(props) => <ChangePassword {...props} setDisplay={() => setModalToggle(prevState => !prevState)} display={modalToggle}/>} />
+        <Route path={`${path}/changePin`} render={(props) => <ChangePin {...props} setDisplay={() => setModalToggle(prevState => !prevState)} display={modalToggle}/>} />
         <Route path={`${path}/managephone`} component={ManagePhone} />
-        <Route path={`${path}/addPhone`} render={(props) => <AddPhone {...props} setDisplay={() => setModalToggle(prevState => !prevState)} display={modalToggle}/>} />
+        <Route path={`${path}/addPhone`} render={(props) => <AddPhone {...props} setDisplay={() => setModalToggle(prevState => !prevState)} display={modalToggle} />} />
       </Switch>
-      <ModalStatus setDisplay={() => setModalToggle(prevState => !prevState)} display={modalToggle} activity={activity} ></ModalStatus> 
+      <ModalStatus setDisplay={() => setModalToggle(prevState => !prevState)} display={modalToggle} activity={activity}  ></ModalStatus> 
 
       <Footer />
     </div>
