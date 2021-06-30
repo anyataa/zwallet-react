@@ -79,28 +79,6 @@
       "image": "./../asset/image/friend1.png",
       "pin": "12121",
       "balance": 25000
-    },
-    {
-      "id": 7,
-      "email": "evan12@mail.com",
-      "password": "evan",
-      "name": "",
-      "username": "evander",
-      "phone": "",
-      "image": "",
-      "pin": "000000",
-      "balance": 0
-    },
-    {
-      "id": 8,
-      "email": "evan122@mail.com",
-      "password": "evan",
-      "name": "",
-      "username": "aaa",
-      "phone": "",
-      "image": "",
-      "pin": "000000",
-      "balance": 0
     }
   ],
   "transaction": [
