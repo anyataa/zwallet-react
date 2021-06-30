@@ -22,7 +22,9 @@ import ManagePhone from "./layout/ManagePhone";
 import AddPhone from "./layout/AddPhone";
 import { PersonalInfoLayout } from "./layout/PersonalInfoLayout";
 import { SeeAllFriends } from "./layout/SeeAllFriends";
+
 import { SeeAllTransaction } from "./layout/SeeAllTransaction";
+
 import TransferStatus from "./layout/TransferStatus";
 
 function App() {
