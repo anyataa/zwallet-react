@@ -20,11 +20,10 @@ import ChangePin from "./layout/ChangePin";
 import NewPin from "./layout/NewPin";
 import ManagePhone from "./layout/ManagePhone";
 import AddPhone from "./layout/AddPhone";
-
 import { PersonalInfoLayout } from "./layout/PersonalInfoLayout";
-import { setFriendsData } from "./global";
 import { SeeAllFriends } from "./layout/SeeAllFriends";
 import { SeeAllTransaction } from "./layout/SeeAllTransaction";
+import TransferStatus from "./layout/TransferStatus";
 
 function App() {
   return (
@@ -47,6 +46,7 @@ function App() {
         <Route path="/newPin" component={NewPin}></Route>
         <Route path="/managePhone" component={ManagePhone}></Route>
         <Route path="/addPhone" component={AddPhone}></Route>
+        <Route path="/transferStatus" component={TransferStatus}></Route>
         {/* End of will be deleted */}
         <Route exact path="/" component={LandingPage} />
         <Route path="/login" component={Login} />

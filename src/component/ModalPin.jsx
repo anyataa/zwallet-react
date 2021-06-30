@@ -58,16 +58,16 @@ export const ModalPin = ({modalToggle, setModalToggle}) => {
     // set display to flex for debugging
     <div id="modal" style={{ display: modalToggle ? "flex" : 'none', position: "absolute" }}>
       {/* {console.log(props)} */}
-      <div class="pin-confirmation-box">
-        <div class="modal-close-icon-wrapper">
-          <p class="transfer-primary-text">Enter PIN to Transfer</p>
-          <FaTimes class="modal-close-icon" onClick={setModalToggle}/>
+      <div className="pin-confirmation-box">
+        <div className="modal-close-icon-wrapper">
+          <p className="transfer-primary-text">Enter PIN to Transfer</p>
+          <FaTimes className="modal-close-icon" onClick={setModalToggle}/>
         </div>
-        <p class="transfer-secondary-text">
+        <p className="transfer-secondary-text">
           Enter your 6 digits PIN for confirmation to <br />
           continue transferring money.
         </p>
-        <div class="transfer-pin-input-wrapper">
+        <div className="transfer-pin-input-wrapper">
           {PinTotal.map((element, index) => {
             return (
               <input
