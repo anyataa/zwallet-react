@@ -1,11 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import SuccessLogo from '../asset/image/images/success.svg'
 import FailedLogo from '../asset/image/images/failed.svg'
 
-const TransferStatus = () => {
+const TransferStatus = ({match}) => {
+  const [isSuccess, setIsSuccess] = useState(true)
+  const [data, setData] = useState({})
 
-  const [isSuccess, setisSuccess] = useState(true)
+
+  useEffect(() => {
+    setIsSuccess(match.params.status == 'success' ? true : false)
+    setData(JSON.parse(localStorage.getItem('transfer-data')))
+  }, [match.params.status])
 
   return (
     <div className='right'>
@@ -23,11 +29,11 @@ const TransferStatus = () => {
       </div>
       <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
         <p className="transfer-secondary-text">Amount</p>
-        <p className="transfer-primary-text">Rp100.000</p>
+        <p className="transfer-primary-text">Rp {data.nominalTransfer}</p>
       </div>
       <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
         <p className="transfer-secondary-text">Balance Left</p>
-        <p className="transfer-primary-text">Rp20.000</p>
+        <p className="transfer-primary-text">Rp {data.balance}</p>
       </div>
       <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
         <p className="transfer-secondary-text">Date & Time</p>
@@ -35,18 +41,18 @@ const TransferStatus = () => {
       </div>
       <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
         <p className="transfer-secondary-text">Notes</p>
-        <p className="transfer-primary-text">For buying some socks</p>
+        <p className="transfer-primary-text">{data.noteTransfer}</p>
       </div>
       <p className="transfer-primary-text">Transfer To</p>
       <div className="transfer-item-wrapper">
         <img
-          src={require("../asset/image/Samuel-Suhi.svg").default}
+          src={`https://randomuser.me/api/portraits/men/${data.id}.jpg`}
           alt=""
           className="transfer-contact-image"
         />
         <div className="transfer-contact">
-          <p className="transfer-primary-text">Samuel Suhi</p>
-          <p className="transfer-secondary-text">+62 813-8492-9994</p>
+          <p className="transfer-primary-text">{data.name}</p>
+          <p className="transfer-secondary-text">{data.phone}</p>
         </div>
       </div>
       <div className="transfer-right-bottom-wrapper">
@@ -65,7 +71,7 @@ const TransferStatus = () => {
           </button>
           : null
         }
-        <Link to='/'>
+        <Link to='/transfer'>
           <input
             type="button"
             value={isSuccess ? "Back to Home" : "Try Again"}
