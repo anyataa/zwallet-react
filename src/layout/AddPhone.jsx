@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Footer } from '../component/Footer'
 import "../style/dashboard.css"
 import "../style/global.css"
@@ -10,7 +10,7 @@ import InputAuth from "../component/InputAuth";
 import Button from "../component/Button";
 import { ModalStatus } from '../component/ModalStatus'
 
-const AddPhone = ({setDisplay, display}) => {
+const AddPhone = ({setDisplay, display}, props) => {
     const [phone, setPhone] = useState();
 
     const [ShowModal, setShowModal] = useState(false)
@@ -18,7 +18,9 @@ const AddPhone = ({setDisplay, display}) => {
 
     const [isDisabled, setIsDisabled] = useState(true);
 
-
+useEffect(() => {
+   console.log(props)
+}, [])
     const buttonHandler = () => {
         if (phone) {
             setIsDisabled(false);
