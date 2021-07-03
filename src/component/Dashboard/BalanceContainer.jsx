@@ -1,6 +1,6 @@
 import React from 'react'
 import Balance from './Balance'
-import BalanceSeeAll from '../BalanceSeeAll'
+import BalanceSeeAll from './BalanceSeeAll'
 
 export default function BalanceContainer() {
     return (
