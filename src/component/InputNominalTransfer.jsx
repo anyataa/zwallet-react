@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "../style/transfer.css";
 import "../style/navBar.css";
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { formatRupiah } from "../global";
-import { ModalPin } from "./ModalPin";
 
 export const InputNominalTransfer = (props) => {
   const [data, setData] = useState([]);
   const [nominalTransfer, setNominalTransfer] = useState();
   const [noteTransfer, setNoteTransfer] = useState("");
 
-  const { url, path } = useRouteMatch
 
   useEffect(() => {
     var tempData = JSON.parse(localStorage.getItem('friends-data'))

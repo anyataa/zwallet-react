@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { setTransactionData } from '../global'
+import { setTransactionData } from '../../global'
 import { Link } from 'react-router-dom'
 
 export const BalanceTransaction = (props) => {

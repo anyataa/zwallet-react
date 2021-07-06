@@ -12,9 +12,6 @@ import { Link } from 'react-router-dom'
 const ManagePhone = () => {
 
     return (
-        <div className="container">
-            <Dashboard />
-            <NavBar />
             <div className="right-change-password">
                 <div className="personal-information-top-container">
                     <div className="set-to-left">
@@ -37,7 +34,7 @@ const ManagePhone = () => {
                                 </div>
                             </li>
                             <div className="input-create-new-button bg-secondary col-white" style={{height:'4rem'}}>
-                                <Link style={{textDecoration:"none", color:"white"}} to='/addPhone'>
+                                <Link style={{textDecoration:"none", color:"white"}} to='/profil/addPhone'>
                                 <but >Add Phone Number</but>
                                 </Link>
                                
@@ -46,8 +43,11 @@ const ManagePhone = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
-        </div>
+        // <div className="container">
+        //     <Dashboard />
+        //     <NavBar />
+        //     <Footer />
+        // </div>
     )
 }
 

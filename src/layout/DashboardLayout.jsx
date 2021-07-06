@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import BalanceContainer from "../component/BalanceContainer";
+import BalanceContainer from "../component/Dashboard/BalanceContainer";
 import "../style/global.css";
 import Dashboard from "../component/Dashboard";
 import { Footer } from "../component/Footer";

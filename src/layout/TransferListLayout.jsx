@@ -10,8 +10,9 @@ import {
   Route,
   Switch,
   useRouteMatch,
-  useParams,
-  useHistory,
+  // is it okay for me to do so? since the code is unused
+  // useParams,
+  // useHistory,
 } from "react-router-dom";
 import { TransferConfirmation } from "../component/TransferConfirmation";
 import { InputNominalTransfer } from "../component/InputNominalTransfer";

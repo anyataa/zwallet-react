@@ -10,7 +10,7 @@ import InputAuth from "../component/InputAuth";
 import Button from "../component/Button";
 import { ModalStatus } from "../component/ModalStatus";
 
-const ChangePassword = () => {
+const ChangePassword = (props) => {
   const [password, setPassword] = useState();
   const [newPassword, setNewPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
@@ -30,9 +30,6 @@ const ChangePassword = () => {
   };
 
   return (
-    <div className="container">
-      <Dashboard />
-      <NavBar />
       <div className="right-change-password">
         <div className="personal-information-top-container">
           <div className="set-to-left">
@@ -78,14 +75,17 @@ const ChangePassword = () => {
           />
          
           <div>
-            <Button onClick={e => setStyleModal("flex")} disabled={isDisabled}>Change Password</Button>
+            <Button onClick={props.setDisplay} disabled={isDisabled}>Change Password</Button>
           </div>
         </div>
       </div>
+    // <div className="container">
+    //   <Dashboard />
+    //   <NavBar />
 
-      <Footer />
-      <ModalStatus setDisplay={setStyleModal} display={StyleModal} activity="Change Password"></ModalStatus> 
-    </div>
+    //   <Footer />
+    //   <ModalStatus setDisplay={setStyleModal} display={StyleModal} activity="Change Password"></ModalStatus> 
+    // </div>
   );
 };
 

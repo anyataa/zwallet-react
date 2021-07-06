@@ -26,9 +26,6 @@ export const PersonalInfoLayout = () => {
         localStorage.setItem('userData', JSON.stringify(existingData))
     }
   return (
-    <div className="container">
-      <Dashboard></Dashboard>
-      <NavBar></NavBar>
       <div className="right-personal-information">
           {/* Top */}
         <div className="personal-information-top-container">
@@ -83,7 +80,7 @@ export const PersonalInfoLayout = () => {
                       disabled
                     />
                   </div>
-                  <Link className="col-secondary" to='/managephone'> Manage</Link>
+                  <Link className="col-secondary" to='/profil/managephone'> Manage</Link>
                   
                 </div>
               </div>
@@ -93,7 +90,10 @@ export const PersonalInfoLayout = () => {
            {/* <!-- Finish --> */}
         </div>
       </div>
-      <Footer></Footer>
-    </div>
+    // <div className="container">
+    //   {/* <Dashboard></Dashboard>
+    //   <NavBar></NavBar> */}
+    //   {/* <Footer></Footer> */}
+    // </div>
   );
 };

@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom'
 
 export const ModalStatus = (props) => {
     return (
-      <div id="modal" style={{display: props.display}} >
+      <div id="modal" style={{display: props.display ? 'flex' : 'none'}} >
           {console.log(props)}
       <div className="pin-confirmation-box">
         <div className="modal-close-icon-wrapper">
           <p className="transfer-primary-text" />
-          <FaTimes className="modal-close-icon" onClick={e => props.setDisplay("none")}></FaTimes>
+          <FaTimes className="modal-close-icon" onClick={props.setDisplay}></FaTimes>
           {/* {props.display} */}
         </div>
         <div className="transfer-pin-input-wrapper">
