@@ -1,4 +1,4 @@
-import { Route, Switch, useRouteMatch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Login from "./layout/Login";
 import NotFound404 from "./layout/404";
 import DashboardLayout from "./layout/DashboardLayout";
@@ -10,34 +10,30 @@ import PinSuccess from "./layout/PinSuccess";
 import CreatePin from "./layout/CreatePin";
 import "./style/global.css";
 import SignUp from "./layout/SignUp";
-
-import { TransferConfirmation } from "./component/TransferConfirmation";
 import TopUp from "./layout/TopUp";
-import { ProfilLayout } from "./layout/ProfilLayout";
-
-import ChangePassword from "./layout/ChangePassword";
-import ChangePin from "./layout/ChangePin";
 import NewPin from "./layout/NewPin";
-import ManagePhone from "./layout/ManagePhone";
-import AddPhone from "./layout/AddPhone";
-import { PersonalInfoLayout } from "./layout/PersonalInfoLayout";
 import { SeeAllFriends } from "./layout/SeeAllFriends";
-
 import { SeeAllTransaction } from "./layout/SeeAllTransaction";
-
 import TransferStatus from "./layout/TransferStatus";
-import ListContact from "./component/ListContact";
 import ProfileListLayout from "./layout/ProfileListLayout";
+import { LoginQR } from "./layout/LoginQR";
+// import ListContact from "./component/ListContact";
+// import ManagePhone from "./layout/ManagePhone";
+// import AddPhone from "./layout/AddPhone";
+// import { PersonalInfoLayout } from "./layout/PersonalInfoLayout";
+// import ChangePassword from "./layout/ChangePassword";
+// import ChangePin from "./layout/ChangePin";
+// import { ProfilLayout } from "./layout/ProfilLayout";
+// import { TransferConfirmation } from "./component/TransferConfirmation";
 
 function App() {
-
   return (
     <div className="App">
       {/* Code below allows un-accessible page to be developed 
       by the person in charge, feel free to add more. Yet pls do not delete. 
       If you need to do so. Pls informed in the group */}
       <Switch>
-        <Route path="/transfer" component={TransferListLayout}/>
+        <Route path="/transfer" component={TransferListLayout} />
         <Route path="/profil" component={ProfileListLayout} />
 
         {/* Will be deleted */}
@@ -50,13 +46,14 @@ function App() {
         {/* <Route path="/managePhone" component={ManagePhone}></Route> */}
         {/* <Route path="/addPhone" component={AddPhone}></Route> */}
         <Route path="/dashboard" component={DashboardLayout} />
-        <Route path="/topup" component={TopUp}></Route>
+        <Route path="/topUp" component={TopUp}></Route>
         <Route path="/newPin" component={NewPin}></Route>
         <Route path="/transferStatus" component={TransferStatus}></Route>
+        <Route path="/qrLogin" component={LoginQR}></Route>
         {/* End of will be deleted */}
         <Route exact path="/" component={LandingPage} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={SignUp} />
+        <Route path="/logIn" component={Login} />
+        <Route path="/signUp" component={SignUp} />
         <Route path="/resetPassword" component={ResetPassword} />
         <Route path="/createNewPassword" component={CreateNewPassword} />
         <Route path="/pinSuccess" component={PinSuccess} />

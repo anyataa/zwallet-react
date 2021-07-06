@@ -80,9 +80,15 @@ const Login = () => {
           isVisible={isVisible}
           password
         />
+        <div>
         <Link to='/resetPassword' className="text" style={{ textDecoration: "none" }}>
-          Forgot Password?
+          Forgot Password? &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </Link>
+        <Link to='/qrlogin' className="text" style={{ textDecoration: "none" }}>
+          Login With QR Code
+        </Link>
+        </div>
+    
         <div>
           {
             errorMsg ? <p className='text-validation'>{errorMsg}</p> : null
