@@ -1,5 +1,6 @@
 import axios from "axios";
 // Email validation in login page and sign up
+
 export const emailValidation = (email) => {
   if (email.includes("@") == false) {
     return false;
@@ -46,6 +47,15 @@ export const setTransactionData = () => {
     localStorage.setItem("transaction-data", JSON.stringify(res.data));
     // return JSON.parse(localStorage.getItem("transaction-data"))
   });
+};
+
+export const getAccountData = (accountId) => {
+  axios
+    .get(`http://localhost:8080/zwallet-api/account/${accountId}`)
+    .then((res) => {
+      localStorage.setItem("account-data", JSON.stringify(res.data));
+      // return JSON.parse(localStorage.getItem("transaction-data"))
+    });
 };
 
 // Pin Handler
