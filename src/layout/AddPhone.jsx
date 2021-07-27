@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Footer } from '../component/Footer'
 import "../style/dashboard.css"
 import "../style/global.css"
@@ -9,6 +9,8 @@ import Dashboard from "../component/Dashboard"
 import InputAuth from "../component/InputAuth";
 import Button from "../component/Button";
 import { ModalStatus } from '../component/ModalStatus'
+import axios from 'axios'
+import { urlAPI } from '../asset/urls'
 
 const AddPhone = ({setDisplay, display}) => {
     const [phone, setPhone] = useState();
@@ -18,6 +20,20 @@ const AddPhone = ({setDisplay, display}) => {
 
     const [isDisabled, setIsDisabled] = useState(true);
 
+
+    const addPhone = () => {
+        if (localStorage.getItem("userData")) {
+            var body = {
+                phoneNumber: 0 + phone,
+                userId: JSON.parse(localStorage.getItem("userData")).id
+            }
+            axios.post(urlAPI + '/phone/add', body)
+            .then(res => {
+                setDisplay()
+            })
+            .catch(err => console.log(err))
+        }
+    }
 
     const buttonHandler = () => {
         if (phone) {
@@ -49,7 +65,7 @@ const AddPhone = ({setDisplay, display}) => {
                         onKeyUp={buttonHandler}
                     />
                     <br />
-                    <Button style={{cursor:'pointer'}}  disabled={isDisabled} onClick={setDisplay} >
+                    <Button style={{cursor:'pointer'}}  disabled={isDisabled} onClick={addPhone} >
                         Add Phone Number
                     </Button>
                     {/* {StyleModal} */}
