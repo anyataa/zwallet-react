@@ -13,8 +13,8 @@ export const LoginQR = () => {
             <p className="login-text-box-top">
                 Login With QR Code
               <br /> 
-              Finance Never Been This Easy!
-              <br /> Only Scan and Ready to Access!
+             Accessing Your E-Wallet Never Been This Easy!
+              <br /> Only Scan and Ready for Transaction!
             </p>
             <p className="login-text-box-bottom">
               Login with QR Code! 

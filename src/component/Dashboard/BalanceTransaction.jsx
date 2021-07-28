@@ -7,8 +7,7 @@ export const BalanceTransaction = (props) => {
     useEffect(() => {setTransactionData();   setTransaction(JSON.parse(localStorage.getItem("transaction-data")).listTransaction)}, [])
     return (
         <div className="contact-list-container">
-          {/* Cannot Do Mapping HELPPP */}
-            {(Transaction.slice(-5) ).map((item) => ( <div className="custom-profile-view">
+            {(Transaction.slice(-4) ).map((item) => ( <div className="custom-profile-view">
             <div className="profile-container">
               <div className="profile-img">
                 <img src={`https://randomuser.me/api/portraits/men/1.jpg`} alt="" />
@@ -21,8 +20,6 @@ export const BalanceTransaction = (props) => {
             </div>
             {item.transactionType > 0 ? <h2 className="col-red">-{item.transactionAmount}</h2> : <h2 className="col-green">+{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits : 0 }).format(item.transactionAmount)}</h2> }
           </div>))}
-          {/* MAPPING DONE, TODO: Image and Color Classification */}
         </div>
- 
     )
 }
