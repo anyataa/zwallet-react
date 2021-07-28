@@ -3,8 +3,12 @@ import Hero from "../component/Hero";
 import "../style/newLogin.css";
 import "../style/transfer.css";
 import Pin from "../component/Pin"
+import axios from "axios";
 
-const ResetPassword = () => {
+const CreatePin = () => {
+    const create = () => {
+        
+    }
 
     return (
         <div className="login-container">
@@ -29,4 +33,4 @@ const ResetPassword = () => {
     );
 };
 
-export default ResetPassword;
+export default CreatePin;
