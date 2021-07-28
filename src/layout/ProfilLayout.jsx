@@ -59,6 +59,7 @@ export const ProfilLayout = () => {
           <div className="profile-bottom-container col-grey">
             <div className="left-profile-bottom-container">
               <ul>
+
                 {/* <!-- 1 --> */}
                 <Link to="/profil/personalinfo">
                   <li>
@@ -122,8 +123,9 @@ export const ProfilLayout = () => {
               </div>
               {/* <!-- Contact --> */}
               <div className="contact-list-container">
-                {FriendsData.filter((friend) => UserData.id != friend.id)
-                  .slice(1 - 5)
+                {/* TODO : change 100 to 0 */}
+                {FriendsData.length < 100? <div><br /><br /><br /><br /><br /><h2>You Have No Friends Yet...</h2><h4>You can add friends from Zwallet Mobile by allowing access to your contacts</h4></div>  : FriendsData.filter((friend) => UserData.id != friend.id)
+                  .slice(1-5)
                   .map((friend) => (
                     <div className="profile-container">
                       <div className="profile-img">

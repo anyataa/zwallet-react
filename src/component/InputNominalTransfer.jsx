@@ -6,6 +6,7 @@ import { formatRupiah } from "../global";
 
 export const InputNominalTransfer = (props) => {
   const [data, setData] = useState([]);
+  const [Balance, setBalance] = useState(0)
   const [nominalTransfer, setNominalTransfer] = useState();
   const [noteTransfer, setNoteTransfer] = useState("");
 
@@ -17,6 +18,10 @@ export const InputNominalTransfer = (props) => {
         setData(tempData[i])
       }
     }
+    // Set balance based on account-data in local storage
+    // CHANGE : "data.balance" change to "Balance"
+    // Did not query from friends anymore :)
+    setBalance(JSON.parse(localStorage.getItem('account-data')).balance)
   }, [])
   
   const onContinue = () => {
@@ -50,8 +55,8 @@ export const InputNominalTransfer = (props) => {
         </p>
         <div className="transfer-input-amount-wrapper2">
           <input onChange={e => setNominalTransfer(e.target.value)} value={nominalTransfer} type="text" id="transfer-input-amount" placeholder="0.00" />
-          {data.balance - nominalTransfer <= 0 ?  <p className='col-red'>Amount exceeds your balance</p> : <p></p> }
-          <p className="transfer-primary-text">{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" }).format(nominalTransfer ? data.balance - nominalTransfer: data.balance)} Available</p>
+          {Balance - nominalTransfer <= 0 ?  <p className='col-red'>Amount exceeds your balance</p> : <p></p> }
+          <p className="transfer-primary-text">{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits:0 }).format(nominalTransfer ? Balance - nominalTransfer: Balance)} Available</p>
           {/* Check if amount exceeding the balance */}
           <div className="transfer-input-notes-wrapper">
             <img
@@ -74,7 +79,7 @@ export const InputNominalTransfer = (props) => {
               <input type="button" value="Back" className="transfer-btn" />
             </Link>
             <Link to={`/transfer/${data.id}/confirmation`}>
-              <input type="button" value="Continue" className="transfer-btn" onClick={onContinue} disabled={nominalTransfer && noteTransfer && (data.balance - nominalTransfer) > 0 ? false : true}/>
+              <input type="button" value="Continue" className="transfer-btn" onClick={onContinue} disabled={nominalTransfer && noteTransfer && (Balance - nominalTransfer) > 0 ? false : true}/>
             </Link>
           </div>
     </div>
