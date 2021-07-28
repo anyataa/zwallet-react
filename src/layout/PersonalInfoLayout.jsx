@@ -3,20 +3,36 @@ import Dashboard from "../component/Dashboard";
 import { Footer } from "../component/Footer";
 import NavBar from "../component/NavBar";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { urlAPI } from "../asset/urls";
 
 export const PersonalInfoLayout = () => {
     const [UserData, setUserData] = useState({})
     const [FirstName, setFirstName] = useState("")
     const [LastName, setLastName] = useState("")
     const [Email, setEmail] = useState("")
+    const [phoneNumber, setPhoneNumber] = useState({})
+
     useEffect(() => {
         setUserData(JSON.parse(localStorage.getItem('userData')))
         setFirstName((JSON.parse(localStorage.getItem('userData')).name).split(" ")[0])
         setLastName((JSON.parse(localStorage.getItem('userData')).name).split(" ")[1])
         setEmail((JSON.parse(localStorage.getItem('userData')).email))
 
+        getPhoneNumber()
     
     }, [])
+
+    const getPhoneNumber = () => {
+      if (localStorage.getItem("userData")) {
+        axios.get(urlAPI + `/phone/get-primary/${JSON.parse(localStorage.getItem("userData")).id}`)
+        .then(res => {
+            console.log(res.data)
+            setPhoneNumber(res.data.phoneNumber)
+        })
+        .catch(err => console.log(err))
+      }
+    }
     
     const changeEmail = function (input) {
         setEmail(input)
@@ -76,7 +92,7 @@ export const PersonalInfoLayout = () => {
                     <input
                       class="col-dark-grey"
                       type="text"
-                      value={UserData.phone}
+                      value={phoneNumber}
                       disabled
                     />
                   </div>
