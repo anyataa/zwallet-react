@@ -20,7 +20,7 @@ const ManagePhone = () => {
 
     const getPhoneNumber = () => {
         if (localStorage.getItem("userData")) {
-            axios.get(urlAPI + `/phone/${JSON.parse(localStorage.getItem("userData")).id}`)
+            axios.get(urlAPI + `/phone/${JSON.parse(localStorage.getItem("userData")).userId}`)
             .then(res => {
                 console.log(res.data)
                 setData(res.data)
@@ -32,7 +32,7 @@ const ManagePhone = () => {
     const setPrimary = (id) => {
         if (localStorage.getItem("userData")) {
             var data = {
-                userId: JSON.parse(localStorage.getItem("userData")).id,
+                userId: JSON.parse(localStorage.getItem("userData")).userId,
                 phoneNumberId: id
             }
             axios.put(urlAPI + `/phone/set-primary`, data)
