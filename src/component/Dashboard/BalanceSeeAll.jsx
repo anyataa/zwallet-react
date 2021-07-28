@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 import { BalanceTransaction } from "./BalanceTransaction";
 import DynamicChart from "./Chart";
 import { Link } from "react-router-dom";
+import { inRupiah } from "../../global";
 
 export default class BalanceSeeAll extends Component {
   
@@ -18,7 +19,7 @@ export default class BalanceSeeAll extends Component {
               </i>
 
               <p>Income</p>
-              <h2>Rp2.120.000 </h2>
+              <h2>{inRupiah(JSON.parse(localStorage.getItem("transaction-data")).sumIncome)}</h2>
             </div>
             <div className="row-balance">
               <i>
@@ -27,7 +28,7 @@ export default class BalanceSeeAll extends Component {
               </i>
 
               <p>Outcome</p>
-              <h2>Rp1.120.000 </h2>
+              <h2>{inRupiah(JSON.parse(localStorage.getItem("transaction-data")).sumOutcome)}</h2>
             </div>
           </div>
           <div className="chart-wrapper">

@@ -3,10 +3,10 @@ import { FaArrowUp, FaPlus, FaTicketAlt, FaWallet } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export default function Balance() {
-  const [UserData, setUserData] = useState(localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')) : {balance: 0})
-  const [BalanceFormat, setBalanceFormat] = useState(Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0}).format(123456))
+  const [UserData, setUserData] = useState(localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('account-data')) : {balance: 0})
+  const [BalanceFormat, setBalanceFormat] = useState(Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0}).format(0))
   useEffect(() => {
- setBalanceFormat(Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" }).format(UserData? UserData.balance : 0))
+ setBalanceFormat(Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 }).format(UserData? UserData.balance : 0))
    
   }, [])
   return (

@@ -8,6 +8,14 @@ export const emailValidation = (email) => {
     return true;
   }
 };
+// rupiah format
+export const inRupiah = (amount) => {
+  return Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    minimumFractionDigits: 0,
+  }).format(amount);
+};
 
 // rupiah format
 export const formatRupiah = (prefix, Initalinput) => {
@@ -42,11 +50,13 @@ export const setFriendsData = () => {
   });
 };
 
-export const setTransactionData = () => {
-  axios.get("http://localhost:4000/transaction").then((res) => {
-    localStorage.setItem("transaction-data", JSON.stringify(res.data));
-    // return JSON.parse(localStorage.getItem("transaction-data"))
-  });
+export const setTransactionData = (accountId) => {
+  axios
+    .get(`http://localhost:8080/zwallet-api/transaction/${2}`)
+    .then((res) => {
+      localStorage.setItem("transaction-data", JSON.stringify(res.data));
+      // return JSON.parse(localStorage.getItem("transaction-data"))
+    });
 };
 
 export const getAccountData = (accountId) => {
@@ -54,6 +64,15 @@ export const getAccountData = (accountId) => {
     .get(`http://localhost:8080/zwallet-api/account/${accountId}`)
     .then((res) => {
       localStorage.setItem("account-data", JSON.stringify(res.data));
+      // return JSON.parse(localStorage.getItem("transaction-data"))
+    });
+};
+
+export const getTransactionByPeriod = (accountId) => {
+  axios
+    .get(`http://localhost:8080/zwallet-api/transaction/history/${accountId}`)
+    .then((res) => {
+      localStorage.setItem("transaction-history", JSON.stringify(res.data));
       // return JSON.parse(localStorage.getItem("transaction-data"))
     });
 };
