@@ -79,6 +79,17 @@
       "image": "./../asset/image/friend1.png",
       "pin": "12121",
       "balance": 25000
+    },
+    {
+      "id": 7,
+      "email": "aaa@mail.com",
+      "password": "123",
+      "name": "",
+      "username": "anijanna",
+      "phone": "",
+      "image": "",
+      "pin": "000000",
+      "balance": 0
     }
   ],
   "transaction": [

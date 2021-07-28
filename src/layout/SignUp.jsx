@@ -5,11 +5,13 @@ import InputAuth from "../component/InputAuth";
 import Button from '../component/Button'
 import Hero from '../component/Hero'
 import axios from "axios";
+import { urlAPI } from "../asset/urls"
 
 const SignUp = () => {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [phone, setPhone] = useState();
 
   const [isVisible, setIsVisible] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
@@ -18,7 +20,7 @@ const SignUp = () => {
   const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
   const buttonHandler = () => {
-    if (username && email && password) {
+    if (username && email && password && phone) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
@@ -27,35 +29,15 @@ const SignUp = () => {
 
   const onRegister = () => {
     if(emailValidation(email)){
-      axios.get(`http://localhost:4000/user?email=${email}`)
+      var body = {
+        username, 
+        email,
+        password,
+        phoneNumber : phone
+      }
+      axios.post(`${urlAPI}/user/signup`, body)
       .then(res => {
-        if(res.data.length > 0){
-          console.log('masuk')
-          setErrorMsg('Email is not available, please try another email!')
-        }else{
-          axios.get('http://localhost:4000/user')
-          .then(res => {
-            axios.post('http://localhost:4000/user', {
-              id: res.data[res.data.length-1].id + 1,
-              email,
-              password,
-              name: "",
-              username,
-              phone: '',
-              image: '',
-              pin: '000000',
-              balance: 0
-            })
-            .then(res => {
-              console.log(res.data)
-              localStorage.setItem('userData', JSON.stringify(res.data))
-              forceUpdate();
-            })
-            .catch(err => {
-              console.log(err)
-            })
-          })
-        }
+        console.log(res.data)
       })
       .catch(err => {
         console.log(err)
@@ -63,6 +45,44 @@ const SignUp = () => {
     }else{
       setErrorMsg('Email Format Invalid')
     }
+
+    // if(emailValidation(email)){
+    //   axios.get(`http://localhost:4000/user?email=${email}`)
+    //   .then(res => {
+    //     if(res.data.length > 0){
+    //       console.log('masuk')
+    //       setErrorMsg('Email is not available, please try another email!')
+    //     }else{
+    //       axios.get('http://localhost:4000/user')
+    //       .then(res => {
+    //         axios.post('http://localhost:4000/user', {
+    //           id: res.data[res.data.length-1].id + 1,
+    //           email,
+    //           password,
+    //           name: "",
+    //           username,
+    //           phone: '',
+    //           image: '',
+    //           pin: '000000',
+    //           balance: 0
+    //         })
+    //         .then(res => {
+    //           console.log(res.data)
+    //           localStorage.setItem('userData', JSON.stringify(res.data))
+    //           forceUpdate();
+    //         })
+    //         .catch(err => {
+    //           console.log(err)
+    //         })
+    //       })
+    //     }
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //   })
+    // }else{
+    //   setErrorMsg('Email Format Invalid')
+    // }
   }
   
   if(JSON.parse(localStorage.getItem('userData'))){
@@ -90,7 +110,7 @@ const SignUp = () => {
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="Enter your Username"
+          placeholder="Enter your Full Name"
           onKeyUp={buttonHandler}
         />
         <InputAuth
@@ -109,6 +129,14 @@ const SignUp = () => {
           onKeyUp={buttonHandler}
           isVisible={isVisible}
           password
+        />
+        <InputAuth
+          type="number"
+          phone
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          placeholder="Enter your phone number"
+          onKeyUp={buttonHandler}
         />
         <Link to='/resetPassword' className="text" style={{ textDecoration: "none" }}>
           Forgot Password?
