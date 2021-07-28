@@ -25,7 +25,7 @@ const AddPhone = ({setDisplay, display}, props) => {
         if (localStorage.getItem("userData")) {
             var body = {
                 phoneNumber: 0 + phone,
-                userId: JSON.parse(localStorage.getItem("userData")).id
+                userId: JSON.parse(localStorage.getItem("userData")).userId
             }
             axios.post(urlAPI + '/phone/add', body)
             .then(res => {

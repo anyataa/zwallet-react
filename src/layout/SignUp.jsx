@@ -39,7 +39,7 @@ const SignUp = () => {
       .then(res => {
         console.log(res.data)
         if (res.data.status.includes('CREATED')) {
-          localStorage.setItem('userData', JSON.stringify(res.data))
+          localStorage.setItem('userData', JSON.stringify(res.data.data))
           forceUpdate();
         }else{
           setErrorMsg(res.data.message)

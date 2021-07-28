@@ -25,7 +25,7 @@ const ListContact = () => {
 
   const fetchContact = () => {
     if (localStorage.getItem("userData")) {
-      axios.get(`http://localhost:8080/zwallet-api/friends/${JSON.parse(localStorage.getItem("userData")).id}`)
+      axios.get(`http://localhost:8080/zwallet-api/friends/${JSON.parse(localStorage.getItem("userData")).userId}`)
       .then(res => {
         // console.log(res.data)
         setData(res.data)

@@ -25,7 +25,7 @@ export const PersonalInfoLayout = () => {
 
     const getPhoneNumber = () => {
       if (localStorage.getItem("userData")) {
-        axios.get(urlAPI + `/phone/get-primary/${JSON.parse(localStorage.getItem("userData")).id}`)
+        axios.get(urlAPI + `/phone/get-primary/${JSON.parse(localStorage.getItem("userData")).userId}`)
         .then(res => {
             console.log(res.data)
             setPhoneNumber(res.data.phoneNumber)
