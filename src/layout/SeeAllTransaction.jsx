@@ -2,7 +2,7 @@ import React from 'react'
 import Dashboard from '../component/Dashboard'
 import NavBar from '../component/NavBar'
 import { Footer } from '../component/Footer'
-import { BalanceTransaction } from '../component/BalanceTransaction'
+import { BalanceTransaction } from '../component/Dashboard/BalanceTransaction'
 
 
 export const SeeAllTransaction = () => {

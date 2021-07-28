@@ -12,7 +12,7 @@ import { ModalStatus } from '../component/ModalStatus'
 import axios from 'axios'
 import { urlAPI } from '../asset/urls'
 
-const AddPhone = ({setDisplay, display}) => {
+const AddPhone = ({setDisplay, display}, props) => {
     const [phone, setPhone] = useState();
 
     const [ShowModal, setShowModal] = useState(false)
