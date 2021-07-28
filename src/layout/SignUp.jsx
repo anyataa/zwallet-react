@@ -10,6 +10,7 @@ const SignUp = () => {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [phone, setPhone] = useState();
 
   const [isVisible, setIsVisible] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
@@ -29,33 +30,7 @@ const SignUp = () => {
     if(emailValidation(email)){
       axios.get(`http://localhost:4000/user?email=${email}`)
       .then(res => {
-        if(res.data.length > 0){
-          console.log('masuk')
-          setErrorMsg('Email is not available, please try another email!')
-        }else{
-          axios.get('http://localhost:4000/user')
-          .then(res => {
-            axios.post('http://localhost:4000/user', {
-              id: res.data[res.data.length-1].id + 1,
-              email,
-              password,
-              name: "",
-              username,
-              phone: '',
-              image: '',
-              pin: '000000',
-              balance: 0
-            })
-            .then(res => {
-              console.log(res.data)
-              localStorage.setItem('userData', JSON.stringify(res.data))
-              forceUpdate();
-            })
-            .catch(err => {
-              console.log(err)
-            })
-          })
-        }
+        
       })
       .catch(err => {
         console.log(err)
@@ -63,6 +38,44 @@ const SignUp = () => {
     }else{
       setErrorMsg('Email Format Invalid')
     }
+
+    // if(emailValidation(email)){
+    //   axios.get(`http://localhost:4000/user?email=${email}`)
+    //   .then(res => {
+    //     if(res.data.length > 0){
+    //       console.log('masuk')
+    //       setErrorMsg('Email is not available, please try another email!')
+    //     }else{
+    //       axios.get('http://localhost:4000/user')
+    //       .then(res => {
+    //         axios.post('http://localhost:4000/user', {
+    //           id: res.data[res.data.length-1].id + 1,
+    //           email,
+    //           password,
+    //           name: "",
+    //           username,
+    //           phone: '',
+    //           image: '',
+    //           pin: '000000',
+    //           balance: 0
+    //         })
+    //         .then(res => {
+    //           console.log(res.data)
+    //           localStorage.setItem('userData', JSON.stringify(res.data))
+    //           forceUpdate();
+    //         })
+    //         .catch(err => {
+    //           console.log(err)
+    //         })
+    //       })
+    //     }
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //   })
+    // }else{
+    //   setErrorMsg('Email Format Invalid')
+    // }
   }
   
   if(JSON.parse(localStorage.getItem('userData'))){
@@ -90,7 +103,7 @@ const SignUp = () => {
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="Enter your Username"
+          placeholder="Enter your Full Name"
           onKeyUp={buttonHandler}
         />
         <InputAuth
@@ -109,6 +122,14 @@ const SignUp = () => {
           onKeyUp={buttonHandler}
           isVisible={isVisible}
           password
+        />
+        <InputAuth
+          type="number"
+          phone
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          placeholder="Enter your phone number"
+          onKeyUp={buttonHandler}
         />
         <Link to='/resetPassword' className="text" style={{ textDecoration: "none" }}>
           Forgot Password?
