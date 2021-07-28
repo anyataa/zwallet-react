@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom'
 
 
 export const Pin = (props) => {
+
+    const { setPinValue, onCreate } = props
    
     //   Pin control
     const [BorderColor, setBorderColor] = useState("rgba(66, 63, 63, 0.4")
     const [ButtonDisabled, setButtonDisabled] = useState(true)
-    const [PinValue, setPinValue] = useState("")
+    // const [PinValue, setPinValue] = useState("")
     const [PinTotal, setPinTotal] = useState([{
         value: null},
         {value: null},
@@ -40,7 +42,7 @@ export const Pin = (props) => {
             //   console.log(pin)
               if (pin.length==6){
                 setPinValue(pin)
-                console.log("This is Pin Value:",PinValue)
+                // console.log("This is Pin Value:",PinValue)
                 setButtonDisabled(false)
               } else {
                 setButtonDisabled(true)
@@ -71,9 +73,9 @@ export const Pin = (props) => {
             onclick
             ={e => validatePin()}
           /> */}
-          <Link to={props.goTo}> 
-          <Button disabled={ButtonDisabled} onClick={validatePin}>{props.buttonValue}</Button>
-          </Link>
+          {/* <Link to={props.goTo}>  */}
+          <Button disabled={ButtonDisabled} onClick={onCreate}>{props.buttonValue}</Button>
+          {/* </Link> */}
           
           <br/>
           <br/>

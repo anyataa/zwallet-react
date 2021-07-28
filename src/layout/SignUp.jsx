@@ -33,14 +33,21 @@ const SignUp = () => {
         username, 
         email,
         password,
-        phoneNumber : phone
+        phoneNumber : phone[0] == 0 ? phone : '0' + phone
       }
       axios.post(`${urlAPI}/user/signup`, body)
       .then(res => {
         console.log(res.data)
+        if (res.data.status.includes('CREATED')) {
+          localStorage.setItem('userData', JSON.stringify(res.data.data))
+          forceUpdate();
+        }else{
+          setErrorMsg(res.data.message)
+        }
       })
       .catch(err => {
         console.log(err)
+        console.log("evan")
       })
     }else{
       setErrorMsg('Email Format Invalid')

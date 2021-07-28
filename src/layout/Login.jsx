@@ -6,6 +6,7 @@ import "../style/newLogin.css";
 import { Link, Redirect } from "react-router-dom";
 import Button from "../component/Button";
 import axios from "axios";
+import { urlAPI } from "../asset/urls";
 
 const Login = () => {
   const [email, setEmail] = useState();
@@ -29,10 +30,11 @@ const Login = () => {
 
   const onLogin = () => {
     if(emailValidation(email)){
-      axios.get(`http://localhost:4000/user?email=${email}&password=${password}`)
+      axios.post(urlAPI + "/user/signin", {email, password})
       .then(res => {
-        res.data.length > 0 ?
-        localStorage.setItem('userData', JSON.stringify(res.data[0]))
+        console.log(res.data.data)
+        res.data.message == "Login success!" ?
+        localStorage.setItem('userData', JSON.stringify(res.data.data))
         : setErrorMsg('Email or Password Incorrect')
         forceUpdate();
       })
