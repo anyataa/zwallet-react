@@ -5,6 +5,7 @@ import InputAuth from "../component/InputAuth";
 import Button from '../component/Button'
 import Hero from '../component/Hero'
 import axios from "axios";
+import { urlAPI } from "../asset/urls"
 
 const SignUp = () => {
   const [username, setUsername] = useState();
@@ -19,7 +20,7 @@ const SignUp = () => {
   const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
   const buttonHandler = () => {
-    if (username && email && password) {
+    if (username && email && password && phone) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
@@ -28,9 +29,15 @@ const SignUp = () => {
 
   const onRegister = () => {
     if(emailValidation(email)){
-      axios.get(`http://localhost:4000/user?email=${email}`)
+      var body = {
+        username, 
+        email,
+        password,
+        phoneNumber : phone
+      }
+      axios.post(`${urlAPI}/user/signup`, body)
       .then(res => {
-        
+        console.log(res.data)
       })
       .catch(err => {
         console.log(err)
