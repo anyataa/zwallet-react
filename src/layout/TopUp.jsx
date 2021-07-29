@@ -13,7 +13,7 @@ const TopUp = () => {
     const [PhoneNumber, setPhoneNumber] = useState("")
     useEffect(() => {
         setUserData(JSON.parse(localStorage.getItem('userData')))
-        setPhoneNumber(JSON.parse(localStorage.getItem('userData')).phone.slice(1))
+        setPhoneNumber(JSON.parse(localStorage.getItem('phoneNumber')).phone.slice(1))
     }, [ ])
   const TopUpDetail = [
     {
