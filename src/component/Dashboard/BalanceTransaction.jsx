@@ -13,13 +13,19 @@ export const BalanceTransaction = (props) => {
                 <img src={`https://randomuser.me/api/portraits/men/1.jpg`} alt="" />
               </div>
               <div className="profile-data">
-                <h3 className="col-grey">{item.toAccountId.userId.username}</h3>
-                {item.transactionDetail == 1 ? <p className="col-grey">Transfer</p> :  <p className="col-grey">Subscription</p>}
+              {item.transactionType > 0 ?  <h3 className="col-grey">{item.receiver}</h3> :  <h3 className="col-grey">{item.sender}</h3>}
+                {item.transactionDetails > 0   ? <p className="col-grey">Transfer</p> :  <p className="col-grey">Subscription</p>}
                
               </div>
             </div>
-            {item.transactionType > 0 ? <h2 className="col-red">-{item.transactionAmount}</h2> : <h2 className="col-green">+{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits : 0 }).format(item.transactionAmount)}</h2> }
+            {item.transactionType > 0 ? <h2 className="col-red">-{item.amount}</h2> : <h2 className="col-green">+{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits : 0 }).format(item.amount)}</h2> }
           </div>))}
         </div>
+        // Transaction Details
+        //  1 : Transfer
+        //  2 : Subscription
+        //  3 : Payment
+        //  4 : Top Up
+        //  5 : Retrieve
     )
 }
