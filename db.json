@@ -27,14 +27,14 @@
     },
     {
       "id": 2,
-      "name": "Lara Croft",
-      "password": "123",
-      "username": "LaraCroft",
-      "email": "LaraCroft@mail.com",
-      "phone": "+62 813-8492-9994",
-      "image": "./../asset/image/friend1.png",
-      "pin": "12121",
-      "balance": 150000
+      "email": "evan@mail.com",
+      "password": "evan",
+      "name": "Evander Rednave",
+      "username": "Rednave",
+      "phone": "+62 812-3333-2222",
+      "image": "",
+      "pin": "000000",
+      "balance": 100000
     },
     {
       "id": 3,
@@ -82,14 +82,14 @@
     },
     {
       "id": 7,
-      "email": "evan@mail.com",
-      "password": "evan",
-      "name": "Evander",
-      "username": "Rednave",
-      "phone": "+62 812-3333-2222",
+      "email": "aaa@mail.com",
+      "password": "123",
+      "name": "",
+      "username": "anijanna",
+      "phone": "",
       "image": "",
       "pin": "000000",
-      "balance": 100000
+      "balance": 0
     }
   ],
   "transaction": [

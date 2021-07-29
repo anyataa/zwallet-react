@@ -3,8 +3,14 @@ import Hero from "../component/Hero";
 import "../style/newLogin.css";
 import Button from "../component/Button";
 import { AiFillCheckCircle } from 'react-icons/ai';
+import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const ResetPassword = () => {
+
+  
+   
+   
 
     return (
         <div className="login-container">
@@ -21,9 +27,12 @@ const ResetPassword = () => {
                 </div>
 
                 <div>
+                    <Link to='/dashboard'>
                     <Button>
                         Login Now
                     </Button>
+                    </Link> 
+                    
                 </div>
             </div>
         </div>

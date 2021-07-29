@@ -1,12 +1,33 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import Hero from "../component/Hero";
 import "../style/newLogin.css";
 import "../style/transfer.css";
-import Button from "../component/Button";
+import Pin from "../component/Pin"
+import axios from "axios";
+import { urlAPI } from "../asset/urls";
+import { Redirect } from "react-router-dom";
 
-const ResetPassword = () => {
-    const [isDisabled, setIsDisabled] = useState(true);
+const CreatePin = () => {
+    const [pinValue, setPinValue] = useState("")
+    const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
+
+    const create = () => {
+        if (localStorage.getItem("userData")) {
+            console.log(JSON.parse(localStorage.getItem('userData')).pin)
+            axios.put(urlAPI + `/user/update-pin/${JSON.parse(localStorage.getItem("userData")).userId}`, {pin: pinValue})
+            .then(res => {
+                console.log(res.data)
+                localStorage.setItem('userData', JSON.stringify(res.data))
+                forceUpdate();
+            })
+            .catch(err => console.log(err))
+          }
+    }
+    
+    if(JSON.parse(localStorage.getItem('userData')).pin){
+        return <Redirect to='/pinSuccess'/>
+    }
     return (
         <div className="login-container">
             <Hero />
@@ -22,41 +43,12 @@ const ResetPassword = () => {
                     </p>
                 </div>
 
-                <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <input
-                        type="number"
-                        className="transfer-input-pin"
-                    />
-                    <input
-                        type="number"
-                        className="transfer-input-pin"
-                    />
-                    <input
-                        type="number"
-                        className="transfer-input-pin"
-                    />
-                    <input
-                        type="number"
-                        className="transfer-input-pin"
-                    />
-                    <input
-                        type="number"
-                        className="transfer-input-pin"
-                    />
-                    <input
-                        type="number"
-                        className="transfer-input-pin"
-                    />
-                </div>
-
                 <div>
-                    <Button disabled={isDisabled}>
-                        Confirm
-                    </Button>
+                    <Pin goTo='/pinsuccess' buttonValue="Confirm" setPinValue={setPinValue} onCreate={create}/>
                 </div>
             </div>
         </div>
     );
 };
 
-export default ResetPassword;
+export default CreatePin;

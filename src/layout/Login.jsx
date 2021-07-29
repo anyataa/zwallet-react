@@ -6,6 +6,7 @@ import "../style/newLogin.css";
 import { Link, Redirect } from "react-router-dom";
 import Button from "../component/Button";
 import axios from "axios";
+import { urlAPI } from "../asset/urls";
 
 const Login = () => {
   const [email, setEmail] = useState();
@@ -25,12 +26,15 @@ const Login = () => {
     }
   };
 
+  //  Turn Off to Access Dashboard
+
   const onLogin = () => {
     if(emailValidation(email)){
-      axios.get(`http://localhost:4000/user?email=${email}&password=${password}`)
+      axios.post(urlAPI + "/user/signin", {email, password})
       .then(res => {
-        res.data.length > 0 ?
-        localStorage.setItem('userData', JSON.stringify(res.data[0]))
+        console.log(res.data.data)
+        res.data.message == "Login success!" ?
+        localStorage.setItem('userData', JSON.stringify(res.data.data))
         : setErrorMsg('Email or Password Incorrect')
         forceUpdate();
       })
@@ -43,6 +47,7 @@ const Login = () => {
   }
   
   if(JSON.parse(localStorage.getItem('userData'))){
+  
     return <Redirect to='/dashboard'/>
   }
 
@@ -80,9 +85,15 @@ const Login = () => {
           isVisible={isVisible}
           password
         />
-        <a className="text" style={{ textDecoration: "none" }}>
-          Forgot Password?
-        </a>
+        <div>
+        <Link to='/resetPassword' className="text" style={{ textDecoration: "none" }}>
+          Forgot Password? &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </Link>
+        <Link to='/qrlogin' className="text" style={{ textDecoration: "none" }}>
+          Login With QR Code
+        </Link>
+        </div>
+    
         <div>
           {
             errorMsg ? <p className='text-validation'>{errorMsg}</p> : null
@@ -93,7 +104,7 @@ const Login = () => {
         </div>
         <p className="bottom-text">
           Don’t have an account? Let’s{" "}
-          <Link style={{ textDecoration: "none" }}>Sign Up</Link>
+          <Link to='/signup' style={{ textDecoration: "none" }}>Sign Up</Link>
         </p>
       </div>
     </div>

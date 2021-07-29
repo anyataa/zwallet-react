@@ -1,91 +1,153 @@
-import React, { useState } from 'react'
-import { FaTimes } from 'react-icons/fa'
-import { pinHandler } from '../global'
+import React, { useState, useRef, useEffect } from "react";
+import { FaTimes } from "react-icons/fa";
+import { Link, Redirect, useRouteMatch } from "react-router-dom";
+import { pinHandler } from "../global";
 
+export const ModalPin = ({ modalToggle, setModalToggle }) => {
+  //   Pin control
 
-export const ModalPin = (props) => {
+  const [pin1Value, setPin1Value] = useState('');
+  const [pin2Value, setPin2Value] = useState('');
+  const [pin3Value, setPin3Value] = useState('');
+  const [pin4Value, setPin4Value] = useState('');
+  const [pin5Value, setPin5Value] = useState('');
+  const [pin6Value, setPin6Value] = useState('');
 
-   
-    //   Pin control
-    const [BorderColor, setBorderColor] = useState("rgba(66, 63, 63, 0.4")
-    const [ButtonDisabled, setButtonDisabled] = useState(true)
-    const [PinValue, setPinValue] = useState("")
-    const [PinTotal, setPinTotal] = useState([{
-        value: null},
-        {value: null},
-        {value: null},
-        {value: null},
-        {value: null},
-        {value: null}])
+  const pin1Ref = useRef();
+  const pin2Ref = useRef();
+  const pin3Ref = useRef();
+  const pin4Ref = useRef();
+  const pin5Ref = useRef();
+  const pin6Ref = useRef();
 
-        const validatePin = () => {
-            console.log("in")
-          // let pinUser='123456'
-          // if (pinUser == PinValue ){
-          //     console.log('true In')
-          // } else {
-          //     console.log("in")
-          // }
-        }
-    
+  const [BorderColor, setBorderColor] = useState("rgba(66, 63, 63, 0.4");
+  const [ButtonDisabled, setButtonDisabled] = useState(true);
+  const [PinValue, setPinValue] = useState("");
+  const [PinTotal, setPinTotal] = useState([
+    {
+      value: null,
+    },
+    { value: null },
+    { value: null },
+    { value: null },
+    { value: null },
+    { value: null },
+  ]);
 
-    const pinHandler = (e, index) => {
-            if (e.target.value != null) {
-              let current = PinTotal
-              current[index]={value:e.target.value}
-            //   console.log("current",current)
-            //   console.log("pinTotal",current)
-              setPinTotal(current)
-              setBorderColor("#6379F4")
-              let pin = PinTotal[0].value+PinTotal[1].value+PinTotal[2].value+PinTotal[3].value+PinTotal[4].value+PinTotal[5].value
-            //   console.log(pin)
-              if (pin.length==6){
-                setPinValue(pin)
-                console.log("This is Pin Value:",PinValue)
-                setButtonDisabled(false)
-              } else {
-                setButtonDisabled(true)
-              }
-            } 
-          
-          };
+  const validatePin = () => {
+    let pinUser = "123456";
+    let pinInput = pin1Value + pin2Value + pin3Value + pin4Value + pin5Value + pin6Value
+    if (pinUser == pinInput) {
+      return `/transfer/status/success`
+    } else {
+      return '/transfer/status/failed'
+    }
+  };
 
-    return (
-        // set display to flex for debugging
-        <div id="modal" 
-        style={{display:props.showModal}}
-        >
-            {console.log(props)}
-        <div class="pin-confirmation-box">
-          <div class="modal-close-icon-wrapper">
-            <p class="transfer-primary-text">Enter PIN to Transfer</p>
-            <FaTimes  class="modal-close-icon"></FaTimes>
-          </div>
-          <p class="transfer-secondary-text">
-            Enter your 6 digits PIN for confirmation to <br />
-            continue transferring money.
-          </p>
-          <div class="transfer-pin-input-wrapper">
-              {PinTotal.map((element, index) => { return  <input
-              type="number"  
-              class="transfer-input-pin"
-              value={PinTotal.value}
-                key={index}
-                style={{borderColor:BorderColor}}
-              onChange={e => pinHandler(e,index)}
-            />})}
-          </div>
+  const pinHandler = (e, index) => {
+    if (e.target.value != null) {
+      let current = PinTotal;
+      current[index] = { value: e.target.value };
+      setPinTotal(current);
+      setBorderColor("#6379F4");
+      let pin =
+        PinTotal[0].value +
+        PinTotal[1].value +
+        PinTotal[2].value +
+        PinTotal[3].value +
+        PinTotal[4].value +
+        PinTotal[5].value;
+      //   console.log(pin)
+      if (pin.length == 6) {
+        setPinValue(pin);
+        console.log("This is Pin Value:", PinValue);
+        setButtonDisabled(false);
+      } else {
+        setButtonDisabled(true);
+      }
+    }
+  };
+
+  return (
+    // set display to flex for debugging
+    <div id="modal" style={{ display: modalToggle ? "flex" : "none" }}>
+      <div className="pin-confirmation-box">
+        <div className="modal-close-icon-wrapper">
+          <p className="transfer-primary-text">Enter PIN to Transfer</p>
+          <FaTimes className="modal-close-icon" onClick={setModalToggle} />
+        </div>
+        <p className="transfer-secondary-text">
+          Enter your 6 digits PIN for confirmation to <br />
+          continue transferring money.
+        </p>
+        <div className="transfer-pin-input-wrapper">
+          <input
+            type="number"
+            className="transfer-input-pin"
+            value={pin1Value}
+            onChange={e => setPin1Value(e.target.value.length > 1 ? e.target.value[1] : e.target.value)}
+            ref={pin1Ref}
+            onKeyUp={(e) => e.code !== 'Backspace' ? pin2Ref.current.focus() : null}
+            style={{ borderColor: pin1Value ? "#6379F4" : "rgba(66, 63, 63, 0.4"}}
+          />
+          <input
+            type="number"
+            className="transfer-input-pin"
+            value={pin2Value}
+            onChange={e => setPin2Value(e.target.value.length > 1 ? e.target.value[1] : e.target.value)}
+            ref={pin2Ref}
+            onKeyUp={(e) => e.code == 'Backspace' ? pin1Ref.current.focus() : pin3Ref.current.focus()}
+            style={{ borderColor: pin2Value ? "#6379F4" : "rgba(66, 63, 63, 0.4" }}
+          />
+          <input
+            type="number"
+            className="transfer-input-pin"
+            value={pin3Value}
+            onChange={e => setPin3Value(e.target.value.length > 1 ? e.target.value[1] : e.target.value)}
+            ref={pin3Ref}
+            onKeyUp={(e) => e.code == 'Backspace' ? pin2Ref.current.focus() : pin4Ref.current.focus()}
+            style={{ borderColor: pin3Value ? "#6379F4" : "rgba(66, 63, 63, 0.4" }}
+          />
+          <input
+            type="number"
+            className="transfer-input-pin"
+            value={pin4Value}
+            onChange={e => setPin4Value(e.target.value.length > 1 ? e.target.value[1] : e.target.value)}
+            ref={pin4Ref}
+            onKeyUp={(e) => e.code == 'Backspace' ? pin3Ref.current.focus() : pin5Ref.current.focus()}
+            style={{ borderColor: pin4Value ? "#6379F4" : "rgba(66, 63, 63, 0.4" }}
+          />
+          <input
+            type="number"
+            className="transfer-input-pin"
+            value={pin5Value}
+            onChange={e => setPin5Value(e.target.value.length > 1 ? e.target.value[1] : e.target.value)}
+            ref={pin5Ref}
+            onKeyUp={(e) => e.code == 'Backspace' ? pin4Ref.current.focus() : pin6Ref.current.focus()}
+            style={{ borderColor: pin5Value ? "#6379F4" : "rgba(66, 63, 63, 0.4" }}
+          />
+          <input
+            type="number"
+            className="transfer-input-pin"
+            value={pin6Value}
+            onChange={e => setPin6Value(e.target.value.length > 1 ? e.target.value[1] : e.target.value)}
+            ref={pin6Ref}
+            onKeyUp={(e) => e.code == 'Backspace' ? pin5Ref.current.focus() : null}
+            style={{ borderColor: pin6Value ? "#6379F4" : "rgba(66, 63, 63, 0.4" }}
+          />
+        </div>
+        <Link to={validatePin}>
           <input
             type="button"
             value="Continue"
-            class="transfer-btn"
+            className="transfer-btn"
             id="pin-btn"
-            disabled={ButtonDisabled}
-            // Pin Validation
-            onclick
-            ={e => validatePin()}
+            disabled={pin1Value && pin2Value && pin3Value && pin4Value && pin5Value && pin6Value ? false : true}
+            onClick={setModalToggle}
           />
-        </div>
+        </Link>
       </div>
-    )
-}
+    </div>
+  );
+
+};
