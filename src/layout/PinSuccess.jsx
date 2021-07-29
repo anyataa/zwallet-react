@@ -6,11 +6,7 @@ import { AiFillCheckCircle } from 'react-icons/ai';
 import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-const ResetPassword = () => {
-
-  
-   
-   
+const PinSuccess = () => {
 
     return (
         <div className="login-container">
@@ -39,4 +35,4 @@ const ResetPassword = () => {
     );
 };
 
-export default ResetPassword;
+export default PinSuccess;
