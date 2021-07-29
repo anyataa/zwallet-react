@@ -110,7 +110,7 @@ const ListContact = () => {
     //     }
     //   })
     }else{
-      return <h1>No data</h1>
+      return <h1 style={{margin: 'auto'}}>"I HAVE NO FRIENDS, THERE ARE ONLY PEOPLE I LOVE."<br/><br/>- Louis Aragon -</h1>
     }
   }
 
@@ -123,6 +123,24 @@ const ListContact = () => {
         placeholder="Search Contact"
       />
       {renderContact()}
+      {/* <Link
+        // to={`/transfer/${contact[1]}`}
+        style={{ textDecoration: "none" }}
+        // key={contact[0]}
+      >
+        <div className="transfer-item-wrapper">
+          <img
+            src={`https://randomuser.me/api/portraits/men/1.jpg`}
+            alt="friend profile"
+            className="transfer-contact-image"
+            width={"60px"}
+          />
+          <div className="transer-contact">
+            <p className="transfer-primary-text">fads</p>
+            <p className="transfer-secondary-text">324234234</p>
+          </div>
+        </div>
+      </Link> */}
     </div>
   )
 }
