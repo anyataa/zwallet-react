@@ -34,7 +34,7 @@ const Login = () => {
       .then(res => {
         console.log(res.data.data)
         res.data.message == "Login success!" ?
-        localStorage.setItem('userData', JSON.stringify(res.data.data))
+        localStorage.setItem('userData', JSON.stringify(res.data.data.user))
         : setErrorMsg('Email or Password Incorrect')
         forceUpdate();
       })

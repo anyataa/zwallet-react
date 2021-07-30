@@ -11,8 +11,8 @@ useEffect(() => {
   setUserData(JSON.parse(localStorage.getItem("userData")))
   // TODOANYA : User Image Handling
   setUserImage(JSON.parse(localStorage.getItem("user-image")))
-  setUserName(JSON.parse(localStorage.getItem("userData")).user.account.userId.username)
-  setPhoneNumber(JSON.parse(localStorage.getItem("userData")).user.phonenumber)
+  setUserName(JSON.parse(localStorage.getItem("userData")).UserName)
+  setPhoneNumber(JSON.parse(localStorage.getItem("userData")).PhoneNumber)
   // TODONYA : Error kadang
   // if(UserData){localStorage.setItem("username", localStorage.getItem("userData").user.account.userId.username)
   // console.log("INI")
@@ -33,7 +33,7 @@ useEffect(() => {
             {
              UserName? <h3>{UserName}</h3> : <h3>Error</h3>
             }
-            <p className="col-white50">{PhoneNumber[0] == 0 ? "+62 "+PhoneNumber.slice(1,PhoneNumber.length) : "Error"}</p>
+            <p className="col-white50">{PhoneNumber ? "+62 "+PhoneNumber.slice(1,PhoneNumber.length) : "Error"}</p>
           </div>
           <div className="profile-img">
             <input id="notif-btn" type="checkbox" hidden={true} />
