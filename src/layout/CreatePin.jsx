@@ -14,18 +14,18 @@ const CreatePin = () => {
 
     const create = () => {
         if (localStorage.getItem("userData")) {
-            console.log(JSON.parse(localStorage.getItem('userData')).pin)
-            axios.put(urlAPI + `/user/update-pin/${JSON.parse(localStorage.getItem("userData")).userId}`, {pin: pinValue})
+            console.log(JSON.parse(localStorage.getItem('userData')).userPin)
+            axios.put(urlAPI + `/user/update-pin/${JSON.parse(localStorage.getItem("userData")).userId}`, {userPin: pinValue})
             .then(res => {
                 console.log(res.data)
                 localStorage.setItem('userData', JSON.stringify(res.data))
                 forceUpdate();
             })
             .catch(err => console.log(err))
-          }
+        }
     }
     
-    if(JSON.parse(localStorage.getItem('userData')).pin){
+    if(JSON.parse(localStorage.getItem('userData')).userPin){
         return <Redirect to='/pinSuccess'/>
     }
     return (
