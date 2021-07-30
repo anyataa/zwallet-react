@@ -8,15 +8,15 @@ const [PhoneNumber, setPhoneNumber] = useState("")
 const [UserImage, setUserImage] = useState({})
 
 useEffect(() => {
-  setUserData(JSON.parse(localStorage.getItem("userData")))
+  // setUserData(JSON.parse(localStorage.getItem("userData")))
   // TODOANYA : User Image Handling
-  setUserImage(JSON.parse(localStorage.getItem("user-image")))
-  setUserName(JSON.parse(localStorage.getItem("userData")).UserName)
-  setPhoneNumber(JSON.parse(localStorage.getItem("userData")).PhoneNumber)
+  setUserImage(JSON.parse(localStorage.getItem("userData")).userImage)
+  setUserName(JSON.parse(localStorage.getItem("userData")).userName)
+  setPhoneNumber(JSON.parse(localStorage.getItem("userData")).phonenumber)
   // TODONYA : Error kadang
-  // if(UserData){localStorage.setItem("username", localStorage.getItem("userData").user.account.userId.username)
+  // if(UserData){localStorage.setItem("username", localStorage.getItem("userData").account.userId.username)
   // console.log("INI")
-  // localStorage.setItem("phone-number", JSON.stringify(localStorage.getItem("userData").user.phonenumber))}
+  // localStorage.setItem("phone-number", JSON.stringify(localStorage.getItem("userData").phonenumber))}
   
 }, [])
 

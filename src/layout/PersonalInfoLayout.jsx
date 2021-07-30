@@ -14,25 +14,28 @@ export const PersonalInfoLayout = () => {
     const [phoneNumber, setPhoneNumber] = useState({})
 
     useEffect(() => {
+      if(JSON.parse(localStorage.getItem('userData'))){
         setUserData(JSON.parse(localStorage.getItem('userData')))
-        setFirstName((JSON.parse(localStorage.getItem('userData')).name).split(" ")[0])
-        setLastName((JSON.parse(localStorage.getItem('userData')).name).split(" ")[1])
-        setEmail((JSON.parse(localStorage.getItem('userData')).email))
+        setFirstName((JSON.parse(localStorage.getItem('userData')).userName).split(" ")[0])
+        setLastName((JSON.parse(localStorage.getItem('userData')).userName).split(" ")[1])
+        setEmail((JSON.parse(localStorage.getItem('userData')).userEmail))
+        setPhoneNumber(JSON.parse(localStorage.getItem('userData')).phonenumber)
+        // getPhoneNumber()
 
-        getPhoneNumber()
+      }
     
     }, [])
 
-    const getPhoneNumber = () => {
-      if (localStorage.getItem("userData")) {
-        axios.get(urlAPI + `/phone/get-primary/${JSON.parse(localStorage.getItem("userData")).userId}`)
-        .then(res => {
-            console.log(res.data)
-            setPhoneNumber(res.data.phoneNumber)
-        })
-        .catch(err => console.log(err))
-      }
-    }
+    // const getPhoneNumber = () => {
+    //   if (localStorage.getItem("userData")) {
+    //     axios.get(urlAPI + `/phone/get-primary/${JSON.parse(localStorage.getItem("userData")).user.userId}`)
+    //     .then(res => {
+    //         console.log(res.data)
+    //         setPhoneNumber(res.data.phoneNumber)
+    //     })
+    //     .catch(err => console.log(err))
+    //   }
+    // }
     
     const changeEmail = function (input) {
         setEmail(input)
@@ -55,28 +58,28 @@ export const PersonalInfoLayout = () => {
         </div>
             {/* Top End */}
 
-      <div class="bottom-personal-information-container">
+      <div className="bottom-personal-information-container">
           <ul>
             {/* <!-- 1 --> */}
             <li>
-              <div class="card-notification">
-                <p class="col-grey">First Name</p>
-                <input class="col-dark-grey" type="text" onChange={e => setFirstName(e.target.value)} value={(FirstName)} />
+              <div className="card-notification">
+                <p className="col-grey">First Name</p>
+                <input className="col-dark-grey" type="text" onChange={e => setFirstName(e.target.value)} value={(FirstName)} />
               </div>
             </li>
             {/* <!-- 2 --> */}
             <li>
-              <div class="card-notification">
-                <p class="col-grey">Last Name</p>
-                <input class="col-dark-grey" type="text" onChange={e => setLastName(e.target.value)} value={(LastName)} />
+              <div className="card-notification">
+                <p className="col-grey">Last Name</p>
+                <input className="col-dark-grey" type="text" onChange={e => setLastName(e.target.value)} value={(LastName)} />
               </div>
             </li>
             {/* <!-- 3 --> */}
             <li>
-              <div class="card-notification">
-                <p class="col-grey">Verified E-mail</p>
+              <div className="card-notification">
+                <p className="col-grey">Verified E-mail</p>
                 <input
-                  class="col-dark-grey"
+                  className="col-dark-grey"
                   type="text"
                   onInput={ e => changeEmail(e.target.value)}
                   value={Email}
@@ -85,12 +88,12 @@ export const PersonalInfoLayout = () => {
             </li>
             {/* <!-- 4 --> */}
             <li>
-              <div class="card-notification">
-                <div class="divide-for-manage">
+              <div className="card-notification">
+                <div className="divide-for-manage">
                   <div>
-                    <p class="col-grey">Phone Number</p>
+                    <p className="col-grey">Phone Number</p>
                     <input
-                      class="col-dark-grey"
+                      className="col-dark-grey"
                       type="text"
                       value={phoneNumber}
                       disabled

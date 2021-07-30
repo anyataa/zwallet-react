@@ -5,6 +5,8 @@ import "../style/global.css";
 import "../style/navBar.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Button from "./Button";
+import { AiOutlineSearch } from "react-icons/ai";
 
 
 const ListContact = () => {
@@ -115,12 +117,16 @@ const ListContact = () => {
     //     }
     //   })
     }else{
-      return <h1>No data</h1>
+      return <h1 style={{margin: 'auto'}}>"I HAVE NO FRIENDS, THERE ARE ONLY PEOPLE I LOVE."<br/><br/>- Louis Aragon -</h1>
     }
   }
 
   return (
     <div className='right'>
+      <div style={{display: 'flex', justifyContent: "space-between"}}>
+        <p className="transfer-primary-text" style={{margin: '30px 0'}}>Search Receiver By Friends List</p>
+        <Button><AiOutlineSearch style={{fontSize: '25px', marginRight: '10px'}}/>Search by phone number</Button>
+      </div>
       <input
         value={searchValue}
         className="transfer-input"
@@ -128,6 +134,24 @@ const ListContact = () => {
         placeholder="Search Contact"
       />
       {renderContact()}
+      {/* <Link
+        // to={`/transfer/${contact[1]}`}
+        style={{ textDecoration: "none" }}
+        // key={contact[0]}
+      >
+        <div className="transfer-item-wrapper">
+          <img
+            src={`https://randomuser.me/api/portraits/men/1.jpg`}
+            alt="friend profile"
+            className="transfer-contact-image"
+            width={"60px"}
+          />
+          <div className="transer-contact">
+            <p className="transfer-primary-text">fads</p>
+            <p className="transfer-secondary-text">324234234</p>
+          </div>
+        </div>
+      </Link> */}
     </div>
   )
 }
