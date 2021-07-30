@@ -2,10 +2,22 @@ import React, { useEffect, useState } from "react";
 import "../style/navBar.css";
 import { FaArrowDown, FaArrowUp, FaBell } from "react-icons/fa";
 export default function NavBar() {
-const [UserData, setUserData] = useState({})
+const [UserData, setUserData] = useState(null)
+const [UserName, setUserName] = useState("")
+const [PhoneNumber, setPhoneNumber] = useState("")
+const [UserImage, setUserImage] = useState({})
 
 useEffect(() => {
   setUserData(JSON.parse(localStorage.getItem("userData")))
+  // TODOANYA : User Image Handling
+  setUserImage(JSON.parse(localStorage.getItem("user-image")))
+  setUserName(JSON.parse(localStorage.getItem("userData")).user.account.userId.username)
+  setPhoneNumber(JSON.parse(localStorage.getItem("userData")).user.phonenumber)
+  // TODONYA : Error kadang
+  // if(UserData){localStorage.setItem("username", localStorage.getItem("userData").user.account.userId.username)
+  // console.log("INI")
+  // localStorage.setItem("phone-number", JSON.stringify(localStorage.getItem("userData").user.phonenumber))}
+  
 }, [])
 
   return (
@@ -14,11 +26,14 @@ useEffect(() => {
         <h2 className="col-secondary">Zwallet</h2>
         <div className="profile-container">
           <div className="profile-img">
-            <img src={`https://randomuser.me/api/portraits/men/${UserData.id}.jpg`} alt="" width="50px" />
+            {UserImage?  <img src={`https://randomuser.me/api/portraits/men/1}.jpg`} alt="" width="50px" /> : <img src="https://i.ibb.co/FHLx6h9/default.png" alt="" width="50px" /> }
+           
           </div>
           <div className="profile-data">
-            <h3>{UserData.name}</h3>
-            <p className="col-white50">{UserData.phone}</p>
+            {
+             UserName? <h3>{UserName}</h3> : <h3>Error</h3>
+            }
+            <p className="col-white50">{PhoneNumber[0] == 0 ? "+62 "+PhoneNumber.slice(1,PhoneNumber.length) : "Error"}</p>
           </div>
           <div className="profile-img">
             <input id="notif-btn" type="checkbox" hidden={true} />

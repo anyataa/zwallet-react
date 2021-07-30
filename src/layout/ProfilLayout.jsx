@@ -16,10 +16,12 @@ export const ProfilLayout = () => {
   
   const [UserData, setUserData] = useState({});
   const [FriendsData, setFriendsData] = useState([]);
+  const [UserImage, setUserImage] = useState({})
 
   useEffect(() => {
     setUserData(JSON.parse(localStorage.getItem("userData")));
     setFriendsData(JSON.parse(localStorage.getItem("friends-data")));
+    setUserImage(JSON.parse(localStorage.getItem("user-image")))
   }, []);
 
 
@@ -36,10 +38,14 @@ export const ProfilLayout = () => {
             <div className="margin-profile-container">
               <div className="profile-img-detail">
                 <div className="img-edit">
-                  <img
+                  {UserImage?  <img
                     src={`https://randomuser.me/api/portraits/men/${UserData.id}.jpg`}
                     alt=""
-                  />
+                  />: <img
+                  src="https://i.ibb.co/FHLx6h9/default.png"
+                  alt=""
+                />}
+                 
                   <p
                     onclick="goToPersonalInfo() "
                     className="fa fa-pencil-alt col-grey"
@@ -59,6 +65,7 @@ export const ProfilLayout = () => {
           <div className="profile-bottom-container col-grey">
             <div className="left-profile-bottom-container">
               <ul>
+
                 {/* <!-- 1 --> */}
                 <Link to="/profil/personalinfo">
                   <li>
@@ -122,8 +129,9 @@ export const ProfilLayout = () => {
               </div>
               {/* <!-- Contact --> */}
               <div className="contact-list-container">
-                {FriendsData.filter((friend) => UserData.id != friend.id)
-                  .slice(1 - 5)
+                {/* TODOANYA  : Protection Check */}
+                {FriendsData? FriendsData.filter((friend) => UserData.id != friend.id)
+                  .slice(1-5)
                   .map((friend) => (
                     <div className="profile-container">
                       <div className="profile-img">
@@ -137,7 +145,7 @@ export const ProfilLayout = () => {
                         <p className="col-white50">{friend.phone}</p>
                       </div>
                     </div>
-                  ))}
+                  )): <div><br /><br /><br /><br /><br /><h2>You Have No Friends Yet...</h2><h4>You can add friends from Zwallet Mobile by allowing access to your contacts</h4></div> }
 
                 {/* <!-- End Contact List --> */}
               </div>

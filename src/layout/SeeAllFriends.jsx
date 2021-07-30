@@ -19,7 +19,8 @@ export const SeeAllFriends = () => {
         <NavBar></NavBar>
       <div className="right">
         <div className="contact-list-container">
-          {FriendsData.filter((friend) => UserData.id != friend.id).map(
+        
+          {FriendsData? FriendsData.filter((friend) => UserData.id != friend.id).map(
             (friend) => (
               <div className="profile-container">
                 <div className="profile-img">
@@ -34,7 +35,7 @@ export const SeeAllFriends = () => {
                 </div>
               </div>
             )
-          )}
+          ): <h1>No Friends Available Yet...</h1> }
 
           {/* <!-- End Contact List --> */}
         </div>

@@ -26,6 +26,8 @@ const Login = () => {
     }
   };
 
+  //  Turn Off to Access Dashboard
+
   const onLogin = () => {
     if(emailValidation(email)){
       axios.post(urlAPI + "/user/signin", {email, password})
@@ -45,6 +47,7 @@ const Login = () => {
   }
   
   if(JSON.parse(localStorage.getItem('userData'))){
+  
     return <Redirect to='/dashboard'/>
   }
 

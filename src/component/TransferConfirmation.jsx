@@ -1,11 +1,30 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { urlAPI } from "../asset/urls";
 import { InputNominalTransfer } from "./InputNominalTransfer";
 
 export const TransferConfirmation = (props) => {
   const [data, setData] = useState([]);
   const [transferData, setTransferData] = useState([]);
+  const onTransfer = () => {
+    if(transferData){
+      var body = {
+        transactionAmount: transferData.nominalTransfer,
+        transactionNotes : transferData.noteTransfer,
+        // TODOANYA: change from account id based on user ID
+        fromAccountId : 1,
+        toUserId : 2
+      }
 
+      axios.post(urlAPI+"/transaction/transfer", body).then(res => {
+        console.log(res)
+      }).catch (err => {
+        console.log(err)
+      })
+    }
+    
+  }
 
   useEffect(() => {
     var tempData = JSON.parse(localStorage.getItem('friends-data'))
@@ -20,6 +39,7 @@ export const TransferConfirmation = (props) => {
 
   return (
     <div className="right">
+      {console.log("transfer",transferData)}
         <div>
           <p className="transfer-primary-text">Transfer To</p>
           <div className="transfer-item-wrapper">
@@ -58,13 +78,14 @@ export const TransferConfirmation = (props) => {
             <Link to={`/transfer/${data.id}`} style={{ textDecoration: "none" }}>
               <input
                 type="button"
+                onClick = {onTransfer}
                 value="Back"
                 className="transfer-btn"
               />
             </Link>
             {/* <Link to="/transfer" style={{ textDecoration: "none" }}> */}
             <input
-              onClick={props.setModalToggle}
+              onClick={props.setModalToggle, onTransfer}
               type="button"
               value="Continue"
               className="transfer-btn"
