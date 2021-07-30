@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 export const BalanceTransaction = (props) => {
     const [Transaction, setTransaction] = useState([])
     const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
-    useEffect(() => {setTransactionData(JSON.parse(localStorage.getItem("userData")).user.account.accountId);   setTransaction(JSON.parse(localStorage.getItem("transaction-data")).listTransaction);forceUpdate() }, [])
+    useEffect(() => {setTransactionData(JSON.parse(localStorage.getItem("userData")));   setTransaction(JSON.parse(localStorage.getItem("transaction-data")).listTransaction);forceUpdate() }, [])
     return (
         <div className="contact-list-container">
             {Transaction.length > 0 ?  (Transaction.slice(-4) ).map((item) => ( <div className="custom-profile-view">

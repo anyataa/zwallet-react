@@ -17,7 +17,7 @@ export default class DashboardLayout extends Component {
   
   componentDidMount() {
     setFriendsData();
-    getAccountData(JSON.parse(localStorage.getItem("userData")).user.account.accountId)
+    getAccountData(JSON.parse(localStorage.getItem("userData")))
     this.setState(x => { x = x+1 })
 
   }
