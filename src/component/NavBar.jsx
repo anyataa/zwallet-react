@@ -11,7 +11,7 @@ useEffect(() => {
   setUserData(JSON.parse(localStorage.getItem("userData")))
   // TODOANYA : User Image Handling
   setUserImage(JSON.parse(localStorage.getItem("user-image")))
-  setUserName(JSON.parse(localStorage.getItem("userData")).user.account.userId.username)
+  setUserName(JSON.parse(localStorage.getItem("userData")).user.userId)
   setPhoneNumber(JSON.parse(localStorage.getItem("userData")).user.phonenumber)
   // TODONYA : Error kadang
   // if(UserData){localStorage.setItem("username", localStorage.getItem("userData").user.account.userId.username)
