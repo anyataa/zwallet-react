@@ -7,13 +7,16 @@ import { InputNominalTransfer } from "./InputNominalTransfer";
 export const TransferConfirmation = (props) => {
   const [data, setData] = useState([]);
   const [transferData, setTransferData] = useState([]);
+  const [accountData, setAccountData] = useState({})
   const onTransfer = () => {
-    if(transferData){
+    setAccountData(JSON.parse(localStorage.getItem("account-data")))
+    if(transferData && accountData){
       var body = {
         transactionAmount: transferData.nominalTransfer,
         transactionNotes : transferData.noteTransfer,
         // TODOANYA: change from account id based on user ID
-        fromAccountId : 1,
+        fromAccountId : accountData.accountId,
+        // TODOANYA: change from account id based on user ID
         toUserId : 2
       }
 
@@ -23,6 +26,7 @@ export const TransferConfirmation = (props) => {
         console.log(err)
       })
     }
+    props.setModalToggle()
     
   }
 
@@ -85,7 +89,7 @@ export const TransferConfirmation = (props) => {
             </Link>
             {/* <Link to="/transfer" style={{ textDecoration: "none" }}> */}
             <input
-              onClick={props.setModalToggle, onTransfer}
+              onClick={onTransfer}
               type="button"
               value="Continue"
               className="transfer-btn"

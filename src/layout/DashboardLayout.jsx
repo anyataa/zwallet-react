@@ -7,9 +7,18 @@ import NavBar from "../component/NavBar";
 import { getAccountData, setFriendsData } from "../global";
 
 export default class DashboardLayout extends Component {
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       x : 0
+    }
+  }
+  
   componentDidMount() {
     setFriendsData();
-    getAccountData(2)
+    getAccountData(JSON.parse(localStorage.getItem("userData")))
+    this.setState(x => { x = x+1 })
 
   }
   render() {

@@ -8,15 +8,15 @@ const [PhoneNumber, setPhoneNumber] = useState("")
 const [UserImage, setUserImage] = useState({})
 
 useEffect(() => {
-  setUserData(JSON.parse(localStorage.getItem("userData")))
+  // setUserData(JSON.parse(localStorage.getItem("userData")))
   // TODOANYA : User Image Handling
-  setUserImage(JSON.parse(localStorage.getItem("user-image")))
-  setUserName(JSON.parse(localStorage.getItem("userData")).user.userId)
-  setPhoneNumber(JSON.parse(localStorage.getItem("userData")).user.phonenumber)
+  setUserImage(JSON.parse(localStorage.getItem("userData")).userImage)
+  setUserName(JSON.parse(localStorage.getItem("userData")).userName)
+  setPhoneNumber(JSON.parse(localStorage.getItem("userData")).phonenumber)
   // TODONYA : Error kadang
-  // if(UserData){localStorage.setItem("username", localStorage.getItem("userData").user.account.userId.username)
+  // if(UserData){localStorage.setItem("username", localStorage.getItem("userData").account.userId.username)
   // console.log("INI")
-  // localStorage.setItem("phone-number", JSON.stringify(localStorage.getItem("userData").user.phonenumber))}
+  // localStorage.setItem("phone-number", JSON.stringify(localStorage.getItem("userData").phonenumber))}
   
 }, [])
 
@@ -33,7 +33,7 @@ useEffect(() => {
             {
              UserName? <h3>{UserName}</h3> : <h3>Error</h3>
             }
-            <p className="col-white50">{PhoneNumber[0] == 0 ? "+62 "+PhoneNumber.slice(1,PhoneNumber.length) : "Error"}</p>
+            <p className="col-white50">{PhoneNumber ? "+62 "+PhoneNumber.slice(1,PhoneNumber.length) : "Error"}</p>
           </div>
           <div className="profile-img">
             <input id="notif-btn" type="checkbox" hidden={true} />

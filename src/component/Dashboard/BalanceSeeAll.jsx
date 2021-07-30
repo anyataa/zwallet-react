@@ -13,6 +13,8 @@ export default class BalanceSeeAll extends Component {
       outcome: localStorage.getItem("transaction-data") ? JSON.parse(localStorage.getItem("transaction-data")).sumOutcome : 0,
     }
   }
+
+  
   
   render() {
     return (
