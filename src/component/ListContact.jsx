@@ -5,6 +5,8 @@ import "../style/global.css";
 import "../style/navBar.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Button from "./Button";
+import { AiOutlineSearch } from "react-icons/ai";
 
 
 const ListContact = () => {
@@ -116,6 +118,10 @@ const ListContact = () => {
 
   return (
     <div className='right'>
+      <div style={{display: 'flex', justifyContent: "space-between"}}>
+        <p className="transfer-primary-text" style={{margin: '30px 0'}}>Search Receiver By Friends List</p>
+        <Button><AiOutlineSearch style={{fontSize: '25px', marginRight: '10px'}}/>Search by phone number</Button>
+      </div>
       <input
         value={searchValue}
         className="transfer-input"
