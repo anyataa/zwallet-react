@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useReducer } from "react";
 // Email validation in login page and sign up
 
 export const emailValidation = (email) => {
@@ -52,7 +53,7 @@ export const setFriendsData = () => {
 
 export const setTransactionData = (accountId) => {
   axios
-    .get(`http://localhost:8080/zwallet-api/transaction/${2}`)
+    .get(`http://localhost:8080/zwallet-api/transaction/${accountId}`)
     .then((res) => {
       localStorage.setItem("transaction-data", JSON.stringify(res.data));
       // return JSON.parse(localStorage.getItem("transaction-data"))

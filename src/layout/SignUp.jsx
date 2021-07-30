@@ -38,7 +38,7 @@ const SignUp = () => {
       axios.post(`${urlAPI}/user/signup`, body)
       .then(res => {
         console.log(res.data)
-        if (res.data.status.includes('CREATED')) {
+        if (res.data.message.includes('created')) {
           localStorage.setItem('userData', JSON.stringify(res.data.data))
           forceUpdate();
         }else{
