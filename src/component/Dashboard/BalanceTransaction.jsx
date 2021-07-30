@@ -13,22 +13,46 @@ export const BalanceTransaction = (props) => {
       }
     }, [])
 
+    const renderTransaction = () => {
+      if(Transaction.length > 0){
+        return Transaction.slice(-4).map(item => (
+          <div className="custom-profile-view">
+            <div className="profile-container">
+              <div className="profile-img">
+                <img src={`https://randomuser.me/api/portraits/men/1.jpg`} alt="" />
+              </div>
+              <div className="profile-data">
+                {/* 0 : in , 1 : out */}
+              {item.transactionType  > 0 ?  <h3 className="col-grey">{item.sender}</h3> :  <h3 className="col-grey">{item.receiver}</h3>}
+                {/* {item.transactionDetails == 0   ? <p className="col-grey">Transfer</p> :  <p className="col-grey">Subscription</p>} */}
+                <p className="col-grey">{item.transactionType == 1 ? "Transfer" : item.transactionType == 2 ? "Subscription" : item.transactionType == 3 ? "Payment" : item.transactionType == 4 ? "Top Up" : item.transactionType == 5 ? "Retrieve" : "Other"}</p>
+              </div>
+            </div>
+            {item.transactionType > 0 ?  <h2 className="col-green">+{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits : 0 }).format(item.amount)}</h2> :<h2 className="col-red">-{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits : 0 }).format(item.amount)}</h2>  }
+          </div>
+        ))
+      }else{
+        return <div><h1> <br /><br /><br /><br /> No Transaction Yet...</h1></div>
+      }
+    }
+
     return (
       <div className="contact-list-container">
-          {Transaction.length > 0 ?  (Transaction.slice(-4) ).map((item) => ( <div className="custom-profile-view">
+          {/* {Transaction.length > 0 ?  (Transaction.slice(-4) ).map((item) => ( <div className="custom-profile-view">
     
           <div className="profile-container">
             <div className="profile-img">
               <img src={`https://randomuser.me/api/portraits/men/1.jpg`} alt="" />
             </div>
-            <div className="profile-data">
+            <div className="profile-data"> */}
               {/* 0 : in , 1 : out */}
-            {item.transactionType  > 0 ?  <h3 className="col-grey">{item.sender}</h3> :  <h3 className="col-grey">{item.receiver}</h3>}
+            {/* {item.transactionType  > 0 ?  <h3 className="col-grey">{item.sender}</h3> :  <h3 className="col-grey">{item.receiver}</h3>}
               {item.transactionDetails > 0   ? <p className="col-grey">Transfer</p> :  <p className="col-grey">Subscription</p>}
             </div>
           </div>
           {item.transactionType > 0 ?  <h2 className="col-green">+{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits : 0 }).format(item.amount)}</h2> :<h2 className="col-red">-{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits : 0 }).format(item.amount)}</h2>  }
-        </div>)): <div><h1> <br /><br /><br /><br /> No Transaction Yet...</h1></div>  }
+        </div>)): <div><h1> <br /><br /><br /><br /> No Transaction Yet...</h1></div>  } */}
+        {renderTransaction()}
       </div>
       // Transaction Details
       //  1 : Transfer
