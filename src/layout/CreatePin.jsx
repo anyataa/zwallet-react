@@ -44,7 +44,7 @@ const CreatePin = () => {
                 </div>
 
                 <div>
-                    <Pin goTo='/pinsuccess' buttonValue="Confirm" setPinValue={setPinValue} onCreate={create}/>
+                    <Pin goTo='/pinsuccess' buttonValue="Confirm" setPinValue={setPinValue} onClick={create}/>
                 </div>
             </div>
         </div>

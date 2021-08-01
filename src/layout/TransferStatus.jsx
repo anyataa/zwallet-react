@@ -76,7 +76,7 @@ const TransferStatus = ({match}) => {
             type="button"
             value={isSuccess ? "Back to Home" : "Try Again"}
             className="transfer-btn"
-            onclick=""
+            onClick=""
           />
         </Link>
       </div>

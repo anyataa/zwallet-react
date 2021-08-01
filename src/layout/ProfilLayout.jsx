@@ -47,7 +47,7 @@ export const ProfilLayout = () => {
                 />}
                  
                   <p
-                    onclick="goToPersonalInfo() "
+                    onClick="goToPersonalInfo() "
                     className="fa fa-pencil-alt col-grey"
                   >
                     &nbsp;&nbsp; <span> Edit</span>{" "}
@@ -71,7 +71,7 @@ export const ProfilLayout = () => {
                   <li>
                     <div className="card-notification ">
                       <h2>Personal Information</h2>
-                      <i class="fa fa-arrow-right">
+                      <i className="fa fa-arrow-right">
                         <FaArrowRight/>
                       </i>
                     </div>
@@ -97,7 +97,7 @@ export const ProfilLayout = () => {
                 <li>
                     <div className="card-notification ">
                       <h2>Change PIN</h2>
-                      <i class="fa fa-arrow-right">
+                      <i className="fa fa-arrow-right">
                         <FaArrowRight/>
                       </i>
                     </div>

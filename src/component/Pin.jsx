@@ -3,21 +3,20 @@ import Button from "../component/Button"
 import { Link } from 'react-router-dom'
 
 
-export const Pin = (props) => {
-
-    const { setPinValue, onCreate } = props
+export const Pin = ({ setPinValue, onClick, buttonValue }) => {
    
     //   Pin control
     const [BorderColor, setBorderColor] = useState("rgba(66, 63, 63, 0.4")
     const [ButtonDisabled, setButtonDisabled] = useState(true)
     // const [PinValue, setPinValue] = useState("")
-    const [PinTotal, setPinTotal] = useState([{
-        value: null},
-        {value: null},
-        {value: null},
-        {value: null},
-        {value: null},
-        {value: null}])
+    const [PinTotal, setPinTotal] = useState(() => ([
+      {value: null},
+      {value: null},
+      {value: null},
+      {value: null},
+      {value: null},
+      {value: null}
+    ]))
 
         const validatePin = () => {
             console.log("in")
@@ -56,7 +55,7 @@ export const Pin = (props) => {
           <div className="transfer-pin-input-wrapper" style={{display: 'flex', justifyContent: 'space-evenly', width: '100%', marginBottom: '1rem'}}>
               {PinTotal.map((element, index) => { return  <input
               type="number"  
-              class="transfer-input-pin"
+              className="transfer-input-pin"
               value={PinTotal.value}
                 key={index}
                 style={{borderColor:BorderColor}}
@@ -74,7 +73,7 @@ export const Pin = (props) => {
             ={e => validatePin()}
           /> */}
           {/* <Link to={props.goTo}>  */}
-          <Button disabled={ButtonDisabled} onClick={onCreate}>{props.buttonValue}</Button>
+          <Button disabled={ButtonDisabled} onClick={onClick}>{buttonValue}</Button>
           {/* </Link> */}
           
           <br/>

@@ -21,7 +21,6 @@ const ListContact = () => {
   const fetchProfile = () => {
     if (localStorage.getItem("friends-data")) {
       setData(JSON.parse(localStorage.getItem("friends-data")));
-      console.log(JSON.parse(localStorage.getItem("friends-data")))
     }
   };
 
@@ -39,7 +38,6 @@ const ListContact = () => {
 
   const renderContact = () => {
     if(data.length > 0){
-      console.log(data)
       return data.map((contact, index) => {
         if(contact.username.toLowerCase().includes(searchValue.toLowerCase())){
           return(

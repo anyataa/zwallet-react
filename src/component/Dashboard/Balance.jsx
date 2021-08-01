@@ -29,13 +29,13 @@ export default function Balance() {
           </div>
           <div className="row-balance">
           <Link style={{textDecoration:"none"}}>
-          <div onclick="goToRetrieve()" className="button-alpha">
+          <div onClick="goToRetrieve()" className="button-alpha">
               <FaWallet></FaWallet>
               <h3>Retrieve</h3>
             </div>
           </Link>
            <Link style={{textDecoration:"none"}}>
-           <div onclick="goToSubscription()" className="button-alpha">
+           <div onClick="goToSubscription()" className="button-alpha">
               <FaTicketAlt></FaTicketAlt>
               <h3 style={{ fontSize: "18px" }}>Subscription</h3>
             </div>
