@@ -60,7 +60,6 @@ export const ModalPin = ({ modalToggle, setModalToggle }) => {
       //   console.log(pin)
       if (pin.length == 6) {
         setPinValue(pin);
-        console.log("This is Pin Value:", PinValue);
         setButtonDisabled(false);
       } else {
         setButtonDisabled(true);
