@@ -5,13 +5,18 @@ import { Link } from "react-router-dom";
 export default function Balance() {
   
   const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
-  const [UserData, setUserData] = useState(localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('account-data')) : {balance: 0})
+  const [UserData, setUserData] = useState(() => {
+    return localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('account-data')) : {balance: 0}
+  })
   const [BalanceFormat, setBalanceFormat] = useState(Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0}).format(0))
+
   useEffect(() => {
- setBalanceFormat(Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 }).format(UserData? UserData.balance : 0));
- forceUpdate()
-   
+    setBalanceFormat(Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 }).format(UserData? UserData.balance : 0));
+    forceUpdate()
   }, [])
+
+  
+
   return (
     <div className="profile-top-container set-margin-for-dash">
       <div className="margin-profile-container">
