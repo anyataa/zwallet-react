@@ -32,11 +32,13 @@ const Login = () => {
     if(emailValidation(email)){
       axios.post(urlAPI + "/user/signin", {email, password})
       .then(res => {
-        console.log(res.data.data.user)
+        // console.log(res.data)
         res.data.message == "Login success!" ?
         localStorage.setItem('userData', JSON.stringify(res.data.data.user))
-        : setErrorMsg('Email or Password Incorrect')
-        forceUpdate();
+        : setErrorMsg('Email or Password Incorrect!')
+
+        // forceUpdate();
+        // console.log("masuk")
       })
       .catch(err => {
         console.log(err)
