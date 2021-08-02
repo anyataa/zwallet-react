@@ -25,7 +25,7 @@ const CreatePin = () => {
         }
     }
     
-    if(JSON.parse(localStorage.getItem('userData')).pin){
+    if(JSON.parse(localStorage.getItem('userData')).userPin){
         return <Redirect to='/pinSuccess'/>
     }
     return (

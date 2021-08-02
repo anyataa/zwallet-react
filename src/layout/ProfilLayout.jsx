@@ -55,8 +55,8 @@ export const ProfilLayout = () => {
                 </div>
 
                 <div className="img-edit col-dark-grey">
-                  <h1 className="col-dark-grey">{UserData.name}</h1>
-                  <h2 className="col-grey">{UserData.phone}</h2>
+                  <h1 className="col-dark-grey">{UserData.userName}</h1>
+                  <h2 className="col-grey">{UserData.phoneNumber}</h2>
                 </div>
               </div>
             </div>
