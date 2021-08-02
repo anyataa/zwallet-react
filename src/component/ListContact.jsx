@@ -28,6 +28,7 @@ const ListContact = () => {
   const fetchContact = () => {
     if (localStorage.getItem("userData")) {
       axios.get(`http://localhost:8080/zwallet-api/friends/${JSON.parse(localStorage.getItem("userData")).userId}`)
+      // axios.get(`http://localhost:8080/zwallet-api/friends/1`)
       .then(res => {
         console.log(res.data)
         setData(res.data)
@@ -38,6 +39,7 @@ const ListContact = () => {
 
   const renderContact = () => {
     if(data.length > 0){
+      console.log(data)
       return data.map((contact, index) => {
         if(contact.username.toLowerCase().includes(searchValue.toLowerCase())){
           return(

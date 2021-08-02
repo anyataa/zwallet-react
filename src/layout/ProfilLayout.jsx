@@ -70,7 +70,7 @@ export const ProfilLayout = () => {
 
               <div className="img-edit col-dark-grey">
                 <h1 className="col-dark-grey">{UserData.userName}</h1>
-                <h2 className="col-grey">+62 {UserData.phonenumber}</h2>
+                <h2 className="col-grey">+62 {UserData.phoneNumber ? UserData.phoneNumber.slice(1,UserData.phoneNumber.length) : "Error"}</h2>
               </div>
             </div>
           </div>
