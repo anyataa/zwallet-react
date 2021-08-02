@@ -54,9 +54,9 @@ export const TransferConfirmation = (props) => {
               className="transfer-contact-image"
             />
             <div className="transfer-contact">
-              <p className="transfer-primary-text">{data.name}</p>
+              <p className="transfer-primary-text">{data.username ? data.username : "Samuel Suhi"}</p>
               <p className="transfer-secondary-text">
-                {data.phone}
+                {data.phoneNumber ? data.phoneNumber : "082222222222"}
               </p>
             </div>
           </div>
@@ -83,7 +83,6 @@ export const TransferConfirmation = (props) => {
             <Link to={`/transfer/${data.id}`} style={{ textDecoration: "none" }}>
               <input
                 type="button"
-                onClick = {onTransfer}
                 value="Back"
                 className="transfer-btn"
               />

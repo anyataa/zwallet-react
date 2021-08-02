@@ -15,7 +15,7 @@ const CreatePin = () => {
     const create = () => {
         if (localStorage.getItem("userData")) {
             console.log(JSON.parse(localStorage.getItem('userData')).userPin)
-            axios.put(urlAPI + `/user/update-pin/${JSON.parse(localStorage.getItem("userData")).userId}`, {userPin: pinValue})
+            axios.put(urlAPI + `/user/update-pin/${JSON.parse(localStorage.getItem("userData")).userId}`, {pin: pinValue})
             .then(res => {
                 console.log(res.data)
                 localStorage.setItem('userData', JSON.stringify(res.data))
@@ -25,7 +25,7 @@ const CreatePin = () => {
         }
     }
     
-    if(JSON.parse(localStorage.getItem('userData')).userPin){
+    if(JSON.parse(localStorage.getItem('userData')).pin){
         return <Redirect to='/pinSuccess'/>
     }
     return (
@@ -44,7 +44,7 @@ const CreatePin = () => {
                 </div>
 
                 <div>
-                    <Pin goTo='/pinsuccess' buttonValue="Confirm" setPinValue={setPinValue} onCreate={create}/>
+                    <Pin goTo='/pinsuccess' buttonValue="Confirm" setPinValue={setPinValue} onClick={create}/>
                 </div>
             </div>
         </div>

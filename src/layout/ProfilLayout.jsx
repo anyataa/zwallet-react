@@ -19,7 +19,7 @@ export const ProfilLayout = () => {
     e.preventDefault();
     console.log("clicked")
     //TODOANYA: Change Edit Button to Submit to trigger the change of photo profil and save to DB
-    
+
   };
 
   const [UserData, setUserData] = useState({});
