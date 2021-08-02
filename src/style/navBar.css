@@ -758,7 +758,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin-top: 2rem;
+  margin-top: calc(2rem + 10vh);
 }
 
 .right-personal-information {
@@ -1423,9 +1423,9 @@
 }
 
 .dashboard-top-up {
+  margin-top: calc(2rem + 10vh);
   width: 65%;
   height: 79vh;
-  margin-top: 2rem;
   border-radius: 25px;
   -webkit-box-pack: center;
       -ms-flex-pack: center;

@@ -558,10 +558,11 @@
   padding: 47px 0 50px 40px;
   border-radius: 25px;
   background: #ffffff;
+  // background: #3a2b2b;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   justify-content: center;
   display: flex;
-  margin-top: 2rem;
+  margin-top: calc(2rem + 10vh);
 }
 
 .right-personal-information {
@@ -1058,9 +1059,10 @@
 }
 
 .dashboard-top-up {
+  margin-top: calc(2rem + 10vh);
   width: 65%;
   height: 79vh;
-  margin-top: 2rem;
+  // margin-top: 2rem;
   // padding: 47px 0 50px px;
   border-radius: 25px;
   // background-color: red;
