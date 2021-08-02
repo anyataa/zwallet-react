@@ -489,7 +489,7 @@
 
 .contact-list-container {
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
   align-items: center;
   flex-direction: column;
   // background-color: wheat;
@@ -500,12 +500,15 @@
   li {
     list-style: none;
   }
+  .custom-profile-view {
+    margin-bottom: 50px;
+    // background-color: green;
+  }
   ul {
     margin: 0;
     padding: 0;
   }
   .profile-container {
-    // margin-top: calc(2rem + 10vh);
     display: flex;
     justify-content: flex-start;
     align-items: center;
