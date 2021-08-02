@@ -15,8 +15,8 @@ export const BalanceTransaction = (props) => {
     }, [])
 
     const renderTransaction = () => {
-      if(Transaction.length > 0){
-        return Transaction.slice(-4).map(item => (
+      if(Transaction && Transaction.listTransaction){
+        return Transaction.listTransaction.slice(-4).map(item => (
           <div className="custom-profile-view">
             <div className="profile-container">
               <div className="profile-img">
@@ -33,7 +33,7 @@ export const BalanceTransaction = (props) => {
           </div>
         ))
       }else{
-        return <div><h1> <br /><br /><br /><br /> No Transaction Yet...</h1></div>
+        return <div><h1> <br /><br /><br /><br /> No Transaction Yet...</h1>{console.log("Transaction", Transaction.listTransaction)}</div>
       }
     }
 
