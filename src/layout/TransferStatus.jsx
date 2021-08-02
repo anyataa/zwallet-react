@@ -51,8 +51,8 @@ const TransferStatus = ({match}) => {
           className="transfer-contact-image"
         />
         <div className="transfer-contact">
-          <p className="transfer-primary-text">{data.name}</p>
-          <p className="transfer-secondary-text">{data.phone}</p>
+          <p className="transfer-primary-text">{data.username ? data.username : "Samuel Suhi"}</p>
+          <p className="transfer-secondary-text">{data.phoneNumber ? data.phoneNumber : "082222222222"}</p>
         </div>
       </div>
       <div className="transfer-right-bottom-wrapper">
@@ -76,7 +76,7 @@ const TransferStatus = ({match}) => {
             type="button"
             value={isSuccess ? "Back to Home" : "Try Again"}
             className="transfer-btn"
-            onclick=""
+            onClick=""
           />
         </Link>
       </div>

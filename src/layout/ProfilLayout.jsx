@@ -47,6 +47,7 @@ export const ProfilLayout = () => {
                   <img
                     src={`https://randomuser.me/api/portraits/men/${UserData.id}.jpg`}
                     alt=""
+
                   />
                 ) : (
                   <img src="https://i.ibb.co/FHLx6h9/default.png" alt="" />
@@ -62,6 +63,17 @@ export const ProfilLayout = () => {
                     maxHeight={64}
                   />
                   {/* <p  className="fa fa-pencil-alt col-grey">
+
+                  />: <img
+                  src="https://i.ibb.co/FHLx6h9/default.png"
+                  alt=""
+                />}
+                 
+                  <p
+                    onClick="goToPersonalInfo() "
+                    className="fa fa-pencil-alt col-grey"
+                  >
+
                     &nbsp;&nbsp; <span> Edit</span>{" "}
                   </p> */}
                   <input  type="submit"  value="&nbsp;&nbsp;&nbsp;&nbsp;Edit" />
@@ -91,6 +103,7 @@ export const ProfilLayout = () => {
                 </li>
               </Link>
 
+
               {/* <!-- 2 --> */}
               <Link to="/profil/changePassword">
                 <li>
@@ -102,6 +115,19 @@ export const ProfilLayout = () => {
                   </div>
                 </li>
               </Link>
+
+                {/* <!-- 1 --> */}
+                <Link to="/profil/personalinfo">
+                  <li>
+                    <div className="card-notification ">
+                      <h2>Personal Information</h2>
+                      <i className="fa fa-arrow-right">
+                        <FaArrowRight/>
+                      </i>
+                    </div>
+                  </li>
+                </Link>
+
 
               {/* <!-- 3 --> */}
               <Link to="/profil/changePin">
@@ -118,6 +144,7 @@ export const ProfilLayout = () => {
               {/* <!-- 4 --> */}
               <a onClick={doLogOut}>
                 <li>
+
                   <div className="card-notification ">
                     <h2>Log Out</h2>
                     <i className="fa fa-arrow-right">
@@ -135,6 +162,31 @@ export const ProfilLayout = () => {
               <Link to="/friendslist" className="col-secondary">
                 See All
               </Link>
+
+                    <div className="card-notification ">
+                      <h2>Change PIN</h2>
+                      <i className="fa fa-arrow-right">
+                        <FaArrowRight/>
+                      </i>
+                    </div>
+                  </li>
+                </Link>
+              
+                
+        
+                {/* <!-- 4 --> */}
+                <a onClick={doLogOut}>
+                  <li>
+                    <div className="card-notification ">
+                      <h2>Log Out</h2>
+                      <i className="fa fa-arrow-right">
+                        <FaArrowRight/>
+                      </i>
+                    </div>
+                  </li>
+                </a>
+              </ul>
+
             </div>
             {/* <!-- Contact --> */}
             <div className="contact-list-container">

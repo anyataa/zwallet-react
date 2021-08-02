@@ -9,11 +9,11 @@ export default function Dashboard() {
   const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
   const { path, url } = useRouteMatch()
-console.log(useRouteMatch())
+
   function doLogOut()  {
     localStorage.removeItem("userData")
     forceUpdate()
-    console.log('in dashboard')
+    // console.log('in dashboard')
     
   }
 

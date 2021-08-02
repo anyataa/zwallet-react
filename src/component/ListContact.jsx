@@ -14,14 +14,13 @@ const ListContact = () => {
   const [searchValue, setSearchValue] = useState('')
 
   useEffect(() => {
-    fetchProfile()
-    // fetchContact()
+    // fetchProfile()
+    fetchContact()
   }, [])
 
   const fetchProfile = () => {
     if (localStorage.getItem("friends-data")) {
       setData(JSON.parse(localStorage.getItem("friends-data")));
-      console.log(JSON.parse(localStorage.getItem("friends-data")))
     }
   };
 
@@ -30,7 +29,7 @@ const ListContact = () => {
     if (localStorage.getItem("userData")) {
       axios.get(`http://localhost:8080/zwallet-api/friends/${JSON.parse(localStorage.getItem("userData")).userId}`)
       .then(res => {
-        // console.log(res.data)
+        console.log(res.data)
         setData(res.data)
       })
       .catch(err => console.log(err))
@@ -39,83 +38,30 @@ const ListContact = () => {
 
   const renderContact = () => {
     if(data.length > 0){
-      console.log(data)
-      return data.map(contact => {
-        // if(contact[2].toLowerCase().includes(searchValue.toLowerCase()))
-        if(contact.name.toLowerCase().includes(searchValue.toLowerCase()))
-        return(
-          <Link
-              // to={`/transfer/${contact[1]}`}
-              to={`/transfer/${contact.id}`}
+      return data.map((contact, index) => {
+        if(contact.username.toLowerCase().includes(searchValue.toLowerCase())){
+          return(
+            <Link
+              to={`/transfer/${contact.friendId}`}
               style={{ textDecoration: "none" }}
-              key={contact[0]}
+              key={contact.friendId}
             >
               <div className="transfer-item-wrapper">
                 <img
-                  // src={`https://randomuser.me/api/portraits/men/${contact[0]}.jpg`}
-                  src={`https://randomuser.me/api/portraits/men/${contact.id}.jpg`}
+                  src={contact.userImage ? `https://randomuser.me/api/portraits/men/${contact.friendId}.jpg` : "https://i.ibb.co/FHLx6h9/default.png"}
                   alt="friend profile"
                   className="transfer-contact-image"
                   width={"60px"}
                 />
                 <div className="transer-contact">
-                  {/* <p className="transfer-primary-text">{contact[2]}</p> */}
-                  <p className="transfer-primary-text">{contact.name}</p>
-                  <p className="transfer-secondary-text">{contact[4]}</p>
+                  <p className="transfer-primary-text">{contact.username}</p>
+                  <p className="transfer-secondary-text">{contact.phoneNumber}</p>
                 </div>
               </div>
             </Link>
-        )
+          )
+        }
       })
-      // console.log(data[0].user.username)
-      // return data.map((contact, index) => {
-      //   if(contact.user.username.toLowerCase().includes(searchValue.toLowerCase())){
-      //     return(
-      //       <Link
-      //         to={`/transfer/${contact.friend.userId}`}
-      //         style={{ textDecoration: "none" }}
-      //         key={contact.friendshipId}
-      //       >
-      //         <div className="transfer-item-wrapper">
-      //           <img
-      //             src={`https://randomuser.me/api/portraits/men/${contact.friend.userId}.jpg`}
-      //             alt="friend profile"
-      //             className="transfer-contact-image"
-      //             width={"60px"}
-      //           />
-      //           <div className="transer-contact">
-      //             <p className="transfer-primary-text">{contact.user.username}</p>
-      //             <p className="transfer-secondary-text">{contact.phone}</p>
-      //           </div>
-      //         </div>
-      //       </Link>
-      //     )
-      //   }
-      // })
-    //   return data.map((contact) => {
-    //     if(contact.name.toLowerCase().includes(searchValue.toLowerCase())){
-    //       return (
-    //         <Link
-    //           to={`/transfer/${contact.id}`}
-    //           style={{ textDecoration: "none" }}
-    //           key={contact.id}
-    //         >
-    //           <div className="transfer-item-wrapper">
-    //             <img
-    //               src={`https://randomuser.me/api/portraits/men/${contact.id}.jpg`}
-    //               alt="friend profile"
-    //               className="transfer-contact-image"
-    //               width={"60px"}
-    //             />
-    //             <div className="transer-contact">
-    //               <p className="transfer-primary-text">{contact.name}</p>
-    //               <p className="transfer-secondary-text">{contact.phone}</p>
-    //             </div>
-    //           </div>
-    //         </Link>
-    //       )
-    //     }
-    //   })
     }else{
       return <h1 style={{margin: 'auto'}}>"I HAVE NO FRIENDS, THERE ARE ONLY PEOPLE I LOVE."<br/><br/>- Louis Aragon -</h1>
     }
