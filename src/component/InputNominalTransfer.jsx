@@ -22,8 +22,9 @@ export const InputNominalTransfer = (props) => {
     // Set balance based on account-data in local storage
     // CHANGE : "data.balance" change to "Balance"
     // Did not query from friends anymore :)
-    
-    setBalance(JSON.parse(localStorage.getItem('account-data')).balance)
+
+    setBalance(JSON.parse(localStorage.getItem('userData')).accountBalance)
+
   }, [])
   
   const onContinue = () => {

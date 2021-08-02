@@ -9,14 +9,15 @@ export const TransferConfirmation = (props) => {
   const [transferData, setTransferData] = useState([]);
   const [accountData, setAccountData] = useState({})
   const onTransfer = () => {
-    setAccountData(JSON.parse(localStorage.getItem("account-data")))
+    setAccountData(JSON.parse(localStorage.getItem("userData")))
     if(transferData && accountData){
+      console.log(accountData.accountId)
       var body = {
         transactionAmount: transferData.nominalTransfer,
         transactionNotes : transferData.noteTransfer,
-        // TODOANYA: change from account id based on user ID
-        fromAccountId : accountData.accountId,
-        // TODOANYA: change from account id based on user ID
+        // TODOANYA: change from account id active user [DONE]
+        fromAccountId : 13,
+        // TODOANYA: change from account id based on friends user ID
         toUserId : 2
       }
 
