@@ -13,15 +13,18 @@ export const InputNominalTransfer = (props) => {
 
   useEffect(() => {
     var tempData = JSON.parse(localStorage.getItem('friends-data'))
-    for(let i=0; i < tempData.length; i++){
-      if(tempData[i].id == props.match.params.id){
-        setData(tempData[i])
-      }
-    }
+    // for(let i=0; i < tempData.length; i++){
+    //   if(tempData[i].id == props.match.params.id){
+    //     setData(tempData[i])
+    //   }
+    // }
+
     // Set balance based on account-data in local storage
     // CHANGE : "data.balance" change to "Balance"
     // Did not query from friends anymore :)
-    setBalance(JSON.parse(localStorage.getItem('account-data')).balance)
+
+    setBalance(JSON.parse(localStorage.getItem('userData')).accountBalance)
+
   }, [])
   
   const onContinue = () => {
@@ -35,15 +38,15 @@ export const InputNominalTransfer = (props) => {
       <p className="transfer-primary-text">Transfer Money</p>
       <div className="transfer-item-wrapper">
         <img
-          src={`https://randomuser.me/api/portraits/men/${data.id}.jpg`}
+          src={data.userImage ? `https://randomuser.me/api/portraits/men/${data.id}.jpg` : "https://i.ibb.co/FHLx6h9/default.png"}
           alt=""
           className="transfer-contact-image"
           width="70px"
 
         />
         <div className="transer-contact">
-          <p className="transfer-primary-text">{data.name}</p>
-          <p className="transfer-secondary-text">{data.phone}</p>
+          <p className="transfer-primary-text">{data.username ? data.username : "Samuel Suhi"}</p>
+          <p className="transfer-secondary-text">{data.phoneNumber ? data.phoneNumber : "082222222222"}</p>
         </div>
       </div>
 
@@ -75,13 +78,13 @@ export const InputNominalTransfer = (props) => {
         </div>
       </div>
       <div className="set-transfer-button-confirmation">
-            <Link to={`/transfer`} style={{ textDecoration: "none" }} >
-              <input type="button" value="Back" className="transfer-btn" />
-            </Link>
-            <Link to={`/transfer/${data.id}/confirmation`}>
-              <input type="button" value="Continue" className="transfer-btn" onClick={onContinue} disabled={nominalTransfer && noteTransfer && (Balance - nominalTransfer) > 0 ? false : true}/>
-            </Link>
-          </div>
+        <Link to={`/transfer`} style={{ textDecoration: "none" }} >
+          <input type="button" value="Back" className="transfer-btn" />
+        </Link>
+        <Link to={`/transfer/${data.id}/confirmation`}>
+          <input type="button" value="Continue" className="transfer-btn" onClick={onContinue} disabled={nominalTransfer && noteTransfer && (Balance - nominalTransfer) > 0 ? false : true}/>
+        </Link>
+      </div>
     </div>
   );
 

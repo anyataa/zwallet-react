@@ -8,27 +8,6 @@ export const TransferConfirmation = (props) => {
   const [data, setData] = useState([]);
   const [transferData, setTransferData] = useState([]);
   const [accountData, setAccountData] = useState({})
-  const onTransfer = () => {
-    setAccountData(JSON.parse(localStorage.getItem("account-data")))
-    if(transferData && accountData){
-      var body = {
-        transactionAmount: transferData.nominalTransfer,
-        transactionNotes : transferData.noteTransfer,
-        // TODOANYA: change from account id based on user ID
-        fromAccountId : accountData.accountId,
-        // TODOANYA: change from account id based on user ID
-        toUserId : 2
-      }
-
-      axios.post(urlAPI+"/transaction/transfer", body).then(res => {
-        console.log(res)
-      }).catch (err => {
-        console.log(err)
-      })
-    }
-    props.setModalToggle()
-    
-  }
 
   useEffect(() => {
     var tempData = JSON.parse(localStorage.getItem('friends-data'))
@@ -37,13 +16,44 @@ export const TransferConfirmation = (props) => {
         setData(tempData[i])
       }
     }
-
+    
     setTransferData(JSON.parse(localStorage.getItem('transfer-data')))
+    setAccountData(JSON.parse(localStorage.getItem("userData")))
   }, [])
+
+  // const getUser = () => {
+  //   axios.get(urlAPI + '/user/getFriend/')
+  // }
+
+  const onTransfer = () => {
+    if(transferData && accountData){
+        console.log(accountData)
+      var body = {
+        transactionAmount: transferData.nominalTransfer,
+        transactionNotes : transferData.noteTransfer,
+        // TODOANYA: change from account id active user [DONE]
+        fromAccountId : accountData.accountId,
+        // TODOANYA: change from account id based on friends user ID
+        toUserId : 2
+      }
+
+      axios.post(urlAPI+"/transaction/transfer", body).then(res => {
+        console.log(res)
+        localStorage.setItem("userData", JSON.stringify({...JSON.parse(localStorage.getItem("userData")), accountBalance: res.data.data.fromAccountBalance}));
+      }).catch (err => {
+        console.log(err)
+      })
+    }
+    props.setModalToggle()
+    
+  }
+
 
   return (
     <div className="right">
-      {console.log("transfer",transferData)}
+      {/* {
+        console.log(accountData)
+      } */}
         <div>
           <p className="transfer-primary-text">Transfer To</p>
           <div className="transfer-item-wrapper">
@@ -53,9 +63,9 @@ export const TransferConfirmation = (props) => {
               className="transfer-contact-image"
             />
             <div className="transfer-contact">
-              <p className="transfer-primary-text">{data.name}</p>
+              <p className="transfer-primary-text">{data.username ? data.username : "Samuel Suhi"}</p>
               <p className="transfer-secondary-text">
-                {data.phone}
+                {data.phoneNumber ? data.phoneNumber : "082222222222"}
               </p>
             </div>
           </div>
@@ -82,7 +92,6 @@ export const TransferConfirmation = (props) => {
             <Link to={`/transfer/${data.id}`} style={{ textDecoration: "none" }}>
               <input
                 type="button"
-                onClick = {onTransfer}
                 value="Back"
                 className="transfer-btn"
               />

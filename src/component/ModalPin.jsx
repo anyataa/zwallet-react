@@ -23,16 +23,14 @@ export const ModalPin = ({ modalToggle, setModalToggle }) => {
   const [BorderColor, setBorderColor] = useState("rgba(66, 63, 63, 0.4");
   const [ButtonDisabled, setButtonDisabled] = useState(true);
   const [PinValue, setPinValue] = useState("");
-  const [PinTotal, setPinTotal] = useState([
-    {
-      value: null,
-    },
+  const [PinTotal, setPinTotal] = useState(() => ([
     { value: null },
     { value: null },
     { value: null },
     { value: null },
     { value: null },
-  ]);
+    { value: null },
+  ]));
 
   const validatePin = () => {
     let pinUser = "123456";
@@ -60,7 +58,6 @@ export const ModalPin = ({ modalToggle, setModalToggle }) => {
       //   console.log(pin)
       if (pin.length == 6) {
         setPinValue(pin);
-        console.log("This is Pin Value:", PinValue);
         setButtonDisabled(false);
       } else {
         setButtonDisabled(true);

@@ -10,20 +10,18 @@ import Pin from "../component/Pin";
 import { Redirect } from "react-router-dom";
 
 
-const ChangePin = () => {
+const ChangePin = ({history}) => {
   const [pinValue, setPinValue] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
-  const onCreate = () => {
+  const onCheck = () => {
     if (JSON.parse(localStorage.getItem("userData")).userPin == pinValue) {
-      console.log('ok');
-      // return <Redirect to='/newPin'/>
+      history.push("/newPin")
     } else{
       setErrorMsg('Invalid PIN')
     }
   }
-
-
+  
   return (
       <div className="right-change-pin">
         <div className="personal-information-top-container">
@@ -37,7 +35,7 @@ const ChangePin = () => {
         </div>
         <div className="row-pin-group">
           <div className="pin-group center-pin-group">
-            <Pin goTo='/newpin' buttonValue="Continue" setPinValue={setPinValue} onCreate={onCreate} />
+            <Pin goTo='/newpin' buttonValue="Continue" setPinValue={setPinValue} onClick={onCheck} />
             {
             errorMsg ? <p className='text-validation'>{errorMsg}</p> : null
             }

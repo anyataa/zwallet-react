@@ -1,5 +1,8 @@
 import axios from "axios";
 import { useReducer } from "react";
+
+//  image form
+
 // Email validation in login page and sign up
 
 export const emailValidation = (email) => {
@@ -55,19 +58,20 @@ export const setTransactionData = (accountId) => {
   axios
     .get(`http://localhost:8080/zwallet-api/transaction/${accountId}`)
     .then((res) => {
-      console.log(res.data)
+      console.log(res.data);
+
       localStorage.setItem("transaction-data", JSON.stringify(res.data));
       // return JSON.parse(localStorage.getItem("transaction-data"))
     });
 };
 
 export const getAccountData = (accountId) => {
-  axios
-    .get(`http://localhost:8080/zwallet-api/account/${accountId}`)
-    .then((res) => {
-      localStorage.setItem("account-data", JSON.stringify(res.data));
-      // return JSON.parse(localStorage.getItem("transaction-data"))
-    });
+  // axios
+  //   .get(`http://localhost:8080/zwallet-api/account/${accountId}`)
+  //   .then((res) => {
+  //     localStorage.setItem("account-data", JSON.stringify(res.data));
+  //     // return JSON.parse(localStorage.getItem("transaction-data"))
+  //   });
 };
 
 export const getTransactionByPeriod = (accountId) => {

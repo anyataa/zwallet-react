@@ -19,7 +19,7 @@ export const PersonalInfoLayout = () => {
         setFirstName((JSON.parse(localStorage.getItem('userData')).userName).split(" ")[0])
         setLastName((JSON.parse(localStorage.getItem('userData')).userName).split(" ")[1])
         setEmail((JSON.parse(localStorage.getItem('userData')).userEmail))
-        setPhoneNumber(JSON.parse(localStorage.getItem('userData')).phonenumber)
+        setPhoneNumber(JSON.parse(localStorage.getItem('userData')).phoneNumber)
         // getPhoneNumber()
 
       }
