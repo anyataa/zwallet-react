@@ -28,6 +28,46 @@
           align-items: center;
 }
 
+.create-contact-avatar-input {
+  min-width: 60px;
+  height: 60px;
+  background-color: #e2e2e2;
+  background-image: url("../asset/icons/person.svg");
+  background-size: 45px 45px;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.create-contact-avatar-input:hover {
+  min-width: 60px;
+  height: 60px;
+  background-color: rgba(101, 124, 236, 0.8);
+  background-image: url("../asset/icons/person.svg");
+  background-size: 45px 45px;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.create-contact-form {
+  cursor: pointer;
+}
+
+.create-contact-form input {
+  border: none;
+  color: #747474;
+  background-color: white;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.create-contact-form input:hover {
+  color: #201e1e;
+}
+
 .nav-container {
   position: fixed;
   top: -4rem;
