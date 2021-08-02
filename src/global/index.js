@@ -66,12 +66,12 @@ export const setTransactionData = (accountId) => {
 };
 
 export const getAccountData = (accountId) => {
-  axios
-    .get(`http://localhost:8080/zwallet-api/account/${accountId}`)
-    .then((res) => {
-      localStorage.setItem("account-data", JSON.stringify(res.data));
-      // return JSON.parse(localStorage.getItem("transaction-data"))
-    });
+  // axios
+  //   .get(`http://localhost:8080/zwallet-api/account/${accountId}`)
+  //   .then((res) => {
+  //     localStorage.setItem("account-data", JSON.stringify(res.data));
+  //     // return JSON.parse(localStorage.getItem("transaction-data"))
+  //   });
 };
 
 export const getTransactionByPeriod = (accountId) => {
