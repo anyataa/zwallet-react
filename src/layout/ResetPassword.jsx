@@ -3,12 +3,18 @@ import Hero from "../component/Hero";
 import InputAuth from "../component/InputAuth";
 import "../style/newLogin.css";
 import Button from "../component/Button";
-import { Link } from 'react-router-dom';
+import { Link, Redirect} from 'react-router-dom';
+import { emailValidation } from "../global";
+import axios from "axios";
+import { urlAPI } from "../asset/urls";
+
 
 const ResetPassword = () => {
   const [email, setEmail] = useState();
 
   const [isDisabled, setIsDisabled] = useState(true);
+  const [errorMsg, setErrorMsg] = useState('');
+
 
   const buttonHandler = () => {
     if (email) {
@@ -18,6 +24,25 @@ const ResetPassword = () => {
     }
     console.log(isDisabled);
   };
+
+  const onReset = () => {
+    if(emailValidation(email)){
+      axios.post(urlAPI + "/user/resetpass", {email})
+      .then(res => {
+        console.log(res.data)
+        localStorage.setItem('userData', JSON.stringify(res.data))
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }else{
+      setErrorMsg('Invalid Email')
+    }
+  }
+
+  if(JSON.parse(localStorage.getItem('userData'))){
+    return <Redirect to='/createNewPassword'/>
+  }
 
   return (
     <div className="login-container">
@@ -43,7 +68,10 @@ const ResetPassword = () => {
         />
         <div>
           <Link to="/createNewPassword">
-            <Button disabled={isDisabled}>
+          {
+            errorMsg ? <p className='text-validation'>{errorMsg}</p> : null
+          }
+            <Button disabled={isDisabled} onClick={onReset}>
               Confirm
             </Button>
           </Link>
