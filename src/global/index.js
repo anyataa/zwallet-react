@@ -59,6 +59,7 @@ export const setTransactionData = (accountId) => {
     .get(`http://localhost:8080/zwallet-api/transaction/${accountId}`)
     .then((res) => {
       console.log(res.data);
+
       localStorage.setItem("transaction-data", JSON.stringify(res.data));
       // return JSON.parse(localStorage.getItem("transaction-data"))
     });
