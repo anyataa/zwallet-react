@@ -7,7 +7,7 @@ export const BalanceTransaction = (props) => {
     const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
     useEffect(() => {
       if(JSON.parse(localStorage.getItem("userData"))){
-        setTransactionData(JSON.parse(localStorage.getItem("account-data")).accountId);
+        setTransactionData(JSON.parse(localStorage.getItem("userData")).accountId);
         setTransaction(JSON.parse(localStorage.getItem("transaction-data")).listTransaction);
         // console.log(JSON.parse(localStorage.getItem("transaction-data")).listTransaction[0])
         forceUpdate()
