@@ -27,7 +27,6 @@ export const TransferConfirmation = (props) => {
 
   const onTransfer = () => {
     if(transferData && accountData){
-        console.log(accountData)
       var body = {
         transactionAmount: transferData.nominalTransfer,
         transactionNotes : transferData.noteTransfer,
@@ -38,7 +37,6 @@ export const TransferConfirmation = (props) => {
       }
 
       axios.post(urlAPI+"/transaction/transfer", body).then(res => {
-        console.log(res)
         localStorage.setItem("userData", JSON.stringify({...JSON.parse(localStorage.getItem("userData")), accountBalance: res.data.data.fromAccountBalance}));
       }).catch (err => {
         console.log(err)

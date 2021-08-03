@@ -16,6 +16,7 @@ import {
 } from "react-router-dom";
 import { TransferConfirmation } from "../component/TransferConfirmation";
 import { InputNominalTransfer } from "../component/InputNominalTransfer";
+import SearchContact from "./SearchContact";
 
 const TransferListLayout = () => {
   const [modalToggle, setModalToggle] = useState(false);
@@ -29,8 +30,9 @@ const TransferListLayout = () => {
       <Switch>
         <Route path={`${path}`} component={ListContact} exact/>
         <Route path={`${path}/:id`} component={InputNominalTransfer} exact/>
-        <Route path={`${path}/:id/confirmation`} render={(props) => <TransferConfirmation {...props} setModalToggle={() => setModalToggle(prevState => !prevState)} />} />
+        <Route path={`${path}/:id/confirmation`} render={(props) => <TransferConfirmation {...props} setModalToggle={() => setModalToggle(prevState => !prevState)} />} exact />
         <Route path={`${path}/status/:status`} component={TransferStatus} exact/>
+        <Route path={`${path}/search/contact`} component={SearchContact} exact/>
       </Switch>
       {/* <ListContact setModalToggle={() => setModalToggle(prevState => !prevState)}/> */}
       {/* <TransferConfirmation/> */}

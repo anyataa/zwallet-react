@@ -71,7 +71,7 @@
   /* background-color: red; */
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   align-items: center;
 }
 
@@ -253,4 +253,13 @@ input::-webkit-inner-spin-button {
   flex-direction: row;
   align-items: center;
   margin: 15px;
+}
+
+.transfer-icon-btn{
+  margin-right: 10px;
+  transition: .5s ease;
+}
+
+.transfer-icon-btn:hover{
+  transform: scale(1.3);
 }

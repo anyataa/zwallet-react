@@ -39,7 +39,6 @@ export const BalanceTransaction = (props) => {
 
     return (
       <div className="contact-list-container">
-        {console.log(Transaction.length)}
         {renderTransaction()}
       </div>
       // Transaction Details

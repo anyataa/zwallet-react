@@ -30,7 +30,7 @@ const ListContact = () => {
       axios.get(`http://localhost:8080/zwallet-api/friends/${JSON.parse(localStorage.getItem("userData")).userId}`)
       // axios.get(`http://localhost:8080/zwallet-api/friends/1`)
       .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         setData(res.data)
       })
       .catch(err => console.log(err))
@@ -73,7 +73,12 @@ const ListContact = () => {
     <div className='right'>
       <div style={{display: 'flex', justifyContent: "space-between"}}>
         <p className="transfer-primary-text" style={{margin: '30px 0'}}>Search Receiver By Friends List</p>
-        <Button><AiOutlineSearch style={{fontSize: '25px', marginRight: '10px'}}/>Search by phone number</Button>
+        <Link to='/transfer/search/contact' style={{textDecoration: "none" }}>
+          <Button>
+            <AiOutlineSearch style={{fontSize: '25px', marginRight: '10px'}}/>
+            Search by phone number
+          </Button>
+        </Link>
       </div>
       <input
         value={searchValue}
