@@ -26,21 +26,14 @@ export default function Balance() {
           <div className="row-balance">
             <h3>Balance</h3>
             <h1 className="col-white">{BalanceFormat}</h1>
-            <p>+62 813-9387-7946</p>
-          </div>
-          <div className="row-balance">
-          <Link style={{textDecoration:"none"}}>
-          <div onClick="goToRetrieve()" className="button-alpha">
+            <Link style={{textDecoration:"none"}} to="/retrieval">
+          <div className="button-alpha">
               <FaWallet></FaWallet>
               <h3>Retrieve</h3>
             </div>
           </Link>
-           <Link style={{textDecoration:"none"}}>
-           <div onClick="goToSubscription()" className="button-alpha">
-              <FaTicketAlt></FaTicketAlt>
-              <h3 style={{ fontSize: "18px" }}>Subscription</h3>
-            </div>
-           </Link>
+          </div>
+          <div className="row-balance">
           </div>
           <div className="row-balance">
             <Link style={{textDecoration:"none"}} to="/transfer">
