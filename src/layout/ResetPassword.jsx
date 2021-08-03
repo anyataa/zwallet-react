@@ -30,7 +30,7 @@ const ResetPassword = () => {
       axios.post(urlAPI + "/user/resetpass", {email})
       .then(res => {
         console.log(res.data)
-        localStorage.setItem('userData', JSON.stringify(res.data))
+        localStorage.setItem('resetPassword', JSON.stringify(res.data))
       })
       .catch(err => {
         console.log(err)
@@ -40,7 +40,7 @@ const ResetPassword = () => {
     }
   }
 
-  if(JSON.parse(localStorage.getItem('userData'))){
+  if(JSON.parse(localStorage.getItem('resetPassword'))){
     return <Redirect to='/createNewPassword'/>
   }
 

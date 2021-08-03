@@ -44,25 +44,29 @@ const CreateNewPassword = () => {
         password: password,
         password: confirmPassword
       }
-      axios.put(urlAPI + `/user/reset-password/${JSON.parse(localStorage.getItem('userData')).userId}`, body)
+      axios.put(urlAPI + `/user/reset-password/${JSON.parse(localStorage.getItem('resetPassword')).userId}`, body)
       .then(res => {
         console.log(res.data)
-        if (res.data.message.includes('updated')) {
-          localStorage.setItem('userData', JSON.stringify(res.data.data))
-          forceUpdate();
-        }else{
-          setErrorMsg(res.data.message)
+        // if (res.data.message.includes('updated')) {
+        //   localStorage.setItem('userData', JSON.stringify(res.data.data))
+        //   forceUpdate();
+        // }else{
+        //   setErrorMsg(res.data.message)
+        // }
+        if(JSON.parse(localStorage.getItem('resetPassword'))) {
+          localStorage.removeItem("resetPassword")
         }
       })
       .catch(err => {
         console.log(err)
+        console.log('masuk ke error')
       })
     }
 
-  if(JSON.parse(localStorage.getItem('userData'))) {
-    localStorage.removeItem("userData")
-    return <Redirect to='/login'/>
-  }
+  // if(JSON.parse(localStorage.getItem('resetPassword'))) {
+  //   // localStorage.removeItem("userData")
+  //   return <Redirect to='/login'/>
+  // }
 
   return (
     <div className="login-container">
