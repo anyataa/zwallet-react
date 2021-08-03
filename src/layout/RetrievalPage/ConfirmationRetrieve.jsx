@@ -7,6 +7,7 @@ import { urlAPI } from "../../asset/urls";
 export const RetrieveConfirmation = (props) => {
   const [data, setData] = useState([]);
   const [transferData, setTransferData] = useState([]);
+    const [retrieveData, setRetrieveData] = useState(null)
   const [accountData, setAccountData] = useState({})
 
   useEffect(() => {
@@ -18,6 +19,7 @@ export const RetrieveConfirmation = (props) => {
     // }
     
     setTransferData(JSON.parse(localStorage.getItem('retrieve-data')))
+    setRetrieveData(JSON.parse(localStorage.getItem('retrieve-data')))
     setAccountData(JSON.parse(localStorage.getItem("userData")))
   }, [])
 
@@ -63,20 +65,20 @@ export const RetrieveConfirmation = (props) => {
               className="transfer-contact-image"
             />
             <div className="transfer-contact">
-              <p className="transfer-primary-text">{data.bankName ? data.bankName : "Bank"}</p>
+              <p className="transfer-primary-text">{retrieveData ? retrieveData.bankName  : "Bank"}</p>
               <p className="transfer-secondary-text">
-                {data.phoneNumber ? data.phoneNumber : "082222222222"}
+                {retrieveData ? retrieveData.bankNumber : "082222222222"}
               </p>
             </div>
           </div>
           <p className="transfer-primary-text">Details</p>
           <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
             <p className="transfer-secondary-text">Amount</p>
-            <p className="transfer-primary-text">{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" }).format(transferData? transferData.amount : 0)}</p>
+            <p className="transfer-primary-text">{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits : 0 }).format(retrieveData? transferData.amount : 0)}</p>
           </div>
           <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
             <p className="transfer-secondary-text">Balance Left</p>
-            <p className="transfer-primary-text">{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" }).format(transferData? transferData.balance : 0)}</p>
+            <p className="transfer-primary-text">{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" , minimumFractionDigits : 0}).format(retrieveData? retrieveData.balance : 0)}</p>
           </div>
           <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
             <p className="transfer-secondary-text">Date & Time</p>
@@ -89,7 +91,7 @@ export const RetrieveConfirmation = (props) => {
             <p className="transfer-primary-text">{transferData.noteTransfer}</p>
           </div>
           <div className="set-transfer-button-confirmation">
-            <Link to={`/transfer/${data.id}`} style={{ textDecoration: "none" }}>
+            <Link to={`/retrieval/${retrieveData? retrieveData.bankName : "error"}`} style={{ textDecoration: "none" }}>
               <input
                 type="button"
                 value="Back"
