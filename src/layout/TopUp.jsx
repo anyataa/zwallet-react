@@ -14,7 +14,7 @@ const TopUp = () => {
     useEffect(() => {
         setUserData(JSON.parse(localStorage.getItem('userData')))
         if(JSON.parse(localStorage.getItem('userData'))){
-          setPhoneNumber(JSON.parse(localStorage.getItem('userData')).phonenumber? JSON.parse(localStorage.getItem('userData')).phonenumber.slice(1): null)
+          setPhoneNumber(JSON.parse(localStorage.getItem('userData')).phoneNumber? JSON.parse(localStorage.getItem('userData')).phoneNumber.slice(1): null)
         }
         
     }, [ ])
