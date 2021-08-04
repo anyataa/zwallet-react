@@ -6,8 +6,8 @@ export const BalanceTransaction = (props) => {
     const [Transaction, setTransaction] = useState([])
     const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
     useEffect(() => {
-      if(JSON.parse(localStorage.getItem("userData"))){
-        setTransactionData(JSON.parse(localStorage.getItem("account-data")).accountId);
+      if(JSON.parse(localStorage.getItem("userData")) &&JSON.parse(localStorage.getItem("transaction-data")) ){
+        // setTransactionData(JSON.parse(localStorage.getItem("userData")).accountId);
         setTransaction(JSON.parse(localStorage.getItem("transaction-data")).listTransaction);
         // console.log(JSON.parse(localStorage.getItem("transaction-data")).listTransaction[0])
         forceUpdate()
@@ -15,8 +15,8 @@ export const BalanceTransaction = (props) => {
     }, [])
 
     const renderTransaction = () => {
-      if(Transaction && Transaction.listTransaction){
-        return Transaction.listTransaction.slice(-4).map(item => (
+      if(Transaction){
+        return Transaction.slice(-4).map(item => (
           <div className="custom-profile-view">
             <div className="profile-container">
               <div className="profile-img">
@@ -33,7 +33,8 @@ export const BalanceTransaction = (props) => {
           </div>
         ))
       }else{
-        return <div><h1> <br /><br /><br /><br /> No Transaction Yet...</h1>{console.log("Transaction", Transaction.listTransaction)}</div>
+        {console.log("YES", Transaction)}
+        return <div><h1> <br /><br /><br /><br /> No Transaction Yet...</h1></div>
       }
     }
 
