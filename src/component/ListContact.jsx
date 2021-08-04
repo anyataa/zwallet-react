@@ -14,23 +14,15 @@ const ListContact = () => {
   const [searchValue, setSearchValue] = useState('')
 
   useEffect(() => {
-    // fetchProfile()
     fetchContact()
   }, [])
-
-  const fetchProfile = () => {
-    if (localStorage.getItem("friends-data")) {
-      setData(JSON.parse(localStorage.getItem("friends-data")));
-    }
-  };
 
   
   const fetchContact = () => {
     if (localStorage.getItem("userData")) {
       axios.get(`http://localhost:8080/zwallet-api/friends/${JSON.parse(localStorage.getItem("userData")).userId}`)
-      // axios.get(`http://localhost:8080/zwallet-api/friends/1`)
       .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         setData(res.data)
       })
       .catch(err => console.log(err))
@@ -39,7 +31,6 @@ const ListContact = () => {
 
   const renderContact = () => {
     if(data.length > 0){
-      console.log(data)
       return data.map((contact, index) => {
         if(contact.username.toLowerCase().includes(searchValue.toLowerCase())){
           return(
@@ -73,7 +64,12 @@ const ListContact = () => {
     <div className='right'>
       <div style={{display: 'flex', justifyContent: "space-between"}}>
         <p className="transfer-primary-text" style={{margin: '30px 0'}}>Search Receiver By Friends List</p>
-        <Button><AiOutlineSearch style={{fontSize: '25px', marginRight: '10px'}}/>Search by phone number</Button>
+        <Link to='/transfer/search/contact' style={{textDecoration: "none" }}>
+          <Button>
+            <AiOutlineSearch style={{fontSize: '25px', marginRight: '10px'}}/>
+            Search by phone number
+          </Button>
+        </Link>
       </div>
       <input
         value={searchValue}

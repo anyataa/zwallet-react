@@ -43,8 +43,7 @@ const Login = () => {
         }
           
 
-        // forceUpdate();
-        // console.log("masuk")
+        forceUpdate();
       })
       .catch(err => {
         console.log(err)

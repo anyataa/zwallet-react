@@ -23,6 +23,7 @@ useEffect(() => {
   setUserImage(JSON.parse(localStorage.getItem("userData")).userImage)
   setUserName(JSON.parse(localStorage.getItem("userData")).userName)
   setPhoneNumber(JSON.parse(localStorage.getItem("userData")).phoneNumber)
+
   setToday(JSON.parse(localStorage.getItem("transaction-data")).list2Day)
   setWeek(JSON.parse(localStorage.getItem("transaction-data")).list2Week)
 
