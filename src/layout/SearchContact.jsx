@@ -1,23 +1,46 @@
 import React, { useEffect, useState } from 'react'
 import { RiSendPlane2Fill } from 'react-icons/ri'
 import { BsPlusCircleFill } from 'react-icons/bs'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import Button from '../component/Button'
 import InputAuth from '../component/InputAuth'
 import axios from 'axios'
 import { urlAPI } from '../asset/urls'
 
-const SearchContact = () => {
+const SearchContact = (props) => {
   const [phone, setPhone] = useState('')
   const [data, setData] = useState([])
+  const [errorMsg, setErrorMsg] = useState('');
+
 
   const onSearch = (e) => {
-    if(phone !== JSON.parse(localStorage.getItem("userData")).phoneNumber){
-      axios.get(urlAPI + '/phone/number/' + phone)
-      .then(res => {
-        setData(res.data)
+    axios.get(`${urlAPI}/phone/number/${phone[0] == 0 ? phone : 0 + phone}`)
+    .then(res => {
+        if(res.data.phoneNumber !== JSON.parse(localStorage.getItem("userData")).phoneNumber){
+          console.log(res.data)
+          if(typeof(res.data) == 'string'){
+            setErrorMsg(res.data)
+          }else{
+            setData(res.data)
+            setErrorMsg('')
+
+          }
+        }else{
+          setErrorMsg('Phone Number Not Found!')
+        }
       })
-    }
+      .catch(err => {
+        setErrorMsg('Phone Number Not Found!')
+      })
+  }
+
+  const onAddFriend = () => {
+    axios.post(urlAPI + '/friends/add', {userId: JSON.parse(localStorage.getItem("userData")).userId, friendId: data.userId})
+    .then(res => {
+      console.log(res.data)
+      setErrorMsg(res.data)
+    })
+    .catch(err => console.log(err))
   }
 
   return (
@@ -58,11 +81,14 @@ const SearchContact = () => {
               <p className="transfer-secondary-text">{data.phoneNumber}</p>
             </div>
             <div style={{display: 'flex', flex: 1, flexDirection: 'row', justifyContent: "flex-end", marginRight: '20px'}}>
-              <BsPlusCircleFill size='30' color='#6379F4' className='transfer-icon-btn'/>
-              <RiSendPlane2Fill size='30' color='#6379F4' className='transfer-icon-btn'/>
+              <BsPlusCircleFill onClick={onAddFriend} size='30' color='#6379F4' className='transfer-icon-btn'/>
+              <RiSendPlane2Fill onclick={window.location.replace(`/transfer/${props.match.params.id}`)} size='30' color='#6379F4' className='transfer-icon-btn'/>
             </div>
           </div>
           : null
+        }
+        {
+          errorMsg ? <p className='text-validation'>{errorMsg}</p> : null
         }
       </div>
     </div>

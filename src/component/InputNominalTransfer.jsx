@@ -3,6 +3,8 @@ import "../style/transfer.css";
 import "../style/navBar.css";
 import { Link } from "react-router-dom";
 import { formatRupiah } from "../global";
+import axios from "axios";
+import { urlAPI } from "../asset/urls";
 
 export const InputNominalTransfer = (props) => {
   const [data, setData] = useState([]);
@@ -24,12 +26,21 @@ export const InputNominalTransfer = (props) => {
     // Did not query from friends anymore :)
 
     setBalance(JSON.parse(localStorage.getItem('userData')).accountBalance)
-
+    getFriendData()
   }, [])
+
+  const getFriendData = () => {
+    axios.get(urlAPI + `/user/getfriend/${props.match.params.id}`)
+    .then(res => {
+      console.log(res.data)
+      setData(res.data)
+    })
+    .catch(err => console.log(err))
+  }
   
   const onContinue = () => {
     if(nominalTransfer && noteTransfer){
-      localStorage.setItem('transfer-data', JSON.stringify({id: data.id, name: data.name, phone: data.phone, nominalTransfer, noteTransfer, balance: Balance - nominalTransfer}))
+      localStorage.setItem('transfer-data', JSON.stringify({id: props.match.params.id, name: data.name, phone: data.phone, nominalTransfer, noteTransfer, balance: Balance - nominalTransfer}))
     }
   }
 
@@ -45,8 +56,8 @@ export const InputNominalTransfer = (props) => {
 
         />
         <div className="transer-contact">
-          <p className="transfer-primary-text">{data.username ? data.username : "Samuel Suhi"}</p>
-          <p className="transfer-secondary-text">{data.phoneNumber ? data.phoneNumber : "082222222222"}</p>
+          <p className="transfer-primary-text">{data.userName ? data.userName : "Error"}</p>
+          <p className="transfer-secondary-text">{data.phoneNumber ? data.phoneNumber : "Error"}</p>
         </div>
       </div>
 
@@ -81,7 +92,7 @@ export const InputNominalTransfer = (props) => {
         <Link to={`/transfer`} style={{ textDecoration: "none" }} >
           <input type="button" value="Back" className="transfer-btn" />
         </Link>
-        <Link to={`/transfer/${data.id}/confirmation`}>
+        <Link to={`/transfer/${props.match.params.id}/confirmation`}>
           <input type="button" value="Continue" className="transfer-btn" onClick={onContinue} disabled={nominalTransfer && noteTransfer && (Balance - nominalTransfer) > 0 ? false : true}/>
         </Link>
       </div>

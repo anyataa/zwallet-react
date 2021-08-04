@@ -37,8 +37,7 @@ const Login = () => {
         localStorage.setItem('userData', JSON.stringify(res.data.data.user))
         : setErrorMsg('Email or Password Incorrect!')
 
-        // forceUpdate();
-        // console.log("masuk")
+        forceUpdate();
       })
       .catch(err => {
         console.log(err)
