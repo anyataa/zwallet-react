@@ -62,8 +62,9 @@ export const TransferConfirmation = (props) => {
           <p className="transfer-primary-text">Transfer To</p>
           <div className="transfer-item-wrapper">
             <img
-              src={`https://randomuser.me/api/portraits/men/${data.userId}.jpg`}
+              src={"https://i.ibb.co/FHLx6h9/default.png"}
               alt=""
+              style={{width : '70px', height : '70px'}}
               className="transfer-contact-image"
             />
             <div className="transfer-contact">

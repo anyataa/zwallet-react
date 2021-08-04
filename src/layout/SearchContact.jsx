@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { RiSendPlane2Fill } from 'react-icons/ri'
 import { BsPlusCircleFill } from 'react-icons/bs'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Button from '../component/Button'
 import InputAuth from '../component/InputAuth'
 import axios from 'axios'
@@ -9,7 +9,7 @@ import { urlAPI } from '../asset/urls'
 
 const SearchContact = (props) => {
   const [phone, setPhone] = useState('')
-  const [data, setData] = useState([])
+  const [data, setData] = useState({})
   const [errorMsg, setErrorMsg] = useState('');
 
 
@@ -23,7 +23,6 @@ const SearchContact = (props) => {
           }else{
             setData(res.data)
             setErrorMsg('')
-
           }
         }else{
           setErrorMsg('Phone Number Not Found!')
@@ -39,6 +38,7 @@ const SearchContact = (props) => {
     .then(res => {
       console.log(res.data)
       setErrorMsg(res.data)
+      window.location.replace(`/transfer`)
     })
     .catch(err => console.log(err))
   }
@@ -60,7 +60,6 @@ const SearchContact = (props) => {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             placeholder="Enter your phone number"
-            // onKeyUp={buttonHandler}
         />
         <div style={{marginTop: '50px'}}>
           <Button style={{cursor:'pointer'}} onClick={onSearch} >
@@ -82,13 +81,13 @@ const SearchContact = (props) => {
             </div>
             <div style={{display: 'flex', flex: 1, flexDirection: 'row', justifyContent: "flex-end", marginRight: '20px'}}>
               <BsPlusCircleFill onClick={onAddFriend} size='30' color='#6379F4' className='transfer-icon-btn'/>
-              <RiSendPlane2Fill onclick={window.location.replace(`/transfer/${props.match.params.id}`)} size='30' color='#6379F4' className='transfer-icon-btn'/>
+              <RiSendPlane2Fill onClick={() => window.location.replace(`/transfer/${data.userId}`)} size='30' color='#6379F4' className='transfer-icon-btn'/>
             </div>
           </div>
           : null
         }
         {
-          errorMsg ? <p className='text-validation'>{errorMsg}</p> : null
+          errorMsg ? <p className='text-validation' style={{marginTop: '50px'}}>{errorMsg}</p> : null
         }
       </div>
     </div>
