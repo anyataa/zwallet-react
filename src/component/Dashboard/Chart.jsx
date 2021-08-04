@@ -41,7 +41,7 @@ const DynamicChart = () => {
       
 const Chart = () => {
   console.log("iniii")
-  console.log(chartLast7Days[0].[0],chartLast7Days[1].[0], chartLast7Days[2].[0],chartLast7Days[3].[0], chartLast7Days[4].[0],chartLast7Days[5].[0], chartLast7Days[6].[0],chartLast7Days[7].[0])
+  // console.log(chartLast7Days[0].[0],chartLast7Days[1].[0], chartLast7Days[2].[0],chartLast7Days[3].[0], chartLast7Days[4].[0],chartLast7Days[5].[0], chartLast7Days[6].[0],chartLast7Days[7].[0])
   
        setChartData({
       //  labels: ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"],
@@ -89,7 +89,7 @@ const Chart = () => {
           // console.log(dayName, getDay(i))
         }
         setDaysLabel(dayName)
-        setbalanceHistory([chartLast7Days[0].[0],chartLast7Days[1].[0], chartLast7Days[2].[0],chartLast7Days[3].[0], chartLast7Days[4].[0],chartLast7Days[5].[0], chartLast7Days[6].[0],chartLast7Days[7].[0]])
+        // setbalanceHistory([chartLast7Days[0].[0],chartLast7Days[1].[0], chartLast7Days[2].[0],chartLast7Days[3].[0], chartLast7Days[4].[0],chartLast7Days[5].[0], chartLast7Days[6].[0],chartLast7Days[7].[0]])
        }
         Chart();
       }, []);

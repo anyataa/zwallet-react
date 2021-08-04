@@ -46,7 +46,7 @@ const NewPin = () => {
         </div>
         <div className="row-pin-group">
           <div className="pin-group center-pin-group">
-            <Pin goTo='/dashboard' buttonValue="Change Pin" onClick={create} setPinValue={setPinValue}/>
+            <Pin goTo='/profil' buttonValue="Change Pin" onClick={create} setPinValue={setPinValue}/>
           </div>
         </div>
       </div>
