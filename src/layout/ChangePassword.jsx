@@ -9,8 +9,11 @@ import Dashboard from "../component/Dashboard";
 import InputAuth from "../component/InputAuth";
 import Button from "../component/Button";
 import { ModalStatus } from "../component/ModalStatus";
+import axios from 'axios'
+import { urlAPI } from '../asset/urls'
+import { Redirect } from 'react-router-dom'
 
-const ChangePassword = (props) => {
+const ChangePassword = () => {
   const [password, setPassword] = useState();
   const [newPassword, setNewPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
@@ -18,7 +21,7 @@ const ChangePassword = (props) => {
   const [isNewVisible, setIsNewVisible] = useState(false);
   const [isConfirmVisible, setIsConfirmVisible] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
-  const [StyleModal, setStyleModal] = useState("none")
+  const [msg, setMsg] = useState('');
 
   const buttonHandler = () => {
     if (password && newPassword && confirmPassword) {
@@ -28,6 +31,22 @@ const ChangePassword = (props) => {
     }
     console.log(isDisabled);
   };
+
+  const onChangePass = () => {
+    var body = {
+      currentPass: password,
+      newPass: newPassword,
+      confirmPass: confirmPassword
+    }
+    axios.put(urlAPI + `/user/change-password/${JSON.parse(localStorage.getItem('userData')).userId}`, body)
+    .then(res => {
+      console.log(res.data)
+    })
+    .catch(err => {
+      setMsg('Invalid Current Password!')
+      console.log('masuk ke error')
+    })
+  }
 
   return (
       <div className="right-change-password">
@@ -75,7 +94,10 @@ const ChangePassword = (props) => {
           />
          
           <div>
-            <Button onClick={props.setDisplay} disabled={isDisabled}>Change Password</Button>
+            {
+            msg ? <p className='text-validation'>{msg}</p> : null
+            }
+            <Button onClick={onChangePass} disabled={isDisabled}>Change Password</Button>
           </div>
         </div>
       </div>

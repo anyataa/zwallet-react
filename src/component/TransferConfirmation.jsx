@@ -10,24 +10,29 @@ export const TransferConfirmation = (props) => {
   const [accountData, setAccountData] = useState({})
 
   useEffect(() => {
-    var tempData = JSON.parse(localStorage.getItem('friends-data'))
-    for(let i=0; i < tempData.length; i++){
-      if(tempData[i].id == props.match.params.id){
-        setData(tempData[i])
-      }
-    }
+    // var tempData = JSON.parse(localStorage.getItem('friends-data'))
+    // for(let i=0; i < tempData.length; i++){
+    //   if(tempData[i].id == props.match.params.id){
+    //     setData(tempData[i])
+    //   }
+    // }
     
     setTransferData(JSON.parse(localStorage.getItem('transfer-data')))
+    getFriendData()
     setAccountData(JSON.parse(localStorage.getItem("userData")))
   }, [])
 
-  // const getUser = () => {
-  //   axios.get(urlAPI + '/user/getFriend/')
-  // }
+  const getFriendData = () => {
+    axios.get(urlAPI + `/user/getfriend/${props.match.params.id}`)
+    .then(res => {
+      console.log(res.data)
+      setData(res.data)
+    })
+    .catch(err => console.log(err))
+  }
 
   const onTransfer = () => {
     if(transferData && accountData){
-        console.log(accountData)
       var body = {
         transactionAmount: transferData.nominalTransfer,
         transactionNotes : transferData.noteTransfer,
@@ -38,7 +43,6 @@ export const TransferConfirmation = (props) => {
       }
 
       axios.post(urlAPI+"/transaction/transfer", body).then(res => {
-        console.log(res)
         localStorage.setItem("userData", JSON.stringify({...JSON.parse(localStorage.getItem("userData")), accountBalance: res.data.data.fromAccountBalance}));
       }).catch (err => {
         console.log(err)
@@ -58,14 +62,15 @@ export const TransferConfirmation = (props) => {
           <p className="transfer-primary-text">Transfer To</p>
           <div className="transfer-item-wrapper">
             <img
-              src={`https://randomuser.me/api/portraits/men/${data.id}.jpg`}
+              src={"https://i.ibb.co/FHLx6h9/default.png"}
               alt=""
+              style={{width : '70px', height : '70px'}}
               className="transfer-contact-image"
             />
             <div className="transfer-contact">
-              <p className="transfer-primary-text">{data.username ? data.username : "Samuel Suhi"}</p>
+              <p className="transfer-primary-text">{data.userName ? data.userName : "Error"}</p>
               <p className="transfer-secondary-text">
-                {data.phoneNumber ? data.phoneNumber : "082222222222"}
+                {data.phoneNumber ? data.phoneNumber : "Error"}
               </p>
             </div>
           </div>
@@ -76,7 +81,7 @@ export const TransferConfirmation = (props) => {
           </div>
           <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
             <p className="transfer-secondary-text">Balance Left</p>
-            <p className="transfer-primary-text">{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" }).format(transferData? transferData.balance : 0)}</p>
+            <p className="transfer-primary-text">{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" }).format(data.accountBalance ? data.accountBalance : 0)}</p>
           </div>
           <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
             <p className="transfer-secondary-text">Date & Time</p>
@@ -89,7 +94,7 @@ export const TransferConfirmation = (props) => {
             <p className="transfer-primary-text">{transferData.noteTransfer}</p>
           </div>
           <div className="set-transfer-button-confirmation">
-            <Link to={`/transfer/${data.id}`} style={{ textDecoration: "none" }}>
+            <Link to={`/transfer/${data.userId}`} style={{ textDecoration: "none" }}>
               <input
                 type="button"
                 value="Back"

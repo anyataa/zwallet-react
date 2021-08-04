@@ -18,7 +18,6 @@ export default function Dashboard() {
   }
 
   if  (!JSON.parse(localStorage.getItem('userData') )){
-    console.log('in if')
     return <Redirect to='/login'/>
     
   }
