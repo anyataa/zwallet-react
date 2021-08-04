@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 import { urlAPI } from "../../asset/urls";
 
 
-export const RetrieveConfirmation = (props) => {
+export const RetrieveConfirmation = ({setDisplay, display}, props) => {
   const [data, setData] = useState([]);
   const [transferData, setTransferData] = useState([]);
     const [retrieveData, setRetrieveData] = useState(null)
-  const [accountData, setAccountData] = useState({})
+  const [accountData, setAccountData] = useState(null)
+  const [accountId, setAccountId] = useState(null)
+  
 
   useEffect(() => {
     // var tempData = JSON.parse(localStorage.getItem('friends-data'))
@@ -21,32 +23,40 @@ export const RetrieveConfirmation = (props) => {
     setTransferData(JSON.parse(localStorage.getItem('retrieve-data')))
     setRetrieveData(JSON.parse(localStorage.getItem('retrieve-data')))
     setAccountData(JSON.parse(localStorage.getItem("userData")))
+    if (accountData) {
+      setAccountId(accountData.accountId)
+    }
   }, [])
 
   // const getUser = () => {
   //   axios.get(urlAPI + '/user/getFriend/')
   // }
 
-  const onTransfer = () => {
-    if(transferData && accountData){
-        console.log(accountData)
+  const onRetrieve = () => {
+    if(retrieveData && accountData && accountId){
+        // console.log(accountData)
       var body = {
-        transactionAmount: transferData.nominalTransfer,
-        transactionNotes : transferData.noteTransfer,
-        // TODOANYA: change from account id active user [DONE]
-        fromAccountId : accountData.accountId,
-        // TODOANYA: change from account id based on friends user ID
-        toUserId : 2
+        username :   retrieveData.bankName,
+        transactionAmount: retrieveData.amount,
+        transactionNotes : `Retrieve : ${retrieveData.bankNumber}`,
+        toAccountId : accountId
+       
       }
 
-      axios.post(urlAPI+"/transaction/transfer", body).then(res => {
+      axios.post(urlAPI+"/zwallet/retrieve/bank", body).then(res => {
         console.log(res)
-        localStorage.setItem("userData", JSON.stringify({...JSON.parse(localStorage.getItem("userData")), accountBalance: res.data.data.fromAccountBalance}));
+        if (res.data != null) {
+          console.log("success")
+          setDisplay()
+          // localStorage.removeItem("retrieve-data")    
+        }
+
+        // localStorage.setItem("userData", JSON.stringify({...JSON.parse(localStorage.getItem("userData")), accountBalance: res.data.data.fromAccountBalance}));
       }).catch (err => {
         console.log(err)
       })
     }
-    props.setModalToggle()
+    // props.setModalToggle()
     
   }
 
@@ -86,10 +96,10 @@ export const RetrieveConfirmation = (props) => {
               {Date().toLocaleString().slice(0, 21)}
             </p>
           </div>
-          <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
+          {/* <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
             <p className="transfer-secondary-text">Notes</p>
             <p className="transfer-primary-text">{transferData.noteTransfer}</p>
-          </div>
+          </div> */}
           <div className="set-transfer-button-confirmation">
             <Link to={`/retrieval/${retrieveData? retrieveData.bankName : "error"}`} style={{ textDecoration: "none" }}>
               <input
@@ -100,7 +110,7 @@ export const RetrieveConfirmation = (props) => {
             </Link>
             {/* <Link to="/transfer" style={{ textDecoration: "none" }}> */}
             <input
-              onClick={onTransfer}
+              onClick={onRetrieve}
               type="button"
               value="Continue"
               className="transfer-btn"
