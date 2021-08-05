@@ -23,9 +23,7 @@ export const RetrieveConfirmation = ({setDisplay, display}, props) => {
     setTransferData(JSON.parse(localStorage.getItem('retrieve-data')))
     setRetrieveData(JSON.parse(localStorage.getItem('retrieve-data')))
     setAccountData(JSON.parse(localStorage.getItem("userData")))
-    if (accountData) {
-      setAccountId(accountData.accountId)
-    }
+      setAccountId(JSON.parse(localStorage.getItem("userData")).accountId)
   }, [])
 
   // const getUser = () => {
@@ -33,29 +31,27 @@ export const RetrieveConfirmation = ({setDisplay, display}, props) => {
   // }
 
   const onRetrieve = () => {
-    if(retrieveData && accountData && accountId){
-        // console.log(accountData)
+    // if(retrieveData && accountData && accountId){
+        console.log(accountData)
       var body = {
         username :   retrieveData.bankName,
         transactionAmount: retrieveData.amount,
         transactionNotes : `Retrieve : ${retrieveData.bankNumber}`,
-        toAccountId : accountId
-       
-      }
-
+        toAccountId : accountId 
+      } 
       axios.post(urlAPI+"/zwallet/retrieve/bank", body).then(res => {
-        console.log(res)
+        // console.log(res)
         if (res.data != null) {
           console.log("success")
           setDisplay()
           // localStorage.removeItem("retrieve-data")    
         }
-
         // localStorage.setItem("userData", JSON.stringify({...JSON.parse(localStorage.getItem("userData")), accountBalance: res.data.data.fromAccountBalance}));
       }).catch (err => {
         console.log(err)
       })
-    }
+    // }
+    
     // props.setModalToggle()
     
   }

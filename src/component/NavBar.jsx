@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import "../style/navBar.css";
 import { FaArrowDown, FaArrowUp, FaBell } from "react-icons/fa";
 export default function NavBar() {
@@ -6,7 +6,8 @@ const [UserData, setUserData] = useState(null)
 const [UserName, setUserName] = useState("")
 const [PhoneNumber, setPhoneNumber] = useState("")
 const [UserImage, setUserImage] = useState({})
-const [Today, setToday] = useState(null)
+const [Today, setToday] = useState(localStorage.getItem("transaction-data") ? JSON.parse(localStorage.getItem("transaction-data")).list2Day : [])
+const [Week, setWeek] = useState(localStorage.getItem("transaction-data") ? JSON.parse(localStorage.getItem("transaction-data")).list2Week: [])
 const [transactionType, setTransactionType] = useState([
    "Transfer",
    "Subscription",
@@ -14,8 +15,7 @@ const [transactionType, setTransactionType] = useState([
    "Top Up",
    "Retrieve"])
 const [toFrom, setToFrom] = useState(["to", "from"])
-const [Week, setWeek] = useState(null)
-   
+const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
 useEffect(() => {
   // setUserData(JSON.parse(localStorage.getItem("userData")))
@@ -23,10 +23,13 @@ useEffect(() => {
   setUserImage(JSON.parse(localStorage.getItem("userData")).userImage)
   setUserName(JSON.parse(localStorage.getItem("userData")).userName)
   setPhoneNumber(JSON.parse(localStorage.getItem("userData")).phoneNumber)
-
-  setToday(JSON.parse(localStorage.getItem("transaction-data")).list2Day)
-  setWeek(JSON.parse(localStorage.getItem("transaction-data")).list2Week)
-
+  // setToday()
+  // setWeek()
+    console.log("MASUK")
+ 
+ 
+  
+  
   // TODONYA : Error kadang
   // if(UserData){localStorage.setItem("username", localStorage.getItem("userData").account.userId.username)
   // console.log("INI")
@@ -60,7 +63,7 @@ useEffect(() => {
             {/* <!-- Nav Bar Body --> */}
             <div className="wrapper-notification">
               <p className="detail-notif-duration">Today</p>
-              {Today? Today.map(transaction => (<li>
+              {Today && Today.length > 0? Today.map(transaction => (<li>
                 <div className="card-notification">
                   {transaction.transactionType > 0?   <i className="fa fa-arrow-down">
                     <FaArrowDown></FaArrowDown>
@@ -73,32 +76,15 @@ useEffect(() => {
                     <h2>{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 }).format(transaction? transaction.amount : 0)}</h2>
                   </div>
                 </div>
-              </li>)) : <p>No Transaction Yet for today</p> }
-              {/* <li>
-                <div className="card-notification">
-                  <i className="fa fa-arrow-down">
-                    <FaArrowDown></FaArrowDown>
-                  </i>
-                  <div className="notif-detail">
-                    <p>Transfered from Joshua Lee</p>
-                    <h2>RP 220.000</h2>
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <div className="card-notification">
-                  <i className="fa fa-arrow-up">
-                    <FaArrowUp></FaArrowUp>{" "}
-                  </i>
-                  <div className="notif-detail">
-                    <p>Netflix subscription</p>
-                    <h2>RP 149.000</h2>
-                  </div>
-                </div>
-              </li> */}
+              </li>)) : <div className="card-notification" style={{height : 195}}>
+          
+                  <p className="col-grey" >Oopsie, You Have No Transaction History Yet For Today. . . </p>
+                
+                 <img src={require('../asset/icons/no-transaction.png').default}  width={"100"} /> 
+                </div>}
+          
               <p className="detail-notif-duration">This Week</p>
-              {Week? Week.map(transaction => (<li>
+              {Week && Week.length > 0? Week.map(transaction => (<li>
                 <div className="card-notification">
                   {transaction.transactionType > 0?   <i className="fa fa-arrow-down">
                     <FaArrowDown></FaArrowDown>
@@ -111,7 +97,10 @@ useEffect(() => {
                     <h2>{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 }).format(transaction? transaction.amount : 0)}</h2>
                   </div>
                 </div>
-              </li>)) : <p>No Transaction Yet for this week</p> }
+              </li>)) : <div className="card-notification" style={{height : 195}}>
+          <p className="col-grey" >Oopsie, You Have No Transaction History Yet For This Week. . . </p>
+         <img src={require('../asset/icons/no-transaction.png').default}  width={"100"} /> 
+        </div> }
               {/* <li>
                 <div className="card-notification">
                   <i className="fa fa-arrow-down">

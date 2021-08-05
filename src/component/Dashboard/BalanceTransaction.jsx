@@ -29,7 +29,7 @@ export const BalanceTransaction = (props) => {
                 <p className="col-grey">{item.transactionDetails == 1 ? "Transfer" : item.transactionDetails == 2 ? "Subscription" : item.transactionDetails == 3 ? "Payment" : item.transactionDetails == 4 ? "Top Up" : item.transactionDetails == 5 ? "Retrieve" : "Other"}</p>
               </div>
             </div>
-            {item.transactionType > 0 ?  <h2 className="col-green">+{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits : 0 }).format(item.amount)}</h2> :<h2 className="col-red">-{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits : 0 }).format(item.amount)}</h2>  }
+            {item.transactionType > 0 ?  <h2 className="col-green">{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits : 0 }).format(item.amount)}</h2> :<h2 className="col-red">{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits : 0 }).format(item.amount)}</h2>  }
           </div>
         ))
       }else{

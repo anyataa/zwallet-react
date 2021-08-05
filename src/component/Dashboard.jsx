@@ -12,6 +12,8 @@ export default function Dashboard() {
 
   function doLogOut()  {
     localStorage.removeItem("userData")
+    localStorage.removeItem("transaction-data")
+    localStorage.removeItem("graph-data")
     forceUpdate()
     // console.log('in dashboard')
     
@@ -36,12 +38,19 @@ export default function Dashboard() {
           <p className="label label-size">Transfer</p>
         </div>
         </Link>
+        <Link style={{textDecoration:"none"}} to='/billing' >
+          <div className={path == '/billing' ? "item-wrapper active" : "item-wrapper"}>
+          <FaUserAlt className="label-size"/>
+          <p className="label label-size">Payments</p>
+        </div>
+        </Link>
         <Link style={{textDecoration:"none"}} to='/topup' >
         <div className={path == '/topup' ? "item-wrapper active" : "item-wrapper"}>
           <FaPlus className="label-size"/>
           <p className="label label-size">Top Up</p>
         </div>
         </Link>
+        
         <Link style={{textDecoration:"none"}} to='/profil' >
 
         <div className={path == '/profil' ? "item-wrapper active" : "item-wrapper"}>
