@@ -15,7 +15,7 @@ export const BalanceTransaction = (props) => {
     }, [])
 
     const renderTransaction = () => {
-      if(Transaction){
+      if(Transaction && Transaction.length){
         return Transaction.slice(-4).map(item => (
           <div className="custom-profile-view">
             <div className="profile-container">
@@ -34,7 +34,16 @@ export const BalanceTransaction = (props) => {
         ))
       }else{
         {console.log("YES", Transaction)}
-        return <div><h1> <br /><br /><br /><br /> No Transaction Yet...</h1></div>
+        return  <div>
+          
+           <p className="col-grey" style={{fontSize : 30}} ><br />Oopsie, You Have No Transaction History Yet. . .  <br /><br /></p>
+           {/* <p className="col-grey">Start Your Amazing Transaction In Zwallet</p> */}
+           <div className="card-notification" style={{height : 205}}>
+           <p className="col-grey">Start Using Zwallet Now!</p>
+         <img src={require('../../asset/icons/no-transaction.png').default}  width={"200"} /> 
+        </div>
+        </div>
+       
       }
     }
 

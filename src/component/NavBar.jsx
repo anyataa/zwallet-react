@@ -25,7 +25,7 @@ useEffect(() => {
   setPhoneNumber(JSON.parse(localStorage.getItem("userData")).phoneNumber)
   // setToday()
   // setWeek()
-    console.log("MASUK")
+
  
  
   
