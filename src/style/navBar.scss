@@ -682,7 +682,7 @@
   }
 }
 .right-change-pin {
-  margin-top: 2rem;
+  margin-top: calc(2rem + 10vh);
   width: 60vw;
   height: 79vh;
   padding: 0 50px;
@@ -853,7 +853,7 @@
   justify-content: space-between;
 }
 .right-change-password {
-  margin-top: 2rem;
+  margin-top: calc(2rem + 10vh);
   width: 65%;
   height: 70vh;
   padding: 47px 0 50px 40px;
