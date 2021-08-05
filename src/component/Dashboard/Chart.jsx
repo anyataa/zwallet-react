@@ -45,11 +45,13 @@ const DynamicChart = () => {
 const Chart = () => {
   setbalanceHistory([chartLast7Days.seventh,chartLast7Days.sixth,chartLast7Days.fifth, chartLast7Days.forth, chartLast7Days.third, chartLast7Days.second, chartLast7Days.first])
   var dayName = [];  
-  const days = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
- for (let i = 0; i > -7; i--) {
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri","Sat", ];
+ for (let i = -7; i < 1; i++) {
      
  var d = new Date(getDay(i));
  dayName.push(days[d.getDay()]);
+//  dayName.push(d.getDate());
+console.log(d, d.getDay())
  setChartData({
   //  labels: ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"],
    labels: dayName,

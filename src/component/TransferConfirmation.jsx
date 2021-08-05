@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { urlAPI } from "../asset/urls";
+import { setTransactionData } from "../global";
 import { InputNominalTransfer } from "./InputNominalTransfer";
 
 export const TransferConfirmation = (props) => {
@@ -44,6 +45,7 @@ export const TransferConfirmation = (props) => {
 
       axios.post(urlAPI+"/transaction/transfer", body).then(res => {
         localStorage.setItem("userData", JSON.stringify({...JSON.parse(localStorage.getItem("userData")), accountBalance: res.data.data.fromAccountBalance}));
+        setTransactionData(JSON.parse(localStorage.getItem("userData")).accountId);
       }).catch (err => {
         console.log(err)
       })

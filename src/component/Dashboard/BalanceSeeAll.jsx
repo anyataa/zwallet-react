@@ -69,7 +69,7 @@ export default class BalanceSeeAll extends Component {
           <h2>Transaction History</h2>
           <Link to='/seealltransaction'className="col-secondary" >See All</Link>
         </div>
-       <BalanceTransaction></BalanceTransaction>
+       <BalanceTransaction start={0} end={4} ></BalanceTransaction>
        </div> 
       </div>
     );

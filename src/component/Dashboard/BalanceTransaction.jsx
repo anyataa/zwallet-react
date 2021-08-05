@@ -16,7 +16,7 @@ export const BalanceTransaction = (props) => {
 
     const renderTransaction = () => {
       if(Transaction && Transaction.length){
-        return Transaction.slice(-4).map(item => (
+        return Transaction.slice(props.start, props.end).map(item => (  
           <div className="custom-profile-view">
             <div className="profile-container">
               <div className="profile-img">
@@ -31,7 +31,7 @@ export const BalanceTransaction = (props) => {
             </div>
             {item.transactionType > 0 ?  <h2 className="col-green">{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits : 0 }).format(item.amount)}</h2> :<h2 className="col-red">{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits : 0 }).format(item.amount)}</h2>  }
           </div>
-        ))
+        )) 
       }else{
         {console.log("YES", Transaction)}
         return  <div>
@@ -42,8 +42,7 @@ export const BalanceTransaction = (props) => {
            <p className="col-grey">Start Using Zwallet Now!</p>
          <img src={require('../../asset/icons/no-transaction.png').default}  width={"200"} /> 
         </div>
-        </div>
-       
+        </div> 
       }
     }
 
