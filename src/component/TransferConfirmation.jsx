@@ -81,7 +81,7 @@ export const TransferConfirmation = (props) => {
           </div>
           <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
             <p className="transfer-secondary-text">Balance Left</p>
-            <p className="transfer-primary-text">{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" }).format(data.accountBalance ? data.accountBalance : 0)}</p>
+            <p className="transfer-primary-text">{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" }).format(accountData.accountBalance ? accountData.accountBalance - transferData.nominalTransfer : 0)}</p>
           </div>
           <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
             <p className="transfer-secondary-text">Date & Time</p>
