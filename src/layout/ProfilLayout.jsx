@@ -6,36 +6,75 @@ import NavBar from "../component/NavBar";
 import { Link, Redirect } from "react-router-dom";
 import ImageInput from "../component/ImageInput";
 import { submitForm } from "../global";
+import axios from "axios";
+import { urlAPI } from "../asset/urls";
 
 export const ProfilLayout = () => {
+  
+  const [userData, setUserData] = useState({});
+  const [friendsData, setFriendsData] = useState([]);
+
   const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
-  function doLogOut() {
-    localStorage.removeItem("userData");
-    forceUpdate();
-    console.log("in dashboard");
+
+  useEffect(() => {
+    setUserData(JSON.parse(localStorage.getItem("userData")));
+    getContact()
+  }, []);
+
+  const getContact = () => {
+    axios.get(urlAPI + `/friends/${JSON.parse(localStorage.getItem("userData")).userId}`)
+    .then(res =>  {
+      console.log(res.data)
+      setFriendsData(res.data)
+    })
   }
 
   const submitForm = (e) => {
     e.preventDefault();
     console.log("clicked")
     //TODOANYA: Change Edit Button to Submit to trigger the change of photo profil and save to DB
-
   };
 
-  const [UserData, setUserData] = useState({});
-  const [FriendsData, setFriendsData] = useState([]);
-  const [UserImage, setUserImage] = useState({});
+  const doLogOut = () => {
+    localStorage.removeItem("userData");
+    forceUpdate();
+  }
 
-  useEffect(() => {
-    setUserData(JSON.parse(localStorage.getItem("userData")));
-    setFriendsData(JSON.parse(localStorage.getItem("friends-data")));
-    setUserImage(JSON.parse(localStorage.getItem("user-image")));
-  }, []);
+  const renderContactList = () => {
+    if(friendsData.length > 0){
+      return friendsData.map(key => (
+        <div className="profile-container" key={key.friendId}>
+          <div className="profile-img">
+            <img
+              src={key.userImage ? urlAPI + `/files/download/${key.userImage}` : "https://i.ibb.co/FHLx6h9/default.png"}
+              alt=""
+            />
+          </div>
+          <div className="profile-data">
+            <h3>{key.username}</h3>
+            <p className="col-white50">{key.phoneNumber}</p>
+          </div>
+        </div>
+      ))
+    }else{
+      return <div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <h2>You Have No Friends Yet...</h2>
+        <h4>
+          You can add friends from Zwallet Mobile by allowing access
+          to your contacts
+        </h4>
+      </div>
+    }
+  }
 
   if (!JSON.parse(localStorage.getItem("userData"))) {
     return <Redirect to="/login" />;
   }
-
   return (
     <div className="right-top-up">
       <div className="profile-page-container">
@@ -51,7 +90,6 @@ export const ProfilLayout = () => {
                 ) : (
                   <img src="https://i.ibb.co/FHLx6h9/default.png" alt="" />
                 )} */}
-
                 <form
                   onSubmit={(e) => submitForm(e)}
                   className="create-contact-form"
@@ -69,8 +107,8 @@ export const ProfilLayout = () => {
               </div>
 
               <div className="img-edit col-dark-grey">
-                <h1 className="col-dark-grey">{UserData.userName}</h1>
-                <h2 className="col-grey">+62 {UserData.phoneNumber ? UserData.phoneNumber.slice(1,UserData.phoneNumber.length) : "Error"}</h2>
+                <h1 className="col-dark-grey">{userData.userName}</h1>
+                <h2 className="col-grey">+62 {userData.phoneNumber ? userData.phoneNumber.slice(1,userData.phoneNumber.length) : "Error"}</h2>
               </div>
             </div>
           </div>
@@ -84,7 +122,7 @@ export const ProfilLayout = () => {
                 <li>
                   <div className="card-notification ">
                     <h2>Personal Information</h2>
-                    <i class="fa fa-arrow-right">
+                    <i className="fa fa-arrow-right">
                       <FaArrowRight />
                     </i>
                   </div>
@@ -97,7 +135,7 @@ export const ProfilLayout = () => {
                   <div className="card-notification ">
                     <h2>Change Password</h2>
                     <i className="fa fa-arrow-right">
-                      <FaArrowRight></FaArrowRight>
+                      <FaArrowRight/>
                     </i>
                   </div>
                 </li>
@@ -108,7 +146,7 @@ export const ProfilLayout = () => {
                 <li>
                   <div className="card-notification ">
                     <h2>Change PIN</h2>
-                    <i class="fa fa-arrow-right">
+                    <i className="fa fa-arrow-right">
                       <FaArrowRight />
                     </i>
                   </div>
@@ -139,38 +177,7 @@ export const ProfilLayout = () => {
             {/* <!-- Contact --> */}
             <div className="contact-list-container">
               {/* TODOANYA  : Protection Check */}
-              {FriendsData ? (
-                FriendsData.filter((friend) => UserData.id != friend.id)
-                  .slice(1 - 5)
-                  .map((friend) => (
-                    <div className="profile-container">
-                      <div className="profile-img">
-                        <img
-                          src={`https://randomuser.me/api/portraits/men/${friend.id}.jpg`}
-                          alt=""
-                        />
-                      </div>
-                      <div className="profile-data">
-                        <h3>{friend.name}</h3>
-                        <p className="col-white50">{friend.phone}</p>
-                      </div>
-                    </div>
-                  ))
-              ) : (
-                <div>
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-                  <h2>You Have No Friends Yet...</h2>
-                  <h4>
-                    You can add friends from Zwallet Mobile by allowing access
-                    to your contacts
-                  </h4>
-                </div>
-              )}
-
+              {renderContactList()}
               {/* <!-- End Contact List --> */}
             </div>
           </div>
@@ -179,10 +186,5 @@ export const ProfilLayout = () => {
         </div>
       </div>
     </div>
-    // <div className="container">
-    //   <Dashboard></Dashboard>
-    //   <NavBar></NavBar>
-    //   <Footer></Footer>
-    // </div>
   );
 };
