@@ -2,16 +2,30 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import SuccessLogo from '../asset/image/images/success.svg'
 import FailedLogo from '../asset/image/images/failed.svg'
+import { urlAPI } from '../asset/urls'
+import axios from 'axios'
 
 const TransferStatus = ({match}) => {
   const [isSuccess, setIsSuccess] = useState(true)
   const [data, setData] = useState({})
+  const [userData, setUserData] = useState()
 
 
   useEffect(() => {
     setIsSuccess(match.params.status == 'success' ? true : false)
     setData(JSON.parse(localStorage.getItem('transfer-data')))
+    console.log(JSON.parse(localStorage.getItem('transfer-data')))
+    getFriendData()
   }, [match.params.status])
+
+  const getFriendData = () => {
+    axios.get(urlAPI + `/user/getfriend/${data.id}`)
+    .then(res => {
+      console.log(res.data)
+      setUserData(res.data)
+    })
+    .catch(err => console.log(err))
+  }
 
   return (
     <div className='right'>
@@ -37,7 +51,7 @@ const TransferStatus = ({match}) => {
       </div>
       <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
         <p className="transfer-secondary-text">Date & Time</p>
-        <p className="transfer-primary-text">May 11, 2020 - 12.20</p>
+        <p className="transfer-primary-text">{Date().toLocaleString().slice(0, 21)}</p>
       </div>
       <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
         <p className="transfer-secondary-text">Notes</p>
@@ -51,7 +65,7 @@ const TransferStatus = ({match}) => {
           className="transfer-contact-image"
         />
         <div className="transfer-contact">
-          <p className="transfer-primary-text">{data.username ? data.username : "Samuel Suhi"}</p>
+          <p className="transfer-primary-text">{data.userName ? data.userName : "Samuel Suhi"}</p>
           <p className="transfer-secondary-text">{data.phoneNumber ? data.phoneNumber : "082222222222"}</p>
         </div>
       </div>
