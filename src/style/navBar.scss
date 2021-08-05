@@ -490,7 +490,9 @@
 .contact-list-container {
   display: flex;
   // justify-content: space-between;
-  align-items: center;
+  // align-items: center;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
   flex-direction: column;
   // background-color: wheat;
   height: 100%;
@@ -500,9 +502,16 @@
   li {
     list-style: none;
   }
+  .profile-data {
+    // background-color: violet;
+  }
   .custom-profile-view {
     margin-bottom: 50px;
     // background-color: green;
+    h2 {
+      // background-color: grey;
+      // width: 1rem;
+    }
   }
   ul {
     margin: 0;
@@ -532,6 +541,7 @@
     h2 {
       font-size: 18px;
       margin-right: 20px;
+      // background-color: purple;
     }
 
     p {

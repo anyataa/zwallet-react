@@ -45,7 +45,7 @@ const SearchContact = (props) => {
 
   return (
     <div className="right">
-      <div style={{display: 'flex', justifyContent: "space-between", marginBottom: '100px'}}>
+      <div style={{display: 'flex', justifyContent: "space-between", marginBottom: '25vh'}}>
         <p className="transfer-primary-text" style={{margin: '30px 0'}}>Search Receiver By Phone Number</p>
         <Link to='/transfer' style={{textDecoration: "none"}}>
           <Button>
