@@ -8,6 +8,7 @@ export const InputNominalRetrieve = (props) => {
   const [data, setData] = useState([]);
   const [Balance, setBalance] = useState(0)
   const [nominalTransfer, setNominalTransfer] = useState();
+  const [alisNominal, setAlisNominal] = useState(0)
   const [BankNumber, setBankNumber] = useState("");
   const [BankName, setBankName] = useState(null)
   const [RetrieveDetail, setRetrieveDetail] = useState(null)
@@ -19,8 +20,10 @@ export const InputNominalRetrieve = (props) => {
     setBankName(props.match.params.id)
     setBalance(JSON.parse(localStorage.getItem('userData')).accountBalance)
     setAccountId(JSON.parse(localStorage.getItem('userData')).accountId)
-
+    
   }, [])
+
+
   
   const onContinue = () => {
     setRetrieveDetail(`${BankName} : ${BankNumber} : ${AccountId}`)

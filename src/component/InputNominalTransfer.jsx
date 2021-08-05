@@ -62,17 +62,17 @@ export const InputNominalTransfer = (props) => {
       </div>
 
       <div className="transfer-input-amount-wrapper">
-        <p className="transfer-secondary-text">
+        <p className="transfer-secondary-text" style={{ marginBottom: '10vh'}}>
           Type the amount you want to transfer and then
           <br />
           press continue to the next steps.
         </p>
-        <div className="transfer-input-amount-wrapper2">
-          <input onChange={e => setNominalTransfer(e.target.value)} value={nominalTransfer} type="text" id="transfer-input-amount" placeholder="0.00" />
+        <div className="transfer-input-amount-wrapper2" style={{ marginBottom: '5vh'}}>
+          <input onChange={e => setNominalTransfer(e.target.value)} value={nominalTransfer} type="text" id="transfer-input-amount" placeholder="0.00" style={{ marginBottom: '5vh'}} />
           {Balance - nominalTransfer <= 0 ?  <p className='col-red'>Amount exceeds your balance</p> : <p></p> }
           <p className="transfer-primary-text">{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits:0 }).format(nominalTransfer ? Balance - nominalTransfer: Balance)} Available</p>
           {/* Check if amount exceeding the balance */}
-          <div className="transfer-input-notes-wrapper">
+          <div className="transfer-input-notes-wrapper" style={{ marginTop: '5vh'}}>
             <img
               src="../assets/images/pen.svg"
               alt=""
