@@ -78,24 +78,6 @@ const ListContact = () => {
         placeholder="Search Contact"
       />
       {renderContact()}
-      {/* <Link
-        // to={`/transfer/${contact[1]}`}
-        style={{ textDecoration: "none" }}
-        // key={contact[0]}
-      >
-        <div className="transfer-item-wrapper">
-          <img
-            src={`https://randomuser.me/api/portraits/men/1.jpg`}
-            alt="friend profile"
-            className="transfer-contact-image"
-            width={"60px"}
-          />
-          <div className="transer-contact">
-            <p className="transfer-primary-text">fads</p>
-            <p className="transfer-secondary-text">324234234</p>
-          </div>
-        </div>
-      </Link> */}
     </div>
   )
 }
