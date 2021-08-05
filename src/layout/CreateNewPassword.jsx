@@ -108,7 +108,7 @@ const CreateNewPassword = () => {
           {
             errorMsg ? <p className="text-validation">{errorMsg}</p> : null
           }
-          <Link to='/login'>
+          <Link to='/login' style={{textDecoration:"none"}}>
             {/* <Button disabled={isDisabled}> */}
             <Button disabled={isDisabled} onClick={onResetPass} setPassword={setPassword}>
               Reset Password

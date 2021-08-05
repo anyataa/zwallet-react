@@ -31,6 +31,11 @@ const ResetPassword = () => {
       .then(res => {
         console.log(res.data)
         localStorage.setItem('resetPassword', JSON.stringify(res.data))
+        console.log('okay')
+        
+        if(JSON.parse(localStorage.getItem('resetPassword'))){
+          axios.post(urlAPI + `/mail/sendresetpass/${JSON.parse(localStorage.getItem("userData")).userId}`, {recipient: email})
+        }
       })
       .catch(err => {
         console.log(err)
@@ -40,9 +45,9 @@ const ResetPassword = () => {
     }
   }
 
-  if(JSON.parse(localStorage.getItem('resetPassword'))){
-    return <Redirect to='/createNewPassword'/>
-  }
+  // if(JSON.parse(localStorage.getItem('resetPassword'))){
+  //   return <Redirect to='/mailForPassword'/>
+  // }
 
   return (
     <div className="login-container">
@@ -67,14 +72,14 @@ const ResetPassword = () => {
           onKeyUp={buttonHandler}
         />
         <div>
-          <Link to="/createNewPassword">
+          {/* <Link to="/mailForPassword"> */}
           {
             errorMsg ? <p className='text-validation'>{errorMsg}</p> : null
           }
             <Button disabled={isDisabled} onClick={onReset}>
               Confirm
             </Button>
-          </Link>
+          {/* </Link> */}
         </div>
       </div>
     </div>
