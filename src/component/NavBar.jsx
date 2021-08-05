@@ -1,6 +1,7 @@
 import React, { useEffect, useReducer, useState } from "react";
 import "../style/navBar.css";
 import { FaArrowDown, FaArrowUp, FaBell } from "react-icons/fa";
+import { Link } from "react-router-dom";
 export default function NavBar() {
 const [UserData, setUserData] = useState(null)
 const [UserName, setUserName] = useState("")
@@ -41,17 +42,23 @@ useEffect(() => {
     <div className="nav-container">
       <nav>
         <h2 className="col-secondary">Zwallet</h2>
+       
         <div className="profile-container">
+        <Link to={"/profil"} style={{ textDecoration: 'none' }, {color : "black" }} >
+       
           <div className="profile-img">
-            {UserImage?  <img src={`https://randomuser.me/api/portraits/men/1}.jpg`} alt="" width="50px" /> : <img src="https://i.ibb.co/FHLx6h9/default.png" alt="" width="50px" /> }
+            {UserImage?  <img src={`https://randomuser.me/api/portraits/men/1}.jpg`} alt="" width="50px" /> : <img src={require("../asset/icons/person.svg").default}  className="create-contact-avatar-input" alt="" width="50px" /> }
            
           </div>
-          <div className="profile-data">
+          </Link>
+
+          <div className="profile-data" >
             {
-             UserName? <h3>{UserName}</h3> : <h3>Error</h3>
+             UserName? <h3 >{UserName}</h3> : <h3>Error</h3>
             }
             <p className="col-white50">{PhoneNumber ? "+62 "+PhoneNumber.slice(1,PhoneNumber.length) : "Error"}</p>
           </div>
+     
           <div className="profile-img">
             <input id="notif-btn" type="checkbox" hidden={true} />
             <label htmlFor="notif-btn">
@@ -101,32 +108,12 @@ useEffect(() => {
           <p className="col-grey" >Oopsie, You Have No Transaction History Yet For This Week. . . </p>
          <img src={require('../asset/icons/no-transaction.png').default}  width={"100"} /> 
         </div> }
-              {/* <li>
-                <div className="card-notification">
-                  <i className="fa fa-arrow-down">
-                    <FaArrowDown></FaArrowDown>
-                  </i>
-                  <div className="notif-detail">
-                    <p>Top up from BNI E-Banking</p>
-                    <h2>RP 300.000</h2>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div className="card-notification">
-                  <i className="fa fa-arrow-up">
-                    <FaArrowUp></FaArrowUp>
-                  </i>
-                  <div className="notif-detail">
-                    <p>Transfer to Jessica Lee</p>
-                    <h2>RP 100.000</h2>
-                  </div>
-                </div>
-              </li> */}
+              
             </div>
             {/* <!-- End Nav Body --> */}
           </div>
         </div>
+
       </nav>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import { FaBorderAll, FaLongArrowAltUp, FaPlus, FaUserAlt } from "react-icons/fa";
+import { FaBorderAll, FaLongArrowAltUp, FaMoneyBill, FaMoneyBillAlt, FaPaperclip, FaPaypal, FaPlus, FaServicestack, FaUserAlt, FaWallet } from "react-icons/fa";
 import { Link, Redirect, useRouteMatch } from "react-router-dom";
 import '../style/navBar.css'
 
@@ -40,7 +40,7 @@ export default function Dashboard() {
         </Link>
         <Link style={{textDecoration:"none"}} to='/billing' >
           <div className={path == '/billing' ? "item-wrapper active" : "item-wrapper"}>
-          <FaUserAlt className="label-size"/>
+          <FaServicestack className="label-size"/>
           <p className="label label-size">Payments</p>
         </div>
         </Link>
@@ -50,6 +50,13 @@ export default function Dashboard() {
           <p className="label label-size">Top Up</p>
         </div>
         </Link>
+        <Link style={{textDecoration:"none"}} to='/retrieval' >
+        <div className={path == '/retrieval' ? "item-wrapper active" : "item-wrapper"}>
+          <FaWallet className="label-size"/>
+          <p className="label label-size">Retrieval</p>
+        </div>
+        </Link>
+        
         
         <Link style={{textDecoration:"none"}} to='/profil' >
 
