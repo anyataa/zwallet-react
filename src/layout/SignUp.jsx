@@ -1,6 +1,6 @@
 import React, { useReducer, useState } from "react";
 import { Link, Redirect } from 'react-router-dom'
-import { emailValidation } from '../global'
+import { emailValidation, setGraphData, setTransactionData } from '../global'
 import InputAuth from "../component/InputAuth";
 import Button from '../component/Button'
 import Hero from '../component/Hero'
@@ -40,6 +40,14 @@ const SignUp = () => {
         console.log(res.data)
         if (res.data.message.includes('created')) {
           localStorage.setItem('userData', JSON.stringify(res.data.data))
+            // Called when sign up too
+        if(JSON.parse(localStorage.getItem("userData")) ){
+          setTransactionData(JSON.parse(localStorage.getItem("userData")).accountId);
+          setGraphData(JSON.parse(localStorage.getItem("userData")).accountId)
+          console.log("in")
+          
+          
+        }
           forceUpdate();
         }else{
           setErrorMsg(res.data.message)
