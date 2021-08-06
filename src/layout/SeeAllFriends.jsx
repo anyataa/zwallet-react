@@ -1,46 +1,59 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { urlAPI } from "../asset/urls";
 import Dashboard from "../component/Dashboard";
 import { Footer } from "../component/Footer";
 import NavBar from "../component/NavBar";
 
 
 export const SeeAllFriends = () => {
-  const [UserData, setUserData] = useState({});
-  const [FriendsData, setFriendsData] = useState([]);
+  const [friendsData, setFriendsData] = useState([]);
 
   useEffect(() => {
-    setUserData(JSON.parse(localStorage.getItem("userData")));
-    setFriendsData(JSON.parse(localStorage.getItem("friends-data")));
+    getFriends();
   }, []);
+
+  const getFriends = () => {
+    axios.get(urlAPI + `/friends/${JSON.parse(localStorage.getItem("userData")).userId}`)
+    .then(res => setFriendsData(res.data))
+    .catch(err => console.log(err))
+  }
+
+  const renderFriends = () => {
+    if(friendsData.length > 0) {
+      return friendsData.map(key => (
+        <div className="profile-container">
+          <div className="profile-img">
+            <img
+              src={key.userImage ? urlAPI + `/files/download/${key.userImage}` : "https://i.ibb.co/FHLx6h9/default.png"}
+              alt=""
+            />
+          </div>
+          <div className="profile-data">
+            <h3>{key.username}</h3>
+            <p className="col-white50">{key.phoneNumber}</p>
+          </div>
+        </div>
+      ))
+    }else{
+      return <h1>No Friends Available Yet...</h1>
+    }
+  }
+
   return (
     // Can be used for reusable component
     <div className="container">
-        <Dashboard></Dashboard>
-        <NavBar></NavBar>
+        <Dashboard/>
+        <NavBar/>
       <div className="right">
         <div className="contact-list-container">
         
-          {FriendsData? FriendsData.filter((friend) => UserData.id != friend.id).map(
-            (friend) => (
-              <div className="profile-container">
-                <div className="profile-img">
-                  <img
-                    src={`https://randomuser.me/api/portraits/men/${friend.id}.jpg`}
-                    alt=""
-                  />
-                </div>
-                <div className="profile-data">
-                  <h3>{friend.name}</h3>
-                  <p className="col-white50">{friend.phone}</p>
-                </div>
-              </div>
-            )
-          ): <h1>No Friends Available Yet...</h1> }
+          {renderFriends()}
 
           {/* <!-- End Contact List --> */}
         </div>
       </div>
-      <Footer></Footer>
+      <Footer/>
     </div>
   );
 };

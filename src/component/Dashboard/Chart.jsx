@@ -28,6 +28,7 @@ const chartColors = {
 };
 
 const DynamicChart = () => {
+
   const [chartData, setChartData] = useState({});
   const [chartLast7Days, setChartLast7Days] = useState(
     JSON.parse(localStorage.getItem("graph-data"))
@@ -57,6 +58,7 @@ const DynamicChart = () => {
       .then((res) => {
         localStorage.setItem("graph-data", JSON.stringify(res.data.data));
 
+
  var dayColor = [];
  var previousBalance = 0   
  if(balanceHistory){
@@ -68,6 +70,7 @@ const DynamicChart = () => {
   }
   
  }
+
           setChartData({
             //  labels: ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"],
             labels: dayName,
@@ -108,6 +111,7 @@ const DynamicChart = () => {
   useEffect(() => {
     Chart();
   }, []);
+
 
   return (
     <div className="App">

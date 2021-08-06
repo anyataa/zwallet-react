@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Button from "./Button";
 import { AiOutlineSearch } from "react-icons/ai";
+import { urlAPI } from "../asset/urls";
 
 
 const ListContact = () => {
@@ -20,7 +21,7 @@ const ListContact = () => {
   
   const fetchContact = () => {
     if (localStorage.getItem("userData")) {
-      axios.get(`http://localhost:8080/zwallet-api/friends/${JSON.parse(localStorage.getItem("userData")).userId}`)
+      axios.get(`${urlAPI}/friends/${JSON.parse(localStorage.getItem("userData")).userId}`)
       .then(res => {
         // console.log(res.data)
         setData(res.data)
@@ -41,7 +42,7 @@ const ListContact = () => {
             >
               <div className="transfer-item-wrapper">
                 <img
-                  src={contact.userImage ? `https://randomuser.me/api/portraits/men/${contact.friendId}.jpg` : "https://i.ibb.co/FHLx6h9/default.png"}
+                  src={contact.userImage ? urlAPI + `/files/download/${contact.userImage}` : "https://i.ibb.co/FHLx6h9/default.png"}
                   alt="friend profile"
                   className="transfer-contact-image"
                   width={"60px"}
@@ -56,7 +57,7 @@ const ListContact = () => {
         }
       })
     }else{
-      return <h1 style={{margin: 'auto'}}>"I HAVE NO FRIENDS, THERE ARE ONLY PEOPLE I LOVE."<br/><br/>- Louis Aragon -</h1>
+      return <h1 style={{margin: 'auto', color: 'grey'}}>"I HAVE NO FRIENDS, THERE ARE ONLY PEOPLE I LOVE."<br/><br/>- Louis Aragon -</h1>
     }
   }
 
