@@ -6,8 +6,8 @@ export const BalanceTransaction = (props) => {
     const [Transaction, setTransaction] = useState([])
     const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
     useEffect(() => {
-      if(JSON.parse(localStorage.getItem("userData"))){
-        setTransactionData(JSON.parse(localStorage.getItem("userData")).accountId);
+      if(JSON.parse(localStorage.getItem("userData")) &&JSON.parse(localStorage.getItem("transaction-data")) ){
+        // setTransactionData(JSON.parse(localStorage.getItem("userData")).accountId);
         setTransaction(JSON.parse(localStorage.getItem("transaction-data")).listTransaction);
         // console.log(JSON.parse(localStorage.getItem("transaction-data")).listTransaction[0])
         forceUpdate()
@@ -15,8 +15,8 @@ export const BalanceTransaction = (props) => {
     }, [])
 
     const renderTransaction = () => {
-      if(Transaction && Transaction.listTransaction){
-        return Transaction.listTransaction.slice(-4).map(item => (
+      if(Transaction && Transaction.length){
+        return Transaction.slice(props.start, props.end).map(item => (  
           <div className="custom-profile-view">
             <div className="profile-container">
               <div className="profile-img">
@@ -29,17 +29,25 @@ export const BalanceTransaction = (props) => {
                 <p className="col-grey">{item.transactionDetails == 1 ? "Transfer" : item.transactionDetails == 2 ? "Subscription" : item.transactionDetails == 3 ? "Payment" : item.transactionDetails == 4 ? "Top Up" : item.transactionDetails == 5 ? "Retrieve" : "Other"}</p>
               </div>
             </div>
-            {item.transactionType > 0 ?  <h2 className="col-green">+{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits : 0 }).format(item.amount)}</h2> :<h2 className="col-red">-{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits : 0 }).format(item.amount)}</h2>  }
+            {item.transactionType > 0 ?  <h2 className="col-green">{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits : 0 }).format(item.amount)}</h2> :<h2 className="col-red">{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits : 0 }).format(item.amount)}</h2>  }
           </div>
-        ))
+        )) 
       }else{
-        return <div><h1> <br /><br /><br /><br /> No Transaction Yet...</h1>{console.log("Transaction", Transaction.listTransaction)}</div>
+        {console.log("YES", Transaction)}
+        return  <div>
+          
+           <p className="col-grey" style={{fontSize : 30}} ><br />Oopsie, You Have No Transaction History Yet. . .  <br /><br /></p>
+           {/* <p className="col-grey">Start Your Amazing Transaction In Zwallet</p> */}
+           <div className="card-notification" style={{height : 205}}>
+           <p className="col-grey">Start Using Zwallet Now!</p>
+         <img src={require('../../asset/icons/no-transaction.png').default}  width={"200"} /> 
+        </div>
+        </div> 
       }
     }
 
     return (
       <div className="contact-list-container">
-        {console.log(Transaction.length)}
         {renderTransaction()}
       </div>
       // Transaction Details

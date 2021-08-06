@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Button from "./Button";
 import { AiOutlineSearch } from "react-icons/ai";
+import { urlAPI } from "../asset/urls";
 
 
 const ListContact = () => {
@@ -14,23 +15,15 @@ const ListContact = () => {
   const [searchValue, setSearchValue] = useState('')
 
   useEffect(() => {
-    // fetchProfile()
     fetchContact()
   }, [])
-
-  const fetchProfile = () => {
-    if (localStorage.getItem("friends-data")) {
-      setData(JSON.parse(localStorage.getItem("friends-data")));
-    }
-  };
 
   
   const fetchContact = () => {
     if (localStorage.getItem("userData")) {
-      axios.get(`http://localhost:8080/zwallet-api/friends/${JSON.parse(localStorage.getItem("userData")).userId}`)
-      // axios.get(`http://localhost:8080/zwallet-api/friends/1`)
+      axios.get(`${urlAPI}/friends/${JSON.parse(localStorage.getItem("userData")).userId}`)
       .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         setData(res.data)
       })
       .catch(err => console.log(err))
@@ -39,7 +32,6 @@ const ListContact = () => {
 
   const renderContact = () => {
     if(data.length > 0){
-      console.log(data)
       return data.map((contact, index) => {
         if(contact.username.toLowerCase().includes(searchValue.toLowerCase())){
           return(
@@ -50,7 +42,7 @@ const ListContact = () => {
             >
               <div className="transfer-item-wrapper">
                 <img
-                  src={contact.userImage ? `https://randomuser.me/api/portraits/men/${contact.friendId}.jpg` : "https://i.ibb.co/FHLx6h9/default.png"}
+                  src={contact.userImage ? urlAPI + `/files/download/${contact.userImage}` : "https://i.ibb.co/FHLx6h9/default.png"}
                   alt="friend profile"
                   className="transfer-contact-image"
                   width={"60px"}
@@ -65,7 +57,7 @@ const ListContact = () => {
         }
       })
     }else{
-      return <h1 style={{margin: 'auto'}}>"I HAVE NO FRIENDS, THERE ARE ONLY PEOPLE I LOVE."<br/><br/>- Louis Aragon -</h1>
+      return <h1 style={{margin: 'auto', color: 'grey'}}>"I HAVE NO FRIENDS, THERE ARE ONLY PEOPLE I LOVE."<br/><br/>- Louis Aragon -</h1>
     }
   }
 
@@ -73,7 +65,12 @@ const ListContact = () => {
     <div className='right'>
       <div style={{display: 'flex', justifyContent: "space-between"}}>
         <p className="transfer-primary-text" style={{margin: '30px 0'}}>Search Receiver By Friends List</p>
-        <Button><AiOutlineSearch style={{fontSize: '25px', marginRight: '10px'}}/>Search by phone number</Button>
+        <Link to='/transfer/search/contact' style={{textDecoration: "none" }}>
+          <Button>
+            <AiOutlineSearch style={{fontSize: '25px', marginRight: '10px'}}/>
+            Search by phone number
+          </Button>
+        </Link>
       </div>
       <input
         value={searchValue}
@@ -82,24 +79,6 @@ const ListContact = () => {
         placeholder="Search Contact"
       />
       {renderContact()}
-      {/* <Link
-        // to={`/transfer/${contact[1]}`}
-        style={{ textDecoration: "none" }}
-        // key={contact[0]}
-      >
-        <div className="transfer-item-wrapper">
-          <img
-            src={`https://randomuser.me/api/portraits/men/1.jpg`}
-            alt="friend profile"
-            className="transfer-contact-image"
-            width={"60px"}
-          />
-          <div className="transer-contact">
-            <p className="transfer-primary-text">fads</p>
-            <p className="transfer-secondary-text">324234234</p>
-          </div>
-        </div>
-      </Link> */}
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import React, { useReducer, useState } from "react";
 import Hero from "../component/Hero";
 import InputAuth from "../component/InputAuth";
-import { emailValidation } from "../global";
+import { emailValidation, setGraphData, setTransactionData } from "../global";
 import "../style/newLogin.css";
 import { Link, Redirect } from "react-router-dom";
 import Button from "../component/Button";
@@ -32,10 +32,19 @@ const Login = () => {
     if(emailValidation(email)){
       axios.post(urlAPI + "/user/signin", {email, password})
       .then(res => {
-        console.log(res.data.data.user)
+        // console.log(res.data)
         res.data.message == "Login success!" ?
         localStorage.setItem('userData', JSON.stringify(res.data.data.user))
-        : setErrorMsg('Email or Password Incorrect')
+        : setErrorMsg('Email or Password Incorrect!')
+        // Called when sign up too
+        if(JSON.parse(localStorage.getItem("userData")) ){
+          setTransactionData(JSON.parse(localStorage.getItem("userData")).accountId);
+          setGraphData(JSON.parse(localStorage.getItem("userData")).accountId)
+          console.log("in")
+          
+        }
+          
+
         forceUpdate();
       })
       .catch(err => {

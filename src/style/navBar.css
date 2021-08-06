@@ -573,6 +573,7 @@
 
 .profile-bottom-container .left-profile-bottom-container li {
   list-style: none;
+  height: 5rem;
 }
 
 .profile-bottom-container .left-profile-bottom-container li :hover {
@@ -664,12 +665,8 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -682,6 +679,10 @@
 
 .contact-list-container li {
   list-style: none;
+}
+
+.contact-list-container .custom-profile-view {
+  margin-bottom: 50px;
 }
 
 .contact-list-container ul {
@@ -758,7 +759,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin-top: 2rem;
+  margin-top: calc(2rem + 10vh);
 }
 
 .right-personal-information {
@@ -909,7 +910,7 @@
 }
 
 .right-change-pin {
-  margin-top: 2rem;
+  margin-top: calc(2rem + 10vh);
   width: 60vw;
   height: 79vh;
   padding: 0 50px;
@@ -1118,7 +1119,7 @@
 }
 
 .right-change-password {
-  margin-top: 2rem;
+  margin-top: calc(2rem + 10vh);
   width: 65%;
   height: 70vh;
   padding: 47px 0 50px 40px;
@@ -1423,9 +1424,9 @@
 }
 
 .dashboard-top-up {
+  margin-top: calc(2rem + 10vh);
   width: 65%;
   height: 79vh;
-  margin-top: 2rem;
   border-radius: 25px;
   -webkit-box-pack: center;
       -ms-flex-pack: center;

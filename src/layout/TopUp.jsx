@@ -14,7 +14,7 @@ const TopUp = () => {
     useEffect(() => {
         setUserData(JSON.parse(localStorage.getItem('userData')))
         if(JSON.parse(localStorage.getItem('userData'))){
-          setPhoneNumber(JSON.parse(localStorage.getItem('userData')).phonenumber? JSON.parse(localStorage.getItem('userData')).phonenumber.slice(1): null)
+          setPhoneNumber(JSON.parse(localStorage.getItem('userData')).phoneNumber? JSON.parse(localStorage.getItem('userData')).phoneNumber.slice(1): null)
         }
         
     }, [ ])
@@ -65,7 +65,7 @@ const TopUp = () => {
               <h2 className="col-dark-grey">
                 How To Top Up?
                 <span className="col-secondary">
-                  &nbsp;  Your Virtual Account Number: 045-{PhoneNumber}
+                  &nbsp;  Your Virtual Account Number: 04 - {PhoneNumber}
                 </span>
               </h2>
             </li>

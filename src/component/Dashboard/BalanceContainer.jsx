@@ -7,7 +7,7 @@ export default function BalanceContainer() {
         <div className='dashboard-top-up'>
             <div className="profile-page-container">
                 <Balance>  </Balance>
-                <BalanceSeeAll></BalanceSeeAll>
+                <BalanceSeeAll start={0} end={10} all={true} ></BalanceSeeAll>
             </div>
           
         </div>
