@@ -19,8 +19,11 @@ export default class BalanceSeeAll extends Component {
   }
 
   componentDidMount() {
-    this.setState(() => {return this.state.income = JSON.parse(localStorage.getItem("transaction-data")).sumIncome
-    , this.state.outcome =JSON.parse(localStorage.getItem("transaction-data")).sumOutcome })
+    if(JSON.parse(localStorage.getItem("transaction-data"))){
+      this.setState(() => {return this.state.income = JSON.parse(localStorage.getItem("transaction-data")).sumIncome
+      , this.state.outcome =JSON.parse(localStorage.getItem("transaction-data")).sumOutcome })
+    }
+    
   }
 
   componentDidUpdate() {

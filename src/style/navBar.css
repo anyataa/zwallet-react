@@ -3,7 +3,6 @@
 @import url(./Fonts/font.css);
 @import url(./landingPage.css);
 @import url(./dashboard.css);
-@import url(./bootstrap.css);
 * {
   padding: 0;
   margin: 0;
@@ -574,6 +573,7 @@
 
 .profile-bottom-container .left-profile-bottom-container li {
   list-style: none;
+  height: 5rem;
 }
 
 .profile-bottom-container .left-profile-bottom-container li :hover {
