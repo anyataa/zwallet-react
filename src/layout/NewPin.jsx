@@ -9,11 +9,14 @@ import Dashboard from "../component/Dashboard"
 import Pin from "../component/Pin"
 import axios from 'axios'
 import { urlAPI } from '../asset/urls'
-import { Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
+import { ModalStatus } from '../component/ModalStatus'
+import { FaCheckCircle, FaTimes } from 'react-icons/fa'
 
 const NewPin = () => {
   const [pinValue, setPinValue] = useState("")
   const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
+  const [showModal, setShowModal] = useState('none')
 
   const create = () => {
     if (localStorage.getItem("userData")) {
@@ -22,6 +25,7 @@ const NewPin = () => {
       .then(res => {
         console.log(res.data)
         localStorage.setItem('userData', JSON.stringify(res.data))
+        setShowModal('flex')
         // forceUpdate();
       })
       .catch(err => console.log(err))
@@ -49,7 +53,30 @@ const NewPin = () => {
             <Pin goTo='/profil' buttonValue="Change Pin" onClick={create} setPinValue={setPinValue}/>
           </div>
         </div>
+        
       </div>
+         {/* <ModalStatus ></ModalStatus> */}
+         <div id="modal" style={{display: showModal }} >
+          {/* {console.log(props)} */}
+      <div className="pin-confirmation-box">
+        <div className="modal-close-icon-wrapper">
+          <p className="transfer-primary-text" />
+          <FaTimes className="modal-close-icon" ></FaTimes>
+          {/* {props.display} */}
+        </div>
+        <div className="transfer-pin-input-wrapper">
+          <FaCheckCircle className='col-green' size='100'></FaCheckCircle>
+         
+        </div>
+        <div className="success-change-password">
+          <h1> Success!</h1>
+        </div>
+        <Link style={{textDecoration:'none', marginLeft:'60%'}} to='/dashboard'>
+        <input type="button" defaultValue="Done" className="transfer-btn" id="back-to-profile" onClick />
+        </Link>  
+      </div>
+    </div>
+          {/* Done  */}
       <Footer />
     </div>
 
