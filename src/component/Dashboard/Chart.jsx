@@ -39,71 +39,71 @@ const DynamicChart = () => {
   const [balanceHistory, setbalanceHistory] = useState(null);
 
   const Chart = () => {
-
-       // Set Day based on date
-       var dayName = [];
-       const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-       for (let i = -6; i < 1; i++) {
-         var d = new Date(getDay(i));
-         dayName.push(days[d.getDay()]);
-         setDaysLabel(dayName);}
+    // Set Day based on date
+    var dayName = [];
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    for (let i = -6; i < 1; i++) {
+      var d = new Date(getDay(i));
+      dayName.push(days[d.getDay()]);
+      setDaysLabel(dayName);
+    }
 
     axios
       .get(
         `http://localhost:8080/zwallet-api/transaction/graph/${
-          (JSON.parse(localStorage.getItem("userData")).accountId)
+          JSON.parse(localStorage.getItem("userData")).accountId
         }`
       )
       .then((res) => {
         localStorage.setItem("graph-data", JSON.stringify(res.data.data));
 
- var dayColor = [];
- var previousBalance = 0   
- if(balanceHistory){
-  for (let i = 0 ; i < balanceHistory.length; i++) {
-    if(previousBalance > balanceHistory[i]){
-      dayColor.push(chartColors.grey)
-     } else {dayColor.push(chartColors.purple)} 
-     previousBalance = balanceHistory[i]
-  }
-  
- }
-          setChartData({
-            //  labels: ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"],
-            labels: dayName,
-            datasets: [
-              {
-                label: "",
-                borderWidth: 2,
-                borderRadius: Number.MAX_VALUE,
-                borderSkipped: false,
-                data: [
-          res.data.data.seventh,
-          res.data.data.sixth,
-          res.data.data.fifth,
-          res.data.data.forth,
-          res.data.data.third,
-          res.data.data.second,
-          res.data.data.first,
-        ],
-                //  data: [100,200,300],
-                barPercentage: 0.2,
-                backgroundColor: dayColor,
-                borderColor: [
-                  chartColors.purple,
-                  chartColors.grey,
-                  chartColors.purple,
-                  chartColors.purple,
-                  chartColors.grey,
-                  chartColors.grey,
-                  chartColors.purple,
-                ],
-                borderWidth: 1,
-              },
-            ],
-          });
+        var dayColor = [];
+        var previousBalance = 0;
+        if (balanceHistory) {
+          for (let i = 0; i < balanceHistory.length; i++) {
+            if (previousBalance > balanceHistory[i]) {
+              dayColor.push(chartColors.grey);
+            } else {
+              dayColor.push(chartColors.purple);
+            }
+            previousBalance = balanceHistory[i];
+          }
         }
-      );
+        setChartData({
+          //  labels: ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"],
+          labels: dayName,
+          datasets: [
+            {
+              label: "",
+              borderWidth: 2,
+              borderRadius: Number.MAX_VALUE,
+              borderSkipped: false,
+              data: [
+                res.data.data.seventh,
+                res.data.data.sixth,
+                res.data.data.fifth,
+                res.data.data.forth,
+                res.data.data.third,
+                res.data.data.second,
+                res.data.data.first,
+              ],
+              //  data: [100,200,300],
+              barPercentage: 0.2,
+              backgroundColor: dayColor,
+              borderColor: [
+                chartColors.purple,
+                chartColors.grey,
+                chartColors.purple,
+                chartColors.purple,
+                chartColors.grey,
+                chartColors.grey,
+                chartColors.purple,
+              ],
+              borderWidth: 1,
+            },
+          ],
+        });
+      });
   };
   useEffect(() => {
     Chart();
