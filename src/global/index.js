@@ -58,8 +58,16 @@ export const setTransactionData = (accountId) => {
   axios
     .get(`http://localhost:8080/zwallet-api/transaction/${accountId}`)
     .then((res) => {
-
       localStorage.setItem("transaction-data", JSON.stringify(res.data));
+      // return JSON.parse(localStorage.getItem("transaction-data"))
+    });
+};
+
+export const setGraphData = (accountId) => {
+  axios
+    .get(`http://localhost:8080/zwallet-api/transaction/graph/${accountId}`)
+    .then((res) => {
+      localStorage.setItem("graph-data", JSON.stringify(res.data.data));
       // return JSON.parse(localStorage.getItem("transaction-data"))
     });
 };
