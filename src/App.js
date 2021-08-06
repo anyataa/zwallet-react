@@ -18,7 +18,11 @@ import TransferStatus from "./layout/TransferStatus";
 import ProfileListLayout from "./layout/ProfileListLayout";
 import { LoginQR } from "./layout/LoginQR";
 import RetrievalLayout from "./layout/RetrievalPage/RetrievalLayout";
+
+import MailForPassword from "./layout/MailForPassword";
+
 import { TopUpLanding } from "./layout/TopUp/TopUpLayout";
+
 // import ListContact from "./component/ListContact";
 // import ManagePhone from "./layout/ManagePhone";
 // import AddPhone from "./layout/AddPhone";
@@ -62,6 +66,7 @@ function App() {
         <Route path="/createNewPassword" component={CreateNewPassword} />
         <Route path="/pinSuccess" component={PinSuccess} />
         <Route path="/createPin" component={CreatePin} />
+        <Route path="/mailForPassword" component={MailForPassword} />
         <Route path="*" component={NotFound404} />
       </Switch>
     </div>

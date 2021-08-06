@@ -34,6 +34,7 @@ const DynamicChart = () => {
        const [daysLabel, setDaysLabel] = useState(null)
        const [balanceHistory, setbalanceHistory] = useState(null)
 
+
   
 const Chart = () => {
   // Assign Balance
