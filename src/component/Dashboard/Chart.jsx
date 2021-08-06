@@ -28,6 +28,7 @@ const chartColors = {
 };
 
 const DynamicChart = () => {
+
   const [chartData, setChartData] = useState({});
   const [chartLast7Days, setChartLast7Days] = useState(
     JSON.parse(localStorage.getItem("graph-data"))
@@ -108,6 +109,7 @@ const DynamicChart = () => {
   useEffect(() => {
     Chart();
   }, []);
+
 
   return (
     <div className="App">
