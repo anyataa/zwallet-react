@@ -33,6 +33,7 @@ const DynamicChart = () => {
       //  const [chartLabel, setChartLabel] = useState(JSON.parse(localStorage.getItem("transaction-data"))?JSON.parse(localStorage.getItem("transaction-data")).listBalance: [])
        const [daysLabel, setDaysLabel] = useState(null)
        const [balanceHistory, setbalanceHistory] = useState(null)
+
   
 const Chart = () => {
   // Assign Balance
@@ -89,6 +90,7 @@ console.log(d, d.getDay())
      
 }
      useEffect(() => {
+
         Chart();
       }, []);
 
