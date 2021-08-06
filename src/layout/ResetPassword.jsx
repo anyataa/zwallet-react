@@ -74,14 +74,14 @@ const ResetPassword = () => {
           onKeyUp={buttonHandler}
         />
         <div>
-          {/* <Link to="/mailForPassword"> */}
+          <Link to="/mailForPassword">
           {
             errorMsg ? <p className='text-validation'>{errorMsg}</p> : null
           }
             <Button disabled={isDisabled} onClick={onReset}>
               Confirm
             </Button>
-          {/* </Link> */}
+          </Link>
         </div>
       </div>
     </div>

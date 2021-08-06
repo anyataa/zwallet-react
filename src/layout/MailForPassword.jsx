@@ -20,13 +20,13 @@ const MailForPassword = () => {
                     </p>
                 </div>
 
-                <div>
+                {/* <div>
                     <Link to='/login'>
                     <Button>
                         Back to Login
                     </Button>
                     </Link> 
-                </div>
+                </div> */}
             </div>
         </div>
     );
