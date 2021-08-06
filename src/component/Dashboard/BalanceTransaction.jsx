@@ -47,8 +47,8 @@ export const BalanceTransaction = (props) => {
     }
 
     return (
-      <div className="contact-list-container">
-        {renderTransaction()}
+      <div className="contact-list-container" style={{height:'30rem'}}>
+         <div class="overflow-auto">{renderTransaction()}</div>
       </div>
       // Transaction Details
       //  1 : Transfer
