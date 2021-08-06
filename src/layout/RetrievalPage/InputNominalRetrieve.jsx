@@ -8,6 +8,7 @@ export const InputNominalRetrieve = (props) => {
   const [data, setData] = useState([]);
   const [Balance, setBalance] = useState(0)
   const [nominalTransfer, setNominalTransfer] = useState();
+  const [alisNominal, setAlisNominal] = useState(0)
   const [BankNumber, setBankNumber] = useState("");
   const [BankName, setBankName] = useState(null)
   const [RetrieveDetail, setRetrieveDetail] = useState(null)
@@ -19,8 +20,10 @@ export const InputNominalRetrieve = (props) => {
     setBankName(props.match.params.id)
     setBalance(JSON.parse(localStorage.getItem('userData')).accountBalance)
     setAccountId(JSON.parse(localStorage.getItem('userData')).accountId)
-
+    
   }, [])
+
+
   
   const onContinue = () => {
     setRetrieveDetail(`${BankName} : ${BankNumber} : ${AccountId}`)
@@ -50,13 +53,14 @@ export const InputNominalRetrieve = (props) => {
 
       <div className="transfer-input-amount-wrapper">
         <p className="transfer-secondary-text">
+          <br />
           Type the amount you want to retrieve and then
           <br />
           press continue to the next steps.
         </p>
-       
-        <div className="transfer-input-amount-wrapper2">
-        <input onChange={e => setBankNumber(e.target.value)} value={BankNumber} type="number" id="transfer-input-amount" placeholder={`.........`} />
+       <br />
+        <div className="transfer-input-amount-wrapper2" style={{display: 'flex', justifyContent: "space-between", marginBottom: '20vh'}}>
+        <input style={{marginLeft:'-4rem',fontSize: '2rem'}} onChange={e => setBankNumber(e.target.value)} value={BankNumber} type="number" id="transfer-input-amount" placeholder={`Bank Number`} />
         <p className="transfer-primary-text">Input {BankName} Account Number</p>
           <input onChange={e => setNominalTransfer(e.target.value)} value={nominalTransfer} type="text" id="transfer-input-amount" placeholder="0.00" />
           {Balance - nominalTransfer <= 0 ?  <p className='col-red'>Amount exceeds your balance</p> : <p></p> }
@@ -68,7 +72,8 @@ export const InputNominalRetrieve = (props) => {
               alt=""
               id="transfer-input-amount-icon"
             />
-            <p>This Process May Take 7 Work Days</p>
+            {nominalTransfer?<p>This Process May Take 2-7 Work Days</p> : <p></p> }
+            
           </div>
         
         </div>
