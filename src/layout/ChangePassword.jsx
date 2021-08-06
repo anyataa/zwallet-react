@@ -11,7 +11,8 @@ import Button from "../component/Button";
 import { ModalStatus } from "../component/ModalStatus";
 import axios from 'axios'
 import { urlAPI } from '../asset/urls'
-import { Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
+import { FaCheckCircle, FaTimes } from 'react-icons/fa'
 
 const ChangePassword = () => {
   const [password, setPassword] = useState();
@@ -22,6 +23,8 @@ const ChangePassword = () => {
   const [isConfirmVisible, setIsConfirmVisible] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const [msg, setMsg] = useState('');
+  const [showModal, setShowModal] = useState('none')
+
 
   const buttonHandler = () => {
     if (password && newPassword && confirmPassword) {
@@ -98,16 +101,33 @@ const ChangePassword = () => {
             msg ? <p className='text-validation'>{msg}</p> : null
             }
             <Button onClick={onChangePass} disabled={isDisabled}>Change Password</Button>
+            </div>
+         {/* <ModalStatus ></ModalStatus> */}
+         <div id="modal" style={{display: showModal }} >
+          {/* {console.log(props)} */}
+      <div className="pin-confirmation-box">
+        <div className="modal-close-icon-wrapper">
+          <p className="transfer-primary-text" />
+          <FaTimes className="modal-close-icon" ></FaTimes>
+          {/* {props.display} */}
+        </div>
+        <div className="transfer-pin-input-wrapper">
+          <FaCheckCircle className='col-green' size='100'></FaCheckCircle>
+         
+        </div>
+        <div className="success-change-password">
+          <h1> Success!</h1>
+        </div>
+        <Link style={{textDecoration:'none', marginLeft:'60%'}} to='/dashboard'>
+        <input type="button" defaultValue="Done" className="transfer-btn" id="back-to-profile" onClick />
+        </Link>  
+      </div>
+    </div>
           </div>
         </div>
-      </div>
-    // <div className="container">
-    //   <Dashboard />
-    //   <NavBar />
+      
+      
 
-    //   <Footer />
-    //   <ModalStatus setDisplay={setStyleModal} display={StyleModal} activity="Change Password"></ModalStatus> 
-    // </div>
   );
 };
 
