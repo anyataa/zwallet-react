@@ -3,7 +3,8 @@
 @import url(./Fonts/font.css);
 @import url(./landingPage.css);
 @import url(./dashboard.css);
-// @import url(./bootstrap.css);
+@import url(./collapsible.css);
+
 * {
   padding: 0;
   margin: 0;
@@ -582,7 +583,8 @@
 
 .right-personal-information {
   width: 65%;
-  margin-top: 2rem;
+  // margin-top: 2rem;
+  margin-top: calc(2rem + 10vh);
   height: 70vh;
   padding: 47px 0 50px 40px;
   border-radius: 25px;
