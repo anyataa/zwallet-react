@@ -15,7 +15,7 @@ export const BalanceTransaction = (props) => {
     }, [])
 
     const renderTransaction = () => {
-      if(Transaction && Transaction.length){
+      if(Transaction){
         return Transaction.slice(props.start, props.end).map(item => (  
           <div className="custom-profile-view">
             <div className="profile-container">
