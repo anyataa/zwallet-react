@@ -18,10 +18,9 @@ export const PersonalInfoLayout = () => {
     useEffect(() => {
       if(JSON.parse(localStorage.getItem('userData'))){
         setUserData(JSON.parse(localStorage.getItem('userData')))
-        setFullName((JSON.parse(localStorage.getItem('userData')).userName))
-        setEmail((JSON.parse(localStorage.getItem('userData')).userEmail))
+        setFullName(JSON.parse(localStorage.getItem('userData')).userName)
+        setEmail(JSON.parse(localStorage.getItem('userData')).userEmail)
         setPhoneNumber(JSON.parse(localStorage.getItem('userData')).phoneNumber)
-        forceUpdate()
       } 
     }, [])
 
@@ -36,11 +35,11 @@ export const PersonalInfoLayout = () => {
     //   }
     // }
     
-    const changeEmail = function (input) {
+    const changeEmail = () => {
       axios.put(urlAPI + `/user/update-email/${JSON.parse(localStorage.getItem('userData')).userId}`, {email : email})
       .then(res => {
         console.log(res.data)
-        setEmail(input)
+        // setEmail(input)
         let existingData = userData
         existingData['userEmail'] = email
         localStorage.setItem('userData', JSON.stringify(existingData))
@@ -51,17 +50,18 @@ export const PersonalInfoLayout = () => {
       })
     }
 
-    const changeName = function (input) {
+    const changeName = () => {
       var body = {
         username : fullName
       }
       axios.put(urlAPI + `/user/updateuser/${JSON.parse(localStorage.getItem('userData')).userId}`, body)
       .then(res => {
         console.log(res.data)
-        setFullName(input)
+        // setFullName(input)
         let existingData = userData
         existingData['userName'] = fullName
         localStorage.setItem('userData', JSON.stringify(existingData))
+        forceUpdate()
       })
       .catch(err => {
         console.log(err)
@@ -82,7 +82,8 @@ export const PersonalInfoLayout = () => {
           {/* Top */}
         <div className="personal-information-top-container">
           <div className="set-to-left">
-            <h1 className="col-dark-grey">Personal Information</h1>
+            {/* <h1 className="col-dark-grey">Personal Information</h1> */}
+            <h1 className="col-dark-grey"></h1>
             <p className="col-grey">
               We got your personal information from the sign up proccess. If you
               want to make changes on your information, contact our support.
@@ -96,7 +97,7 @@ export const PersonalInfoLayout = () => {
             {/* <!-- 1 --> */}
             <li>
               <div className="card-notification">
-                <p className="col-grey">Full Name<Link style={{fontSize: '18px', textDecoration:'none', paddingLeft: '0vw', color: '#6379F4'}} onClick={changeName}> Submit</Link></p>
+                <p className="col-grey">Full Name<a style={{fontSize: '18px', textDecoration:'none', paddingLeft: '0vw', color: '#6379F4'}} onClick={changeName}> Submit</a></p>
                 <input className="col-dark-grey" 
                 type="text" 
                 onChange={e => setFullName(e.target.value)} 
@@ -106,11 +107,11 @@ export const PersonalInfoLayout = () => {
             {/* <!-- 2 --> */}
             <li>
               <div className="card-notification">
-                <p className="col-grey">Verified E-mail<Link style={{fontSize: '18px', textDecoration:'none', paddingLeft: '0vw', color: '#6379F4'}} onClick={changeEmail}> Submit</Link></p>
+                <p className="col-grey">Verified E-mail<a style={{fontSize: '18px', textDecoration:'none', paddingLeft: '0vw', color: '#6379F4'}} onClick={changeEmail}> Submit</a></p>
                 <input
                   className="col-dark-grey"
                   type="text"
-                  onInput={ e => changeEmail(e.target.value)}
+                  onInput={ e => setEmail(e.target.value)}
                   value={email}
                 />
               </div>
