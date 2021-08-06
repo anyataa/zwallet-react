@@ -1,4 +1,5 @@
 @import url("../style/Font/style.css");
+/* @import url(./bootstrap.css); */
 
 * {
   margin: 0;
@@ -171,7 +172,7 @@
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   transition: 0.3s;
   border-radius: 25px;
-  background: #FFFFFF;
+  background: #ffffff;
   width: 367px;
   height: 344px;
   display: flex;
@@ -182,7 +183,7 @@
 
 /* On mouse-over, add a deeper shadow */
 .card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .card-title-about {
@@ -190,7 +191,7 @@
   font-weight: bold;
   font-size: 24px;
   line-height: 31px;
-  color: #3A3D42;
+  color: #3a3d42;
   text-align: center;
 }
 
@@ -297,7 +298,7 @@
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   transition: 0.3s;
   border-radius: 25px;
-  background: #FFFFFF;
+  background: #ffffff;
   width: 620px;
   height: 127px;
   margin-top: 40px;
@@ -305,7 +306,7 @@
 
 /* On mouse-over, add a deeper shadow */
 .card-feature:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .card-title-feature {
@@ -314,13 +315,13 @@
   font-weight: bold;
   font-size: 22px;
   line-height: 31px;
-  color: #6379F4;
+  color: #6379f4;
   margin-top: 25px;
   margin-left: 25px;
 }
 
 .card-title-feature span {
-  color: #3A3D42;
+  color: #3a3d42;
   padding-left: 15px;
 }
 
