@@ -65,7 +65,7 @@ const TopUp = () => {
               <h2 className="col-dark-grey">
                 How To Top Up?
                 <span className="col-secondary">
-                  &nbsp;  Your Virtual Account Number: 045-{PhoneNumber}
+                  &nbsp;  Your Virtual Account Number: 04 - {PhoneNumber}
                 </span>
               </h2>
             </li>

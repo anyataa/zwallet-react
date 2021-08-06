@@ -18,6 +18,7 @@ import TransferStatus from "./layout/TransferStatus";
 import ProfileListLayout from "./layout/ProfileListLayout";
 import { LoginQR } from "./layout/LoginQR";
 import RetrievalLayout from "./layout/RetrievalPage/RetrievalLayout";
+import { TopUpLanding } from "./layout/TopUp/TopUpLayout";
 // import ListContact from "./component/ListContact";
 // import ManagePhone from "./layout/ManagePhone";
 // import AddPhone from "./layout/AddPhone";
@@ -48,7 +49,8 @@ function App() {
         {/* <Route path="/managePhone" component={ManagePhone}></Route> */}
         {/* <Route path="/addPhone" component={AddPhone}></Route> */}
         <Route path="/dashboard" component={DashboardLayout} />
-        <Route path="/topUp" component={TopUp}></Route>
+        {/* <Route path="/topUp" component={TopUp}></Route> */}
+        <Route path="/topUp" component={TopUpLanding}></Route>
         <Route path="/newPin" component={NewPin}></Route>
         <Route path="/transferStatus" component={TransferStatus}></Route>
         <Route path="/qrLogin" component={LoginQR}></Route>
