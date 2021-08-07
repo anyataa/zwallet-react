@@ -24,12 +24,12 @@ const InputTransport = () => {
       </div>
 
       <div className="transfer-input-amount-wrapper">
-        <p className="transfer-secondary-text" style={{ marginBottom: '10vh'}}>
+        <p className="transfer-secondary-text">
           Choose your preference and then
           <br />
           press search to the next steps.
         </p>
-        <div className="form-group" style={{ color: '#6379F4', fontSize: '24px', fontFamily: 'Nunito Sans Regular', fontWeight: 'bold'}}>
+        <div className="form-group" style={{ color: '#6379F4', fontSize: '24px', fontFamily: 'Nunito Sans Regular', fontWeight: 'bold', marginTop: '3vh'}}>
             <p><MdFlight/> <MdTrain/><BiBusSchool/><MdDirectionsCar/></p>
             <label for="sel1">Choose : </label>
             <select className="form-control" style={{ color: '#6379F4', fontSize: '24px', border: 'none'}}>
@@ -39,8 +39,8 @@ const InputTransport = () => {
                 <option>Car Rental</option>
             </select>
         </div>
-        <div className="payment-wrapper" style={{ marginBottom: '5vh', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-        <div className="form-group" style={{ color: '#6379F4', fontSize: '24px', marginBottom: '5vh', fontFamily: 'Nunito Sans Regular', display: 'flex', flexDirection: 'row', fontWeight: 'bold'}}>
+        <div className="payment-wrapper" style={{ marginBottom: '3vh', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+        <div className="form-group" style={{ color: '#6379F4', fontSize: '24px', marginBottom: '3vh', fontFamily: 'Nunito Sans Regular', display: 'flex', flexDirection: 'row', fontWeight: 'bold'}}>
             <label for="sel1">From :</label>
             <select className="form-control" style={{ color: '#6379F4', fontSize: '24px', border: 'none'}}>
                 <option>Jakarta</option>
@@ -51,7 +51,7 @@ const InputTransport = () => {
                 <option>Bali</option>
             </select>
         </div>
-        <div className="form-group" style={{ color: '#6379F4', fontSize: '24px', marginBottom: '5vh', fontFamily: 'Nunito Sans Regular', display: 'flex', flexDirection: 'row', fontWeight: 'bold', marginLeft: '20px'}}>
+        <div className="form-group" style={{ color: '#6379F4', fontSize: '24px', marginBottom: '3vh', fontFamily: 'Nunito Sans Regular', display: 'flex', flexDirection: 'row', fontWeight: 'bold', marginLeft: '20px'}}>
             <label for="sel1">To :</label>
             <select className="form-control" style={{ color: '#6379F4', fontSize: '24px', border: 'none'}}>
                 <option>Jakarta</option>
@@ -63,18 +63,18 @@ const InputTransport = () => {
             </select>
         </div>
         </div>
-        <div className="payment-wrapper" style={{ marginBottom: '5vh', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-        <div className="form-group" style={{ color: '#6379F4', fontSize: '24px', marginBottom: '5vh', fontFamily: 'Nunito Sans Regular', display: 'flex', flexDirection: 'row', fontWeight: 'bold'}}>
+        <div className="payment-wrapper" style={{ marginBottom: '3vh', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+        <div className="form-group" style={{ color: '#6379F4', fontSize: '24px', marginBottom: '3vh', fontFamily: 'Nunito Sans Regular', display: 'flex', flexDirection: 'row', fontWeight: 'bold'}}>
             <label for="sel1">Departure Date :</label>
             <input type='date' style={{ color: '#6379F4', fontSize: '24px', border: 'none'}}/>
         </div>
-        <div className="form-group" style={{ color: '#6379F4', fontSize: '24px', marginBottom: '5vh', fontFamily: 'Nunito Sans Regular', display: 'flex', flexDirection: 'row', fontWeight: 'bold'}}>
+        <div className="form-group" style={{ color: '#6379F4', fontSize: '24px', marginBottom: '3vh', fontFamily: 'Nunito Sans Regular', display: 'flex', flexDirection: 'row', fontWeight: 'bold'}}>
             <label for="sel1">Return Date :</label>
             <input type='date' style={{ color: '#6379F4', fontSize: '24px', border: 'none'}}/>
         </div>
     </div>
-    <div className="payment-wrapper" style={{ marginBottom: '5vh', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-    <div className="form-group" style={{ color: '#6379F4', fontSize: '24px', marginBottom: '5vh', fontFamily: 'Nunito Sans Regular', display: 'flex', flexDirection: 'row', fontWeight: 'bold', marginLeft: '20px'}}>
+    <div className="payment-wrapper" style={{ marginBottom: '3vh', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+    <div className="form-group" style={{ color: '#6379F4', fontSize: '24px', fontFamily: 'Nunito Sans Regular', display: 'flex', flexDirection: 'row', fontWeight: 'bold', marginLeft: '20px'}}>
             <label for="sel1">Passengers :</label>
             <select className="form-control" style={{ color: '#6379F4', fontSize: '24px', border: 'none'}}>
                 <option>Adult</option>
