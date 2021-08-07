@@ -58,7 +58,7 @@ const InputTransport = () => {
                 <option>Bandung</option>
                 <option>Semarang</option>
                 <option>Surabaya</option>
-                <option>Yogakarta</option>
+                <option>Yogyakarta</option>
                 <option>Bali</option>
             </select>
         </div>
