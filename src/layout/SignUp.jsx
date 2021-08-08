@@ -5,6 +5,7 @@ import InputAuth from "../component/InputAuth";
 import Button from "../component/Button";
 import Hero from "../component/Hero";
 import axios from "axios";
+
 import { urlAPI } from "../asset/urls";
 import { useSelector } from "react-redux";
 
@@ -45,13 +46,10 @@ const SignUp = () => {
           if (res.data.message.includes("created")) {
             localStorage.setItem("userData", JSON.stringify(res.data.data));
             // Called when sign up too
-            if (JSON.parse(localStorage.getItem("userData"))) {
-              setTransactionData(
-                JSON.parse(localStorage.getItem("userData")).accountId
-              );
-              setGraphData(
-                JSON.parse(localStorage.getItem("userData")).accountId
-              );
+
+            if (user.accountId) {
+              setTransactionData(user.accountId);
+              setGraphData(user.accountId);
               console.log("in");
             }
             forceUpdate();
