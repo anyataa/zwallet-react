@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
 
 export const showVirtualAccountNumber = (usePrefix) => {
   const phoneNumber = JSON.parse(localStorage.getItem("userData")).phoneNumber;
