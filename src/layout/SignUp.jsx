@@ -70,7 +70,7 @@ const SignUp = () => {
     }
   };
 
-  if (JSON.parse(localStorage.getItem("userData"))) {
+  if (user.userId) {
     return <Redirect to="/createpin" />;
   }
 
