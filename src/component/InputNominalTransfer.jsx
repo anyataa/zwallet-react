@@ -8,71 +8,105 @@ import { urlAPI } from "../asset/urls";
 
 export const InputNominalTransfer = (props) => {
   const [data, setData] = useState([]);
-  const [Balance, setBalance] = useState(0)
+  const [Balance, setBalance] = useState(0);
   const [nominalTransfer, setNominalTransfer] = useState();
   const [noteTransfer, setNoteTransfer] = useState("");
 
-
   useEffect(() => {
-    var tempData = JSON.parse(localStorage.getItem('friends-data'))
-    // for(let i=0; i < tempData.length; i++){
-    //   if(tempData[i].id == props.match.params.id){
-    //     setData(tempData[i])
-    //   }
-    // }
+    var tempData = JSON.parse(localStorage.getItem("friends-data"));
 
-    // Set balance based on account-data in local storage
-    // CHANGE : "data.balance" change to "Balance"
-    // Did not query from friends anymore :)
-
-    setBalance(JSON.parse(localStorage.getItem('userData')).accountBalance)
-    getFriendData()
-  }, [])
+    setBalance(JSON.parse(localStorage.getItem("userData")).accountBalance);
+    getFriendData();
+  }, []);
 
   const getFriendData = () => {
-    axios.get(urlAPI + `/user/getfriend/${props.match.params.id}`)
-    .then(res => {
-      console.log(res.data)
-      setData(res.data)
-    })
-    .catch(err => console.log(err))
-  }
-  
+    axios
+      .get(urlAPI + `/user/getfriend/${props.match.params.id}`)
+      .then((res) => {
+        console.log(res.data);
+        setData(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
   const onContinue = () => {
-    if(nominalTransfer && noteTransfer){
-      localStorage.setItem('transfer-data', JSON.stringify({id: props.match.params.id, name: data.name, phone: data.phone, nominalTransfer, noteTransfer, balance: Balance - nominalTransfer}))
+    if (nominalTransfer && noteTransfer) {
+      localStorage.setItem(
+        "transfer-data",
+        JSON.stringify({
+          id: props.match.params.id,
+          name: data.name,
+          phone: data.phone,
+          nominalTransfer,
+          noteTransfer,
+          balance: Balance - nominalTransfer,
+        })
+      );
     }
-  }
+  };
 
   return (
     <div className="right">
       <p className="transfer-primary-text">Transfer Money</p>
       <div className="transfer-item-wrapper">
         <img
-          src={data.userImage ? `https://randomuser.me/api/portraits/men/${data.id}.jpg` : "https://i.ibb.co/FHLx6h9/default.png"}
+          src={
+            data.userImage
+              ? `https://randomuser.me/api/portraits/men/${data.id}.jpg`
+              : "https://i.ibb.co/FHLx6h9/default.png"
+          }
           alt=""
           className="transfer-contact-image"
           width="70px"
-
         />
         <div className="transer-contact">
-          <p className="transfer-primary-text">{data.userName ? data.userName : "Error"}</p>
-          <p className="transfer-secondary-text">{data.phoneNumber ? data.phoneNumber : "Error"}</p>
+          <p className="transfer-primary-text">
+            {data.userName ? data.userName : "Error"}
+          </p>
+          <p className="transfer-secondary-text">
+            {data.phoneNumber ? data.phoneNumber : "Error"}
+          </p>
         </div>
       </div>
 
       <div className="transfer-input-amount-wrapper">
-        <p className="transfer-secondary-text" style={{ marginBottom: '10vh'}}>
+        <p className="transfer-secondary-text" style={{ marginBottom: "10vh" }}>
           Type the amount you want to transfer and then
           <br />
           press continue to the next steps.
         </p>
-        <div className="transfer-input-amount-wrapper2" style={{ marginBottom: '5vh'}}>
-          <input onChange={e => setNominalTransfer(e.target.value)} value={nominalTransfer} type="text" id="transfer-input-amount" placeholder="0.00" style={{ marginBottom: '5vh'}} />
-          {Balance - nominalTransfer <= 0 ?  <p className='col-red'>Amount exceeds your balance</p> : <p></p> }
-          <p className="transfer-primary-text">{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits:0 }).format(nominalTransfer ? Balance - nominalTransfer: Balance)} Available</p>
+        <div
+          className="transfer-input-amount-wrapper2"
+          style={{ marginBottom: "5vh" }}
+        >
+          <input
+            onChange={(e) => setNominalTransfer(e.target.value)}
+            value={nominalTransfer}
+            type="text"
+            id="transfer-input-amount"
+            placeholder="0.00"
+            style={{ marginBottom: "5vh" }}
+          />
+          {Balance - nominalTransfer <= 0 ? (
+            <p className="col-red">Amount exceeds your balance</p>
+          ) : (
+            <p></p>
+          )}
+          <p className="transfer-primary-text">
+            {Intl.NumberFormat("id-ID", {
+              style: "currency",
+              currency: "IDR",
+              minimumFractionDigits: 0,
+            }).format(
+              nominalTransfer ? Balance - nominalTransfer : Balance
+            )}{" "}
+            Available
+          </p>
           {/* Check if amount exceeding the balance */}
-          <div className="transfer-input-notes-wrapper" style={{ marginTop: '5vh'}}>
+          <div
+            className="transfer-input-notes-wrapper"
+            style={{ marginTop: "5vh" }}
+          >
             <img
               src="../assets/images/pen.svg"
               alt=""
@@ -83,17 +117,27 @@ export const InputNominalTransfer = (props) => {
               id="transfer-input-notes"
               placeholder="Add some notes"
               value={noteTransfer}
-              onChange={(e)=> setNoteTransfer(e.target.value)}
+              onChange={(e) => setNoteTransfer(e.target.value)}
             />
           </div>
         </div>
       </div>
       <div className="set-transfer-button-confirmation">
-        <Link to={`/transfer`} style={{ textDecoration: "none" }} >
+        <Link to={`/transfer`} style={{ textDecoration: "none" }}>
           <input type="button" value="Back" className="transfer-btn" />
         </Link>
         <Link to={`/transfer/${props.match.params.id}/confirmation`}>
-          <input type="button" value="Continue" className="transfer-btn" onClick={onContinue} disabled={nominalTransfer && noteTransfer && (Balance - nominalTransfer) > 0 ? false : true}/>
+          <input
+            type="button"
+            value="Continue"
+            className="transfer-btn"
+            onClick={onContinue}
+            disabled={
+              nominalTransfer && noteTransfer && Balance - nominalTransfer > 0
+                ? false
+                : true
+            }
+          />
         </Link>
       </div>
     </div>

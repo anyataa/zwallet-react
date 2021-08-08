@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { useReducer } from "react";
 import { Chart as ChartJS, Bar } from "react-chartjs-2";
 
 function getDay(day) {
@@ -28,14 +29,13 @@ const chartColors = {
 };
 
 const DynamicChart = () => {
-
   const [chartData, setChartData] = useState({});
   const [chartLast7Days, setChartLast7Days] = useState(
     JSON.parse(localStorage.getItem("graph-data"))
       ? JSON.parse(localStorage.getItem("graph-data"))
       : []
   );
-  //  const [chartLabel, setChartLabel] = useState(JSON.parse(localStorage.getItem("transaction-data"))?JSON.parse(localStorage.getItem("transaction-data")).listBalance: [])
+  const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
   const [daysLabel, setDaysLabel] = useState(null);
   const [balanceHistory, setbalanceHistory] = useState(null);
 
@@ -56,11 +56,21 @@ const DynamicChart = () => {
         }`
       )
       .then((res) => {
-        localStorage.setItem("graph-data", JSON.stringify(res.data.data));
-
+        // localStorage.setItem("graph-data", JSON.stringify(res.data.data));
+        let graphData = res.data.data;
+        setbalanceHistory([
+          graphData.seventh != null ? graphData.seventh : 0,
+          graphData.sixth != null ? graphData.sixth : graphData.seventh,
+          graphData.fifth != null ? graphData.fifth : graphData.sixth,
+          graphData.forth != null ? graphData.forth : graphData.fifth,
+          graphData.third != null ? graphData.third : graphData.forth,
+          graphData.second != null ? graphData.second : graphData.third,
+          graphData.first != null ? graphData.first : graphData.second,
+        ]);
         var dayColor = [];
         var previousBalance = 0;
-        if (balanceHistory) {
+        if (balanceHistory && balanceHistory.length > 0) {
+          console.log("Balance inside if", balanceHistory);
           for (let i = 0; i < balanceHistory.length; i++) {
             if (previousBalance > balanceHistory[i]) {
               dayColor.push(chartColors.grey);
@@ -69,6 +79,16 @@ const DynamicChart = () => {
             }
             previousBalance = balanceHistory[i];
           }
+        } else {
+          setbalanceHistory([
+            chartData.grey,
+            chartData.grey,
+            chartData.grey,
+            chartData.grey,
+            chartData.grey,
+            chartData.grey,
+            chartData.grey,
+          ]);
         }
         setChartData({
           //  labels: ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"],
@@ -79,27 +99,11 @@ const DynamicChart = () => {
               borderWidth: 2,
               borderRadius: Number.MAX_VALUE,
               borderSkipped: false,
-              data: [
-                res.data.data.seventh,
-                res.data.data.sixth,
-                res.data.data.fifth,
-                res.data.data.forth,
-                res.data.data.third,
-                res.data.data.second,
-                res.data.data.first,
-              ],
+              data: balanceHistory,
               //  data: [100,200,300],
               barPercentage: 0.2,
               backgroundColor: dayColor,
-              borderColor: [
-                chartColors.purple,
-                chartColors.grey,
-                chartColors.purple,
-                chartColors.purple,
-                chartColors.grey,
-                chartColors.grey,
-                chartColors.purple,
-              ],
+              borderColor: dayColor,
               borderWidth: 1,
             },
           ],
@@ -109,7 +113,6 @@ const DynamicChart = () => {
   useEffect(() => {
     Chart();
   }, []);
-
 
   return (
     <div className="App">
@@ -127,19 +130,6 @@ const DynamicChart = () => {
             maintainAspectRatio: true,
             title: { text: "THICCKNESS SCALE", display: false },
             scales: {
-              // x: {
-              //   grid: {
-              //     display: false,
-              //     drawBorder: false,
-              //     drawOnChartArea: false,
-              //     drawTicks: false,
-              //   }
-              // },
-              // xAxes: [{
-              //     gridLines: {
-              //         color: "rgba(0, 0, 0, 0)",
-              //     }
-              // }],
               x: {
                 grid: {
                   drawBorder: false,
