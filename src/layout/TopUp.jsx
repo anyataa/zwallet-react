@@ -7,17 +7,12 @@ import NavBar from "../component/NavBar";
 import { Footer } from "../component/Footer";
 import Dashboard from "../component/Dashboard";
 import ListTopUp from "../component/ListTopUp";
+import { useSelector } from "react-redux";
 
 const TopUp = () => {
-    const [UserData, setUserData] = useState({})
-    const [PhoneNumber, setPhoneNumber] = useState("")
-    useEffect(() => {
-        setUserData(JSON.parse(localStorage.getItem('userData')))
-        if(JSON.parse(localStorage.getItem('userData'))){
-          setPhoneNumber(JSON.parse(localStorage.getItem('userData')).phoneNumber? JSON.parse(localStorage.getItem('userData')).phoneNumber.slice(1): null)
-        }
-        
-    }, [ ])
+  const user = useSelector((state) => state.user);
+
+  useEffect(() => {}, []);
   const TopUpDetail = [
     {
       number: "1",
@@ -65,7 +60,7 @@ const TopUp = () => {
               <h2 className="col-dark-grey">
                 How To Top Up?
                 <span className="col-secondary">
-                  &nbsp;  Your Virtual Account Number: 04 - {PhoneNumber}
+                  &nbsp; Your Virtual Account Number: 04 - {user.phoneNumber}
                 </span>
               </h2>
             </li>

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
-export const showVirtualAccountNumber = (usePrefix) => {
-  const phoneNumber = JSON.parse(localStorage.getItem("userData")).phoneNumber;
+export const ShowVirtualAccountNumber = (usePrefix) => {
+  const user = useSelector((state) => state.user);
+
+  const phoneNumber = user.phoneNumber;
   const prefix = ["045 - ", ""];
   return (
     <div
