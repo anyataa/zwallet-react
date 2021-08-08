@@ -10,12 +10,15 @@ import { FiTrash } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { urlAPI } from "../asset/urls";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { onLoginAction } from "../actions";
 
 const ManagePhone = () => {
   const [data, setData] = useState([]);
 
   const user = useSelector(state => state.user)
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     getPhoneNumber();
@@ -23,16 +26,16 @@ const ManagePhone = () => {
 
   const getPhoneNumber = () => {
     if (user.userId) {
-      axios
-        .get(
-          urlAPI +
-            `/phone/${user.userId}`
-        )
-        .then((res) => {
-          console.log(res.data);
-          setData(res.data);
+      axios.get(urlAPI + `/phone/${user.userId}`)
+      .then((res) => {
+        res.data.map(phone => {
+          if(phone.primary){
+            dispatch(onLoginAction({...user, phoneNumber: phone.phoneNumber}))
+          }
         })
-        .catch((err) => console.log(err));
+        setData(res.data);
+      })
+      .catch((err) => console.log(err));
     }
   };
 
@@ -44,8 +47,7 @@ const ManagePhone = () => {
       };
       axios
         .put(urlAPI + `/phone/set-primary`, data)
-        .then((res) => {
-          console.log(res.data);
+        .then(() => {
           getPhoneNumber();
         })
         .catch((err) => console.log(err));

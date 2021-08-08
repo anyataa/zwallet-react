@@ -1,22 +1,17 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { FaArrowUp, FaPlus, FaTicketAlt, FaWallet } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function Balance() {
-  
-  const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
-
-  const [UserData, setUserData] = useState(localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')) : {balance: 0})
 
   const [BalanceFormat, setBalanceFormat] = useState(Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0}).format(0))
 
-  useEffect(() => {
- setBalanceFormat(Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 }).format(UserData? UserData.accountBalance : 0));
- forceUpdate()
-   
-  }, [])
+  const user = useSelector(state => state.user)
 
-  
+  useEffect(() => {
+    setBalanceFormat(Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 }).format(user? user.accountBalance : 0));
+  }, [])
 
   return (
     <div className="profile-top-container set-margin-for-dash">

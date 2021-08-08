@@ -8,90 +8,41 @@ import { urlAPI } from "../asset/urls";
 
 import Button from "../component/Button";
 import { AiFillStar } from "react-icons/ai";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { onLoginAction, updateUserName } from "../actions";
 
 export const PersonalInfoLayout = () => {
-  // const [user, setUserData] = useState({});
-  // const [user.fullName, setFullName] = useState("");
-  const [fullNameInitial, setFullNameInitial] = useState("");
+  const [userName, setFullName] = useState("");
   const [email, setEmail] = useState("");
-  const [initialEmail, setInitialEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState({});
-  const [fullNameEdited, setfullNameEdited] = useState("");
-  const [emailEdited, setEmailEdited] = useState("");
-  const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
 
   const user = useSelector(state => state.user)
 
+  const dispatch = useDispatch()
+
   useEffect(() => {
     if (user.userId) {
-      // setUserData(JSON.parse(localStorage.getItem("userData")));
-      // setFullName(JSON.parse(localStorage.getItem("userData")).userName);
-      setFullNameInitial(JSON.parse(localStorage.getItem("userData")).userName);
-      setEmail(JSON.parse(localStorage.getItem("userData")).userEmail);
-      setInitialEmail(JSON.parse(localStorage.getItem("userData")).userEmail);
-      setPhoneNumber(JSON.parse(localStorage.getItem("userData")).phoneNumber);
-      forceUpdate();
+      setFullName(user.userName);
+      setEmail(user.userEmail);
     }
   }, []);
 
-  const changeEmail = function (input) {
+  const changeEmail = () => {
+    axios.put(urlAPI +`/user/update-email/${user.userId}`, { email })
+    .then((res) => {
+      console.log(res.data);
+      dispatch(onLoginAction({...user, userEmail: email}))
+    })
+    .catch((err) => console.log(err));
+  };
+
+  const changeName = () => {
     axios
-      .put(
-        urlAPI +
-          `/user/update-email/${
-            JSON.parse(localStorage.getItem("userData")).userId
-          }`,
-        { email: email }
-      )
+      .put(urlAPI + `/user/updateuser/${user.userId}`, {username: userName})
       .then((res) => {
         console.log(res.data);
-        setEmail(input);
-        let existingData = user;
-        existingData["userEmail"] = email;
-        localStorage.setItem("userData", JSON.stringify(existingData));
+        dispatch(onLoginAction({...user, userName}))
       })
-      .catch((err) => {
-        console.log(err);
-        console.log("masuk ke error");
-      });
-  };
-
-  const changeName = function (input) {
-    var body = {
-      username: user.fullName,
-    };
-    axios
-      .put(
-        urlAPI +
-          `/user/updateuser/${JSON.parse(localStorage.getItem("userData")).userId}`,
-        body
-      )
-      .then((res) => {
-        console.log(res.data);
-        setFullName(input);
-        let existingData = user;
-        existingData["userName"] = user.fullName;
-        localStorage.setItem("userData", JSON.stringify(existingData));
-      })
-      .catch((err) => {
-        console.log(err);
-        console.log("masuk ke error");
-      });
-  };
-
-  const triggerButtonFullName = (e) => {
-    setFullName(e.target.value);
-    if (fullNameInitial != user.fullName) {
-      setfullNameEdited("Submit");
-    }
-  };
-
-  const triggerButtonEmail = (e) => {
-    setEmail(e.target.value);
-    if (initialEmail != email) {
-      setEmailEdited("Submit");
-    }
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -119,23 +70,26 @@ export const PersonalInfoLayout = () => {
                   <input
                     className="col-dark-grey "
                     type="text"
-                    onChange={(e) => triggerButtonFullName(e)}
-                    value={user.fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    value={userName}
                   />
                 </div>
-
-                <Link
-                  style={{
-                    fontSize: "18px",
-                    textDecoration: "none",
-                    paddingLeft: "0vw",
-                    color: "#6379F4",
-                  }}
-                  className="col-secondary"
-                  onClick={() => changeName(user.fullName)}
-                >
-                  {fullNameEdited}
-                </Link>
+                {
+                  userName !== user.userName ?
+                  <Link
+                    style={{
+                      fontSize: "18px",
+                      textDecoration: "none",
+                      paddingLeft: "0vw",
+                      color: "#6379F4",
+                    }}
+                    className="col-secondary"
+                    onClick={() => changeName(user.fullName)}
+                  >
+                    Submit
+                  </Link>
+                  : null
+                }
               </div>
             </div>
           </li>
@@ -148,22 +102,25 @@ export const PersonalInfoLayout = () => {
                   <input
                     className="col-dark-grey"
                     type="text"
-                    // onClick={triggerButtonEmail}
-                    onInput={(e) => triggerButtonEmail(e)}
+                    onInput={(e) => setEmail(e.target.value)}
                     value={email}
                   />
                 </div>
-                <Link
-                  style={{
-                    fontSize: "18px",
-                    textDecoration: "none",
-                    paddingLeft: "0vw",
-                    color: "#6379F4",
-                  }}
-                  onClick={() => changeEmail(email)}
-                >
-                  {emailEdited}
-                </Link>
+                {
+                  email !== user.userEmail ?
+                  <Link
+                    style={{
+                      fontSize: "18px",
+                      textDecoration: "none",
+                      paddingLeft: "0vw",
+                      color: "#6379F4",
+                    }}
+                    onClick={() => changeEmail(email)}
+                  >
+                    Submit
+                  </Link>
+                  : null
+                }
               </div>
             </div>
           </li>
@@ -176,7 +133,7 @@ export const PersonalInfoLayout = () => {
                   <input
                     className="col-dark-grey"
                     type="text"
-                    value={phoneNumber}
+                    value={user.phoneNumber}
                     disabled
                   />
                 </div>
@@ -200,10 +157,5 @@ export const PersonalInfoLayout = () => {
         {/* <!-- Finish --> */}
       </div>
     </div>
-    // <div className="container">
-    //   {/* <Dashboard></Dashboard>
-    //   <NavBar></NavBar> */}
-    //   {/* <Footer></Footer> */}
-    // </div>
   );
 };
