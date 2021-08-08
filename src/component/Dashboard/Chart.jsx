@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { useReducer } from "react";
 import { Chart as ChartJS, Bar } from "react-chartjs-2";
 
 function getDay(day) {
@@ -34,7 +35,7 @@ const DynamicChart = () => {
       ? JSON.parse(localStorage.getItem("graph-data"))
       : []
   );
-  //  const [chartLabel, setChartLabel] = useState(JSON.parse(localStorage.getItem("transaction-data"))?JSON.parse(localStorage.getItem("transaction-data")).listBalance: [])
+  const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
   const [daysLabel, setDaysLabel] = useState(null);
   const [balanceHistory, setbalanceHistory] = useState(null);
 
@@ -55,24 +56,40 @@ const DynamicChart = () => {
         }`
       )
       .then((res) => {
-        setbalanceHistory(res.data.data);
-        console.log(res.data.data.length, balanceHistory);
-        localStorage.setItem("graph-data", JSON.stringify(res.data.data));
-
+        // localStorage.setItem("graph-data", JSON.stringify(res.data.data));
+        let graphData = res.data.data;
+        let graphDataArr = [
+          graphData.seventh != null ? graphData.seventh : 0,
+          graphData.sixth != null ? graphData.sixth : graphData.seventh,
+          graphData.fifth != null ? graphData.fifth : graphData.sixth,
+          graphData.forth != null ? graphData.forth : graphData.fifth,
+          graphData.third != null ? graphData.third : graphData.forth,
+          graphData.second != null ? graphData.second : graphData.third,
+          graphData.first != null ? graphData.first : graphData.second,
+        ];
         var dayColor = [];
         var previousBalance = 0;
-        if (res.data.data) {
-          console.log("in");
-          for (let i = 0; i < res.data.data.length; i++) {
-            if (previousBalance > res.data.data[i]) {
+        if (graphDataArr && graphDataArr.length > 0) {
+          for (let i = 0; i < graphDataArr.length; i++) {
+            if (previousBalance > graphDataArr[i]) {
               dayColor.push(chartColors.grey);
               console.log("in");
             } else {
               dayColor.push(chartColors.purple);
               console.log("ina");
             }
-            previousBalance = res.data.data[i];
+            previousBalance = graphDataArr[i];
           }
+        } else {
+          setbalanceHistory([
+            chartData.grey,
+            chartData.grey,
+            chartData.grey,
+            chartData.grey,
+            chartData.grey,
+            chartData.grey,
+            chartData.grey,
+          ]);
         }
         console.log("daycolor", dayColor);
         setChartData({
@@ -85,13 +102,13 @@ const DynamicChart = () => {
               borderRadius: Number.MAX_VALUE,
               borderSkipped: false,
               data: [
-                res.data.data.seventh,
-                res.data.data.sixth,
-                res.data.data.fifth,
-                res.data.data.forth,
-                res.data.data.third,
-                res.data.data.second,
-                res.data.data.first,
+                graphData.seventh ? graphData.seventh : 0,
+                graphData.sixth ? graphData.sixth : graphData.seventh,
+                graphData.fifth ? graphData.fifth : graphData.sixth,
+                graphData.forth ? graphData.forth : graphData.fifth,
+                graphData.third ? graphData.third : graphData.forth,
+                graphData.second ? graphData.second : graphData.third,
+                graphData.first ? graphData.first : graphData.second,
               ],
               //  data: [100,200,300],
               barPercentage: 0.2,
