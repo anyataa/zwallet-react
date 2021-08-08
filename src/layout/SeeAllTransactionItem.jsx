@@ -2,8 +2,10 @@ import React from "react";
 import { useReducer } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export const SeeAllTransactionItem = (props) => {
+  const user = useSelector((state) => state.user);
   const [AllTransaction, setAllTransaction] = useState([]);
   const [DailyTransaction, setDailyTransaction] = useState([]);
   const [MonthlyTransaction, setMonthlyTransaction] = useState([]);
@@ -11,7 +13,7 @@ export const SeeAllTransactionItem = (props) => {
   const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
   useEffect(() => {
     if (
-      JSON.parse(localStorage.getItem("userData")) &&
+      user.userId > 0 &&
       JSON.parse(localStorage.getItem("transaction-data"))
     ) {
       setAllTransaction(
@@ -107,7 +109,9 @@ export const SeeAllTransactionItem = (props) => {
   switch (props.data) {
     case "daily":
       return (
-        <div className="overflow-auto">{renderTransaction(DailyTransaction)}</div>
+        <div className="overflow-auto">
+          {renderTransaction(DailyTransaction)}
+        </div>
       );
 
     case "all":
@@ -117,7 +121,9 @@ export const SeeAllTransactionItem = (props) => {
 
     case "weekly":
       return (
-        <div className="overflow-auto">{renderTransaction(WeeklyTransaction)}</div>
+        <div className="overflow-auto">
+          {renderTransaction(WeeklyTransaction)}
+        </div>
       );
 
     default:

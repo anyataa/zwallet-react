@@ -7,26 +7,21 @@ import axios from "axios";
 import Button from "../../component/Button";
 import { AiOutlineSearch } from "react-icons/ai";
 import { urlAPI } from "../../asset/urls";
+import { useSelector } from "react-redux";
 
 const PartnerList = () => {
   const [data, setData] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
-  const [Partner, setPartner] = useState([]);
+  const user = useSelector((state) => state.user);
+
+  // const [searchValue, setSearchValue] = useState("");
+  // const [Partner, setPartner] = useState([]);
 
   useEffect(() => {
-    // fetchProfile()
     fetchContact();
   }, []);
 
-  const fetchProfile = () => {
-    if (localStorage.getItem("friends-data")) {
-      setData(JSON.parse(localStorage.getItem("friends-data")));
-    }
-  };
-
   const fetchContact = () => {
-    if (localStorage.getItem("userData")) {
-      // axios.get(`http://localhost:8080/zwallet-api/friends/${JSON.parse(localStorage.getItem("userData")).userId}`)
+    if (user.userId > 0) {
       axios
         .get(`${urlAPI}/user/bank`)
         .then((res) => {

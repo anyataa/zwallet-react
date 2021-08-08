@@ -2,7 +2,10 @@ import React from "react";
 import { Accordion } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { bankTransferInstruction } from "../../global/topUpConstants";
-import { showVirtualAccountNumber } from "./showVirtualAccountNumber";
+import {
+  ShowVirtualAccountNumber,
+  showVirtualAccountNumber,
+} from "./showVirtualAccountNumber";
 
 export const BankInstruction = () => {
   const bankInstruction = bankTransferInstruction;
@@ -30,7 +33,7 @@ export const BankInstruction = () => {
 
   return (
     <div className="right">
-      {showVirtualAccountNumber(true)}
+      {ShowVirtualAccountNumber(true)}
       {/* <div>ANYAAAA</div> */}
       <h4>Instruction</h4>
       {renderBankInstruction()}
