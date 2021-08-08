@@ -127,10 +127,6 @@ export const InputNominalTransfer = (props) => {
           <input type="button" value="Back" className="transfer-btn" />
         </Link>
         <Link to={`/transfer/${props.match.params.id}/confirmation`}>
-<<<<<<< HEAD
-=======
-
->>>>>>> 4e25a71e690c99ed951466d574ae4012469a2388
           <input
             type="button"
             value="Continue"
@@ -142,10 +138,6 @@ export const InputNominalTransfer = (props) => {
                 : true
             }
           />
-<<<<<<< HEAD
-=======
-
->>>>>>> 4e25a71e690c99ed951466d574ae4012469a2388
         </Link>
       </div>
     </div>
