@@ -8,10 +8,11 @@ import { urlAPI } from "../asset/urls";
 
 import Button from "../component/Button";
 import { AiFillStar } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
 export const PersonalInfoLayout = () => {
-  const [userData, setUserData] = useState({});
-  const [fullName, setFullName] = useState("");
+  // const [user, setUserData] = useState({});
+  // const [user.fullName, setFullName] = useState("");
   const [fullNameInitial, setFullNameInitial] = useState("");
   const [email, setEmail] = useState("");
   const [initialEmail, setInitialEmail] = useState("");
@@ -20,10 +21,12 @@ export const PersonalInfoLayout = () => {
   const [emailEdited, setEmailEdited] = useState("");
   const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
 
+  const user = useSelector(state => state.user)
+
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem("userData"))) {
-      setUserData(JSON.parse(localStorage.getItem("userData")));
-      setFullName(JSON.parse(localStorage.getItem("userData")).userName);
+    if (user.userId) {
+      // setUserData(JSON.parse(localStorage.getItem("userData")));
+      // setFullName(JSON.parse(localStorage.getItem("userData")).userName);
       setFullNameInitial(JSON.parse(localStorage.getItem("userData")).userName);
       setEmail(JSON.parse(localStorage.getItem("userData")).userEmail);
       setInitialEmail(JSON.parse(localStorage.getItem("userData")).userEmail);
@@ -44,7 +47,7 @@ export const PersonalInfoLayout = () => {
       .then((res) => {
         console.log(res.data);
         setEmail(input);
-        let existingData = userData;
+        let existingData = user;
         existingData["userEmail"] = email;
         localStorage.setItem("userData", JSON.stringify(existingData));
       })
@@ -56,21 +59,19 @@ export const PersonalInfoLayout = () => {
 
   const changeName = function (input) {
     var body = {
-      username: fullName,
+      username: user.fullName,
     };
     axios
       .put(
         urlAPI +
-          `/user/updateuser/${
-            JSON.parse(localStorage.getItem("userData")).userId
-          }`,
+          `/user/updateuser/${JSON.parse(localStorage.getItem("userData")).userId}`,
         body
       )
       .then((res) => {
         console.log(res.data);
         setFullName(input);
-        let existingData = userData;
-        existingData["userName"] = fullName;
+        let existingData = user;
+        existingData["userName"] = user.fullName;
         localStorage.setItem("userData", JSON.stringify(existingData));
       })
       .catch((err) => {
@@ -81,7 +82,7 @@ export const PersonalInfoLayout = () => {
 
   const triggerButtonFullName = (e) => {
     setFullName(e.target.value);
-    if (fullNameInitial != fullName) {
+    if (fullNameInitial != user.fullName) {
       setfullNameEdited("Submit");
     }
   };
@@ -119,7 +120,7 @@ export const PersonalInfoLayout = () => {
                     className="col-dark-grey "
                     type="text"
                     onChange={(e) => triggerButtonFullName(e)}
-                    value={fullName}
+                    value={user.fullName}
                   />
                 </div>
 
@@ -131,7 +132,7 @@ export const PersonalInfoLayout = () => {
                     color: "#6379F4",
                   }}
                   className="col-secondary"
-                  onClick={() => changeName(fullName)}
+                  onClick={() => changeName(user.fullName)}
                 >
                   {fullNameEdited}
                 </Link>

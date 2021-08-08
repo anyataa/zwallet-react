@@ -10,20 +10,23 @@ import { FiTrash } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { urlAPI } from "../asset/urls";
+import { useSelector } from "react-redux";
 
 const ManagePhone = () => {
   const [data, setData] = useState([]);
+
+  const user = useSelector(state => state.user)
 
   useEffect(() => {
     getPhoneNumber();
   }, []);
 
   const getPhoneNumber = () => {
-    if (localStorage.getItem("userData")) {
+    if (user.userId) {
       axios
         .get(
           urlAPI +
-            `/phone/${JSON.parse(localStorage.getItem("userData")).userId}`
+            `/phone/${user.userId}`
         )
         .then((res) => {
           console.log(res.data);
@@ -34,9 +37,9 @@ const ManagePhone = () => {
   };
 
   const setPrimary = (id) => {
-    if (localStorage.getItem("userData")) {
+    if (user.userId) {
       var data = {
-        userId: JSON.parse(localStorage.getItem("userData")).userId,
+        userId: user.userId,
         phoneNumberId: id,
       };
       axios

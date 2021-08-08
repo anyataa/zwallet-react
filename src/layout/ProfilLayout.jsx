@@ -8,21 +8,22 @@ import ImageInput from "../component/ImageInput";
 import { submitForm } from "../global";
 import axios from "axios";
 import { urlAPI } from "../asset/urls";
+import { useSelector } from "react-redux";
 
 export const ProfilLayout = () => {
   
-  const [userData, setUserData] = useState({});
   const [friendsData, setFriendsData] = useState([]);
 
   const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
 
+  const user = useSelector(state => state.user)
+
   useEffect(() => {
-    setUserData(JSON.parse(localStorage.getItem("userData")));
     getContact()
   }, []);
 
   const getContact = () => {
-    axios.get(urlAPI + `/friends/${JSON.parse(localStorage.getItem("userData")).userId}`)
+    axios.get(urlAPI + `/friends/${user.userId}`)
     .then(res =>  {
       console.log(res.data)
       setFriendsData(res.data)
@@ -73,7 +74,7 @@ export const ProfilLayout = () => {
     }
   }
 
-  if (!JSON.parse(localStorage.getItem("userData"))) {
+  if (user.userId == 0) {
     return <Redirect to="/login" />;
   }
   return (
@@ -108,8 +109,8 @@ export const ProfilLayout = () => {
               </div>
 
               <div className="img-edit col-dark-grey">
-                <h1 className="col-dark-grey">{userData.userName}</h1>
-                <h2 className="col-grey">+62 {userData.phoneNumber ? userData.phoneNumber.slice(1,userData.phoneNumber.length) : "Error"}</h2>
+                <h1 className="col-dark-grey">{user.userName}</h1>
+                <h2 className="col-grey">+62 {user.phoneNumber ? user.phoneNumber.slice(1,user.phoneNumber.length) : "Error"}</h2>
               </div>
             </div>
           </div>
