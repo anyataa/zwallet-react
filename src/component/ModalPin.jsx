@@ -2,7 +2,9 @@ import axios from "axios";
 import React, { useState, useRef, useEffect } from "react";
 import { useReducer } from "react";
 import { FaTimes } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect, useRouteMatch } from "react-router-dom";
+import { updateAccountBalance } from "../actions";
 import { urlAPI } from "../asset/urls";
 import { pinHandler, setTransactionData } from "../global";
 
@@ -27,23 +29,25 @@ export const ModalPin = ({ modalToggle, setModalToggle }) => {
   const [pin, setPin] = useState("");
   const [data, setData] = useState([]);
   const [transferData, setTransferData] = useState([]);
-  const [accountData, setAccountData] = useState({});
+  // const [user, setAccountData] = useState({});
   const [message, setMessage] = useState("");
+
+  const user = useSelector((state) => state.user);
+  
+  const dispatch = useDispatch()
 
   useEffect(() => {
     setTransferData(JSON.parse(localStorage.getItem("transfer-data")));
-
-    setAccountData(JSON.parse(localStorage.getItem("userData")));
   }, []);
 
   const onTransfer = () => {
-    if (transferData && accountData) {
+    if (transferData && user) {
       console.log("pin", PinValue);
       var body = {
         //==================== Pin Data Where ========================
         transactionAmount: transferData.nominalTransfer,
         transactionNotes: transferData.noteTransfer,
-        fromAccountId: accountData.accountId,
+        fromAccountId: user.accountId,
         toUserId: transferData.id,
         userPin: PinValue,
       };
@@ -58,18 +62,12 @@ export const ModalPin = ({ modalToggle, setModalToggle }) => {
             return;
           } else if (res.data.message.includes("Success")) {
             redirectTo(1);
-            localStorage.setItem(
-              "userData",
-              JSON.stringify({
-                ...JSON.parse(localStorage.getItem("userData")),
-                accountBalance: res.data.data.fromAccountBalance,
-              })
-            );
-            setTransactionData(
-              JSON.parse(localStorage.getItem("userData")).accountId
-            );
+            
+            dispatch(updateAccountBalance(res.data.data.fromAccountBalance))
+            
+            setTransactionData(user.accountId);
             setMessage("");
-            forceUpdate();
+            // forceUpdate();
             setModalToggle();
             return;
           }

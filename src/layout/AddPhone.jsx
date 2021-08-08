@@ -11,6 +11,7 @@ import Button from "../component/Button";
 import { ModalStatus } from '../component/ModalStatus'
 import axios from 'axios'
 import { urlAPI } from '../asset/urls'
+import { useSelector } from 'react-redux'
 
 const AddPhone = ({setDisplay, display}, props) => {
     const [phone, setPhone] = useState();
@@ -20,12 +21,13 @@ const AddPhone = ({setDisplay, display}, props) => {
 
     const [isDisabled, setIsDisabled] = useState(true);
 
+    const user = useSelector(state => state.user)
 
     const addPhone = () => {
-        if (localStorage.getItem("userData")) {
+        if (user.userId) {
             var body = {
                 phoneNumber: 0 + phone,
-                userId: JSON.parse(localStorage.getItem("userData")).userId
+                userId: user.userId
             }
             axios.post(urlAPI + '/phone/add', body)
             .then(res => {

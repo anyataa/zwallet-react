@@ -8,11 +8,14 @@ import axios from "axios";
 import Button from "./Button";
 import { AiOutlineSearch } from "react-icons/ai";
 import { urlAPI } from "../asset/urls";
+import { useSelector } from "react-redux";
 
 
 const ListContact = () => {
   const [data, setData] = useState([])
   const [searchValue, setSearchValue] = useState('')
+
+  const user = useSelector(state => state.user)
 
   useEffect(() => {
     fetchContact()
@@ -20,8 +23,8 @@ const ListContact = () => {
 
   
   const fetchContact = () => {
-    if (localStorage.getItem("userData")) {
-      axios.get(`${urlAPI}/friends/${JSON.parse(localStorage.getItem("userData")).userId}`)
+    if (user.userId > 0) {
+      axios.get(`${urlAPI}/friends/${user.userId}`)
       .then(res => {
         // console.log(res.data)
         setData(res.data)

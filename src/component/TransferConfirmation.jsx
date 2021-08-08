@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useReducer } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { urlAPI } from "../asset/urls";
 import { setTransactionData } from "../global";
@@ -9,41 +10,39 @@ import { InputNominalTransfer } from "./InputNominalTransfer";
 export const TransferConfirmation = (props) => {
   const [data, setData] = useState([]);
   const [transferData, setTransferData] = useState([]);
-  const [accountData, setAccountData] = useState({});
+  // const [user, setAccountData] = useState({});
+
+  const user = useSelector(state => state.user)
 
   useEffect(() => {
     setTransferData(JSON.parse(localStorage.getItem("transfer-data")));
     getFriendData();
-    setAccountData(JSON.parse(localStorage.getItem("userData")));
+    // setAccountData(JSON.parse(localStorage.getItem("userData")));
   }, []);
-  const onTransfer = () => {
-    if (transferData && accountData) {
-      var body = {
-        transactionAmount: transferData.nominalTransfer,
-        transactionNotes: transferData.noteTransfer,
-        fromAccountId: accountData.accountId,
-        toUserId: transferData.id,
-      };
-      axios
-        .post(urlAPI + "/transaction/transfer", body)
-        .then((res) => {
-          localStorage.setItem(
-            "userData",
-            JSON.stringify({
-              ...JSON.parse(localStorage.getItem("userData")),
-              accountBalance: res.data.data.fromAccountBalance,
-            })
-          );
-          setTransactionData(
-            JSON.parse(localStorage.getItem("userData")).accountId
-          );
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-    console.log("transfer in", transferData.id);
-  };
+
+  // const onTransfer = () => {
+  //   if (transferData && user) {
+  //     var body = {
+  //       transactionAmount: transferData.nominalTransfer,
+  //       transactionNotes: transferData.noteTransfer,
+  //       fromAccountId: user.accountId,
+  //       toUserId: transferData.id,
+  //     };
+  //     axios
+  //       .post(urlAPI + "/transaction/transfer", body)
+  //       .then((res) => {
+          
+  //         localStorage.setItem("userData", JSON.stringify({...JSON.parse(localStorage.getItem("userData")), accountBalance: res.data.data.fromAccountBalance,}));
+  //         setTransactionData(
+  //           JSON.parse(localStorage.getItem("userData")).accountId
+  //         );
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   }
+  //   console.log("transfer in", transferData.id);
+  // };
 
   const getFriendData = () => {
     axios
@@ -95,8 +94,8 @@ export const TransferConfirmation = (props) => {
               style: "currency",
               currency: "IDR",
             }).format(
-              accountData.accountBalance
-                ? accountData.accountBalance - transferData.nominalTransfer
+              user.accountBalance
+                ? user.accountBalance - transferData.nominalTransfer
                 : 0
             )}
           </p>

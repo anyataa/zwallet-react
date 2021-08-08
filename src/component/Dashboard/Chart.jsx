@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useReducer } from "react";
 import { Chart as ChartJS, Bar } from "react-chartjs-2";
+import { useSelector } from "react-redux";
 
 function getDay(day) {
   var today = new Date();
@@ -37,7 +38,9 @@ const DynamicChart = () => {
   );
   const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
   const [daysLabel, setDaysLabel] = useState(null);
-  const [balanceHistory, setbalanceHistory] = useState(null);
+  const [balanceHistory, setbalanceHistory] = useState();
+  
+  const user = useSelector(state => state.user)
 
   const Chart = () => {
     // Set Day based on date
@@ -50,11 +53,7 @@ const DynamicChart = () => {
     }
 
     axios
-      .get(
-        `http://localhost:8080/zwallet-api/transaction/graph/${
-          JSON.parse(localStorage.getItem("userData")).accountId
-        }`
-      )
+      .get(`http://localhost:8080/zwallet-api/transaction/graph/${user.accountId}`)
       .then((res) => {
         // localStorage.setItem("graph-data", JSON.stringify(res.data.data));
         let graphData = res.data.data;

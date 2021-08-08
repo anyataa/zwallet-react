@@ -107,20 +107,20 @@ export const SeeAllTransactionItem = (props) => {
   switch (props.data) {
     case "daily":
       return (
-        <div class="overflow-auto">{renderTransaction(DailyTransaction)}</div>
+        <div className="overflow-auto">{renderTransaction(DailyTransaction)}</div>
       );
 
     case "all":
       return (
-        <div class="overflow-auto">{renderTransaction(AllTransaction)}</div>
+        <div className="overflow-auto">{renderTransaction(AllTransaction)}</div>
       );
 
     case "weekly":
       return (
-        <div class="overflow-auto">{renderTransaction(WeeklyTransaction)}</div>
+        <div className="overflow-auto">{renderTransaction(WeeklyTransaction)}</div>
       );
 
     default:
-      return <div class="overflow-auto">{renderTransaction()}</div>;
+      return <div className="overflow-auto">{renderTransaction()}</div>;
   }
 };
