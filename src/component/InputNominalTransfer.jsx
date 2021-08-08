@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { formatRupiah } from "../global";
 import axios from "axios";
 import { urlAPI } from "../asset/urls";
+import { useSelector } from "react-redux";
 
 export const InputNominalTransfer = (props) => {
   const [data, setData] = useState([]);
@@ -12,10 +13,10 @@ export const InputNominalTransfer = (props) => {
   const [nominalTransfer, setNominalTransfer] = useState();
   const [noteTransfer, setNoteTransfer] = useState("");
 
+  const user = useSelector(state => state.user)
+  
   useEffect(() => {
-    var tempData = JSON.parse(localStorage.getItem("friends-data"));
-
-    setBalance(JSON.parse(localStorage.getItem("userData")).accountBalance);
+    setBalance(user.accountBalance);
     getFriendData();
   }, []);
 

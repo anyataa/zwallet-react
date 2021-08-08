@@ -23,6 +23,10 @@ export default (state = INITIAL_STATE, action) => {
         userPin: action.payload.userPin,
         userImage: action.payload.userImage
       };
+    case "UPDATE_BALANCE":
+      return {...INITIAL_STATE, accountBalance: action.payload}
+    case "RESET":
+      return INITIAL_STATE
     default:
       return state
   }

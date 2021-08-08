@@ -3,22 +3,20 @@ import { inRupiah, setTransactionData } from '../../global'
 import { Link } from 'react-router-dom'
 import { urlAPI } from '../../asset/urls'
 import axios from 'axios'
+import { useSelector } from 'react-redux'
 
 export const BalanceTransaction = () => {
     const [Transaction, setTransaction] = useState([])
     const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
+
+    const user = useSelector(state => state.user)
+
     useEffect(() => {
-      // if(JSON.parse(localStorage.getItem("userData")) &&JSON.parse(localStorage.getItem("transaction-data")) ){
-      //   // setTransactionData(JSON.parse(localStorage.getItem("userData")).accountId);
-      //   setTransaction(JSON.parse(localStorage.getItem("transaction-data")).listTransaction);
-      //   // console.log(JSON.parse(localStorage.getItem("transaction-data")).listTransaction[0])
-      //   forceUpdate()
-      // }
       getTransaction()
     }, [])
 
     const getTransaction = () => {
-      axios.get(`${urlAPI}/transaction/${JSON.parse(localStorage.getItem("userData")).accountId}`)
+      axios.get(`${urlAPI}/transaction/${user.accountId}`)
       .then((res) => {
         setTransaction(res.data.listTransaction)
       })

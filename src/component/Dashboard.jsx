@@ -4,24 +4,30 @@ import { Link, Redirect, useRouteMatch } from "react-router-dom";
 import '../style/navBar.css'
 import axios from 'axios'
 import { urlAPI } from '../asset/urls'
-
+import { useDispatch, useSelector } from "react-redux";
+import { reset } from '../actions'
 export default function Dashboard() {
   
   const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
   const { path, url } = useRouteMatch()
 
+  const user = useSelector(state => state.user)
+
+  const dispatch = useDispatch()
+
   function doLogOut()  {
-    axios.put(urlAPI + `/user/signout-status/${JSON.parse(localStorage.getItem('userData')).userId}`)
+    axios.put(urlAPI + `/user/signout-status/${user.userId}`)
+    dispatch(reset())
     localStorage.removeItem("userData")
     localStorage.removeItem("transaction-data")
     localStorage.removeItem("graph-data")
+
     forceUpdate()
-    // console.log('in dashboard')
     
   }
 
-  if  (!JSON.parse(localStorage.getItem('userData') )){
+  if  (user.userId == 0){
     return <Redirect to='/login'/>
   }
   return (

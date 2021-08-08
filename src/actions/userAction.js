@@ -12,9 +12,15 @@ export const onRegister = (data) => {
   }
 }
 
-// export const onLogin = () => {
-//   return {
-//     type: 'LOGIN',
-//     payload:
-//   }
-// }
+export const updateAccountBalance = (balance) => {
+  return {
+    type: "UPDATE_BALANCE",
+    payload: balance
+  }
+}
+
+export const reset = () => {
+  return{
+    type: "RESET"
+  }
+}
