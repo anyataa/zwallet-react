@@ -5,12 +5,8 @@ import InputAuth from "../component/InputAuth";
 import Button from "../component/Button";
 import Hero from "../component/Hero";
 import axios from "axios";
-<<<<<<< HEAD
 import { urlAPI } from "../asset/urls";
-=======
-import { urlAPI } from "../asset/urls"
 import { useSelector } from "react-redux";
->>>>>>> origin/development
 
 const SignUp = () => {
   const [username, setUsername] = useState();
@@ -24,7 +20,7 @@ const SignUp = () => {
 
   const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
 
-  const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user);
 
   const buttonHandler = () => {
     if (username && email && password && phone) {
