@@ -3,8 +3,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { useReducer } from "react";
 import { FaTimes } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Redirect, useRouteMatch } from "react-router-dom";
-import { updateAccountBalance } from "../actions";
+import { Link } from "react-router-dom";
+import { onLoginAction } from "../actions";
 import { urlAPI } from "../asset/urls";
 import { pinHandler, setTransactionData } from "../global";
 
@@ -63,7 +63,7 @@ export const ModalPin = ({ modalToggle, setModalToggle }) => {
           } else if (res.data.message.includes("Success")) {
             redirectTo(1);
             
-            dispatch(updateAccountBalance(res.data.data.fromAccountBalance))
+            dispatch(onLoginAction({...user, accountBalance: res.data.data.fromAccountBalance}))
             
             setTransactionData(user.accountId);
             setMessage("");

@@ -8,14 +8,17 @@ import NavBar from "../component/NavBar";
 import Dashboard from "../component/Dashboard";
 import Pin from "../component/Pin";
 import { Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 
 const ChangePin = ({history}) => {
   const [pinValue, setPinValue] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
+  const user = useSelector(state => state.user)
+
   const onCheck = () => {
-    if (JSON.parse(localStorage.getItem("userData")).userPin == pinValue) {
+    if (JSON.parse(user.userPin == pinValue)) {
       history.push("/newPin")
     } else{
       setErrorMsg('Invalid PIN')

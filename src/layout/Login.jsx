@@ -45,8 +45,8 @@ const Login = () => {
         // localStorage.setItem('userData', JSON.stringify(res.data.data.user))
         : setErrorMsg('Email or Password Incorrect!')
         // Called when sign up too
-        if(JSON.parse(localStorage.getItem("userData")) ){
-          setGraphData(JSON.parse(localStorage.getItem("userData")).accountId)
+        if(user.userId){
+          setGraphData(user.accountId)
         }
         
 
