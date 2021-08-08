@@ -28,7 +28,6 @@ const chartColors = {
 };
 
 const DynamicChart = () => {
-
   const [chartData, setChartData] = useState({});
   const [chartLast7Days, setChartLast7Days] = useState(
     JSON.parse(localStorage.getItem("graph-data"))
@@ -56,20 +55,26 @@ const DynamicChart = () => {
         }`
       )
       .then((res) => {
+        setbalanceHistory(res.data.data);
+        console.log(res.data.data.length, balanceHistory);
         localStorage.setItem("graph-data", JSON.stringify(res.data.data));
 
         var dayColor = [];
         var previousBalance = 0;
-        if (balanceHistory) {
-          for (let i = 0; i < balanceHistory.length; i++) {
-            if (previousBalance > balanceHistory[i]) {
+        if (res.data.data) {
+          console.log("in");
+          for (let i = 0; i < res.data.data.length; i++) {
+            if (previousBalance > res.data.data[i]) {
               dayColor.push(chartColors.grey);
+              console.log("in");
             } else {
               dayColor.push(chartColors.purple);
+              console.log("ina");
             }
-            previousBalance = balanceHistory[i];
+            previousBalance = res.data.data[i];
           }
         }
+        console.log("daycolor", dayColor);
         setChartData({
           //  labels: ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"],
           labels: dayName,
@@ -91,15 +96,7 @@ const DynamicChart = () => {
               //  data: [100,200,300],
               barPercentage: 0.2,
               backgroundColor: dayColor,
-              borderColor: [
-                chartColors.purple,
-                chartColors.grey,
-                chartColors.purple,
-                chartColors.purple,
-                chartColors.grey,
-                chartColors.grey,
-                chartColors.purple,
-              ],
+              borderColor: dayColor,
               borderWidth: 1,
             },
           ],
@@ -109,7 +106,6 @@ const DynamicChart = () => {
   useEffect(() => {
     Chart();
   }, []);
-
 
   return (
     <div className="App">
@@ -127,19 +123,6 @@ const DynamicChart = () => {
             maintainAspectRatio: true,
             title: { text: "THICCKNESS SCALE", display: false },
             scales: {
-              // x: {
-              //   grid: {
-              //     display: false,
-              //     drawBorder: false,
-              //     drawOnChartArea: false,
-              //     drawTicks: false,
-              //   }
-              // },
-              // xAxes: [{
-              //     gridLines: {
-              //         color: "rgba(0, 0, 0, 0)",
-              //     }
-              // }],
               x: {
                 grid: {
                   drawBorder: false,
@@ -153,11 +136,6 @@ const DynamicChart = () => {
                   color: "rgba(0, 0, 0, 0)",
                 },
               },
-              // yAxes: [{
-              //     gridLines: {
-              //         display: false
-              //     }
-              // }]
             },
           }}
         />
