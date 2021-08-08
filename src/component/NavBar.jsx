@@ -70,7 +70,8 @@ useEffect(() => {
             {/* <!-- Nav Bar Body --> */}
             <div className="wrapper-notification">
               <p className="detail-notif-duration">Today</p>
-              {Today && Today.length > 0? Today.slice(0,2).map(transaction => (<li>
+              {Today && Today.length > 0? Today.slice(0,2).map((transaction, idx) => (
+              <li key={idx}>
                 <div className="card-notification">
                   {transaction.transactionType > 0?   <i className="fa fa-arrow-down">
                     <FaArrowDown></FaArrowDown>
@@ -91,8 +92,8 @@ useEffect(() => {
                 </div>}
           
               <p className="detail-notif-duration">This Week</p>
-              {Week && Week.length > 0? Week.slice(0,2).map(transaction => (<li>
-                <div className="card-notification">
+              {Week && Week.length > 0? Week.slice(0,2).map((transaction, idx) => (<li>
+                <div className="card-notification" key={idx}>
                   {transaction.transactionType > 0?   <i className="fa fa-arrow-down">
                     <FaArrowDown></FaArrowDown>
                   </i> :  <i className="fa fa-arrow-up">

@@ -38,10 +38,7 @@ const Login = () => {
         : setErrorMsg('Email or Password Incorrect!')
         // Called when sign up too
         if(JSON.parse(localStorage.getItem("userData")) ){
-          setTransactionData(JSON.parse(localStorage.getItem("userData")).accountId);
           setGraphData(JSON.parse(localStorage.getItem("userData")).accountId)
-          console.log("in")
-          
         }
           
 

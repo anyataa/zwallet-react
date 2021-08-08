@@ -65,7 +65,7 @@ export const Pin = ({ setPinValue, onClick, buttonValue }) => {
           {/* <input
             type="button"
             value={props.buttonValue}
-            class="transfer-btn"
+            className="transfer-btn"
             id="pin-btn"
             disabled={ButtonDisabled}
             // Pin Validation
