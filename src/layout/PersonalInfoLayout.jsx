@@ -9,6 +9,7 @@ import { urlAPI } from "../asset/urls";
 import Button from "../component/Button";
 import { AiFillStar } from "react-icons/ai";
 
+<<<<<<< HEAD
 export const PersonalInfoLayout = () => {
   const [userData, setUserData] = useState({});
   const [fullName, setFullName] = useState("");
@@ -29,9 +30,45 @@ export const PersonalInfoLayout = () => {
       setInitialEmail(JSON.parse(localStorage.getItem("userData")).userEmail);
       setPhoneNumber(JSON.parse(localStorage.getItem("userData")).phoneNumber);
       forceUpdate();
+=======
+    useEffect(() => {
+      if(JSON.parse(localStorage.getItem('userData'))){
+        setUserData(JSON.parse(localStorage.getItem('userData')))
+        setFullName(JSON.parse(localStorage.getItem('userData')).userName)
+        setEmail(JSON.parse(localStorage.getItem('userData')).userEmail)
+        setPhoneNumber(JSON.parse(localStorage.getItem('userData')).phoneNumber)
+      } 
+    }, [])
+
+    // const getPhoneNumber = () => {
+    //   if (localStorage.getItem("userData")) {
+    //     axios.get(urlAPI + `/phone/get-primary/${JSON.parse(localStorage.getItem("userData")).user.userId}`)
+    //     .then(res => {
+    //         console.log(res.data)
+    //         setPhoneNumber(res.data.phoneNumber)
+    //     })
+    //     .catch(err => console.log(err))
+    //   }
+    // }
+    
+    const changeEmail = () => {
+      axios.put(urlAPI + `/user/update-email/${JSON.parse(localStorage.getItem('userData')).userId}`, {email : email})
+      .then(res => {
+        console.log(res.data)
+        // setEmail(input)
+        let existingData = userData
+        existingData['userEmail'] = email
+        localStorage.setItem('userData', JSON.stringify(existingData))
+      })
+      .catch(err => {
+        console.log(err)
+        console.log('masuk ke error')
+      })
+>>>>>>> b64706ae51f0b52e560d9a09332cc591b76f5709
     }
   }, []);
 
+<<<<<<< HEAD
   const changeEmail = function (input) {
     axios
       .put(
@@ -47,6 +84,20 @@ export const PersonalInfoLayout = () => {
         let existingData = userData;
         existingData["userEmail"] = email;
         localStorage.setItem("userData", JSON.stringify(existingData));
+=======
+    const changeName = () => {
+      var body = {
+        username : fullName
+      }
+      axios.put(urlAPI + `/user/updateuser/${JSON.parse(localStorage.getItem('userData')).userId}`, body)
+      .then(res => {
+        console.log(res.data)
+        // setFullName(input)
+        let existingData = userData
+        existingData['userName'] = fullName
+        localStorage.setItem('userData', JSON.stringify(existingData))
+        forceUpdate()
+>>>>>>> b64706ae51f0b52e560d9a09332cc591b76f5709
       })
       .catch((err) => {
         console.log(err);

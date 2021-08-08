@@ -69,7 +69,7 @@ export const InputNominalTransfer = (props) => {
         </p>
         <div className="transfer-input-amount-wrapper2" style={{ marginBottom: '5vh'}}>
           <input onChange={e => setNominalTransfer(e.target.value)} value={nominalTransfer} type="text" id="transfer-input-amount" placeholder="0.00" style={{ marginBottom: '5vh'}} />
-          {Balance - nominalTransfer <= 0 ?  <p className='col-red'>Amount exceeds your balance</p> : <p></p> }
+          {Balance - nominalTransfer < 0 ?  <p className='col-red'>Amount exceeds your balance</p> : <p></p> }
           <p className="transfer-primary-text">{Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits:0 }).format(nominalTransfer ? Balance - nominalTransfer: Balance)} Available</p>
           {/* Check if amount exceeding the balance */}
           <div className="transfer-input-notes-wrapper" style={{ marginTop: '5vh'}}>
@@ -93,7 +93,7 @@ export const InputNominalTransfer = (props) => {
           <input type="button" value="Back" className="transfer-btn" />
         </Link>
         <Link to={`/transfer/${props.match.params.id}/confirmation`}>
-          <input type="button" value="Continue" className="transfer-btn" onClick={onContinue} disabled={nominalTransfer && noteTransfer && (Balance - nominalTransfer) > 0 ? false : true}/>
+          <input type="button" value="Continue" className="transfer-btn" onClick={onContinue} disabled={nominalTransfer && noteTransfer && (Balance - nominalTransfer) >= 0 ? false : true}/>
         </Link>
       </div>
     </div>
