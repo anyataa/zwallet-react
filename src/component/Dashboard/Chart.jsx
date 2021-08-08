@@ -56,6 +56,7 @@ const DynamicChart = () => {
         }`
       )
       .then((res) => {
+
         // localStorage.setItem("graph-data", JSON.stringify(res.data.data));
         let graphData = res.data.data;
         let graphDataArr = [
@@ -72,11 +73,16 @@ const DynamicChart = () => {
         if (graphDataArr && graphDataArr.length > 0) {
           for (let i = 0; i < graphDataArr.length; i++) {
             if (previousBalance > graphDataArr[i]) {
+
               dayColor.push(chartColors.grey);
+              console.log("in");
             } else {
               dayColor.push(chartColors.purple);
+              console.log("ina");
             }
+
             previousBalance = graphDataArr[i];
+
           }
         } else {
           setbalanceHistory([
@@ -89,6 +95,7 @@ const DynamicChart = () => {
             chartData.grey,
           ]);
         }
+        console.log("daycolor", dayColor);
         setChartData({
           //  labels: ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"],
           labels: dayName,
@@ -150,11 +157,6 @@ const DynamicChart = () => {
                   color: "rgba(0, 0, 0, 0)",
                 },
               },
-              // yAxes: [{
-              //     gridLines: {
-              //         display: false
-              //     }
-              // }]
             },
           }}
         />

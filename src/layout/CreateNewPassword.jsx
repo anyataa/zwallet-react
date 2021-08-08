@@ -55,6 +55,7 @@ const CreateNewPassword = () => {
       .catch(err => {
         console.log(err)
         console.log('masuk ke error')
+        setErrorMsg('Invalid Password')
       })
     }
 

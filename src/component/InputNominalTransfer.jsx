@@ -75,6 +75,7 @@ export const InputNominalTransfer = (props) => {
           <br />
           press continue to the next steps.
         </p>
+
         <div
           className="transfer-input-amount-wrapper2"
           style={{ marginBottom: "5vh" }}
@@ -102,6 +103,7 @@ export const InputNominalTransfer = (props) => {
             )}{" "}
             Available
           </p>
+
           {/* Check if amount exceeding the balance */}
           <div
             className="transfer-input-notes-wrapper"
@@ -127,6 +129,7 @@ export const InputNominalTransfer = (props) => {
           <input type="button" value="Back" className="transfer-btn" />
         </Link>
         <Link to={`/transfer/${props.match.params.id}/confirmation`}>
+
           <input
             type="button"
             value="Continue"
@@ -138,6 +141,7 @@ export const InputNominalTransfer = (props) => {
                 : true
             }
           />
+
         </Link>
       </div>
     </div>

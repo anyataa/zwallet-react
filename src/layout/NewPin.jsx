@@ -32,9 +32,10 @@ const NewPin = () => {
     }
   }
 
-  if(JSON.parse(localStorage.getItem('userData')).pin == pinValue) {
-    return <Redirect to='/profil'/>
-  }
+  // if(JSON.parse(localStorage.getItem('userData')).pin == pinValue) {
+  //   return <Redirect to='/profil'/>
+  // }
+
   return (
     <div className="container">
       <Dashboard />
