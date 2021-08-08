@@ -21,9 +21,7 @@ export default function Dashboard() {
 
   if  (!JSON.parse(localStorage.getItem('userData') )){
     return <Redirect to='/login'/>
-    
   }
-  
   return (
     <div className="left">
       <div className="left-top">

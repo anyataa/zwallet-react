@@ -7,6 +7,9 @@ import { Link, Redirect } from "react-router-dom";
 import Button from "../component/Button";
 import axios from "axios";
 import { urlAPI } from "../asset/urls";
+import { onLoginAction } from '../actions'
+import { useDispatch, useSelector } from "react-redux";
+
 
 const Login = () => {
   const [email, setEmail] = useState();
@@ -17,6 +20,10 @@ const Login = () => {
   const [errorMsg, setErrorMsg] = useState('');
 
   const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
+
+  const user = useSelector(state => state.user)
+
+  const dispatch = useDispatch()
 
   const buttonHandler = () => {
     if (email && password) {
@@ -32,15 +39,16 @@ const Login = () => {
     if(emailValidation(email)){
       axios.post(urlAPI + "/user/signin", {email, password})
       .then(res => {
-        // console.log(res.data)
+        console.log(res.data)
         res.data.message == "Login success!" ?
-        localStorage.setItem('userData', JSON.stringify(res.data.data.user))
+        dispatch(onLoginAction(res.data.data.user))
+        // localStorage.setItem('userData', JSON.stringify(res.data.data.user))
         : setErrorMsg('Email or Password Incorrect!')
         // Called when sign up too
         if(JSON.parse(localStorage.getItem("userData")) ){
           setGraphData(JSON.parse(localStorage.getItem("userData")).accountId)
         }
-          
+        
 
         forceUpdate();
       })
@@ -52,11 +60,9 @@ const Login = () => {
     }
   }
   
-  if(JSON.parse(localStorage.getItem('userData'))){
-  
+  if(user.userId !== 0){
     return <Redirect to='/dashboard'/>
   }
-
   return (
     <div className="login-container">
       <Hero />
