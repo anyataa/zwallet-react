@@ -58,7 +58,7 @@ const DynamicChart = () => {
       .then((res) => {
         // localStorage.setItem("graph-data", JSON.stringify(res.data.data));
         let graphData = res.data.data;
-        setbalanceHistory([
+        let graphDataArr = [
           graphData.seventh != null ? graphData.seventh : 0,
           graphData.sixth != null ? graphData.sixth : graphData.seventh,
           graphData.fifth != null ? graphData.fifth : graphData.sixth,
@@ -66,18 +66,17 @@ const DynamicChart = () => {
           graphData.third != null ? graphData.third : graphData.forth,
           graphData.second != null ? graphData.second : graphData.third,
           graphData.first != null ? graphData.first : graphData.second,
-        ]);
+        ];
         var dayColor = [];
         var previousBalance = 0;
-        if (balanceHistory && balanceHistory.length > 0) {
-          console.log("Balance inside if", balanceHistory);
-          for (let i = 0; i < balanceHistory.length; i++) {
-            if (previousBalance > balanceHistory[i]) {
+        if (graphDataArr && graphDataArr.length > 0) {
+          for (let i = 0; i < graphDataArr.length; i++) {
+            if (previousBalance > graphDataArr[i]) {
               dayColor.push(chartColors.grey);
             } else {
               dayColor.push(chartColors.purple);
             }
-            previousBalance = balanceHistory[i];
+            previousBalance = graphDataArr[i];
           }
         } else {
           setbalanceHistory([
@@ -99,7 +98,15 @@ const DynamicChart = () => {
               borderWidth: 2,
               borderRadius: Number.MAX_VALUE,
               borderSkipped: false,
-              data: balanceHistory,
+              data: [
+                graphData.seventh ? graphData.seventh : 0,
+                graphData.sixth ? graphData.sixth : graphData.seventh,
+                graphData.fifth ? graphData.fifth : graphData.sixth,
+                graphData.forth ? graphData.forth : graphData.fifth,
+                graphData.third ? graphData.third : graphData.forth,
+                graphData.second ? graphData.second : graphData.third,
+                graphData.first ? graphData.first : graphData.second,
+              ],
               //  data: [100,200,300],
               barPercentage: 0.2,
               backgroundColor: dayColor,
