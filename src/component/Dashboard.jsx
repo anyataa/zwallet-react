@@ -2,7 +2,8 @@ import React, { useReducer } from "react";
 import { FaBorderAll, FaLongArrowAltUp, FaMoneyBill, FaMoneyBillAlt, FaPaperclip, FaPaypal, FaPlus, FaServicestack, FaUserAlt, FaWallet } from "react-icons/fa";
 import { Link, Redirect, useRouteMatch } from "react-router-dom";
 import '../style/navBar.css'
-
+import axios from 'axios'
+import { urlAPI } from '../asset/urls'
 
 export default function Dashboard() {
   
@@ -11,6 +12,7 @@ export default function Dashboard() {
   const { path, url } = useRouteMatch()
 
   function doLogOut()  {
+    axios.put(urlAPI + `/user/signout-status/${JSON.parse(localStorage.getItem('userData')).userId}`)
     localStorage.removeItem("userData")
     localStorage.removeItem("transaction-data")
     localStorage.removeItem("graph-data")

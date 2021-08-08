@@ -36,6 +36,7 @@ export const ProfilLayout = () => {
   };
 
   const doLogOut = () => {
+    axios.put(urlAPI + `/user/signout-status/${JSON.parse(localStorage.getItem('userData')).userId}`)
     localStorage.removeItem("userData");
     forceUpdate();
   }
