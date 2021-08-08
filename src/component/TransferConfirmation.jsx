@@ -10,39 +10,13 @@ import { InputNominalTransfer } from "./InputNominalTransfer";
 export const TransferConfirmation = (props) => {
   const [data, setData] = useState([]);
   const [transferData, setTransferData] = useState([]);
-  // const [user, setAccountData] = useState({});
 
   const user = useSelector(state => state.user)
 
   useEffect(() => {
     setTransferData(JSON.parse(localStorage.getItem("transfer-data")));
     getFriendData();
-    // setAccountData(JSON.parse(localStorage.getItem("userData")));
   }, []);
-
-  // const onTransfer = () => {
-  //   if (transferData && user) {
-  //     var body = {
-  //       transactionAmount: transferData.nominalTransfer,
-  //       transactionNotes: transferData.noteTransfer,
-  //       fromAccountId: user.accountId,
-  //       toUserId: transferData.id,
-  //     };
-  //     axios
-  //       .post(urlAPI + "/transaction/transfer", body)
-  //       .then((res) => {
-          
-  //         localStorage.setItem("userData", JSON.stringify({...JSON.parse(localStorage.getItem("userData")), accountBalance: res.data.data.fromAccountBalance,}));
-  //         setTransactionData(
-  //           JSON.parse(localStorage.getItem("userData")).accountId
-  //         );
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   }
-  //   console.log("transfer in", transferData.id);
-  // };
 
   const getFriendData = () => {
     axios

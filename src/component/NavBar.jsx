@@ -22,28 +22,6 @@ export default function NavBar() {
 
   const user = useSelector(state => state.user)
 
-  // useEffect(() => {
-  //   // setUserData(JSON.parse(localStorage.getItem("userData")))
-  //   // TODOANYA : User Image Handling
-
-
-  //   setUserImage(JSON.parse(localStorage.getItem("userData")).userImage)
-  //   setUserName(JSON.parse(localStorage.getItem("userData")).userName)
-  //   setPhoneNumber(JSON.parse(localStorage.getItem("userData")).phoneNumber)
-  //   // setToday()
-  //   // setWeek()
-
-  
-  
-    
-    
-  //   // TODONYA : Error kadang
-  //   // if(UserData){localStorage.setItem("username", localStorage.getItem("userData").account.userId.username)
-  //   // console.log("INI")
-  //   // localStorage.setItem("phone-number", JSON.stringify(localStorage.getItem("userData").phonenumber))}
-    
-  // }, [])
-
   return (
     <div className="nav-container">
       <nav>

@@ -10,39 +10,44 @@ import { FiTrash } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { urlAPI } from "../asset/urls";
+import { useDispatch, useSelector } from "react-redux";
+import { onLoginAction } from "../actions";
 
 const ManagePhone = () => {
   const [data, setData] = useState([]);
+
+  const user = useSelector(state => state.user)
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     getPhoneNumber();
   }, []);
 
   const getPhoneNumber = () => {
-    if (localStorage.getItem("userData")) {
-      axios
-        .get(
-          urlAPI +
-            `/phone/${JSON.parse(localStorage.getItem("userData")).userId}`
-        )
-        .then((res) => {
-          console.log(res.data);
-          setData(res.data);
+    if (user.userId) {
+      axios.get(urlAPI + `/phone/${user.userId}`)
+      .then((res) => {
+        res.data.map(phone => {
+          if(phone.primary){
+            dispatch(onLoginAction({...user, phoneNumber: phone.phoneNumber}))
+          }
         })
-        .catch((err) => console.log(err));
+        setData(res.data);
+      })
+      .catch((err) => console.log(err));
     }
   };
 
   const setPrimary = (id) => {
-    if (localStorage.getItem("userData")) {
+    if (user.userId) {
       var data = {
-        userId: JSON.parse(localStorage.getItem("userData")).userId,
+        userId: user.userId,
         phoneNumberId: id,
       };
       axios
         .put(urlAPI + `/phone/set-primary`, data)
-        .then((res) => {
-          console.log(res.data);
+        .then(() => {
           getPhoneNumber();
         })
         .catch((err) => console.log(err));

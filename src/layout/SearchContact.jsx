@@ -6,20 +6,20 @@ import Button from "../component/Button";
 import InputAuth from "../component/InputAuth";
 import axios from "axios";
 import { urlAPI } from "../asset/urls";
+import { useSelector } from "react-redux";
 
 const SearchContact = (props) => {
   const [phone, setPhone] = useState("");
   const [data, setData] = useState({});
   const [errorMsg, setErrorMsg] = useState("");
 
+  const user = useSelector(state => state.user)
+
   const onSearch = (e) => {
     axios
       .get(`${urlAPI}/phone/number/${phone[0] == 0 ? phone : 0 + phone}`)
       .then((res) => {
-        if (
-          res.data.phoneNumber !==
-          JSON.parse(localStorage.getItem("userData")).phoneNumber
-        ) {
+        if (res.data.phoneNumber !== user.phoneNumber) {
           console.log(res.data);
           if (typeof res.data == "string") {
             setErrorMsg(res.data);
@@ -39,7 +39,7 @@ const SearchContact = (props) => {
   const onAddFriend = () => {
     axios
       .post(urlAPI + "/friends/add", {
-        userId: JSON.parse(localStorage.getItem("userData")).userId,
+        userId: user.userId,
         friendId: data.userId,
       })
       .then((res) => {
