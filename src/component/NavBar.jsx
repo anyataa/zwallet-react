@@ -2,41 +2,25 @@ import React, { useEffect, useReducer, useState } from "react";
 import "../style/navBar.css";
 import { FaArrowDown, FaArrowUp, FaBell } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 export default function NavBar() {
-const [UserData, setUserData] = useState(null)
-const [UserName, setUserName] = useState("")
-const [PhoneNumber, setPhoneNumber] = useState("")
-const [UserImage, setUserImage] = useState({})
-const [Today, setToday] = useState(localStorage.getItem("transaction-data") ? JSON.parse(localStorage.getItem("transaction-data")).list2Day : [])
-const [Week, setWeek] = useState(localStorage.getItem("transaction-data") ? JSON.parse(localStorage.getItem("transaction-data")).list2Week: [])
-const [transactionType, setTransactionType] = useState([
-   "Transfer",
-   "Subscription",
-  "Payment",
-   "Top Up",
-   "Retrieve"])
-const [toFrom, setToFrom] = useState(["to", "from"])
-const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
+  const [UserData, setUserData] = useState(null)
+  // const [user.userName, setUserName] = useState("")
+  // const [user.phoneNumber, setPhoneNumber] = useState("")
+  // const [user.userImage, setUserImage] = useState({})
+  const [Today, setToday] = useState(localStorage.getItem("transaction-data") ? JSON.parse(localStorage.getItem("transaction-data")).list2Day : [])
+  const [Week, setWeek] = useState(localStorage.getItem("transaction-data") ? JSON.parse(localStorage.getItem("transaction-data")).list2Week: [])
+  const [transactionType, setTransactionType] = useState([
+    "Transfer",
+    "Subscription",
+    "Payment",
+    "Top Up",
+    "Retrieve"])
+  const [toFrom, setToFrom] = useState(["to", "from"])
+  const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
-useEffect(() => {
-  // setUserData(JSON.parse(localStorage.getItem("userData")))
-  // TODOANYA : User Image Handling
-  setUserImage(JSON.parse(localStorage.getItem("userData")).userImage)
-  setUserName(JSON.parse(localStorage.getItem("userData")).userName)
-  setPhoneNumber(JSON.parse(localStorage.getItem("userData")).phoneNumber)
-  // setToday()
-  // setWeek()
-
- 
- 
-  
-  
-  // TODONYA : Error kadang
-  // if(UserData){localStorage.setItem("username", localStorage.getItem("userData").account.userId.username)
-  // console.log("INI")
-  // localStorage.setItem("phone-number", JSON.stringify(localStorage.getItem("userData").phonenumber))}
-  
-}, [])
+  const user = useSelector(state => state.user)
 
   return (
     <div className="nav-container">
@@ -47,16 +31,16 @@ useEffect(() => {
         <Link to={"/profil"} style={{ textDecoration: 'none' }, {color : "black" }} >
        
           <div className="profile-img">
-            {UserImage?  <img src={`https://randomuser.me/api/portraits/men/1}.jpg`} alt="" width="50px" /> : <img src={require("../asset/icons/person.svg").default}  className="create-contact-avatar-input" alt="" width="50px" /> }
+            {user.userImage?  <img src={`https://randomuser.me/api/portraits/men/1}.jpg`} alt="" width="50px" /> : <img src={require("../asset/icons/person.svg").default}  className="create-contact-avatar-input" alt="" width="50px" /> }
            
           </div>
           </Link>
 
           <div className="profile-data" >
             {
-             UserName? <h3 >{UserName}</h3> : <h3>Error</h3>
+             user.userName? <h3 >{user.userName}</h3> : <h3>Error</h3>
             }
-            <p className="col-white50">{PhoneNumber ? "+62 "+PhoneNumber.slice(1,PhoneNumber.length) : "Error"}</p>
+            <p className="col-white50">{user.phoneNumber ? "+62 "+user.phoneNumber.slice(1,user.phoneNumber.length) : "Error"}</p>
           </div>
      
           <div className="profile-img">

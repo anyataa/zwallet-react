@@ -7,6 +7,7 @@ import { Link, Redirect} from 'react-router-dom';
 import { emailValidation } from "../global";
 import axios from "axios";
 import { urlAPI } from "../asset/urls";
+import { useSelector } from "react-redux";
 
 
 const ResetPassword = () => {
@@ -15,6 +16,7 @@ const ResetPassword = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [errorMsg, setErrorMsg] = useState('');
 
+  // const user = useSelector(state => state.user)
 
   const buttonHandler = () => {
     if (email) {
@@ -34,7 +36,7 @@ const ResetPassword = () => {
         console.log('okay')
         
         if(JSON.parse(localStorage.getItem('resetPassword'))){
-          // axios.post(urlAPI + `/mail/sendresetpass/${JSON.parse(localStorage.getItem("userData")).userId}`, {recipient: email})
+          // axios.post(urlAPI + `/mail/sendresetpass/${user.userId}`, {recipient: email})
           axios.post(urlAPI + `/mail/sendresetpass/${res.data.userId}`, {recipient: email})
           console.log("masuk post")
         }

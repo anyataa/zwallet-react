@@ -6,16 +6,18 @@ import Pin from "../component/Pin"
 import axios from "axios";
 import { urlAPI } from "../asset/urls";
 import { Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const CreatePin = () => {
     const [pinValue, setPinValue] = useState("")
     const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
+    const user = useSelector(state => state.user)
 
     const create = () => {
-        if (localStorage.getItem("userData")) {
+        if (user.userId) {
             console.log(JSON.parse(localStorage.getItem('userData')).userPin)
-            axios.put(urlAPI + `/user/update-pin/${JSON.parse(localStorage.getItem("userData")).userId}`, {pin: pinValue})
+            axios.put(urlAPI + `/user/update-pin/${user.userId}`, {pin: pinValue})
             .then(res => {
                 console.log(res.data)
                 localStorage.setItem('userData', JSON.stringify(res.data))

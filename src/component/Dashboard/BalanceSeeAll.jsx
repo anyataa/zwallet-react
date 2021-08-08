@@ -6,18 +6,21 @@ import { Link } from "react-router-dom";
 import { inRupiah } from "../../global";
 import axios from "axios";
 import { urlAPI } from "../../asset/urls";
+import { useSelector } from "react-redux";
 
 
 const BalanceSeeAll = () => {
 
   const [transactionData, setTransactionData] = useState({})
 
+  const user = useSelector(state => state.user)
+
   useEffect(() => {
     getTransactionData()
   }, [])
   
   const getTransactionData = () => {
-    axios.get(`${urlAPI}/transaction/${JSON.parse(localStorage.getItem("userData")).accountId}`)
+    axios.get(`${urlAPI}/transaction/${user.accountId}`)
     .then((res) => {
       setTransactionData(res.data)
     })

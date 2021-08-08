@@ -1,38 +1,33 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import BalanceContainer from "../component/Dashboard/BalanceContainer";
 import "../style/global.css";
 import Dashboard from "../component/Dashboard";
 import { Footer } from "../component/Footer";
 import NavBar from "../component/NavBar";
 import { getAccountData, setFriendsData } from "../global";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
-export default class DashboardLayout extends Component {
-  constructor(props) {
-    super(props)
+const DashboardLayout = () => {
+  const user = useSelector(state => state.user)
   
-    this.state = {
-       x : 0
-    }
-  }
-  
-  componentDidMount() {
+  useEffect(() => {
     setFriendsData();
-    if(JSON.parse(localStorage.getItem("userData"))){
+    if(user.userId){
       // getAccountData(1)
-      // getAccountData(JSON.parse(localStorage.getItem("userData")).userId)
-      console.log(JSON.parse(localStorage.getItem("userData")).userId)
-      this.setState(x => { x = x+1 })
+      // getAccountData(user.userId)
+      console.log(user.userId)
     }
+  }, [])
 
-  }
-  render() {
-    return (
-      <div className="container">
-        <Dashboard />
-        <BalanceContainer />
-        <NavBar />
-        <Footer />
-      </div>
-    );
-  }
+  return (
+    <div className="container">
+      <Dashboard />
+      <BalanceContainer />
+      <NavBar />
+      <Footer />
+    </div>
+  );
 }
+
+export default DashboardLayout;
