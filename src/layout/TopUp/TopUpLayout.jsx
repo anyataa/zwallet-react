@@ -3,21 +3,27 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 import Dashboard from "../../component/Dashboard";
 import { Footer } from "../../component/Footer";
 import NavBar from "../../component/NavBar";
+import { topUpOption } from "../../global/topUpConstants";
+import { BankInstruction } from "./BankInstruction";
 import { TopUpContent } from "./TopUpContent";
 
-
 export const TopUpLanding = () => {
-  let {path , url} = useRouteMatch();
+  const option = topUpOption;
+  let { path, url } = useRouteMatch();
   return (
     <div className="container">
-   <Dashboard/>
-        <Switch>
-            <Route path={`${path}`} component={TopUpContent} exact></Route>
-        </Switch>
-        
-        <NavBar/>
-        <Footer />
-        
+      <Dashboard />
+      <Switch>
+        <Route path={`${path}`} component={TopUpContent} exact></Route>
+        <Route
+          path={`${path}/bankTransfer`}
+          component={BankInstruction}
+          exact
+        ></Route>
+      </Switch>
+
+      <NavBar />
+      <Footer />
     </div>
   );
 };
