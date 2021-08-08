@@ -56,6 +56,10 @@ const DynamicChart = () => {
         }`
       )
       .then((res) => {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4e25a71e690c99ed951466d574ae4012469a2388
         // localStorage.setItem("graph-data", JSON.stringify(res.data.data));
         let graphData = res.data.data;
         let graphDataArr = [
@@ -72,13 +76,23 @@ const DynamicChart = () => {
         if (graphDataArr && graphDataArr.length > 0) {
           for (let i = 0; i < graphDataArr.length; i++) {
             if (previousBalance > graphDataArr[i]) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4e25a71e690c99ed951466d574ae4012469a2388
               dayColor.push(chartColors.grey);
               console.log("in");
             } else {
               dayColor.push(chartColors.purple);
               console.log("ina");
             }
+<<<<<<< HEAD
             previousBalance = graphDataArr[i];
+=======
+
+            previousBalance = graphDataArr[i];
+
+>>>>>>> 4e25a71e690c99ed951466d574ae4012469a2388
           }
         } else {
           setbalanceHistory([
