@@ -1,6 +1,5 @@
 const INITIAL_STATE = {
-  // eslint-disable-next-line no-undef
-  userId: BigInt(0),
+  userId: 0,
   userName: "",
   phoneNumber: "",
   userEmail: "",

@@ -27,7 +27,7 @@ function doHandleMonth(month) {
 const chartColors = {
   purple: "#6379F4",
   grey: "#7a7886",
-  red: "red",
+  red: "#e2442b",
 };
 
 const DynamicChart = () => {
@@ -73,11 +73,9 @@ const DynamicChart = () => {
         var previousBalance = 0;
         if (graphDataArr && graphDataArr.length > 0) {
           for (let i = 0; i < graphDataArr.length; i++) {
-            if ((previousBalance = graphDataArr[i])) {
+            if (previousBalance >= graphDataArr[i]) {
               dayColor.push(chartColors.grey);
               console.log("in");
-            } else if (previousBalance > graphDataArr[i]) {
-              dayColor.push(chartColors.red);
             } else {
               dayColor.push(chartColors.purple);
               console.log("ina");

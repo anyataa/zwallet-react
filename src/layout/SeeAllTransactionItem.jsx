@@ -1,8 +1,11 @@
+import axios from "axios";
 import React from "react";
 import { useReducer } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { urlAPI } from "../asset/urls";
+import { setTransactionData } from "../global";
 
 export const SeeAllTransactionItem = (props) => {
   const user = useSelector((state) => state.user);
@@ -12,22 +15,23 @@ export const SeeAllTransactionItem = (props) => {
   const [WeeklyTransaction, setWeeklyTransaction] = useState([]);
   const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
   useEffect(() => {
-    if (
-      user.userId > 0 &&
-      JSON.parse(localStorage.getItem("transaction-data"))
-    ) {
-      setAllTransaction(
-        JSON.parse(localStorage.getItem("transaction-data")).listTransaction
-      );
-      setDailyTransaction(
-        JSON.parse(localStorage.getItem("transaction-data")).list2Day
-      );
-      setWeeklyTransaction(
-        JSON.parse(localStorage.getItem("transaction-data")).list2Week
-      );
-      forceUpdate();
+    if (user.userId > 0) {
+      getTransactionData();
     }
   }, []);
+
+  const getTransactionData = () => {
+    axios
+      .get(`${urlAPI}/transaction/${user.accountId}`)
+      .then((res) => {
+        setTransactionData(res.data);
+        setDailyTransaction(res.data.list2Day);
+        setWeeklyTransaction(res.data.list2Week);
+        setAllTransaction(res.data.listTransaction);
+      })
+      .catch((err) => console.log(err));
+  };
+
   const renderTransaction = (Transaction) => {
     if (Transaction && Transaction.length > 0) {
       return Transaction.map((item) => (
