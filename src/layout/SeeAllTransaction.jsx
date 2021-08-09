@@ -18,7 +18,7 @@ export const SeeAllTransaction = () => {
         </div>
         <div className="contact-list-container" style={{ height: "25rem" }}>
           <p style={{ fontSize: "25px" }} className="col-grey">
-            Weekly
+            Last Week
           </p>
           <SeeAllTransactionItem data={"weekly"}></SeeAllTransactionItem>
         </div>

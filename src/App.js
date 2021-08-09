@@ -21,6 +21,7 @@ import RetrievalLayout from "./layout/RetrievalPage/RetrievalLayout";
 import MailForPassword from "./layout/MailForPassword";
 import { TopUpLanding } from "./layout/TopUp/TopUpLayout";
 import PaymentLayout from "./layout/Payment/PaymentLayout";
+import { RenderPdfApp } from "./component/RenderPdfApp";
 
 // import ListContact from "./component/ListContact";
 // import ManagePhone from "./layout/ManagePhone";
@@ -42,6 +43,7 @@ function App() {
         <Route path={"/retrieval"} component={RetrievalLayout} />
         <Route path="/transfer" component={TransferListLayout} />
         <Route path="/profil" component={ProfileListLayout} />
+        <Route path="/pdf" component={RenderPdfApp} />
 
         {/* Will be deleted */}
         <Route path="/seealltransaction" component={SeeAllTransaction}></Route>

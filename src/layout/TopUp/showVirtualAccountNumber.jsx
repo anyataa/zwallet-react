@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 export const ShowVirtualAccountNumber = (usePrefix) => {
@@ -6,6 +7,11 @@ export const ShowVirtualAccountNumber = (usePrefix) => {
 
   const phoneNumber = user.phoneNumber;
   const prefix = ["045 - ", ""];
+  const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
+  useEffect(() => {
+    forceUpdate();
+  }, []);
+
   return (
     <div
       className="profile-top-container set-margin-for-dash"

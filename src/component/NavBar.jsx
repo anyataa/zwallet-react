@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { setTransactionData } from "../global";
-import { urlAPI } from "../asset/urls";
+import { urlAPI, urlFile } from "../asset/urls";
 
 export default function NavBar() {
   const [UserData, setUserData] = useState(null);
@@ -50,11 +50,7 @@ export default function NavBar() {
           >
             <div className="profile-img">
               {user.userImage ? (
-                <img
-                  src={`https://randomuser.me/api/portraits/men/1}.jpg`}
-                  alt=""
-                  width="50px"
-                />
+                <img src={`${urlFile}/${user.userImage}`} alt="" width="50px" />
               ) : (
                 <img
                   src={require("../asset/icons/person.svg").default}

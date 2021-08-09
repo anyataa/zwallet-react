@@ -60,15 +60,41 @@ const DynamicChart = () => {
       .then((res) => {
         // localStorage.setItem("graph-data", JSON.stringify(res.data.data));
         let graphData = res.data.data;
-        let graphDataArr = [
-          graphData.seventh != null ? graphData.seventh : 0,
-          graphData.sixth != null ? graphData.sixth : graphData.seventh,
-          graphData.fifth != null ? graphData.fifth : graphData.sixth,
-          graphData.forth != null ? graphData.forth : graphData.fifth,
-          graphData.third != null ? graphData.third : graphData.forth,
-          graphData.second != null ? graphData.second : graphData.third,
-          graphData.first != null ? graphData.first : graphData.second,
-        ];
+        let graphDataArr = [];
+        console.log(graphData);
+        if (
+          graphData.seventh != null ||
+          graphData.sixth != null ||
+          graphData.fifth != null ||
+          graphData.forth != null ||
+          graphData.third != null ||
+          graphData.second != null ||
+          graphData.first != null
+        ) {
+          console.log("in Data");
+          graphDataArr = [
+            graphData.seventh != null ? graphData.seventh : 0,
+            graphData.sixth != null ? graphData.sixth : graphData.seventh,
+            graphData.fifth != null ? graphData.fifth : graphData.sixth,
+            graphData.forth != null ? graphData.forth : graphData.fifth,
+            graphData.third != null ? graphData.third : graphData.forth,
+            graphData.second != null ? graphData.second : graphData.third,
+            graphData.first != null ? graphData.first : graphData.second,
+          ];
+        } else {
+          console.log("else");
+          graphDataArr = [
+            user.accountBalance,
+            user.accountBalance,
+            user.accountBalance,
+            user.accountBalance,
+            user.accountBalance,
+            user.accountBalance,
+            user.accountBalance,
+          ];
+        }
+
+        console.log(graphDataArr);
         var dayColor = [];
         var previousBalance = 0;
         if (graphDataArr && graphDataArr.length > 0) {
@@ -103,16 +129,17 @@ const DynamicChart = () => {
               borderWidth: 2,
               borderRadius: Number.MAX_VALUE,
               borderSkipped: false,
-              data: [
-                graphData.seventh ? graphData.seventh : 0,
-                graphData.sixth ? graphData.sixth : graphData.seventh,
-                graphData.fifth ? graphData.fifth : graphData.sixth,
-                graphData.forth ? graphData.forth : graphData.fifth,
-                graphData.third ? graphData.third : graphData.forth,
-                graphData.second ? graphData.second : graphData.third,
-                graphData.first ? graphData.first : graphData.second,
-              ],
-              //  data: [100,200,300],
+              data: graphDataArr,
+              // data: [
+              //   graphData.seventh ? graphData.seventh : 0,
+              //   graphData.sixth ? graphData.sixth : graphData.seventh,
+              //   graphData.fifth ? graphData.fifth : graphData.sixth,
+              //   graphData.forth ? graphData.forth : graphData.fifth,
+              //   graphData.third ? graphData.third : graphData.forth,
+              //   graphData.second ? graphData.second : graphData.third,
+              //   graphData.first ? graphData.first : graphData.second,
+              // ],
+              // data: [100, 200, 300],
               barPercentage: 0.2,
               backgroundColor: dayColor,
               borderColor: dayColor,
