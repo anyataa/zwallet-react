@@ -27,6 +27,7 @@ function doHandleMonth(month) {
 const chartColors = {
   purple: "#6379F4",
   grey: "#7a7886",
+  red: "#e2442b",
 };
 
 const DynamicChart = () => {
@@ -39,8 +40,8 @@ const DynamicChart = () => {
   const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
   const [daysLabel, setDaysLabel] = useState(null);
   const [balanceHistory, setbalanceHistory] = useState();
-  
-  const user = useSelector(state => state.user)
+
+  const user = useSelector((state) => state.user);
 
   const Chart = () => {
     // Set Day based on date
@@ -53,7 +54,9 @@ const DynamicChart = () => {
     }
 
     axios
-      .get(`http://localhost:8080/zwallet-api/transaction/graph/${user.accountId}`)
+      .get(
+        `http://localhost:8080/zwallet-api/transaction/graph/${user.accountId}`
+      )
       .then((res) => {
         // localStorage.setItem("graph-data", JSON.stringify(res.data.data));
         let graphData = res.data.data;
@@ -70,7 +73,7 @@ const DynamicChart = () => {
         var previousBalance = 0;
         if (graphDataArr && graphDataArr.length > 0) {
           for (let i = 0; i < graphDataArr.length; i++) {
-            if (previousBalance > graphDataArr[i]) {
+            if (previousBalance >= graphDataArr[i]) {
               dayColor.push(chartColors.grey);
               console.log("in");
             } else {
