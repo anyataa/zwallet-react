@@ -65,6 +65,7 @@ class ImageInput extends React.Component {
   }
 
   render() {
+    // ==== Handle Change  ====
     const handleFileChange = (event) => {
       const file = event.target.files[0];
 
@@ -83,16 +84,17 @@ class ImageInput extends React.Component {
         axios
           .post(urlAPI + `/files/upload/${user.userId}`, formData)
           .then((res) => {
-            onLoginAction({ ...user, userImage: res.data.fileName });
-            console.log("Success Uploaded to DB", res.data.fileName);
+            this.props.onLoginAction({ ...user, userImage: res.data.fileName });
+            console.log(user);
           })
           .catch((err) => console.log("Error"));
       } else {
         this.setState({ value: "" });
       }
     };
-    const { user } = this.props;
-    const { className, name } = this.props;
+
+    // ==== Handle Change End ====
+    const { className, name, user } = this.props;
     const { value } = this.state;
 
     const style = {
@@ -139,13 +141,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onLoginAction: (payload) => {
-      dispatch({ type: "LOGIN", payload: payload });
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ImageInput);
+export default connect(mapStateToProps, { onLoginAction })(ImageInput);
 // export default ImageInput;
