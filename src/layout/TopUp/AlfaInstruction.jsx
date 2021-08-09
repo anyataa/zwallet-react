@@ -1,19 +1,16 @@
 import React from "react";
 import { Accordion } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { bankTransferInstruction } from "../../global/topUpConstants";
-import {
-  ShowVirtualAccountNumber,
-  showVirtualAccountNumber,
-} from "./showVirtualAccountNumber";
+import { alfaTransferInstruction } from "../../global/topUpConstants";
+import { ShowVirtualAccountNumber } from "./showVirtualAccountNumber";
 
-export const BankInstruction = () => {
-  const bankInstruction = bankTransferInstruction;
+export const AlfaInstruction = () => {
+  const alfaInstruction = alfaTransferInstruction;
 
-  const renderBankInstruction = () => {
+  const renderAlfaInstruction = () => {
     return (
       <Accordion defaultActiveKey="0">
-        {bankInstruction.map((item, index) => {
+        {alfaInstruction.map((item, index) => {
           return (
             <Accordion.Item eventKey={`${index}`}>
               <Accordion.Header>{item.methods}</Accordion.Header>
@@ -33,11 +30,11 @@ export const BankInstruction = () => {
 
   return (
     <div className="right">
-      {ShowVirtualAccountNumber(true)}
-      {/* <div>ANYAAAA</div> */}
+      <h1>How to Top Up</h1>
+      <br/>
       <h4>Instruction</h4>
       <br/>
-      {renderBankInstruction()}
+      {renderAlfaInstruction()}
     </div>
   );
 };
