@@ -49,7 +49,7 @@ export const SeeAllTransactionItem = (props) => {
             </div>
             <div className="profile-data">
               {/* 0 : in , 1 : out */}
-              {item.transactionType > 0 ? (
+              {item.receiver == user.userName ? (
                 <h3 className="col-grey">{item.sender}</h3>
               ) : (
                 <h3 className="col-grey">{item.receiver}</h3>
@@ -70,7 +70,7 @@ export const SeeAllTransactionItem = (props) => {
               </p>
             </div>
           </div>
-          {item.transactionType > 0 ? (
+          {item.receiver == user.userName ? (
             <h2 className="col-green">
               {Intl.NumberFormat("id-ID", {
                 style: "currency",
