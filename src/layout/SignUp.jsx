@@ -7,7 +7,8 @@ import Hero from "../component/Hero";
 import axios from "axios";
 
 import { urlAPI } from "../asset/urls";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { onLoginAction } from "../actions";
 
 const SignUp = () => {
   const [username, setUsername] = useState();
@@ -19,9 +20,9 @@ const SignUp = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
 
-  const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
-
   const user = useSelector((state) => state.user);
+
+  const dispatch = useDispatch()
 
   const buttonHandler = () => {
     if (username && email && password && phone) {
@@ -44,29 +45,23 @@ const SignUp = () => {
         .then((res) => {
           console.log(res.data);
           if (res.data.message.includes("created")) {
-            localStorage.setItem("userData", JSON.stringify(res.data.data));
+            dispatch(onLoginAction(res.data.data))
+
             // Called when sign up too
 
-            if (user.accountId) {
-              setTransactionData(user.accountId);
-              setGraphData(user.accountId);
-              console.log("in");
-            }
-            forceUpdate();
           } else {
             setErrorMsg(res.data.message);
           }
         })
         .catch((err) => {
           console.log(err);
-          console.log("evan");
         });
     } else {
       setErrorMsg("Email Format Invalid");
     }
   };
 
-  if (JSON.parse(localStorage.getItem("userData"))) {
+  if (user.userId) {
     return <Redirect to="/createpin" />;
   }
 
@@ -142,5 +137,7 @@ const SignUp = () => {
     </div>
   );
 };
+
+
 
 export default SignUp;

@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useState } from "react";
 import Hero from "../component/Hero";
 import "../style/newLogin.css";
 import "../style/transfer.css";
@@ -6,32 +6,32 @@ import Pin from "../component/Pin"
 import axios from "axios";
 import { urlAPI } from "../asset/urls";
 import { Redirect } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { onLoginAction } from "../actions";
 
 const CreatePin = () => {
     const [pinValue, setPinValue] = useState("")
-    const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
     const user = useSelector(state => state.user)
 
+    const dispatch = useDispatch()
+
     const create = () => {
         if (user.userId) {
-            console.log(JSON.parse(localStorage.getItem('userData')).userPin)
             axios.put(urlAPI + `/user/update-pin/${user.userId}`, {pin: pinValue})
             .then(res => {
-                console.log(res.data)
-                localStorage.setItem('userData', JSON.stringify(res.data))
-                forceUpdate();
+                dispatch(onLoginAction(res.data))
             })
             .catch(err => console.log(err))
         }
     }
     
-    if(JSON.parse(localStorage.getItem('userData')).userPin){
+    if(user.userPin !== null ) {
         return <Redirect to='/pinSuccess'/>
     }
     return (
         <div className="login-container">
+            {console.log(user.userPin)}
             <Hero />
             <div className="login-right">
                 <div>

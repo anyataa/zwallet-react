@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import "../style/transfer.css";
 import "../style/navBar.css";
 import { Link } from "react-router-dom";
-import { formatRupiah } from "../global";
 import axios from "axios";
 import { urlAPI } from "../asset/urls";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { onTransfer } from "../actions";
 
 export const InputNominalTransfer = (props) => {
   const [data, setData] = useState([]);
@@ -13,8 +13,10 @@ export const InputNominalTransfer = (props) => {
   const [nominalTransfer, setNominalTransfer] = useState();
   const [noteTransfer, setNoteTransfer] = useState("");
 
-  const user = useSelector(state => state.user)
-  
+  const user = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
     setBalance(user.accountBalance);
     getFriendData();
@@ -24,26 +26,9 @@ export const InputNominalTransfer = (props) => {
     axios
       .get(urlAPI + `/user/getfriend/${props.match.params.id}`)
       .then((res) => {
-        console.log(res.data);
         setData(res.data);
       })
       .catch((err) => console.log(err));
-  };
-
-  const onContinue = () => {
-    if (nominalTransfer && noteTransfer) {
-      localStorage.setItem(
-        "transfer-data",
-        JSON.stringify({
-          id: props.match.params.id,
-          name: data.name,
-          phone: data.phone,
-          nominalTransfer,
-          noteTransfer,
-          balance: Balance - nominalTransfer,
-        })
-      );
-    }
   };
 
   return (
@@ -51,11 +36,7 @@ export const InputNominalTransfer = (props) => {
       <p className="transfer-primary-text">Transfer Money</p>
       <div className="transfer-item-wrapper">
         <img
-          src={
-            data.userImage
-              ? `https://randomuser.me/api/portraits/men/${data.id}.jpg`
-              : "https://i.ibb.co/FHLx6h9/default.png"
-          }
+          src={data.userImage ? urlAPI + `/files/download/${data.userImage}` : "https://i.ibb.co/FHLx6h9/default.png"}
           alt=""
           className="transfer-contact-image"
           width="70px"
@@ -132,7 +113,18 @@ export const InputNominalTransfer = (props) => {
             type="button"
             value="Continue"
             className="transfer-btn"
-            onClick={onContinue}
+            onClick={() =>
+              dispatch(
+                onTransfer({
+                  id: props.match.params.id,
+                  name: data.userName,
+                  phone: data.phoneNumber,
+                  nominalTransfer,
+                  noteTransfer,
+                  balance: Balance - nominalTransfer,
+                })
+              )
+            }
             disabled={
               nominalTransfer && noteTransfer && Balance - nominalTransfer > 0
                 ? false
