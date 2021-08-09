@@ -18,9 +18,9 @@ export const BankInstruction = () => {
             <Accordion.Item eventKey={`${index}`}>
               <Accordion.Header>{item.methods}</Accordion.Header>
               <Accordion.Body>
-                {item.steps.map((step) => (
+                {item.steps.map((step, stepIndex) => (
                   <ul style={{ listStyle: "none" }}>
-                    <li>{step}</li>
+                    <li> {`${stepIndex + 1} . ${step}`}</li>
                   </ul>
                 ))}
               </Accordion.Body>

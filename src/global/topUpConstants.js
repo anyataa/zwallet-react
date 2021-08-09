@@ -24,8 +24,59 @@ export const topUpOption = [
 ];
 
 export const bankTransferInstruction = [
-  { methods: "Via ATM", steps: ["a", "b", "c", "d"] },
-  { methods: "M-Banking", steps: ["a", "b", "c", "d"] },
-  { methods: "Internet Banking", steps: ["a", "b", "c", "d"] },
-  { methods: "SMS Banking", steps: ["a", "b", "c", "d"] },
+  {
+    methods: "Via ATM",
+    steps: [
+      "Go to the nearest ATM. ",
+      "Type your security number on the ATM .",
+      "Type the virtual account number that we provide you at the top.",
+      "Type the amount of the money you want to top up.",
+      "Read the summary details.",
+      "Press transfer / top up.",
+      "You can see your money in Zwallet within 3 hours.",
+      "Type your security number on the ATM .",
+    ],
+  },
+  {
+    methods: "M-Banking",
+    steps: [
+      "Go to your M-Banking Application",
+      "Type your security number on the M-Banking.",
+      "Choose Transfer to Virtual Account.",
+      "Type the virtual account number that we provide you at the top.",
+      "Type the amount of the money you want to top up.",
+      "Read the summary details.",
+      "Press transfer / top up.",
+      "You can see your money in Zwallet within 3 hours.",
+      "Type your security number on the M-Banking.",
+    ],
+  },
+  {
+    methods: "Internet Banking",
+    steps: [
+      "Go to your Internet Banking Application",
+      "Type your security number on the Internet Banking.",
+      "Choose Transfer to Virtual Account.",
+      "Type the virtual account number that we provide you at the top.",
+      "Type the amount of the money you want to top up.",
+      "Read the summary details.",
+      "Press transfer / top up.",
+      "You can see your money in Zwallet within 3 hours.",
+      "Type your security number on the Internet Banking.",
+    ],
+  },
+  {
+    methods: "SMS Banking",
+    steps: [
+      "Go to your SMS Application",
+      "Type your SMS Code for transfer transaction.",
+      "Choose methods for Transfer to Virtual Account.",
+      "Type the virtual account number that we provide you at the top.",
+      "Type the amount of the money you want to top up.",
+      "The SMS format as : methods (space) virtual account number (space) top up amount.",
+      "Press send to your SMS Banking number.",
+      "You can see your money in Zwallet within 3 hours.",
+      "Make sure you are using the registered phone number for SMS Banking Service so the transaction can be successfully excecuted.",
+    ],
+  },
 ];

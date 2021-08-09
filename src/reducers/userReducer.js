@@ -1,5 +1,6 @@
 const INITIAL_STATE = {
-  userId: 0,
+  // eslint-disable-next-line no-undef
+  userId: BigInt(0),
   userName: "",
   phoneNumber: "",
   userEmail: "",
@@ -21,13 +22,13 @@ export default (state = INITIAL_STATE, action) => {
         accountId: action.payload.accountId,
         accountBalance: action.payload.accountBalance,
         userPin: action.payload.userPin,
-        userImage: action.payload.userImage
+        userImage: action.payload.userImage,
       };
     case "UPDATE_BALANCE":
-      return {...INITIAL_STATE, accountBalance: action.payload}
+      return { ...INITIAL_STATE, accountBalance: action.payload };
     case "RESET":
-      return INITIAL_STATE
+      return INITIAL_STATE;
     default:
-      return state
+      return state;
   }
 };
