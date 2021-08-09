@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
-import { urlAPI } from "../asset/urls";
+import { urlAPI, urlFile } from "../asset/urls";
 import { connect } from "react-redux";
 import { onLoginAction } from "../actions";
 
@@ -101,6 +101,11 @@ class ImageInput extends React.Component {
 
     if (value) {
       style.backgroundImage = `url("${value}")`;
+      style.backgroundRepeat = "no-repeat";
+      style.backgroundPosition = "center";
+      style.backgroundSize = "cover";
+    } else if (user.userImage) {
+      style.backgroundImage = `url("${urlFile}/${user.userImage}")`;
       style.backgroundRepeat = "no-repeat";
       style.backgroundPosition = "center";
       style.backgroundSize = "cover";
