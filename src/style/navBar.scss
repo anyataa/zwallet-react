@@ -1199,6 +1199,7 @@
     margin: 0;
     padding: 0;
   }
+
   .profile-container {
     display: flex;
     justify-content: flex-start;
@@ -1274,4 +1275,50 @@
 
 .text-bold {
   font-weight: bold;
+}
+
+.modal-download {
+  position: absolute;
+  margin-left: -33vw;
+  margin-top: -26vh;
+  width: 133vw;
+  height: 206vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  color: black;
+  display: flex;
+  align-items: center;
+  ul {
+    list-style: none;
+    margin-top: -30rem;
+    align-items: center;
+    height: 60vh;
+    margin-top: -10vh;
+    // background-color: red;
+  }
+
+  .pin-confirmation-box {
+    padding-top: 10vh;
+    margin-top: 0vh;
+    margin-bottom: 85vh;
+    margin-left: 50vw;
+    height: 60vh;
+  }
+}
+
+.modal-button {
+  color: #6379f4;
+  background-color: #cfcde6;
+  border: none;
+  padding: 10px;
+  border-radius: 1rem;
+  width: 10rem;
+  font-size: 25px;
+  z-index: 100;
+  cursor: pointer;
+  position: absolute;
+}
+.modal-button:hover {
+  color: #6379f4;
+  background-color: #c9c5f6;
 }
