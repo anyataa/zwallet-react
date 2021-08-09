@@ -1,43 +1,42 @@
-import React, { useReducer, useState } from 'react'
-import { Footer } from '../component/Footer'
-import "../style/dashboard.css"
-import "../style/global.css"
-import "../style/navBar.css"
-import "../style/Font/style.css"
-import NavBar from "../component/NavBar"
-import Dashboard from "../component/Dashboard"
-import Pin from "../component/Pin"
-import axios from 'axios'
-import { urlAPI } from '../asset/urls'
-import { Link, Redirect } from 'react-router-dom'
-import { ModalStatus } from '../component/ModalStatus'
-import { FaCheckCircle, FaTimes } from 'react-icons/fa'
-import { useSelector } from 'react-redux'
+import React, { useReducer, useState } from "react";
+import { Footer } from "../component/Footer";
+import "../style/dashboard.css";
+import "../style/global.css";
+import "../style/navBar.css";
+import "../style/Font/style.css";
+import NavBar from "../component/NavBar";
+import Dashboard from "../component/Dashboard";
+import Pin from "../component/Pin";
+import axios from "axios";
+import { urlAPI } from "../asset/urls";
+import { Link, Redirect } from "react-router-dom";
+import { ModalStatus } from "../component/ModalStatus";
+import { FaCheckCircle, FaTimes } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { onLoginAction } from "../actions";
 
 const NewPin = () => {
-  const [pinValue, setPinValue] = useState("")
-  const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
-  const [showModal, setShowModal] = useState('none')
+  const [pinValue, setPinValue] = useState("");
+  const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
+  const [showModal, setShowModal] = useState("none");
 
-  const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const create = () => {
     if (user.userId) {
-      console.log(user.userPin)
-      axios.put(urlAPI + `/user/update-pin/${user.userId}`, {pin: pinValue})
-      .then(res => {
-        console.log(res.data)
-        localStorage.setItem('userData', JSON.stringify(res.data))
-        setShowModal('flex')
-        // forceUpdate();
-      })
-      .catch(err => console.log(err))
+      console.log(user.userPin);
+      axios
+        .put(urlAPI + `/user/update-pin/${user.userId}`, { pin: pinValue })
+        .then((res) => {
+          console.log(res.data, "pin only: ", res.data.userPin);
+          dispatch(onLoginAction({ ...user, userPin: res.data.userPin }));
+          setShowModal("flex");
+          // forceUpdate();
+        })
+        .catch((err) => console.log(err));
     }
-  }
-
-  // if(JSON.parse(localStorage.getItem('userData')).pin == pinValue) {
-  //   return <Redirect to='/profil'/>
-  // }
+  };
 
   return (
     <div className="container">
@@ -48,43 +47,54 @@ const NewPin = () => {
           <div className="set-to-left">
             <h1 className="col-dark-grey">Create New Pin</h1>
             <p className="col-grey">
-            Type your new 6 digits security PIN to use in Zwallet.
+              Type your new 6 digits security PIN to use in Zwallet.
             </p>
           </div>
         </div>
         <div className="row-pin-group">
           <div className="pin-group center-pin-group">
-            <Pin goTo='/profil' buttonValue="Change Pin" onClick={create} setPinValue={setPinValue}/>
+            <Pin
+              goTo="/profil"
+              buttonValue="Change Pin"
+              onClick={create}
+              setPinValue={setPinValue}
+            />
           </div>
         </div>
-        
       </div>
-         {/* <ModalStatus ></ModalStatus> */}
-         <div id="modal" style={{display: showModal }} >
-          {/* {console.log(props)} */}
-      <div className="pin-confirmation-box">
-        <div className="modal-close-icon-wrapper">
-          <p className="transfer-primary-text" />
-          <FaTimes className="modal-close-icon" ></FaTimes>
-          {/* {props.display} */}
+      {/* <ModalStatus ></ModalStatus> */}
+      <div id="modal" style={{ display: showModal }}>
+        {/* {console.log(props)} */}
+        <div className="pin-confirmation-box">
+          <div className="modal-close-icon-wrapper">
+            <p className="transfer-primary-text" />
+            <FaTimes className="modal-close-icon"></FaTimes>
+            {/* {props.display} */}
+          </div>
+          <div className="transfer-pin-input-wrapper">
+            <FaCheckCircle className="col-green" size="100"></FaCheckCircle>
+          </div>
+          <div className="success-change-password">
+            <h1> Success!</h1>
+          </div>
+          <Link
+            style={{ textDecoration: "none", marginLeft: "60%" }}
+            to="/dashboard"
+          >
+            <input
+              type="button"
+              defaultValue="Done"
+              className="transfer-btn"
+              id="back-to-profile"
+              onClick
+            />
+          </Link>
         </div>
-        <div className="transfer-pin-input-wrapper">
-          <FaCheckCircle className='col-green' size='100'></FaCheckCircle>
-         
-        </div>
-        <div className="success-change-password">
-          <h1> Success!</h1>
-        </div>
-        <Link style={{textDecoration:'none', marginLeft:'60%'}} to='/dashboard'>
-        <input type="button" defaultValue="Done" className="transfer-btn" id="back-to-profile" onClick />
-        </Link>  
       </div>
-    </div>
-          {/* Done  */}
+      {/* Done  */}
       <Footer />
     </div>
+  );
+};
 
-  )
-}
-
-export default NewPin
+export default NewPin;
