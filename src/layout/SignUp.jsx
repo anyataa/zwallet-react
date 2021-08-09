@@ -1,11 +1,13 @@
 import React, { useReducer, useState } from "react";
-import { Link, Redirect } from 'react-router-dom'
-import { emailValidation, setGraphData, setTransactionData } from '../global'
+import { Link, Redirect } from "react-router-dom";
+import { emailValidation, setGraphData, setTransactionData } from "../global";
 import InputAuth from "../component/InputAuth";
-import Button from '../component/Button'
-import Hero from '../component/Hero'
+import Button from "../component/Button";
+import Hero from "../component/Hero";
 import axios from "axios";
-import { urlAPI } from "../asset/urls"
+
+import { urlAPI } from "../asset/urls";
+import { useSelector } from "react-redux";
 
 const SignUp = () => {
   const [username, setUsername] = useState();
@@ -15,9 +17,11 @@ const SignUp = () => {
 
   const [isVisible, setIsVisible] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
-  const [errorMsg, setErrorMsg] = useState('');
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
+  const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
+
+  const user = useSelector((state) => state.user);
 
   const buttonHandler = () => {
     if (username && email && password && phone) {
@@ -28,80 +32,42 @@ const SignUp = () => {
   };
 
   const onRegister = () => {
-    if(emailValidation(email)){
+    if (emailValidation(email)) {
       var body = {
-        username, 
+        username,
         email,
         password,
-        phoneNumber : phone[0] == 0 ? phone : '0' + phone
-      }
-      axios.post(`${urlAPI}/user/signup`, body)
-      .then(res => {
-        console.log(res.data)
-        if (res.data.message.includes('created')) {
-          localStorage.setItem('userData', JSON.stringify(res.data.data))
+        phoneNumber: phone[0] == 0 ? phone : "0" + phone,
+      };
+      axios
+        .post(`${urlAPI}/user/signup`, body)
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.message.includes("created")) {
+            localStorage.setItem("userData", JSON.stringify(res.data.data));
             // Called when sign up too
-        if(JSON.parse(localStorage.getItem("userData")) ){
-          setTransactionData(JSON.parse(localStorage.getItem("userData")).accountId);
-          setGraphData(JSON.parse(localStorage.getItem("userData")).accountId)
-          console.log("in")
-          
-          
-        }
-          forceUpdate();
-        }else{
-          setErrorMsg(res.data.message)
-        }
-      })
-      .catch(err => {
-        console.log(err)
-        console.log("evan")
-      })
-    }else{
-      setErrorMsg('Email Format Invalid')
-    }
 
-    // if(emailValidation(email)){
-    //   axios.get(`http://localhost:4000/user?email=${email}`)
-    //   .then(res => {
-    //     if(res.data.length > 0){
-    //       console.log('masuk')
-    //       setErrorMsg('Email is not available, please try another email!')
-    //     }else{
-    //       axios.get('http://localhost:4000/user')
-    //       .then(res => {
-    //         axios.post('http://localhost:4000/user', {
-    //           id: res.data[res.data.length-1].id + 1,
-    //           email,
-    //           password,
-    //           name: "",
-    //           username,
-    //           phone: '',
-    //           image: '',
-    //           pin: '000000',
-    //           balance: 0
-    //         })
-    //         .then(res => {
-    //           console.log(res.data)
-    //           localStorage.setItem('userData', JSON.stringify(res.data))
-    //           forceUpdate();
-    //         })
-    //         .catch(err => {
-    //           console.log(err)
-    //         })
-    //       })
-    //     }
-    //   })
-    //   .catch(err => {
-    //     console.log(err)
-    //   })
-    // }else{
-    //   setErrorMsg('Email Format Invalid')
-    // }
-  }
-  
-  if(JSON.parse(localStorage.getItem('userData'))){
-    return <Redirect to='/createpin'/>
+            if (user.accountId) {
+              setTransactionData(user.accountId);
+              setGraphData(user.accountId);
+              console.log("in");
+            }
+            forceUpdate();
+          } else {
+            setErrorMsg(res.data.message);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          console.log("evan");
+        });
+    } else {
+      setErrorMsg("Email Format Invalid");
+    }
+  };
+
+  if (user.userId) {
+    return <Redirect to="/createpin" />;
   }
 
   return (
@@ -153,24 +119,28 @@ const SignUp = () => {
           placeholder="Enter your phone number"
           onKeyUp={buttonHandler}
         />
-        <Link to='/resetPassword' className="text" style={{ textDecoration: "none" }}>
+        <Link
+          to="/resetPassword"
+          className="text"
+          style={{ textDecoration: "none" }}
+        >
           Forgot Password?
         </Link>
         <div>
-          {
-            errorMsg ? <p className="text-validation">{errorMsg}</p> : null
-          }
+          {errorMsg ? <p className="text-validation">{errorMsg}</p> : null}
           <Button disabled={isDisabled} onClick={onRegister}>
             Sign Up
           </Button>
         </div>
         <p className="bottom-text">
           Already have an account? Let’s&nbsp;
-          <Link to='/login' style={{ textDecoration: "none" }}>Login</Link>
+          <Link to="/login" style={{ textDecoration: "none" }}>
+            Login
+          </Link>
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SignUp
+export default SignUp;

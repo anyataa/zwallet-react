@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { urlAPI } from "../asset/urls";
 import Dashboard from "../component/Dashboard";
 import { Footer } from "../component/Footer";
@@ -9,12 +10,14 @@ import NavBar from "../component/NavBar";
 export const SeeAllFriends = () => {
   const [friendsData, setFriendsData] = useState([]);
 
+  const user = useSelector(state => state.user)
+
   useEffect(() => {
     getFriends();
   }, []);
 
   const getFriends = () => {
-    axios.get(urlAPI + `/friends/${JSON.parse(localStorage.getItem("userData")).userId}`)
+    axios.get(urlAPI + `/friends/${user.userId}`)
     .then(res => setFriendsData(res.data))
     .catch(err => console.log(err))
   }

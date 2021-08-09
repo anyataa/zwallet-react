@@ -7,43 +7,37 @@ import axios from "axios";
 import Button from "../../component/Button";
 import { AiOutlineSearch } from "react-icons/ai";
 import { urlAPI } from "../../asset/urls";
-
+import { useSelector } from "react-redux";
 
 const PartnerList = () => {
-  const [data, setData] = useState([])
-  const [searchValue, setSearchValue] = useState('')
-  const [Partner, setPartner] = useState([])
+  const [data, setData] = useState([]);
+  const user = useSelector((state) => state.user);
+
+  // const [searchValue, setSearchValue] = useState("");
+  // const [Partner, setPartner] = useState([]);
 
   useEffect(() => {
-    // fetchProfile()
-    fetchContact()
-  }, [])
+    fetchContact();
+  }, []);
 
-  const fetchProfile = () => {
-    if (localStorage.getItem("friends-data")) {
-      setData(JSON.parse(localStorage.getItem("friends-data")));
+  const fetchContact = () => {
+    if (user.userId > 0) {
+      axios
+        .get(`${urlAPI}/user/bank`)
+        .then((res) => {
+          console.log(res.data);
+          setData(res.data.data);
+        })
+        .catch((err) => console.log(err));
     }
   };
 
-  
-  const fetchContact = () => {
-    if (localStorage.getItem("userData")) {
-      // axios.get(`http://localhost:8080/zwallet-api/friends/${JSON.parse(localStorage.getItem("userData")).userId}`)
-      axios.get(`${urlAPI}/user/bank`)
-      .then(res => {
-        console.log(res.data)
-        setData(res.data.data)
-      })
-      .catch(err => console.log(err))
-    }
-  }
-
   const renderContact = () => {
-    if(data.length > 0){
-      console.log(data)
+    if (data.length > 0) {
+      console.log(data);
       return data.map((bank, index) => {
-        if(bank.username.toLowerCase().includes(searchValue.toLowerCase())){
-          return(
+        if (bank.username) {
+          return (
             <Link
               to={`/retrieval/${bank.username}`}
               style={{ textDecoration: "none" }}
@@ -51,7 +45,11 @@ const PartnerList = () => {
             >
               <div className="transfer-item-wrapper">
                 <img
-                  src={bank.username ? `https://randomuser.me/api/portraits/men/${bank.username}.jpg` : "https://i.ibb.co/FHLx6h9/default.png"}
+                  src={
+                    bank.username
+                      ? `https://randomuser.me/api/portraits/men/${bank.username}.jpg`
+                      : "https://i.ibb.co/FHLx6h9/default.png"
+                  }
                   alt="friend profile"
                   className="transfer-contact-image"
                   width={"60px"}
@@ -62,22 +60,31 @@ const PartnerList = () => {
                 </div>
               </div>
             </Link>
-          )
+          );
         }
-      })
-    }else{
-      return <h1 style={{margin: 'auto'}}>Couldn't Load The Partners Data<br/><br/>Please Check Your Internet Connection</h1>
+      });
+    } else {
+      return (
+        <h1 style={{ margin: "auto" }}>
+          Couldn't Load The Partners Data
+          <br />
+          <br />
+          Please Check Your Internet Connection
+        </h1>
+      );
     }
-  }
+  };
 
   return (
-    <div className='right'>
-      <div style={{display: 'flex', justifyContent: "space-between"}}>
-        <p className="transfer-primary-text" style={{margin: '30px 0'}}>Choose Your Retrieval Methods</p>
+    <div className="right">
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <p className="transfer-primary-text" style={{ margin: "30px 0" }}>
+          Choose Your Retrieval Methods
+        </p>
       </div>
       {renderContact()}
     </div>
-  )
-}
+  );
+};
 
-export default PartnerList
+export default PartnerList;

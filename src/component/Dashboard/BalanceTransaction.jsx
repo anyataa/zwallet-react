@@ -1,23 +1,32 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import { inRupiah, setTransactionData } from '../../global'
 import { Link } from 'react-router-dom'
+import { urlAPI } from '../../asset/urls'
+import axios from 'axios'
+import { useSelector } from 'react-redux'
 
-export const BalanceTransaction = (props) => {
+export const BalanceTransaction = () => {
     const [Transaction, setTransaction] = useState([])
     const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
+
+    const user = useSelector(state => state.user)
+
     useEffect(() => {
-      if(JSON.parse(localStorage.getItem("userData")) &&JSON.parse(localStorage.getItem("transaction-data")) ){
-        // setTransactionData(JSON.parse(localStorage.getItem("userData")).accountId);
-        setTransaction(JSON.parse(localStorage.getItem("transaction-data")).listTransaction);
-        // console.log(JSON.parse(localStorage.getItem("transaction-data")).listTransaction[0])
-        forceUpdate()
-      }
+      getTransaction()
     }, [])
+
+    const getTransaction = () => {
+      axios.get(`${urlAPI}/transaction/${user.accountId}`)
+      .then((res) => {
+        setTransaction(res.data.listTransaction)
+      })
+      .catch((err) => console.log(err))
+    }
 
     const renderTransaction = () => {
       if(Transaction){
-        return Transaction.slice(props.start, props.end).map(item => (  
-          <div className="custom-profile-view">
+        return Transaction.slice(0, 4).map((item, idx) => (
+          <div className="custom-profile-view" key={idx}>
             <div className="profile-container">
               <div className="profile-img">
                 <img src={item.userImage ? item.userImage : "https://i.ibb.co/FHLx6h9/default.png"} alt="" />
@@ -47,8 +56,8 @@ export const BalanceTransaction = (props) => {
     }
 
     return (
-      <div className="contact-list-container">
-        {renderTransaction()}
+      <div className="contact-list-container" style={{height:'30rem'}}>
+         <div className="overflow-auto">{renderTransaction()}</div>
       </div>
       // Transaction Details
       //  1 : Transfer

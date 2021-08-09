@@ -190,6 +190,28 @@
   color: #6379f4;
 }
 
+.card-notification-button {
+  background-color: #6379f4;
+  padding: 20px 20px;
+  width: 100%;
+  height: 2rem;
+  border-radius: 20px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  //   background-color: greenyellow;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 2rem;
+  transition: 0.5s ease;
+  cursor: pointer;
+  h2 {
+    color: #ffffff;
+  }
+}
+.card-notification-button:hover {
+  transform: scale(1.05);
+}
 .card-notification {
   padding: 20px 20px;
   width: 90%;
@@ -287,8 +309,8 @@
     height: 1.7rem;
     margin: 20px;
     width: 103%;
-
     background-color: white;
+
     box-shadow: 0px 4px 20px rgba(0, 0, 20, 0.1);
     transition: 0.5s ease;
   }
@@ -505,16 +527,9 @@
   li {
     list-style: none;
   }
-  .profile-data {
-    // background-color: violet;
-  }
+
   .custom-profile-view {
     margin-bottom: 50px;
-    // background-color: green;
-    h2 {
-      // background-color: grey;
-      // width: 1rem;
-    }
   }
   ul {
     margin: 0;
@@ -580,7 +595,9 @@
   display: flex;
   margin-top: calc(2rem + 10vh);
 }
-
+.full-name {
+  width: 5rem;
+}
 .right-personal-information {
   width: 65%;
   // margin-top: 2rem;
@@ -728,6 +745,7 @@
     width: 100%;
     // height: 10%;
   }
+
   p {
     margin-top: -0.5rem;
   }
@@ -832,6 +850,10 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  input {
+    // background-color: purple;
+    width: 30rem;
+  }
 
   a {
     margin-top: 20px;
@@ -843,9 +865,7 @@
     color: #221619;
   }
 }
-.button-trash {
-  // margin-left: -100rem;
-}
+
 // Change Password
 .bottom-personal-information-container2 {
   // background-color: plum;

@@ -12,16 +12,19 @@ import { urlAPI } from '../asset/urls'
 import { Link, Redirect } from 'react-router-dom'
 import { ModalStatus } from '../component/ModalStatus'
 import { FaCheckCircle, FaTimes } from 'react-icons/fa'
+import { useSelector } from 'react-redux'
 
 const NewPin = () => {
   const [pinValue, setPinValue] = useState("")
   const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
   const [showModal, setShowModal] = useState('none')
 
+  const user = useSelector(state => state.user)
+
   const create = () => {
-    if (localStorage.getItem("userData")) {
-      console.log(JSON.parse(localStorage.getItem('userData')).userPin)
-      axios.put(urlAPI + `/user/update-pin/${JSON.parse(localStorage.getItem("userData")).userId}`, {pin: pinValue})
+    if (user.userId) {
+      console.log(user.userPin)
+      axios.put(urlAPI + `/user/update-pin/${user.userId}`, {pin: pinValue})
       .then(res => {
         console.log(res.data)
         localStorage.setItem('userData', JSON.stringify(res.data))
@@ -32,9 +35,10 @@ const NewPin = () => {
     }
   }
 
-  if(JSON.parse(localStorage.getItem('userData')).pin == pinValue) {
-    return <Redirect to='/profil'/>
-  }
+  // if(JSON.parse(localStorage.getItem('userData')).pin == pinValue) {
+  //   return <Redirect to='/profil'/>
+  // }
+
   return (
     <div className="container">
       <Dashboard />

@@ -18,10 +18,9 @@ import TransferStatus from "./layout/TransferStatus";
 import ProfileListLayout from "./layout/ProfileListLayout";
 import { LoginQR } from "./layout/LoginQR";
 import RetrievalLayout from "./layout/RetrievalPage/RetrievalLayout";
-
 import MailForPassword from "./layout/MailForPassword";
-
 import { TopUpLanding } from "./layout/TopUp/TopUpLayout";
+import PaymentLayout from "./layout/Payment/PaymentLayout";
 
 // import ListContact from "./component/ListContact";
 // import ManagePhone from "./layout/ManagePhone";
@@ -39,6 +38,7 @@ function App() {
       by the person in charge, feel free to add more. Yet pls do not delete. 
       If you need to do so. Pls informed in the group */}
       <Switch>
+        <Route path={"/billing"} component={PaymentLayout} />
         <Route path={"/retrieval"} component={RetrievalLayout} />
         <Route path="/transfer" component={TransferListLayout} />
         <Route path="/profil" component={ProfileListLayout} />
