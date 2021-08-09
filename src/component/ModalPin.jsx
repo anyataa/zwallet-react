@@ -3,14 +3,13 @@ import React, { useState, useRef, useEffect } from "react";
 import { useReducer } from "react";
 import { FaTimes } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { onLoginAction } from "../actions";
 import { urlAPI } from "../asset/urls";
-import { pinHandler, setTransactionData } from "../global";
+import { setTransactionData } from "../global";
 
 export const ModalPin = ({ modalToggle, setModalToggle }) => {
   //   Pin control
-  const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
   const [pin1Value, setPin1Value] = useState("");
   const [pin2Value, setPin2Value] = useState("");
   const [pin3Value, setPin3Value] = useState("");
@@ -26,118 +25,55 @@ export const ModalPin = ({ modalToggle, setModalToggle }) => {
   const pin6Ref = useRef();
 
   // =========== Transfer ================
-  const [pin, setPin] = useState("");
-  const [data, setData] = useState([]);
-  const [transferData, setTransferData] = useState([]);
-  // const [user, setAccountData] = useState({});
   const [message, setMessage] = useState("");
 
   const user = useSelector((state) => state.user);
+  const transfer = useSelector(state => state.transfer)
   
   const dispatch = useDispatch()
 
+
   useEffect(() => {
-    setTransferData(JSON.parse(localStorage.getItem("transfer-data")));
+    // setTransferData(JSON.parse(localStorage.getItem("transfer-data")));
   }, []);
-
+  
   const onTransfer = () => {
-    if (transferData && user) {
-      console.log("pin", PinValue);
+    if (transfer && user) {
       var body = {
-        //==================== Pin Data Where ========================
-        transactionAmount: transferData.nominalTransfer,
-        transactionNotes: transferData.noteTransfer,
-        fromAccountId: user.accountId,
-        toUserId: transferData.id,
-        userPin: PinValue,
-      };
-      axios
-        .post(urlAPI + "/transaction/transfer", body)
-        .then((res) => {
-          console.log(res);
-          if (res.data.message.includes("Sorry")) {
-            setMessage(res.data.message);
-            // redirectTo(0);
-            console.log(redirectTo(0));
-            return;
-          } else if (res.data.message.includes("Success")) {
-            redirectTo(1);
-            
-            dispatch(onLoginAction({...user, accountBalance: res.data.data.fromAccountBalance}))
-            
-            setTransactionData(user.accountId);
-            setMessage("");
-            // forceUpdate();
-            setModalToggle();
-            return;
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-    console.log("transfer in", transferData.id);
-  };
+          //==================== Pin Data Where ========================
+          transactionAmount: transfer.nominalTransfer,
+          transactionNotes: transfer.noteTransfer,
+          fromAccountId: user.accountId,
+          toUserId: transfer.id,
+          userPin: pin1Value + pin2Value + pin3Value + pin4Value + pin5Value + pin6Value,
+        };
+      axios.post(urlAPI + "/transaction/transfer", body)
+      .then((res) => {
+        if (res.data.message.includes("Sorry")) {
+          setMessage(res.data.message);
+        } else if (res.data.message.includes("Success")) {
+          dispatch(onLoginAction({...user, accountBalance: res.data.data.fromAccountBalance}))
+          
+          setTransactionData(user.accountId);
+          setModalToggle();
+          setMessage(res.data.message);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setMessage("Sorry, something went wrong...");
 
-  const [BorderColor, setBorderColor] = useState("rgba(66, 63, 63, 0.4");
-  const [ButtonDisabled, setButtonDisabled] = useState(true);
-  const [PinValue, setPinValue] = useState("");
-  const [PinTotal, setPinTotal] = useState(() => [
-    { value: null },
-    { value: null },
-    { value: null },
-    { value: null },
-    { value: null },
-    { value: null },
-  ]);
-
-  const validatePin = () => {
-    let pinUser = "123456";
-    let pinInput =
-      pin1Value + pin2Value + pin3Value + pin4Value + pin5Value + pin6Value;
-    if (pinUser == pinInput) {
-      console.log("masuk", pin);
-    } else {
-      console.log("no", pin);
+      });
     }
   };
 
-  const redirectTo = (isError) => {
-    let pinInput =
-      pin1Value + pin2Value + pin3Value + pin4Value + pin5Value + pin6Value;
-    setPinValue(pinInput);
-    console.log(PinValue);
-    if (isError == 1) {
-      return "/transfer/status/failed";
-    } else if (isError == 0) {
-      return "/transfer/status/success";
-    }
-  };
 
-  const pinHandler = (e, index) => {
-    if (e.target.value != null) {
-      let current = PinTotal;
-      current[index] = { value: e.target.value };
-      setPinTotal(current);
-      setBorderColor("#6379F4");
-      let pin =
-        PinTotal[0].value +
-        PinTotal[1].value +
-        PinTotal[2].value +
-        PinTotal[3].value +
-        PinTotal[4].value +
-        PinTotal[5].value;
-      //   console.log(pin)
-      if (pin.length == 6) {
-        setPinValue(pin);
-        setButtonDisabled(false);
-        console.log("pin Valueee", PinValue);
-      } else {
-        setButtonDisabled(true);
-      }
-    }
-  };
 
+  if(message.includes("something went wrong")){
+    return <Redirect to="/transfer/status/failed"/>
+  }else if(message.includes("Success")){
+    return <Redirect to="/transfer/status/success"/>
+  }
   return (
     // set display to flex for debugging
     <div id="modal" style={{ display: modalToggle ? "flex" : "none" }}>
@@ -265,7 +201,7 @@ export const ModalPin = ({ modalToggle, setModalToggle }) => {
           />
         </div>
 
-        <Link to={redirectTo}>
+        <Link >
           <input
             type="button"
             value="Continue"

@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../style/navBar.css";
 import { FaArrowDown, FaArrowUp, FaBell } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -8,7 +8,6 @@ import { setTransactionData } from "../global";
 import { urlAPI, urlFile } from "../asset/urls";
 
 export default function NavBar() {
-  const [UserData, setUserData] = useState(null);
 
   const [Today, setToday] = useState([]);
   const [Week, setWeek] = useState([]);
@@ -131,8 +130,8 @@ export default function NavBar() {
               <p className="detail-notif-duration">This Week</p>
               {Week && Week.length > 0 ? (
                 Week.slice(0, 2).map((transaction, idx) => (
-                  <li>
-                    <div className="card-notification" key={idx}>
+                  <li key={idx}>
+                    <div className="card-notification">
                       {transaction.transactionType > 0 ? (
                         <i className="fa fa-arrow-down">
                           <FaArrowDown></FaArrowDown>

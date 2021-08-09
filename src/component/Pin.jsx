@@ -19,7 +19,7 @@ export const Pin = ({ setPinValue, onClick, buttonValue }) => {
     ]))
 
         const validatePin = () => {
-            console.log("in")
+            // console.log("in")
           // let pinUser='123456'
           // if (pinUser == PinValue ){
           //     console.log('true In')
@@ -33,15 +33,12 @@ export const Pin = ({ setPinValue, onClick, buttonValue }) => {
             if (e.target.value != null) {
               let current = PinTotal
               current[index]={value:e.target.value}
-            //   console.log("current",current)
-            //   console.log("pinTotal",current)
               setPinTotal(current)
               setBorderColor("#6379F4")
               let pin = PinTotal[0].value+PinTotal[1].value+PinTotal[2].value+PinTotal[3].value+PinTotal[4].value+PinTotal[5].value
-            //   console.log(pin)
+
               if (pin.length==6){
                 setPinValue(pin)
-                // console.log("This is Pin Value:",PinValue)
                 setButtonDisabled(false)
               } else {
                 setButtonDisabled(true)

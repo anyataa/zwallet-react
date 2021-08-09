@@ -4,29 +4,27 @@ import SuccessLogo from '../asset/image/images/success.svg'
 import FailedLogo from '../asset/image/images/failed.svg'
 import { urlAPI } from '../asset/urls'
 import axios from 'axios'
+import { useSelector } from 'react-redux'
 
 const TransferStatus = ({match}) => {
   const [isSuccess, setIsSuccess] = useState(true)
-  const [data, setData] = useState({})
-  const [userData, setUserData] = useState()
-
+  const [userData, setUserData] = useState({})
+  const transfer = useSelector(state => state.transfer)
 
   useEffect(() => {
     setIsSuccess(match.params.status == 'success' ? true : false)
-    setData(JSON.parse(localStorage.getItem('transfer-data')))
-    console.log(JSON.parse(localStorage.getItem('transfer-data')))
     getFriendData()
   }, [match.params.status])
-
+  
   const getFriendData = () => {
-    axios.get(urlAPI + `/user/getfriend/${data.id}`)
+    axios.get(urlAPI + `/user/getfriend/${transfer.id}`)
     .then(res => {
-      console.log(res.data)
+      // console.log(res.data)
       setUserData(res.data)
     })
     .catch(err => console.log(err))
   }
-
+  
   return (
     <div className='right'>
       <div className="transfer-right-top">
@@ -34,7 +32,7 @@ const TransferStatus = ({match}) => {
           src={isSuccess ? SuccessLogo : FailedLogo}
           alt=""
           className="success-failed-image"
-        />
+          />
         <p className="transfer-primary-text">{isSuccess ? 'Transfer Success' : 'Transfer Failed'}</p>
         {
           isSuccess ? null : <p className="transfer-secondary-text">We can’t transfer your money at the moment, we recommend you to check your internet connection and try again.</p>
@@ -43,11 +41,11 @@ const TransferStatus = ({match}) => {
       </div>
       <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
         <p className="transfer-secondary-text">Amount</p>
-        <p className="transfer-primary-text">Rp {data.nominalTransfer}</p>
+        <p className="transfer-primary-text">Rp {transfer.nominalTransfer}</p>
       </div>
       <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
         <p className="transfer-secondary-text">Balance Left</p>
-        <p className="transfer-primary-text">Rp {data.balance}</p>
+        <p className="transfer-primary-text">Rp {transfer.balance}</p>
       </div>
       <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
         <p className="transfer-secondary-text">Date & Time</p>
@@ -55,24 +53,24 @@ const TransferStatus = ({match}) => {
       </div>
       <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
         <p className="transfer-secondary-text">Notes</p>
-        <p className="transfer-primary-text">{data.noteTransfer}</p>
+        <p className="transfer-primary-text">{transfer.noteTransfer}</p>
       </div>
       <p className="transfer-primary-text">Transfer To</p>
       <div className="transfer-item-wrapper">
         <img
-          src={`https://randomuser.me/api/portraits/men/${data.id}.jpg`}
+          src={ userData.userImage ? urlAPI + `/files/download/${userData.userImage}` : "https://i.ibb.co/FHLx6h9/default.png"}
           alt=""
           className="transfer-contact-image"
-        />
+          />
         <div className="transfer-contact">
-          <p className="transfer-primary-text">{data.userName ? data.userName : "Samuel Suhi"}</p>
-          <p className="transfer-secondary-text">{data.phoneNumber ? data.phoneNumber : "082222222222"}</p>
+          <p className="transfer-primary-text">{userData.userName ? userData.userName : "Connection Error"}</p>
+          <p className="transfer-secondary-text">{userData.phoneNumber ? userData.phoneNumber : "Connection Error"}</p>
         </div>
       </div>
       <div className="transfer-right-bottom-wrapper">
         {
           isSuccess ? 
-            <button className="transfer-download-btn">
+          <button className="transfer-download-btn">
               <img src={require("../asset/image/images/share.svg").default} alt="" />
             </button>
             : null
