@@ -56,7 +56,7 @@ const BalanceSeeAll = () => {
     <div className="profile-bottom-container">
       {/* Left */}
       <div className="left-dash-bottom-container">
-        \{renderIncomeOutcome()}
+        {renderIncomeOutcome()}
         <div className="chart-wrapper">
           <DynamicChart></DynamicChart>
         </div>
