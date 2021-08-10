@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { updateAccountBalance } from "../../actions";
+import { onLoginAction, updateAccountBalance } from "../../actions";
 import { urlAPI } from "../../asset/urls";
 import { setTransactionData } from "../../global";
 
@@ -31,17 +31,10 @@ export const RetrieveConfirmation = ({ setDisplay, display }, props) => {
         if (res.data != null) {
           console.log(res.data.data);
           let resBalance = res.data.data.balance;
-          setDisplay();
           setTransactionData(user.accountId);
           if (resBalance) {
-            dispatch(resBalance);
-            // localStorage.setItem(
-            //   "userData",
-            //   JSON.stringify({
-            //     ...JSON.parse(localStorage.getItem("userData")),
-            //     accountBalance: res,
-            //   })
-            // );
+            dispatch(onLoginAction({ ...user, accountBalance: resBalance }));
+            setDisplay();
           }
         }
       })

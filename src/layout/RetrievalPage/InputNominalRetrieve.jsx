@@ -4,6 +4,7 @@ import "../../style/navBar.css";
 import { Link } from "react-router-dom";
 import { formatRupiah } from "../../global";
 import { useSelector } from "react-redux";
+import { urlFile } from "../../asset/urls";
 
 export const InputNominalRetrieve = (props) => {
   const user = useSelector((state) => state.user);
@@ -43,8 +44,8 @@ export const InputNominalRetrieve = (props) => {
       <div className="transfer-item-wrapper">
         <img
           src={
-            data.userImage
-              ? `https://randomuser.me/api/portraits/men/${data.id}.jpg`
+            BankName
+              ? `${urlFile}/${BankName}.png`
               : "https://i.ibb.co/FHLx6h9/default.png"
           }
           alt=""
