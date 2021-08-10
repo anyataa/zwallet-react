@@ -71,10 +71,10 @@ const ManagePhone = () => {
                   borderRadius: "10px",
                   marginBottom: "5px",
                   cursor: "pointer",
+                  textAlign: "center",
                 }}
               >
-                {" "}
-                Set As Primary{" "}
+                Set As Primary
               </div>
             )}
             {phone.primary ? <p className="col-grey">Primary</p> : null}
@@ -82,7 +82,8 @@ const ManagePhone = () => {
             <input
               className="col-dark-grey"
               type="number"
-              value={phone.phoneNumber}
+              value={phone.phoneNumber.slice(1, phone.phoneNumber.length)}
+              disabled
             />
             <h3 className="col-dark-grey">+62</h3>
             {/* <button className="col-grey button-trash" ><FiTrash/></button> */}

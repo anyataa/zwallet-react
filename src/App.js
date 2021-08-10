@@ -65,7 +65,7 @@ function App() {
         <Route path="/logIn" component={Login} />
         <Route path="/signUp" component={SignUp} />
         <Route path="/resetPassword" component={ResetPassword} />
-        <Route path="/createNewPassword" component={CreateNewPassword} />
+        <Route path="/createNewPassword/:id" component={CreateNewPassword} />
         <Route path="/pinSuccess" component={PinSuccess} />
         <Route path="/createPin" component={CreatePin} />
         <Route path="/mailForPassword" component={MailForPassword} />

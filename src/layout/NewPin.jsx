@@ -58,6 +58,7 @@ const NewPin = () => {
               buttonValue="Change Pin"
               onClick={create}
               setPinValue={setPinValue}
+              pinValue={pinValue}
             />
           </div>
         </div>

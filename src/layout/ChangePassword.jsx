@@ -16,10 +16,9 @@ import { FaCheckCircle, FaTimes } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
 const ChangePassword = (props) => {
-  console.log("props", props);
-  const [password, setPassword] = useState();
-  const [newPassword, setNewPassword] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
+  const [password, setPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [isVisible, setIsVisible] = useState(false);
   const [isNewVisible, setIsNewVisible] = useState(false);
   const [isConfirmVisible, setIsConfirmVisible] = useState(false);
@@ -34,26 +33,33 @@ const ChangePassword = (props) => {
     } else {
       setIsDisabled(true);
     }
-    console.log(isDisabled);
   };
 
   const onChangePass = () => {
-    var body = {
-      currentPass: password,
-      newPass: newPassword,
-      confirmPass: confirmPassword,
-    };
-    axios
-      .put(urlAPI + `/user/change-password/${user.userId}`, body)
-      .then((res) => {
-        console.log(res.data);
-
-        props.setDisplay(true);
-      })
-      .catch((err) => {
-        setMsg("Invalid Current Password!");
-        console.log("masuk ke error");
-      });
+    if(newPassword.length >= 8){
+      if(confirmPassword == newPassword){
+        var body = {
+          currentPass: password,
+          newPass: newPassword
+        };
+        axios.put(urlAPI + `/user/change-password/${user.userId}`, body)
+        .then((res) => {
+          console.log(res.data)
+          if(res.data == "Error"){
+            setMsg("Invalid Current Password!");
+          }else{
+            props.setDisplay(true);
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        });
+      }else{
+        setMsg("Password do not match.");
+      }
+    }else{
+      setMsg("Password must be at least 8 characters.");
+    }
   };
 
   return (
