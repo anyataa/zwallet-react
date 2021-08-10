@@ -22,7 +22,7 @@ export default function NavBar() {
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    getTransactionData();
+    // getTransactionData();
   }, []);
 
   const getTransactionData = () => {

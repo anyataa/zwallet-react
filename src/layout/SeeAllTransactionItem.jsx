@@ -16,7 +16,7 @@ export const SeeAllTransactionItem = (props) => {
   const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
   useEffect(() => {
     if (user.userId != "") {
-      getTransactionData();
+      // getTransactionData();
     }
   }, []);
 

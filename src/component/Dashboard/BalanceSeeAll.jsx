@@ -14,7 +14,7 @@ const BalanceSeeAll = () => {
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    getTransactionData();
+    // getTransactionData();
   }, []);
 
   const getTransactionData = () => {
