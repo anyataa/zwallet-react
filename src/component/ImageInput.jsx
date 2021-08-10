@@ -106,11 +106,12 @@ class ImageInput extends React.Component {
       style.backgroundRepeat = "no-repeat";
       style.backgroundPosition = "center";
       style.backgroundSize = "cover";
-    } else if (user.userImage) {
+    } else if (user.userImage !== "") {
       style.backgroundImage = `url("${urlFile}/${user.userImage}")`;
       style.backgroundRepeat = "no-repeat";
       style.backgroundPosition = "center";
       style.backgroundSize = "cover";
+      console.log(user.userImage);
     }
 
     return (
