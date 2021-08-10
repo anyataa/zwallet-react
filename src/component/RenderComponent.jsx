@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 
 export class ComponentToPrint extends React.PureComponent {
   render() {
@@ -14,13 +15,17 @@ export class ComponentToPrint extends React.PureComponent {
             <li>
               <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
                 <p className="transfer-secondary-text">Amount</p>
-                <p className="transfer-primary-text">Sabaraha</p>
+                <p className="transfer-primary-text">
+                  {this.props.nominalTransfer}
+                </p>
               </div>
             </li>
             <li>
               <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
                 <p className="transfer-secondary-text">Notes</p>
-                <p className="transfer-primary-text">Notes Transfernya Apa</p>
+                <p className="transfer-primary-text">
+                  {this.props.nominalTransfer}
+                </p>
               </div>
             </li>
           </ul>
@@ -29,3 +34,11 @@ export class ComponentToPrint extends React.PureComponent {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    transfer: state.transfer,
+  };
+};
+
+export default connect(mapStateToProps)(ComponentToPrint);

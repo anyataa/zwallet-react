@@ -1710,11 +1710,10 @@
 
 .modal-download {
   position: absolute;
-  margin-left: -33vw;
-  margin-top: -26vh;
+  margin-left: -40vw;
+  margin-top: 46vh;
   width: 133vw;
   height: 206vh;
-  background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
   color: black;
   display: -webkit-box;
@@ -1727,17 +1726,14 @@
 
 .modal-download ul {
   list-style: none;
-  margin-top: -30rem;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 60vh;
-  margin-top: -10vh;
 }
 
 .modal-download .pin-confirmation-box {
   padding-top: 10vh;
-  margin-top: 0vh;
+  margin-top: -100vh;
   margin-bottom: 85vh;
   margin-left: 50vw;
   height: 60vh;
@@ -1745,15 +1741,15 @@
 
 .modal-button {
   color: #6379f4;
-  background-color: #cfcde6;
+  background-color: #e8eafd;
   border: none;
-  padding: 10px;
+  padding: 13px;
   border-radius: 1rem;
+  margin-top: 13px;
   width: 10rem;
-  font-size: 25px;
+  font-size: 20px;
   z-index: 100;
   cursor: pointer;
-  position: absolute;
 }
 
 .modal-button:hover {

@@ -1,14 +1,14 @@
 import React, { useRef } from "react";
-import { useReducer } from "react";
+
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useReactToPrint } from "react-to-print";
-import { Footer } from "./Footer";
-import NavBar from "./NavBar";
+
 import { ComponentToPrint } from "./RenderComponent";
-import { TransferConfirmation } from "./TransferConfirmation";
 
 export const RenderPdfApp = () => {
   const componentRef = useRef();
+  const transfer = useSelector((state) => state.transfer);
 
   const [isPrint, setIsPrint] = useState(false);
   const [label, setLabel] = useState("Download PDF");
@@ -20,10 +20,11 @@ export const RenderPdfApp = () => {
     if (isPrint) {
       setShow("none");
       setLabel("Download");
+      handlePrint();
       setIsPrint(!isPrint);
     } else {
       handlePrint();
-      setLabel("Close");
+      setLabel("Download");
       setShow("");
       setIsPrint(!isPrint);
     }
@@ -31,7 +32,13 @@ export const RenderPdfApp = () => {
 
   return (
     <div>
-      <ComponentToPrint ref={componentRef} show={show} />
+      <ComponentToPrint
+        ref={componentRef}
+        show={show}
+        nominalTransfer={transfer.nominalTransfer}
+        noteTransfer={transfer.noteTransfer}
+      />
+      {console.log(transfer)}
       <button className="modal-button " onClick={handlePrintOut}>
         {label}
         <img
