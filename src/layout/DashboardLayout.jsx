@@ -9,16 +9,16 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
 const DashboardLayout = () => {
-  const user = useSelector(state => state.user)
-  
+  const user = useSelector((state) => state.user);
+
   useEffect(() => {
-    setFriendsData();
-    if(user.userId){
+    // setFriendsData();
+    if (user.userId) {
       // getAccountData(1)
       // getAccountData(user.userId)
-      console.log(user.userId)
+      console.log(user.userId);
     }
-  }, [])
+  }, []);
 
   return (
     <div className="container">
@@ -28,6 +28,6 @@ const DashboardLayout = () => {
       <Footer />
     </div>
   );
-}
+};
 
 export default DashboardLayout;

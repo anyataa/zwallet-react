@@ -47,12 +47,12 @@ export const formatRupiah = (prefix, Initalinput) => {
   return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
 };
 // Fetch Data
-export const setFriendsData = () => {
-  axios.get("http://localhost:4000/user").then((res) => {
-    // Local storage set item will soon be removed once Redux is implemented
-    localStorage.setItem("friends-data", JSON.stringify(res.data));
-  });
-};
+// export const setFriendsData = () => {
+//   axios.get("http://localhost:4000/user").then((res) => {
+//     // Local storage set item will soon be removed once Redux is implemented
+//     localStorage.setItem("friends-data", JSON.stringify(res.data));
+//   });
+// };
 
 export const setTransactionData = (accountId) => {
   axios
