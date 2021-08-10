@@ -15,9 +15,9 @@ export const SeeAllTransactionItem = (props) => {
   const [WeeklyTransaction, setWeeklyTransaction] = useState([]);
   const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
   useEffect(() => {
-    if (user.userId > 0) {
-      getTransactionData();
-    }
+    // if (user.userId > 0) {
+    getTransactionData();
+    // }
   }, []);
 
   const getTransactionData = () => {
@@ -115,22 +115,33 @@ export const SeeAllTransactionItem = (props) => {
       return (
         <div className="overflow-auto">
           {renderTransaction(DailyTransaction)}
+          <p className="col-grey">
+            Total Transaction : {DailyTransaction.length}
+          </p>
         </div>
       );
 
     case "all":
       return (
-        <div className="overflow-auto">{renderTransaction(AllTransaction)}</div>
+        <div className="overflow-auto">
+          {renderTransaction(AllTransaction)}
+          <p className="col-grey">
+            Total Transaction : {AllTransaction.length}
+          </p>
+        </div>
       );
 
     case "weekly":
       return (
         <div className="overflow-auto">
           {renderTransaction(WeeklyTransaction)}
+          <p className="col-grey">
+            Total Transaction : {WeeklyTransaction.length}
+          </p>
         </div>
       );
 
     default:
-      return <div className="overflow-auto">{renderTransaction()}</div>;
+      return <div className="overflow-auto">{renderTransaction()} </div>;
   }
 };
