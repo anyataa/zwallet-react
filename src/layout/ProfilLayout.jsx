@@ -11,44 +11,51 @@ import { urlAPI } from "../asset/urls";
 import { useSelector } from "react-redux";
 
 export const ProfilLayout = () => {
-  
   const [friendsData, setFriendsData] = useState([]);
 
   const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
 
-  const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    getContact()
+    getContact();
   }, []);
 
   const getContact = () => {
-    axios.get(urlAPI + `/friends/${user.userId}`)
-    .then(res =>  {
-      console.log(res.data)
-      setFriendsData(res.data)
-    })
-  }
+    axios.get(urlAPI + `/friends/${user.userId}`).then((res) => {
+      console.log(res.data);
+      setFriendsData(res.data);
+    });
+  };
 
   const submitForm = (e) => {
     e.preventDefault();
-    console.log("clicked")
+    console.log("clicked");
     //TODOANYA: Change Edit Button to Submit to trigger the change of photo profil and save to DB
   };
 
   const doLogOut = () => {
-    axios.put(urlAPI + `/user/signout-status/${JSON.parse(localStorage.getItem('userData')).userId}`)
+    axios.put(
+      urlAPI +
+        `/user/signout-status/${
+          JSON.parse(localStorage.getItem("userData")).userId
+        }`
+    );
     localStorage.removeItem("userData");
     forceUpdate();
-  }
+  };
 
   const renderContactList = () => {
-    if(friendsData.length > 0){
-      return friendsData.map(key => (
+    if (friendsData.length > 0) {
+      return friendsData.map((key) => (
         <div className="profile-container" key={key.friendId}>
           <div className="profile-img">
             <img
-              src={key.userImage ? urlAPI + `/files/download/${key.userImage}` : "https://i.ibb.co/FHLx6h9/default.png"}
+              src={
+                key.userImage
+                  ? urlAPI + `/files/download/${key.userImage}`
+                  : "https://i.ibb.co/FHLx6h9/default.png"
+              }
               alt=""
             />
           </div>
@@ -57,24 +64,26 @@ export const ProfilLayout = () => {
             <p className="col-white50">{key.phoneNumber}</p>
           </div>
         </div>
-      ))
-    }else{
-      return <div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <h2>You Have No Friends Yet...</h2>
-        <h4>
-          You can add friends from Zwallet Mobile by allowing access
-          to your contacts
-        </h4>
-      </div>
+      ));
+    } else {
+      return (
+        <div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <h2>You Have No Friends Yet...</h2>
+          <h4>
+            You can add friends from Zwallet Mobile by allowing access to your
+            contacts
+          </h4>
+        </div>
+      );
     }
-  }
+  };
 
-  if (user.userId == 0) {
+  if (user.userId !== "") {
     return <Redirect to="/login" />;
   }
   return (
@@ -104,13 +113,18 @@ export const ProfilLayout = () => {
                   {/* <p  className="fa fa-pencil-alt col-grey">
                     &nbsp;&nbsp; <span> Edit</span>{" "}
                   </p> */}
-                  <input  type="submit"  value="&nbsp;&nbsp;&nbsp;&nbsp;Edit" />
+                  <input type="submit" value="&nbsp;&nbsp;&nbsp;&nbsp;Edit" />
                 </form>
               </div>
 
               <div className="img-edit col-dark-grey">
                 <h1 className="col-dark-grey">{user.userName}</h1>
-                <h2 className="col-grey">+62 {user.phoneNumber ? user.phoneNumber.slice(1,user.phoneNumber.length) : "Error"}</h2>
+                <h2 className="col-grey">
+                  +62{" "}
+                  {user.phoneNumber
+                    ? user.phoneNumber.slice(1, user.phoneNumber.length)
+                    : "Error"}
+                </h2>
               </div>
             </div>
           </div>
@@ -137,7 +151,7 @@ export const ProfilLayout = () => {
                   <div className="card-notification ">
                     <h2>Change Password</h2>
                     <i className="fa fa-arrow-right">
-                      <FaArrowRight/>
+                      <FaArrowRight />
                     </i>
                   </div>
                 </li>

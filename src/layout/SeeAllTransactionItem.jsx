@@ -15,7 +15,7 @@ export const SeeAllTransactionItem = (props) => {
   const [WeeklyTransaction, setWeeklyTransaction] = useState([]);
   const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
   useEffect(() => {
-    if (user.userId > 0) {
+    if (user.userId != "") {
       getTransactionData();
     }
   }, []);
