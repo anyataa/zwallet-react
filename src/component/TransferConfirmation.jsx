@@ -1,10 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, Redirect, useRouteMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { urlAPI } from "../asset/urls";
-import { setTransactionData } from "../global";
-import { InputNominalTransfer } from "./InputNominalTransfer";
 
 
 

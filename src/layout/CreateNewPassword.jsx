@@ -7,16 +7,16 @@ import axios from "axios";
 import { urlAPI } from "../asset/urls";
 import { Link, Redirect } from "react-router-dom";
 
-const CreateNewPassword = () => {
-  const [password, setPassword] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
+const CreateNewPassword = ({match}) => {
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const [isVisible, setIsVisible] = useState(false);
   const [isConfirmVisible, setIsConfirmVisible] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
 
-  const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
+  const [isRedirect, setIsRedirect] = useState()
 
   const buttonHandler = () => {
     if (password && confirmPassword) {
@@ -24,36 +24,33 @@ const CreateNewPassword = () => {
     } else {
       setIsDisabled(true);
     }
-    console.log(isDisabled);
   };
 
   const onResetPass = () => {
-    var body = {
-      password: password,
-      password: confirmPassword,
-    };
-    axios
-      .put(
-        urlAPI +
-          `/user/reset-password/${
-            JSON.parse(localStorage.getItem("resetPassword")).userId
-          }`,
-        body
-      )
-      .then((res) => {
-        console.log(res.data);
-
-        if (JSON.parse(localStorage.getItem("resetPassword"))) {
-          localStorage.removeItem("resetPassword");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        console.log("masuk ke error");
-        setErrorMsg("Invalid Password");
-      });
+    if(password.length >= 8){
+      if(confirmPassword == password){
+        var body = {
+          password,
+          // password: confirmPassword,
+        };
+        axios.put(urlAPI + `/user/reset-password/${match.params.id}`, body)
+        .then((res) => {
+          setIsRedirect(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      }else{
+        setErrorMsg("Password do not match.");
+      }
+    }else{
+      setErrorMsg("Password must be at least 8 characters.");
+    }
   };
 
+  if(isRedirect){
+    return <Redirect to='/login'/>
+  }
   return (
     <div className="login-container">
       <Hero />
@@ -94,16 +91,13 @@ const CreateNewPassword = () => {
 
         <div>
           {errorMsg ? <p className="text-validation">{errorMsg}</p> : null}
-          <Link to="/login" style={{ textDecoration: "none" }}>
-            {/* <Button disabled={isDisabled}> */}
-            <Button
-              disabled={isDisabled}
-              onClick={onResetPass}
-              setPassword={setPassword}
-            >
-              Reset Password
-            </Button>
-          </Link>
+          <Button
+            disabled={isDisabled}
+            onClick={onResetPass}
+            setPassword={setPassword}
+          >
+            Reset Password
+          </Button>
         </div>
       </div>
     </div>

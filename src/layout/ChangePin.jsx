@@ -17,7 +17,7 @@ const ChangePin = ({ history }) => {
   const user = useSelector((state) => state.user);
 
   const onCheck = () => {
-    if (JSON.parse(user.userPin == pinValue)) {
+    if (user.userPin == pinValue) {
       history.push("/newPin");
     } else {
       setErrorMsg("Invalid PIN");
@@ -42,6 +42,7 @@ const ChangePin = ({ history }) => {
             buttonValue="Continue"
             setPinValue={setPinValue}
             onClick={onCheck}
+            pinValue={pinValue}
           />
           {errorMsg ? <p className="text-validation">{errorMsg}</p> : null}
         </div>
