@@ -15,7 +15,7 @@ export const BankInstruction = () => {
       <Accordion defaultActiveKey="0">
         {bankInstruction.map((item, index) => {
           return (
-            <Accordion.Item eventKey={`${index}`}>
+            <Accordion.Item eventKey={`${index}`} key={index}>
               <Accordion.Header>{item.methods}</Accordion.Header>
               <Accordion.Body>
                 {item.steps.map((step, stepIndex) => (
@@ -36,7 +36,7 @@ export const BankInstruction = () => {
       {ShowVirtualAccountNumber(true)}
       {/* <div>ANYAAAA</div> */}
       <h4>Instruction</h4>
-      <br/>
+      <br />
       {renderBankInstruction()}
     </div>
   );

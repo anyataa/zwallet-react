@@ -28,14 +28,19 @@ export const RetrieveConfirmation = ({ setDisplay, display }, props) => {
     axios
       .post(urlAPI + "/zwallet/retrieve/bank", body)
       .then((res) => {
-        if (res.data != null) {
+        if (res.data.message.includes("Success")) {
           console.log(res.data.data);
-          let resBalance = res.data.data.balance;
+          let resBalance = res.data.data.senderBalance;
+          dispatch(
+            onLoginAction({
+              ...user,
+              accountBalance: resBalance,
+            })
+          );
           setTransactionData(user.accountId);
-          if (resBalance) {
-            dispatch(onLoginAction({ ...user, accountBalance: resBalance }));
-            setDisplay();
-          }
+          setDisplay();
+        } else {
+          console.log(res);
         }
       })
       .catch((err) => {

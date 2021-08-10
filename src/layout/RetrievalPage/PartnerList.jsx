@@ -39,7 +39,7 @@ const PartnerList = () => {
             <Link
               to={`/retrieval/${bank.username}`}
               style={{ textDecoration: "none" }}
-              key={bank.friendId}
+              key={bank.username}
             >
               <div className="transfer-item-wrapper">
                 <img

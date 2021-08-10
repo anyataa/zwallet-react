@@ -1,7 +1,9 @@
+import axios from "axios";
 import React, { useEffect, useReducer, useState } from "react";
 import { FaArrowUp, FaPlus, FaTicketAlt, FaWallet } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { onLoginAction } from "../../actions";
 
 export default function Balance() {
   const [BalanceFormat, setBalanceFormat] = useState(
@@ -13,8 +15,10 @@ export default function Balance() {
   );
 
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    updateAccountBalance();
     setBalanceFormat(
       Intl.NumberFormat("id-ID", {
         style: "currency",
@@ -24,10 +28,23 @@ export default function Balance() {
     );
   }, []);
 
+  const updateAccountBalance = () => {
+    axios
+      .get(
+        "http://localhost:8080/zwallet-api/account/balance/T0NsQ2hJcXFlRWZJcytGOHNiaHhwdz09"
+      )
+      .then((res) => {
+        console.log(res);
+        if (res.data.message.includes("Success")) {
+          const balance = res.data.data;
+          dispatch(onLoginAction({ ...user, accountBalance: balance }));
+        }
+      });
+  };
+
   return (
     <div className="profile-top-container set-margin-for-dash">
       <div className="margin-profile-container">
-        {console.log(user.userId)}
         <div className="balance-detail">
           <div className="row-balance">
             <h3>Balance</h3>
