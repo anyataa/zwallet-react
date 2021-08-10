@@ -6,29 +6,36 @@ import Dashboard from "../component/Dashboard";
 import { Footer } from "../component/Footer";
 import NavBar from "../component/NavBar";
 
-
 export const SeeAllFriends = () => {
   const [friendsData, setFriendsData] = useState([]);
 
-  const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     getFriends();
   }, []);
 
   const getFriends = () => {
-    axios.get(urlAPI + `/friends/${user.userId}`)
-    .then(res => setFriendsData(res.data))
-    .catch(err => console.log(err))
-  }
+    axios
+      .get(urlAPI + `/friends/${user.userId}`)
+      .then((res) => {
+        setFriendsData(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
 
   const renderFriends = () => {
-    if(friendsData.length > 0) {
-      return friendsData.map(key => (
+    if (friendsData.length > 0) {
+      return friendsData.map((key) => (
         <div className="profile-container">
           <div className="profile-img">
             <img
-              src={key.userImage ? urlAPI + `/files/download/${key.userImage}` : "https://i.ibb.co/FHLx6h9/default.png"}
+              src={
+                key.userImage
+                  ? urlAPI + `/files/download/${key.userImage}`
+                  : "https://i.ibb.co/FHLx6h9/default.png"
+              }
               alt=""
             />
           </div>
@@ -37,26 +44,25 @@ export const SeeAllFriends = () => {
             <p className="col-white50">{key.phoneNumber}</p>
           </div>
         </div>
-      ))
-    }else{
-      return <h1>No Friends Available Yet...</h1>
+      ));
+    } else {
+      return <h1>No Friends Available Yet...</h1>;
     }
-  }
+  };
 
   return (
     // Can be used for reusable component
     <div className="container">
-        <Dashboard/>
-        <NavBar/>
+      <Dashboard />
+      <NavBar />
       <div className="right">
         <div className="contact-list-container">
-        
           {renderFriends()}
 
           {/* <!-- End Contact List --> */}
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

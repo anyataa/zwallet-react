@@ -21,7 +21,7 @@ const PartnerList = () => {
   }, []);
 
   const fetchContact = () => {
-    if (user.userId > 0) {
+    if (user.userId != "") {
       axios
         .get(`${urlAPI}/user/bank`)
         .then((res) => {

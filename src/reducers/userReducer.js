@@ -1,9 +1,9 @@
 const INITIAL_STATE = {
-  userId: 0,
+  userId: "",
   userName: "",
   phoneNumber: "",
   userEmail: "",
-  accountId: 0,
+  accountId: "",
   accountBalance: 0,
   userPin: "",
   userImage: "",
