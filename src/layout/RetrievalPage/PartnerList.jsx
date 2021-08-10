@@ -21,15 +21,13 @@ const PartnerList = () => {
   }, []);
 
   const fetchContact = () => {
-    if (user.userId > 0) {
-      axios
-        .get(`${urlAPI}/user/bank`)
-        .then((res) => {
-          console.log(res.data);
-          setData(res.data.data);
-        })
-        .catch((err) => console.log(err));
-    }
+    axios
+      .get(`${urlAPI}/user/bank`)
+      .then((res) => {
+        console.log(res.data);
+        setData(res.data.data);
+      })
+      .catch((err) => console.log(err));
   };
 
   const renderContact = () => {
