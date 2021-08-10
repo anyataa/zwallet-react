@@ -12,13 +12,13 @@ export const RenderPdfApp = () => {
 
   const [isPrint, setIsPrint] = useState(false);
   const [label, setLabel] = useState("Download PDF");
-  const [show, setShow] = useState("none");
+  const [show, setShow] = useState("");
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
   const handlePrintOut = () => {
     if (isPrint) {
-      setShow("none");
+      setShow("");
       setLabel("Download");
       handlePrint();
       setIsPrint(!isPrint);
@@ -39,7 +39,7 @@ export const RenderPdfApp = () => {
         noteTransfer={transfer.noteTransfer}
       />
       {console.log(transfer)}
-      <button className="modal-button " onClick={handlePrintOut}>
+      <button className="modal-button " onClick={handlePrint}>
         {label}
         <img
           src={require("../asset/image/images/download.svg").default}

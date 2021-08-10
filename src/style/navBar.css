@@ -1746,7 +1746,7 @@
   padding: 13px;
   border-radius: 1rem;
   margin-top: 13px;
-  width: 10rem;
+  width: 15rem;
   font-size: 20px;
   z-index: 100;
   cursor: pointer;
@@ -1755,5 +1755,14 @@
 .modal-button:hover {
   color: #6379f4;
   background-color: #c9c5f6;
+}
+
+.center {
+  padding-left: 10rem;
+}
+
+.center img {
+  padding-left: 2rem;
+  margin-bottom: 10px;
 }
 /*# sourceMappingURL=navBar.css.map */

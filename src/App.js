@@ -10,7 +10,6 @@ import PinSuccess from "./layout/PinSuccess";
 import CreatePin from "./layout/CreatePin";
 import "./style/global.css";
 import SignUp from "./layout/SignUp";
-
 import NewPin from "./layout/NewPin";
 import { SeeAllFriends } from "./layout/SeeAllFriends";
 import { SeeAllTransaction } from "./layout/SeeAllTransaction";
@@ -35,17 +34,13 @@ function App() {
         <Route path="/transfer" component={TransferListLayout} />
         <Route path="/profil" component={ProfileListLayout} />
         <Route path="/pdf" component={RenderPdfApp} />
-
         <Route path="/seealltransaction" component={SeeAllTransaction}></Route>
         <Route path="/friendslist" component={SeeAllFriends}></Route>
-
         <Route path="/dashboard" component={DashboardLayout} />
-
         <Route path="/topUp" component={TopUpLanding}></Route>
         <Route path="/newPin" component={NewPin}></Route>
         <Route path="/transferStatus" component={TransferStatus}></Route>
         <Route path="/qrLogin" component={LoginQR}></Route>
-
         <Route exact path="/" component={LandingPage} />
         <Route path="/logIn" component={Login} />
         <Route path="/signUp" component={SignUp} />
