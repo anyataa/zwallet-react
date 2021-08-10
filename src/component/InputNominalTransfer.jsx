@@ -36,7 +36,11 @@ export const InputNominalTransfer = (props) => {
       <p className="transfer-primary-text">Transfer Money</p>
       <div className="transfer-item-wrapper">
         <img
-          src={data.userImage ? urlAPI + `/files/download/${data.userImage}` : "https://i.ibb.co/FHLx6h9/default.png"}
+          src={
+            data.userImage
+              ? urlAPI + `/files/download/${data.userImage}`
+              : "https://i.ibb.co/FHLx6h9/default.png"
+          }
           alt=""
           className="transfer-contact-image"
           width="70px"
@@ -69,7 +73,7 @@ export const InputNominalTransfer = (props) => {
             placeholder="0.00"
             style={{ marginBottom: "5vh" }}
           />
-          {Balance - nominalTransfer <= 0 ? (
+          {Balance - nominalTransfer < 0 ? (
             <p className="col-red">Amount exceeds your balance</p>
           ) : (
             <p></p>
@@ -126,7 +130,7 @@ export const InputNominalTransfer = (props) => {
               )
             }
             disabled={
-              nominalTransfer && noteTransfer && Balance - nominalTransfer > 0
+              nominalTransfer && noteTransfer && Balance - nominalTransfer >= 0
                 ? false
                 : true
             }
