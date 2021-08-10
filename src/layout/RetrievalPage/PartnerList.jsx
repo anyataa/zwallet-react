@@ -4,14 +4,11 @@ import React, { useEffect, useState } from "react";
 // import "../style/navBar.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Button from "../../component/Button";
-import { AiOutlineSearch } from "react-icons/ai";
+
 import { urlAPI, urlFile } from "../../asset/urls";
-import { useSelector } from "react-redux";
 
 const PartnerList = () => {
   const [data, setData] = useState([]);
-  const user = useSelector((state) => state.user);
 
   // const [searchValue, setSearchValue] = useState("");
   // const [Partner, setPartner] = useState([]);

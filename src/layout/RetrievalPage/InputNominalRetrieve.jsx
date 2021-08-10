@@ -2,21 +2,20 @@ import React, { useEffect, useState } from "react";
 import "../../style/transfer.css";
 import "../../style/navBar.css";
 import { Link } from "react-router-dom";
-import { formatRupiah } from "../../global";
+
 import { useSelector } from "react-redux";
 import { urlFile } from "../../asset/urls";
 
 export const InputNominalRetrieve = (props) => {
   const user = useSelector((state) => state.user);
-  const [data, setData] = useState([]);
+
   const [nominalTransfer, setNominalTransfer] = useState();
-  const [alisNominal, setAlisNominal] = useState(0);
+
   const [BankNumber, setBankNumber] = useState("");
   const [BankName, setBankName] = useState(null);
   const [RetrieveDetail, setRetrieveDetail] = useState(null);
 
   useEffect(() => {
-    var tempData = JSON.parse(localStorage.getItem("friends-data"));
     setBankName(props.match.params.id);
   }, []);
 

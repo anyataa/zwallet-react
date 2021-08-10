@@ -10,7 +10,7 @@ import PinSuccess from "./layout/PinSuccess";
 import CreatePin from "./layout/CreatePin";
 import "./style/global.css";
 import SignUp from "./layout/SignUp";
-import TopUp from "./layout/TopUp";
+
 import NewPin from "./layout/NewPin";
 import { SeeAllFriends } from "./layout/SeeAllFriends";
 import { SeeAllTransaction } from "./layout/SeeAllTransaction";
@@ -22,15 +22,6 @@ import MailForPassword from "./layout/MailForPassword";
 import { TopUpLanding } from "./layout/TopUp/TopUpLayout";
 import PaymentLayout from "./layout/Payment/PaymentLayout";
 import { RenderPdfApp } from "./component/RenderPdfApp";
-
-// import ListContact from "./component/ListContact";
-// import ManagePhone from "./layout/ManagePhone";
-// import AddPhone from "./layout/AddPhone";
-// import { PersonalInfoLayout } from "./layout/PersonalInfoLayout";
-// import ChangePassword from "./layout/ChangePassword";
-// import ChangePin from "./layout/ChangePin";
-// import { ProfilLayout } from "./layout/ProfilLayout";
-// import { TransferConfirmation } from "./component/TransferConfirmation";
 
 function App() {
   return (
@@ -45,22 +36,16 @@ function App() {
         <Route path="/profil" component={ProfileListLayout} />
         <Route path="/pdf" component={RenderPdfApp} />
 
-        {/* Will be deleted */}
         <Route path="/seealltransaction" component={SeeAllTransaction}></Route>
         <Route path="/friendslist" component={SeeAllFriends}></Route>
-        {/* <Route path="/personalinfo" component={PersonalInfoLayout}></Route> */}
-        {/* <Route path="/transfer/:id" component={TransferConfirmation}/> */}
-        {/* <Route path="/changePassword" component={ChangePassword}></Route> */}
-        {/* <Route path="/changePin" component={ChangePin}></Route> */}
-        {/* <Route path="/managePhone" component={ManagePhone}></Route> */}
-        {/* <Route path="/addPhone" component={AddPhone}></Route> */}
+
         <Route path="/dashboard" component={DashboardLayout} />
-        {/* <Route path="/topUp" component={TopUp}></Route> */}
+
         <Route path="/topUp" component={TopUpLanding}></Route>
         <Route path="/newPin" component={NewPin}></Route>
         <Route path="/transferStatus" component={TransferStatus}></Route>
         <Route path="/qrLogin" component={LoginQR}></Route>
-        {/* End of will be deleted */}
+
         <Route exact path="/" component={LandingPage} />
         <Route path="/logIn" component={Login} />
         <Route path="/signUp" component={SignUp} />
