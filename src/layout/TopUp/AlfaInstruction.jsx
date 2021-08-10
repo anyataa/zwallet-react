@@ -1,6 +1,6 @@
 import React from "react";
 import { Accordion } from "react-bootstrap";
-import { Link } from "react-router-dom";
+
 import { alfaTransferInstruction } from "../../global/topUpConstants";
 import { ShowVirtualAccountNumber } from "./showVirtualAccountNumber";
 
