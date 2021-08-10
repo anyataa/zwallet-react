@@ -69,7 +69,7 @@ export const InputNominalTransfer = (props) => {
             placeholder="0.00"
             style={{ marginBottom: "5vh" }}
           />
-          {Balance - nominalTransfer <= 0 ? (
+          {Balance - nominalTransfer < 0 ? (
             <p className="col-red">Amount exceeds your balance</p>
           ) : (
             <p></p>
@@ -126,7 +126,7 @@ export const InputNominalTransfer = (props) => {
               )
             }
             disabled={
-              nominalTransfer && noteTransfer && Balance - nominalTransfer > 0
+              nominalTransfer && noteTransfer && Balance - nominalTransfer >= 0
                 ? false
                 : true
             }
