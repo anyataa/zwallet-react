@@ -44,12 +44,6 @@ const Login = () => {
             ? dispatch(onLoginAction(res.data.data.user))
             : // localStorage.setItem('userData', JSON.stringify(res.data.data.user))
               setErrorMsg("Email or Password Incorrect!");
-          // Called when sign up too
-          if (user.userId) {
-            setGraphData(user.accountId);
-          }
-
-          forceUpdate();
         })
         .catch((err) => {
           console.log(err);

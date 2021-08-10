@@ -8,7 +8,6 @@ import { setTransactionData } from "../global";
 import { urlAPI, urlFile } from "../asset/urls";
 
 export default function NavBar() {
-
   const [Today, setToday] = useState([]);
   const [Week, setWeek] = useState([]);
   const [transactionType, setTransactionType] = useState([

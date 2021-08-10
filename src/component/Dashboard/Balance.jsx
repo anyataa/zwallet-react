@@ -27,7 +27,6 @@ export default function Balance() {
   return (
     <div className="profile-top-container set-margin-for-dash">
       <div className="margin-profile-container">
-        {console.log(user.userId)}
         <div className="balance-detail">
           <div className="row-balance">
             <h3>Balance</h3>
