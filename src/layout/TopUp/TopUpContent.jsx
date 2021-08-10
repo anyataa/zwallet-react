@@ -2,6 +2,7 @@ import React from "react";
 
 import { Accordion } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { urlFile } from "../../asset/urls";
 import { topUpOption } from "../../global/topUpConstants";
 
 export const TopUpContent = () => {
@@ -13,13 +14,13 @@ export const TopUpContent = () => {
         <Link
           to={`/topup/${item.url}`}
           style={{ textDecoration: "none" }}
-          //   key={bank.friendId}
+          key={item.name}
         >
           <div className="transfer-item-wrapper">
             <img
               src={
                 item.name
-                  ? `https://randomuser.me/api/portraits/men/${item.name}.jpg`
+                  ? `${urlFile}/${item.image}.png`
                   : "https://i.ibb.co/FHLx6h9/default.png"
               }
               alt="friend profile"

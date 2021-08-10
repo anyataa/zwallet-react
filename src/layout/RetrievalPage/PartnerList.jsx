@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Button from "../../component/Button";
 import { AiOutlineSearch } from "react-icons/ai";
-import { urlAPI } from "../../asset/urls";
+import { urlAPI, urlFile } from "../../asset/urls";
 import { useSelector } from "react-redux";
 
 const PartnerList = () => {
@@ -45,7 +45,7 @@ const PartnerList = () => {
                 <img
                   src={
                     bank.username
-                      ? `https://randomuser.me/api/portraits/men/${bank.username}.jpg`
+                      ? `${urlFile}/${bank.username}.png`
                       : "https://i.ibb.co/FHLx6h9/default.png"
                   }
                   alt="friend profile"

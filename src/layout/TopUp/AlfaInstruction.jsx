@@ -30,10 +30,11 @@ export const AlfaInstruction = () => {
 
   return (
     <div className="right">
+      {ShowVirtualAccountNumber(false)}
       <h1>How to Top Up</h1>
-      <br/>
+      <br />
       <h4>Instruction</h4>
-      <br/>
+      <br />
       {renderAlfaInstruction()}
     </div>
   );

@@ -1,27 +1,33 @@
 export const topUpOption = [
   {
     name: "BCA OneKlik",
+    image: "BCAOneKlik",
     slogan: "Easy to top up only one click away from your finger",
     url: "bcaOneKlik",
   },
   {
     name: "Bank Transfer",
+    image: "BankTransfer",
     slogan: "BCA, BRI, Mandiri, BNI, Bank Syariah Indonesia, and Sea Bank",
     url: "bankTransfer",
   },
   {
     name: "Bank Branch Office & Agent",
-    slogan: "ATM Bersama, BCA, BPD DIY, Bank KB Bukopin, Bank Sinarmas, OCBC NISP, and Outlet Pos Indonesia",
+    image: "BankBranch",
+    slogan:
+      "ATM Bersama, BCA, BPD DIY, Bank KB Bukopin, Bank Sinarmas, OCBC NISP, and Outlet Pos Indonesia",
     url: "branchAgent",
   },
   {
     name: "Alfamart, Alfamidi, or Dan+Dan",
+    image: "Alfamart",
     slogan:
       "Top up to Alfamart, Alfamidi, and Dan+Dan based on your registered phone number in Zwallet",
     url: "alfaGroup",
   },
   {
     name: "Indomaret or i.Saku",
+    image: "Indomaret",
     slogan:
       "Top up to Indomaret based on your registered phone number in Zwallet",
     url: "indomaretGroup",
@@ -155,7 +161,7 @@ export const branchAgentTransferInstruction = [
       "Inform your Zwallet app registered phone number and top up amount at the counter.",
       "Once the staff is done, make sure the amount is added to your Zwallet.",
     ],
-  }
+  },
 ];
 
 export const alfaTransferInstruction = [
@@ -191,7 +197,7 @@ export const alfaTransferInstruction = [
       "Cashier will add the balance to your Zwallet.",
       "Make sure it's added to your Zwallet. Keep the payment receipt as proof of payment in case any further verification is needed.",
     ],
-  }
+  },
 ];
 
 export const indomaretTransferInstruction = [
@@ -215,6 +221,5 @@ export const indomaretTransferInstruction = [
       "Check your payment details. Ensure that Vendor is Zwallet and total amount is correct. If correct, choose PAY.",
       "Your order will be verified automatically once payment is successfull.",
     ],
-  }
+  },
 ];
-

@@ -30,6 +30,7 @@ export const BankBranchAgentInstruction = () => {
 
   return (
     <div className="right">
+      {ShowVirtualAccountNumber(true)}
       <h1>How to Top Up</h1>
       <br />
       <h4>Instruction</h4>

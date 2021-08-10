@@ -30,6 +30,8 @@ export const IndomaretInstruction = () => {
 
   return (
     <div className="right">
+      {ShowVirtualAccountNumber(false)}
+
       <h1>How to Top Up</h1>
       <br />
       <h4>Instruction</h4>
