@@ -6,17 +6,20 @@ import Button from "../component/Button";
 import axios from "axios";
 import { urlAPI } from "../asset/urls";
 import { Link, Redirect } from "react-router-dom";
+import { FaCheckCircle, FaTimes } from "react-icons/fa";
 
-const CreateNewPassword = () => {
-  const [password, setPassword] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
+const CreateNewPassword = ({ match }) => {
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const [isVisible, setIsVisible] = useState(false);
   const [isConfirmVisible, setIsConfirmVisible] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
-
   const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
+  const [isRedirect, setIsRedirect] = useState();
+  const [showModal, setShowModal] = useState("none");
+  const [message, setMessage] = useState("");
 
   const buttonHandler = () => {
     if (password && confirmPassword) {
@@ -24,38 +27,75 @@ const CreateNewPassword = () => {
     } else {
       setIsDisabled(true);
     }
-    console.log(isDisabled);
   };
 
   const onResetPass = () => {
-    var body = {
-      password: password,
-      password: confirmPassword,
-    };
-    axios
-      .put(
-        urlAPI +
-          `/user/reset-password/${
-            JSON.parse(localStorage.getItem("resetPassword")).userId
-          }`,
-        body
-      )
-      .then((res) => {
-        console.log(res.data);
+    if (password.length >= 8) {
+      if (confirmPassword == password) {
+        var body = {
+          password,
+          // password: confirmPassword,
+        };
+        axios
+          .put(urlAPI + `/user/reset-password/${match.params.id}`, body)
+          .then((res) => {
+            console.log(res.data);
+            if (res.data.message.includes("Success")) {
+              setShowModal("flex");
 
-        if (JSON.parse(localStorage.getItem("resetPassword"))) {
-          localStorage.removeItem("resetPassword");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        console.log("masuk ke error");
-        setErrorMsg("Invalid Password");
-      });
+              setMessage(`${res.data.message}`);
+            } else {
+              setMessage(`${res.data.message}`);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        setErrorMsg("Password do not match.");
+      }
+    } else {
+      setErrorMsg("Password must be at least 8 characters.");
+    }
   };
-
+  const setRedirect = () => {
+    console.log("in");
+    setIsRedirect("ada value");
+  };
+  if (isRedirect) {
+    return <Redirect to="/login" />;
+  }
   return (
     <div className="login-container">
+      {/* Show Success Change if axios res fulfill the condition */}
+      <div id="modal" style={{ display: showModal }}>
+        <div className="pin-confirmation-box">
+          <div className="modal-close-icon-wrapper">
+            <p className="transfer-primary-text" />
+            <FaTimes className="modal-close-icon"></FaTimes>
+          </div>
+
+          <div className="transfer-pin-input-wrapper">
+            <FaCheckCircle className="col-green" size="100"></FaCheckCircle>
+          </div>
+          <div className="success-change-password">
+            <h1>{message}</h1>
+          </div>
+          {/* <Link
+            style={{ textDecoration: "none", marginLeft: "60%" }}
+            to="/login"
+          > */}
+          <input
+            type="button"
+            defaultValue="Done"
+            className="transfer-btn"
+            id="back-to-profile"
+            onClick={() => setRedirect()}
+          />
+          {/* </Link> */}
+        </div>
+      </div>
+      {/* Modal End  */}
       <Hero />
       <div className="login-right">
         <div>
@@ -94,16 +134,13 @@ const CreateNewPassword = () => {
 
         <div>
           {errorMsg ? <p className="text-validation">{errorMsg}</p> : null}
-          <Link to="/login" style={{ textDecoration: "none" }}>
-            {/* <Button disabled={isDisabled}> */}
-            <Button
-              disabled={isDisabled}
-              onClick={onResetPass}
-              setPassword={setPassword}
-            >
-              Reset Password
-            </Button>
-          </Link>
+          <Button
+            disabled={isDisabled}
+            onClick={onResetPass}
+            setPassword={setPassword}
+          >
+            Reset Password
+          </Button>
         </div>
       </div>
     </div>

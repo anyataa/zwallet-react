@@ -30,9 +30,7 @@ export default function Balance() {
 
   const updateAccountBalance = () => {
     axios
-      .get(
-        "http://localhost:8080/zwallet-api/account/balance/T0NsQ2hJcXFlRWZJcytGOHNiaHhwdz09"
-      )
+      .get(`http://localhost:8080/zwallet-api/account/${user.accountId}`)
       .then((res) => {
         console.log(res);
         if (res.data.message.includes("Success")) {

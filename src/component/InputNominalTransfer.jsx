@@ -36,7 +36,11 @@ export const InputNominalTransfer = (props) => {
       <p className="transfer-primary-text">Transfer Money</p>
       <div className="transfer-item-wrapper">
         <img
-          src={data.userImage ? urlAPI + `/files/download/${data.userImage}` : "https://i.ibb.co/FHLx6h9/default.png"}
+          src={
+            data.userImage
+              ? urlAPI + `/files/download/${data.userImage}`
+              : "https://i.ibb.co/FHLx6h9/default.png"
+          }
           alt=""
           className="transfer-contact-image"
           width="70px"
