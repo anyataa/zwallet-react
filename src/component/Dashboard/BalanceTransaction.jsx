@@ -17,7 +17,8 @@ export const BalanceTransaction = () => {
       .get(`${urlAPI}/transaction/${user.accountId}`)
       .then((res) => {
         setTransaction(res.data.listTransaction);
-        console.log(res.data.listTransaction);
+
+        console.log(res.data);
       })
       .catch((err) => console.log(err));
   };
