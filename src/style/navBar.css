@@ -702,6 +702,9 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
   -webkit-box-orient: vertical;
@@ -720,6 +723,9 @@
 
 .contact-list-container .custom-profile-view {
   margin-bottom: 50px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .contact-list-container ul {
@@ -738,7 +744,6 @@
       -ms-flex-align: center;
           align-items: center;
   margin-top: 10px;
-  width: 100%;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
