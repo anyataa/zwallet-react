@@ -7,6 +7,7 @@ const INITIAL_STATE = {
   accountBalance: 0,
   userPin: "",
   userImage: "",
+  userRole: "",
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -22,6 +23,7 @@ export default (state = INITIAL_STATE, action) => {
         accountBalance: action.payload.accountBalance,
         userPin: action.payload.userPin,
         userImage: action.payload.userImage,
+        userRole: action.payload.userRole,
       };
     case "UPDATE_BALANCE":
       return { ...INITIAL_STATE, accountBalance: action.payload };

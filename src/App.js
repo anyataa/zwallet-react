@@ -38,7 +38,7 @@ function App() {
         <Route path="/seealltransaction" component={SeeAllTransaction}></Route>
         <Route path="/friendslist" component={SeeAllFriends}></Route>
         <Route path="/dashboard" component={DashboardLayout} />
-        <Route path="/topUp" component={TopUpLanding}></Route>
+        <Route path="/topup" component={TopUpLanding}></Route>
         <Route path="/newPin" component={NewPin}></Route>
         <Route path="/transferStatus" component={TransferStatus}></Route>
         <Route path="/qrLogin" component={LoginQR}></Route>
