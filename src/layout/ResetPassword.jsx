@@ -3,11 +3,10 @@ import Hero from "../component/Hero";
 import InputAuth from "../component/InputAuth";
 import "../style/newLogin.css";
 import Button from "../component/Button";
-import { Link, Redirect} from 'react-router-dom';
+import { Redirect} from 'react-router-dom';
 import { emailValidation } from "../global";
 import axios from "axios";
 import { urlAPI } from "../asset/urls";
-import { useSelector } from "react-redux";
 
 
 const ResetPassword = () => {
@@ -16,7 +15,6 @@ const ResetPassword = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [errorMsg, setErrorMsg] = useState('');
 
-  // const user = useSelector(state => state.user)
 
   const buttonHandler = () => {
     if (email) {
@@ -24,35 +22,27 @@ const ResetPassword = () => {
     } else {
       setIsDisabled(true);
     }
-    console.log(isDisabled);
   };
 
   const onReset = () => {
     if(emailValidation(email)){
       axios.post(urlAPI + "/user/resetpass", {email})
       .then(res => {
-        console.log(res.data)
-        localStorage.setItem('resetPassword', JSON.stringify(res.data))
-        console.log('okay')
-        
-        if(JSON.parse(localStorage.getItem('resetPassword'))){
-          // axios.post(urlAPI + `/mail/sendresetpass/${user.userId}`, {recipient: email})
-          axios.post(urlAPI + `/mail/sendresetpass/${res.data.userId}`, {recipient: email})
-          console.log("masuk post")
-        }
+        axios.post(urlAPI + `/mail/sendresetpass/${res.data.userId}`, {recipient: email})
+        .then(res => setErrorMsg(res.data))
+        .catch(err => console.log(err))
       })
       .catch(err => {
-        console.log(err)
+        setErrorMsg("Email does not exist!")
       })
     }else{
       setErrorMsg('Invalid Email')
     }
   }
 
-  // if(JSON.parse(localStorage.getItem('resetPassword'))){
-  //   return <Redirect to='/mailForPassword'/>
-  // }
-
+  if(errorMsg == 'Email sent successfully!'){
+    return <Redirect to="/mailForPassword" />
+  }
   return (
     <div className="login-container">
       <Hero />
@@ -76,14 +66,12 @@ const ResetPassword = () => {
           onKeyUp={buttonHandler}
         />
         <div>
-          <Link to="/mailForPassword">
           {
             errorMsg ? <p className='text-validation'>{errorMsg}</p> : null
           }
             <Button disabled={isDisabled} onClick={onReset}>
               Confirm
             </Button>
-          </Link>
         </div>
       </div>
     </div>
