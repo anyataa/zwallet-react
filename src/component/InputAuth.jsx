@@ -19,7 +19,7 @@ const InputAuth = ({type, value, placeholder, onChange, password, ifClicked, isV
         type == 'email' ? <HiMail style={styles.icon} color={changeColor()}/> : type == 'password' || password ? <BsLockFill style={styles.icon} color={changeColor()}/> : phone ? <FiPhone style={styles.icon} color={changeColor()}/> : <BsPeopleCircle style={styles.icon} color={changeColor()}/>
       }
       {
-        phone ? <p style={{margin: '5px'}}>+62</p> : null
+        phone ? <p style={{margin: '5px', fontWeight: 600, color: '#3A3D42'}}>+62</p> : null
       }
       <input className='input' type={type} placeholder={placeholder} value={value} onChange={onChange} onKeyUp={onKeyUp}/>
       {
