@@ -109,7 +109,7 @@ const InputTransport = () => {
         <Link to='/billing' style={{ textDecoration: "none" }} >
           <input type="button" value="Back" className="transfer-btn" />
         </Link>
-        <Link>
+        <Link to='/billing/transport/departresult'>
           <input type="button" value="Search" className="transfer-btn"/>
         </Link>
       </div>
