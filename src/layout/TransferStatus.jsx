@@ -5,12 +5,12 @@ import FailedLogo from "../asset/image/images/failed.svg";
 import { urlAPI } from "../asset/urls";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { RenderPdfApp } from "../component/RenderPdfApp";
+import { usePDF, Document, Page, View, Text, Image, StyleSheet } from "@react-pdf/renderer";
 
 const TransferStatus = ({ match }) => {
   const [isSuccess, setIsSuccess] = useState(true);
   const [userData, setUserData] = useState({});
-  
+
   const transfer = useSelector((state) => state.transfer);
 
   useEffect(() => {
@@ -22,11 +22,88 @@ const TransferStatus = ({ match }) => {
     axios
       .get(urlAPI + `/user/getfriend/${transfer.id}`)
       .then((res) => {
-        // console.log(res.data)
         setUserData(res.data);
       })
       .catch((err) => console.log(err));
   };
+
+  const styles = StyleSheet.create({
+    container: {
+      padding: '10px'
+    },
+    item: {
+      marginTop: '15px',
+    },
+    image: {
+      margin: 'auto',
+      width: '70px',
+      height: '70px'
+    },
+    primary: {
+      fontWeight: 'bold',
+      fontSize: '18px',
+      color: '#3a3d42',
+    },
+    secondary: {
+      fontSize:'18px',
+      color: '#7a7886',
+    }
+  })
+
+  const MyDoc = (
+    <Document>
+      <Page wrap size="A6">
+        <View style={styles.container}>
+          <View style={styles.item}>
+            <Text  style={styles.secondary}>Amount</Text>
+            <Text style={styles.primary}>
+              Rp {transfer.nominalTransfer}
+            </Text>
+          </View>
+          <View style={styles.item}>
+            <Text style={styles.secondary}>Balance Left</Text>
+            <Text style={styles.primary}>Rp {transfer.balance}</Text>
+          </View>
+          <View style={styles.item}>
+            <Text style={styles.secondary}>Date & Time</Text>
+            <Text style={styles.primary}>
+              {Date().toLocaleString().slice(0, 21)}
+            </Text>
+          </View>
+          <View style={styles.item}>
+            <Text style={styles.secondary}>Notes</Text>
+            <Text style={styles.primary}>
+              {transfer.noteTransfer}
+            </Text>
+          </View>
+          <View style={styles.item}>
+            <Text style={styles.secondary}>Transfer To</Text>
+            <Image
+              src={{
+                uri: userData.userImage
+                  ? urlAPI + `/files/download/${userData.userImage}`
+                  : "https://i.ibb.co/FHLx6h9/default.png",
+                method: "GET",
+              }}
+              alt=""
+              style={styles.image}
+            />
+            <View>
+              <Text style={{...styles.primary, margin: 'auto'}}>
+                {transfer.name ? transfer.name : "Connection Error"}
+              </Text>
+              <Text style={{...styles.secondary, margin: 'auto'}}>
+                {transfer.phone
+                  ? transfer.phone
+                  : "Connection Error"}
+              </Text>
+            </View>
+          </View>
+        </View>
+      </Page>
+    </Document>
+  );
+  const [instance, updateInstance] = usePDF({ document: MyDoc });
 
   return (
     <div className="right">
@@ -94,12 +171,20 @@ const TransferStatus = ({ match }) => {
           </button>
         ) : null}
         {isSuccess ? (
-          <Link to='/print' className="transfer-download-btn" style={{textDecoration: "none" }}>
-            <img src={require("../asset/image/images/download.svg").default} alt="" /> &nbsp;&nbsp;
-            Download PDF
-          </Link>
-          // <RenderPdfApp />
-        ) : null}
+          <a
+            href={instance.url}
+            download="Receipt.pdf"
+            className="transfer-download-btn"
+            style={{ textDecoration: "none" }}
+          >
+            <img
+              src={require("../asset/image/images/download.svg").default}
+              alt=""
+            />{" "}
+            &nbsp;&nbsp; Download PDF
+          </a>
+        ) : // <RenderPdfApp />
+        null}
         <Link to="/transfer">
           <input
             type="button"
