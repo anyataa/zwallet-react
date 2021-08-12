@@ -22,7 +22,7 @@ const AddPhone = ({setDisplay}) => {
         if (user.userId) {
             if(phone.length > 9 && phone.length < 14) {
                 var body = {
-                    phoneNumber: 0 + phone,
+                    phoneNumber: phone[0] == 0 ? phone : 0 + phone,
                     userId: user.userId
                 }
                 axios.post(urlAPI + '/phone/add', body)
