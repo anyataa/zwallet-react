@@ -15,9 +15,9 @@ export const PersonalInfoLayout = () => {
   const [userName, setFullName] = useState("");
   const [email, setEmail] = useState("");
 
-  const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (user.userId) {
@@ -27,20 +27,21 @@ export const PersonalInfoLayout = () => {
   }, []);
 
   const changeEmail = () => {
-    axios.put(urlAPI +`/user/update-email/${user.userId}`, { email })
-    .then((res) => {
-      console.log(res.data);
-      dispatch(onLoginAction({...user, userEmail: email}))
-    })
-    .catch((err) => console.log(err));
+    axios
+      .put(urlAPI + `/user/update-email/${user.userId}`, { email })
+      .then((res) => {
+        console.log(res.data);
+        dispatch(onLoginAction({ ...user, userEmail: email }));
+      })
+      .catch((err) => console.log(err));
   };
 
   const changeName = () => {
     axios
-      .put(urlAPI + `/user/updateuser/${user.userId}`, {username: userName})
+      .put(urlAPI + `/user/updateuser/${user.userId}`, { username: userName })
       .then((res) => {
         console.log(res.data);
-        dispatch(onLoginAction({...user, userName}))
+        dispatch(onLoginAction({ ...user, userName }));
       })
       .catch((err) => console.log(err));
   };
@@ -74,8 +75,7 @@ export const PersonalInfoLayout = () => {
                     value={userName}
                   />
                 </div>
-                {
-                  userName !== user.userName ?
+                {userName !== user.userName ? (
                   <Link
                     style={{
                       fontSize: "18px",
@@ -88,8 +88,7 @@ export const PersonalInfoLayout = () => {
                   >
                     Submit
                   </Link>
-                  : null
-                }
+                ) : null}
               </div>
             </div>
           </li>
@@ -106,8 +105,7 @@ export const PersonalInfoLayout = () => {
                     value={email}
                   />
                 </div>
-                {
-                  email !== user.userEmail ?
+                {email !== user.userEmail ? (
                   <Link
                     style={{
                       fontSize: "18px",
@@ -119,8 +117,7 @@ export const PersonalInfoLayout = () => {
                   >
                     Submit
                   </Link>
-                  : null
-                }
+                ) : null}
               </div>
             </div>
           </li>
@@ -146,12 +143,17 @@ export const PersonalInfoLayout = () => {
           </li>
           {/* <!-- 4 --> */}
           <li>
-            <div className="card-notification-button ">
-              <h2>
-                Upgrade to Zwallet Premium With National Identitiy Card{" "}
-                <AiFillStar />
-              </h2>
-            </div>
+            <Link
+              to="/profil/personalinfo/upgrade"
+              style={{ textDecoration: "none" }}
+            >
+              <div className="card-notification-button ">
+                <h2>
+                  Upgrade to Zwallet Premium With National Identitiy Card{" "}
+                  <AiFillStar />
+                </h2>
+              </div>
+            </Link>
           </li>
         </ul>
         {/* <!-- Finish --> */}
