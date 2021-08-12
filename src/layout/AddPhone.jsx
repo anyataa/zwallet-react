@@ -69,7 +69,7 @@ const AddPhone = ({setDisplay}) => {
                     <Button style={{cursor:'pointer'}}  disabled={isDisabled} onClick={addPhone} >
                         Add Phone Number
                     </Button>
-                
+
                 </div>
             </div>
     )

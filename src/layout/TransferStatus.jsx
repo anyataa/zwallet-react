@@ -10,6 +10,7 @@ import { RenderPdfApp } from "../component/RenderPdfApp";
 const TransferStatus = ({ match }) => {
   const [isSuccess, setIsSuccess] = useState(true);
   const [userData, setUserData] = useState({});
+  
   const transfer = useSelector((state) => state.transfer);
 
   useEffect(() => {
