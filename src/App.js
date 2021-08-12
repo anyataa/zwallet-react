@@ -21,8 +21,29 @@ import MailForPassword from "./layout/MailForPassword";
 import { TopUpLanding } from "./layout/TopUp/TopUpLayout";
 import PaymentLayout from "./layout/Payment/PaymentLayout";
 import { RenderPdfApp } from "./component/RenderPdfApp";
+import ComponentToPrint from "./component/RenderComponent";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import axios from "axios";
+import { urlAPI } from "./asset/urls";
+import { useDispatch } from "react-redux";
+import { onLoginAction } from "./actions";
 
 function App() {
+  const user = useSelector(state => state.user)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if(user.userEmail && user.password) {
+      axios.post(urlAPI + "/user/signin", { email: user.userEmail, password: user.password })
+      .then(res => {
+        dispatch(onLoginAction(res.data.data.user))
+      })
+      .catch(err => console(err))
+    }
+  })
+  
   return (
     <div className="App">
       {/* Code below allows un-accessible page to be developed 
@@ -37,7 +58,7 @@ function App() {
         <Route path="/seealltransaction" component={SeeAllTransaction}></Route>
         <Route path="/friendslist" component={SeeAllFriends}></Route>
         <Route path="/dashboard" component={DashboardLayout} />
-        <Route path="/topUp" component={TopUpLanding}></Route>
+        <Route path="/topup" component={TopUpLanding}></Route>
         <Route path="/newPin" component={NewPin}></Route>
         <Route path="/transferStatus" component={TransferStatus}></Route>
         <Route path="/qrLogin" component={LoginQR}></Route>
@@ -49,6 +70,7 @@ function App() {
         <Route path="/pinSuccess" component={PinSuccess} />
         <Route path="/createPin" component={CreatePin} />
         <Route path="/mailForPassword" component={MailForPassword} />
+        <Route path="/print" component={ComponentToPrint} />
         <Route path="*" component={NotFound404} />
       </Switch>
     </div>

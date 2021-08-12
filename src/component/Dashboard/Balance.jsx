@@ -19,23 +19,23 @@ export default function Balance() {
 
   useEffect(() => {
     updateAccountBalance();
-    setBalanceFormat(
-      Intl.NumberFormat("id-ID", {
-        style: "currency",
-        currency: "IDR",
-        minimumFractionDigits: 0,
-      }).format(user ? user.accountBalance : 0)
-    );
   }, []);
 
   const updateAccountBalance = () => {
     axios
-      .get(`http://localhost:8080/zwallet-api/account/${user.accountId}`)
+      .get(`http://localhost:8080/zwallet-api/account/balance/${user.accountId}`)
       .then((res) => {
-        console.log(res);
         if (res.data.message.includes("Success")) {
           const balance = res.data.data;
+          console.log(balance)
           dispatch(onLoginAction({ ...user, accountBalance: balance }));
+          setBalanceFormat(
+            Intl.NumberFormat("id-ID", {
+              style: "currency",
+              currency: "IDR",
+              minimumFractionDigits: 0,
+            }).format(balance)
+          );
         }
       });
   };

@@ -1,23 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import { Footer } from '../component/Footer'
+import React, { useState } from 'react'
 import "../style/dashboard.css"
 import "../style/global.css"
 import "../style/navBar.css"
 import "../style/Font/style.css"
-import NavBar from "../component/NavBar"
-import Dashboard from "../component/Dashboard"
 import InputAuth from "../component/InputAuth";
 import Button from "../component/Button";
-import { ModalStatus } from '../component/ModalStatus'
 import axios from 'axios'
 import { urlAPI } from '../asset/urls'
 import { useSelector } from 'react-redux'
 
-const AddPhone = ({setDisplay, display}, props) => {
+const AddPhone = ({setDisplay}) => {
     const [phone, setPhone] = useState();
+    const [errorMsg, setErrorMsg] = useState("");
 
-    const [ShowModal, setShowModal] = useState(false)
-    // const [StyleModal, setStyleModal] = useState("none")
 
     const [isDisabled, setIsDisabled] = useState(true);
 
@@ -25,15 +20,19 @@ const AddPhone = ({setDisplay, display}, props) => {
 
     const addPhone = () => {
         if (user.userId) {
-            var body = {
-                phoneNumber: 0 + phone,
-                userId: user.userId
+            if(phone.length > 9 && phone.length < 14) {
+                var body = {
+                    phoneNumber: 0 + phone,
+                    userId: user.userId
+                }
+                axios.post(urlAPI + '/phone/add', body)
+                .then(res => {
+                    setDisplay()
+                })
+                .catch(err => console.log(err))
+            }else{
+                setErrorMsg("Phone number must be between 10 to 13 digits.")
             }
-            axios.post(urlAPI + '/phone/add', body)
-            .then(res => {
-                setDisplay()
-            })
-            .catch(err => console.log(err))
         }
     }
 
@@ -51,7 +50,6 @@ const AddPhone = ({setDisplay, display}, props) => {
                 <div className="personal-information-top-container">
                     <div className="set-to-left">
                         <h1 className="col-dark-grey">Add Phone Number</h1>
-                        {/* {console.log("show",ShowModal)} */}
                         <p className="col-grey">
                             Add at least one phone number for the transfer ID so you can start transfering your money to another user.
                         </p>
@@ -67,18 +65,13 @@ const AddPhone = ({setDisplay, display}, props) => {
                         onKeyUp={buttonHandler}
                     />
                     <br />
+                    {errorMsg ? <p className="text-validation">{errorMsg}</p> : null}
                     <Button style={{cursor:'pointer'}}  disabled={isDisabled} onClick={addPhone} >
                         Add Phone Number
                     </Button>
-                    {/* {StyleModal} */}
-                
+
                 </div>
             </div>
-        // <div className="container">
-        //     <Dashboard />
-        //     <NavBar />
-        //     <Footer />
-        // </div>
     )
 }
 

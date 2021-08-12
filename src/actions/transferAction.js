@@ -4,3 +4,9 @@ export const onTransfer = (data) => {
     payload: data
   }
 }
+
+export const resetTransfer = () => {
+  return {
+    type: "RESET_TRANSFER",
+  };
+};

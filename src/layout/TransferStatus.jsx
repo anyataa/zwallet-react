@@ -10,6 +10,7 @@ import { RenderPdfApp } from "../component/RenderPdfApp";
 const TransferStatus = ({ match }) => {
   const [isSuccess, setIsSuccess] = useState(true);
   const [userData, setUserData] = useState({});
+  
   const transfer = useSelector((state) => state.transfer);
 
   useEffect(() => {
@@ -94,11 +95,11 @@ const TransferStatus = ({ match }) => {
           <div></div>
         ) : null}
         {isSuccess ? (
-          // <button className="transfer-download-btn">
-          //   <img src={require("../asset/image/images/download.svg").default} alt="" /> &nbsp;&nbsp;
-          //   Download PDF
-          // </button>
-          <RenderPdfApp />
+          <Link to='/print' className="transfer-download-btn" style={{textDecoration: "none" }}>
+            <img src={require("../asset/image/images/download.svg").default} alt="" /> &nbsp;&nbsp;
+            Download PDF
+          </Link>
+          // <RenderPdfApp />
         ) : null}
         <Link to="/transfer">
           <input

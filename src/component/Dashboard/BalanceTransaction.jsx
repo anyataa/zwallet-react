@@ -18,7 +18,7 @@ export const BalanceTransaction = () => {
       .then((res) => {
         setTransaction(res.data.listTransaction);
 
-        console.log(res.data);
+        // console.log(res.data);
       })
       .catch((err) => console.log(err));
   };
