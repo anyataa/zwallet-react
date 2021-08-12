@@ -69,6 +69,25 @@
   color: #201e1e;
 }
 
+.profile-data {
+  width: 100%;
+  margin: 0 5px;
+  height: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
 .nav-container {
   position: fixed;
   top: -4rem;
@@ -118,7 +137,6 @@
 }
 
 .nav-container .profile-container {
-  width: 20rem;
   height: 80%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -129,6 +147,25 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.nav-container .profile-container .profile-data {
+  width: 300%;
+  margin: 0 5px;
+  height: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .profile-container .profile-img {
@@ -158,25 +195,6 @@
 
 .profile-container .profile-img .icon-notif:hover {
   color: #6379f4;
-}
-
-.profile-data {
-  width: 50%;
-  margin: 0 5px;
-  height: 100%;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
 }
 
 .wrapper-notification {
