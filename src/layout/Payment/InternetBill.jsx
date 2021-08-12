@@ -6,7 +6,7 @@ import Indihome from "../../asset/image/indihome.png";
 import { urlAPI } from "../../asset/urls";
 import { inRupiah } from "../../global";
 
-const InternetBill = () => {
+const InternetBill = ({ setDisplay, display }, props) => {
   const nominalTransaksi = 195000;
   const nominalAdmin = 2500;
   const transfer = useSelector((state) => state.transfer);
@@ -22,6 +22,7 @@ const InternetBill = () => {
       .then((res) => {
         if (res.data.message.includes("Success")) {
           console.log("success internet");
+          setDisplay();
         } else {
           console.log(res);
         }

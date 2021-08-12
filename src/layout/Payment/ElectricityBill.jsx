@@ -4,10 +4,9 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import PLN from "../../asset/image/pln.jpg";
 import { urlAPI } from "../../asset/urls";
-import { ModalStatus } from "../../component/ModalStatus";
 import { inRupiah } from "../../global";
 
-const ElectricityBill = () => {
+export const ElectricityBill = ({ setDisplay, display }, props) => {
   const nominalTransaksi = 102500;
   const transfer = useSelector((state) => state.transfer);
   const user = useSelector((state) => state.user);
@@ -21,6 +20,9 @@ const ElectricityBill = () => {
       .post(`${urlAPI}/transaction/payments/PLN`, body)
       .then((res) => {
         if (res.data.message.includes("Success")) {
+          console.log("success", res);
+          setDisplay();
+          console.log(display);
         } else {
           console.log(res);
         }
@@ -32,6 +34,7 @@ const ElectricityBill = () => {
 
   return (
     <div className="right">
+      {console.log(props, display)}
       <div className="transfer-right-top">
         <img src={PLN} style={{ height: "50px", width: "100px" }} />
         <p className="transfer-primary-text"></p>
@@ -97,4 +100,4 @@ const ElectricityBill = () => {
   );
 };
 
-export default ElectricityBill;
+// export default ElectricityBill;

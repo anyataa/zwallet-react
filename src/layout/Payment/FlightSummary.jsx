@@ -10,7 +10,7 @@ import { inRupiah } from "../../global";
 import axios from "axios";
 import { urlAPI } from "../../asset/urls";
 
-export const FlightSummary = () => {
+export const FlightSummary = ({ setDisplay, display }, props) => {
   const user = useSelector((state) => state.user);
   const nominalTransaksi = 1215000;
   const body = {
@@ -23,6 +23,7 @@ export const FlightSummary = () => {
       .post(`${urlAPI}/transaction/payments/Citilink`, body)
       .then((res) => {
         if (res.data.message.includes("Success")) {
+          setDisplay();
         } else {
           console.log(res);
         }

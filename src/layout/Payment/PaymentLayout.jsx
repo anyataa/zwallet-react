@@ -8,7 +8,7 @@ import InputElectricity from "./InputElectricity";
 import InputInternet from "./InputInternet";
 import InputEcommerce from "./InputEcommerce";
 import InputTransport from "./InputTransport";
-import ElectricityBill from "./ElectricityBill";
+// import ElectricityBill from "./ElectricityBill";
 import InternetBill from "./InternetBill";
 import EcommerceBill from "./EcommerceBill";
 import { DepartureResult } from "./DepartureResult";
@@ -16,6 +16,7 @@ import { ArrivalResult } from "./ArrivalResult";
 import { FlightSummary } from "./FlightSummary";
 import { ModalStatus } from "../../component/ModalStatus";
 import { useState } from "react";
+import { ElectricityBill } from "./ElectricityBill";
 
 const PaymentLayout = () => {
   const [modalToggle, setModalToggle] = useState(false);
@@ -49,38 +50,71 @@ const PaymentLayout = () => {
             />
           )}
         />
-        <Route
+        {/* <Route
           path={`${path}/internet/indihome`}
           component={InternetBill}
           exact
-        />
+        /> */}
         <Route
+          path={`${path}/internet/indihome`}
+          exact
+          render={(props) => (
+            <InternetBill
+              {...props}
+              setDisplay={() => setModalToggle((prevState) => !prevState)}
+              display={modalToggle}
+            />
+          )}
+        />
+        {/* <Route
           path={`${path}/ecommerce/tokopedia`}
           component={EcommerceBill}
           exact
+        /> */}
+        <Route
+          path={`${path}/ecommerce/tokopedia`}
+          exact
+          render={(props) => (
+            <EcommerceBill
+              {...props}
+              setDisplay={() => setModalToggle((prevState) => !prevState)}
+              display={modalToggle}
+            />
+          )}
         />
         <Route
           path={`${path}/transport/departresult`}
           component={DepartureResult}
           exact
         />
+
         <Route
           path={`${path}/transport/departresult/arrival`}
           component={ArrivalResult}
           exact
         />
-        <Route
+        {/* <Route
           path={`${path}/transport/departresult/arrival/summary`}
           component={FlightSummary}
           exact
+        /> */}
+        <Route
+          path={`${path}/transport/departresult/arrival/summary`}
+          exact
+          render={(props) => (
+            <FlightSummary
+              {...props}
+              setDisplay={() => setModalToggle((prevState) => !prevState)}
+              display={modalToggle}
+            />
+          )}
         />
-
-        <ModalStatus
-          setDisplay={() => setModalToggle((prevState) => !prevState)}
-          display={modalToggle}
-        ></ModalStatus>
       </Switch>
       <NavBar />
+      <ModalStatus
+        setDisplay={() => setModalToggle((prevState) => !prevState)}
+        display={modalToggle}
+      ></ModalStatus>
       <Footer />
     </div>
   );

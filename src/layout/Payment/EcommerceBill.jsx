@@ -7,7 +7,7 @@ import Tokopedia from "../../asset/image/tokopedia.png";
 import { urlAPI } from "../../asset/urls";
 import { inRupiah } from "../../global";
 
-const EcommerceBill = () => {
+const EcommerceBill = ({ setDisplay, display }, props) => {
   const nominalTransaksi = 48000;
   const nominalAdmin = 2500;
   const transfer = useSelector((state) => state.transfer);
@@ -23,6 +23,7 @@ const EcommerceBill = () => {
       .post(`${urlAPI}/transaction/payments/Tokopedia`, body)
       .then((res) => {
         if (res.data.message.includes("Success")) {
+          setDisplay();
         } else {
           console.log(res);
         }
