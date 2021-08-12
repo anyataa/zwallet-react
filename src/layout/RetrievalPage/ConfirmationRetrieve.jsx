@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { onLoginAction, updateAccountBalance } from "../../actions";
-import { urlAPI } from "../../asset/urls";
+import { urlAPI, urlFile } from "../../asset/urls";
 import { setTransactionData } from "../../global";
 
 export const RetrieveConfirmation = ({ setDisplay, display }, props) => {
@@ -54,7 +54,11 @@ export const RetrieveConfirmation = ({ setDisplay, display }, props) => {
         <p className="transfer-primary-text">Retrieve To</p>
         <div className="transfer-item-wrapper">
           <img
-            src={`https://randomuser.me/api/portraits/men/${data.id}.jpg`}
+            src={
+              retrieveData
+                ? `${urlFile}/${retrieveData.bankName}.png`
+                : "https://i.ibb.co/FHLx6h9/default.png"
+            }
             alt=""
             className="transfer-contact-image"
           />

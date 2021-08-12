@@ -2,6 +2,7 @@ import React from "react";
 import {
   FaBorderAll,
   FaLongArrowAltUp,
+  FaMoneyBill,
   FaPlus,
   FaServicestack,
   FaUserAlt,

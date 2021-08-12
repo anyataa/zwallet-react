@@ -11,6 +11,9 @@ import InputTransport from "./InputTransport";
 import ElectricityBill from "./ElectricityBill";
 import InternetBill from "./InternetBill";
 import EcommerceBill from "./EcommerceBill";
+import { DepartureResult } from "./DepartureResult";
+import { ArrivalResult } from "./ArrivalResult";
+import { FlightSummary } from "./FlightSummary";
 
 const PaymentLayout = () => {
   let {path , url} = useRouteMatch();
@@ -26,6 +29,9 @@ const PaymentLayout = () => {
             <Route path={`${path}/electricity/pln`} component={ElectricityBill} exact/>
             <Route path={`${path}/internet/indihome`} component={InternetBill} exact/>
             <Route path={`${path}/ecommerce/tokopedia`} component={EcommerceBill} exact/>
+            <Route path={`${path}/transport/departresult`} component={DepartureResult} exact/>
+            <Route path={`${path}/transport/departresult/arrival`} component={ArrivalResult} exact/>
+            <Route path={`${path}/transport/departresult/arrival/summary`} component={FlightSummary} exact/>
         </Switch>
         <NavBar/>
         <Footer />
