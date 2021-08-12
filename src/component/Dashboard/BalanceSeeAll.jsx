@@ -48,7 +48,7 @@ const BalanceSeeAll = () => {
         </div>
       );
     } else {
-      return <div>Error Fetching Balance</div>;
+      return <div>Loading and Fetching Balance</div>;
     }
   };
 
