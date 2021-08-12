@@ -34,28 +34,32 @@ const SignUp = () => {
 
   const onRegister = () => {
     if (emailValidation(email)) {
-      var body = {
-        username,
-        email,
-        password,
-        phoneNumber: phone[0] == 0 ? phone : "0" + phone,
-      };
-      axios
-        .post(`${urlAPI}/user/signup`, body)
-        .then((res) => {
-          console.log(res.data);
-          if (res.data.message.includes("created")) {
-            dispatch(onLoginAction(res.data.data))
-
-            // Called when sign up too
-
-          } else {
-            setErrorMsg(res.data.message);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      if(password.length >= 8){
+        var body = {
+          username,
+          email,
+          password,
+          phoneNumber: phone[0] == 0 ? phone : "0" + phone,
+        };
+        axios
+          .post(`${urlAPI}/user/signup`, body)
+          .then((res) => {
+            console.log(res.data);
+            if (res.data.message.includes("created")) {
+              dispatch(onLoginAction(res.data.data))
+  
+              // Called when sign up too
+  
+            } else {
+              setErrorMsg(res.data.message);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }else{
+        setErrorMsg("Password must be at least 8 characters.");
+      }
     } else {
       setErrorMsg("Email Format Invalid");
     }

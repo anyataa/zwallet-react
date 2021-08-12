@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useReactToPrint } from "react-to-print";
 
-import { ComponentToPrint } from "./RenderComponent";
+import ComponentToPrint from "./RenderComponent";
 
 export const RenderPdfApp = () => {
   const componentRef = useRef();

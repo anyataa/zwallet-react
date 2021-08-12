@@ -21,6 +21,7 @@ import MailForPassword from "./layout/MailForPassword";
 import { TopUpLanding } from "./layout/TopUp/TopUpLayout";
 import PaymentLayout from "./layout/Payment/PaymentLayout";
 import { RenderPdfApp } from "./component/RenderPdfApp";
+import ComponentToPrint from "./component/RenderComponent";
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
         <Route path="/pinSuccess" component={PinSuccess} />
         <Route path="/createPin" component={CreatePin} />
         <Route path="/mailForPassword" component={MailForPassword} />
+        <Route path="/print" component={ComponentToPrint} />
         <Route path="*" component={NotFound404} />
       </Switch>
     </div>
