@@ -86,12 +86,13 @@ const TransferStatus = ({ match }) => {
       </div>
       <div className="transfer-right-bottom-wrapper">
         {isSuccess ? (
-          <button className="transfer-download-btn">
-            <img
-              src={require("../asset/image/images/share.svg").default}
-              alt=""
-            />
-          </button>
+          // <button className="transfer-download-btn">
+          //   <img
+          //     src={require("../asset/image/images/share.svg").default}
+          //     alt=""
+          //   />
+          // </button>
+          <div></div>
         ) : null}
         {isSuccess ? (
           <Link to='/print' className="transfer-download-btn" style={{textDecoration: "none" }}>

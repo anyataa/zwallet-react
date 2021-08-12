@@ -12,9 +12,9 @@ export const PersonalInfoLayout = () => {
   const [isNameEdited, setIsNameEdited] = useState(false)
   const [isEmailEdited, setIsEmailEdited] = useState(false)
 
-  const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (user.userId) {
@@ -44,7 +44,7 @@ export const PersonalInfoLayout = () => {
 
   const changeName = () => {
     axios
-      .put(urlAPI + `/user/updateuser/${user.userId}`, {username: userName})
+      .put(urlAPI + `/user/updateuser/${user.userId}`, { username: userName })
       .then((res) => {
         dispatch(onLoginAction({...user, userName}))
         setIsNameEdited(true)
@@ -178,12 +178,17 @@ export const PersonalInfoLayout = () => {
           </li>
           {/* <!-- 4 --> */}
           <li>
-            <div className="card-notification-button ">
-              <h2>
-                Upgrade to Zwallet Premium With National Identitiy Card{" "}
-                <AiFillStar />
-              </h2>
-            </div>
+            <Link
+              to="/profil/personalinfo/upgrade"
+              style={{ textDecoration: "none" }}
+            >
+              <div className="card-notification-button ">
+                <h2>
+                  Upgrade to Zwallet Premium With National Identitiy Card{" "}
+                  <AiFillStar />
+                </h2>
+              </div>
+            </Link>
           </li>
         </ul>
         {/* <!-- Finish --> */}

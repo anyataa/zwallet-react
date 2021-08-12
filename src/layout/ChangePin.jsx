@@ -37,14 +37,16 @@ const ChangePin = ({ history }) => {
       </div>
       <div className="row-pin-group">
         <div className="pin-group center-pin-group">
-          <Pin
-            goTo="/newpin"
-            buttonValue="Continue"
-            setPinValue={setPinValue}
-            onClick={onCheck}
-            pinValue={pinValue}
-          />
-          {errorMsg ? <p className="text-validation">{errorMsg}</p> : null}
+          <div>
+            <Pin
+              goTo="/newpin"
+              buttonValue="Continue"
+              setPinValue={setPinValue}
+              onClick={onCheck}
+              pinValue={pinValue}
+              errMessage={errorMsg ? errorMsg : ""}
+            />
+          </div>
         </div>
       </div>
     </div>
