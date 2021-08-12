@@ -8,7 +8,6 @@ import { setTransactionData } from "../global";
 import { urlAPI, urlFile } from "../asset/urls";
 
 export default function NavBar() {
-
   const [Today, setToday] = useState([]);
   const [Week, setWeek] = useState([]);
   const [transactionType, setTransactionType] = useState([
@@ -56,6 +55,7 @@ export default function NavBar() {
                   className="create-contact-avatar-input"
                   alt=""
                   width="50px"
+                  style={{ overflow: "hidden" }}
                 />
               )}
             </div>
