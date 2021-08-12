@@ -19,7 +19,7 @@ export default (state = INITIAL_STATE, action) => {
         noteTransfer: action.payload.noteTransfer,
         balance: action.payload.balance
       };
-    case "RESET":
+    case "RESET_TRANSFER":
       return INITIAL_STATE;
     default:
       return state;

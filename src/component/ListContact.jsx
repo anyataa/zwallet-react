@@ -8,7 +8,8 @@ import axios from "axios";
 import Button from "./Button";
 import { AiOutlineSearch } from "react-icons/ai";
 import { urlAPI } from "../asset/urls";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { resetTransfer } from "../actions";
 
 const ListContact = () => {
   const [data, setData] = useState([]);
@@ -16,8 +17,11 @@ const ListContact = () => {
 
   const user = useSelector((state) => state.user);
 
+  const dispatch = useDispatch()
+
   useEffect(() => {
     fetchContact();
+    dispatch(resetTransfer())
   }, []);
 
   const fetchContact = () => {

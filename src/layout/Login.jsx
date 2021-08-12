@@ -18,8 +18,6 @@ const Login = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
 
-  const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
-
   const user = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -49,7 +47,6 @@ const Login = () => {
             setGraphData(user.accountId);
           }
 
-          forceUpdate();
         })
         .catch((err) => {
           console.log(err);

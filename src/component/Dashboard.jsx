@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React from "react";
 import {
   FaBorderAll,
   FaLongArrowAltUp,
@@ -15,9 +15,8 @@ import { urlAPI } from "../asset/urls";
 import { useDispatch, useSelector } from "react-redux";
 import { reset } from "../actions";
 export default function Dashboard() {
-  const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
 
-  const { path, url } = useRouteMatch();
+  const { path } = useRouteMatch();
 
   const user = useSelector((state) => state.user);
 
@@ -26,11 +25,6 @@ export default function Dashboard() {
   function doLogOut() {
     axios.put(urlAPI + `/user/signout-status/${user.userId}`);
     dispatch(reset());
-    localStorage.removeItem("userData");
-    localStorage.removeItem("transaction-data");
-    localStorage.removeItem("graph-data");
-
-    forceUpdate();
   }
 
   if (user.userId == 0) {
@@ -59,16 +53,20 @@ export default function Dashboard() {
             <p className="label label-size">Transfer</p>
           </div>
         </Link>
-        <Link style={{ textDecoration: "none" }} to="/billing">
-          <div
-            className={
-              path == "/billing" ? "item-wrapper active" : "item-wrapper"
-            }
-          >
-            <FaMoneyBill className="label-size"></FaMoneyBill>
-            <p className="label label-size">Payments</p>
-          </div>
-        </Link>
+        {
+          user.userRole == "USER" ?
+          <Link style={{ textDecoration: "none" }} to="/billing">
+            <div
+              className={
+                path == "/billing" ? "item-wrapper active" : "item-wrapper"
+              }
+            >
+              <FaServicestack className="label-size" />
+              <p className="label label-size">Payments</p>
+            </div>
+          </Link>
+          : null
+        }
         <Link style={{ textDecoration: "none" }} to="/topup">
           <div
             className={

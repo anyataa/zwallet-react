@@ -1,19 +1,16 @@
-import React, { useEffect, useState, useReducer } from "react";
-import Dashboard from "../component/Dashboard";
-import { Footer } from "../component/Footer";
-import NavBar from "../component/NavBar";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { urlAPI } from "../asset/urls";
-
-import Button from "../component/Button";
 import { AiFillStar } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { onLoginAction, updateUserName } from "../actions";
+import { onLoginAction } from "../actions";
 
 export const PersonalInfoLayout = () => {
   const [userName, setFullName] = useState("");
   const [email, setEmail] = useState("");
+  const [isNameEdited, setIsNameEdited] = useState(false)
+  const [isEmailEdited, setIsEmailEdited] = useState(false)
 
   const user = useSelector((state) => state.user);
 
@@ -26,22 +23,31 @@ export const PersonalInfoLayout = () => {
     }
   }, []);
 
+  const onEditName = (name) => {
+    setIsNameEdited(false)
+    setFullName(name)
+  }
+
+  const onEditEmail = (email) => {
+    setIsEmailEdited(false)
+    setEmail(email)
+  }
+
   const changeEmail = () => {
-    axios
-      .put(urlAPI + `/user/update-email/${user.userId}`, { email })
-      .then((res) => {
-        console.log(res.data);
-        dispatch(onLoginAction({ ...user, userEmail: email }));
-      })
-      .catch((err) => console.log(err));
+    axios.put(urlAPI +`/user/update-email/${user.userId}`, { email })
+    .then((res) => {
+      dispatch(onLoginAction({...user, userEmail: email}))
+      setIsEmailEdited(true)
+    })
+    .catch((err) => console.log(err));
   };
 
   const changeName = () => {
     axios
       .put(urlAPI + `/user/updateuser/${user.userId}`, { username: userName })
       .then((res) => {
-        console.log(res.data);
-        dispatch(onLoginAction({ ...user, userName }));
+        dispatch(onLoginAction({...user, userName}))
+        setIsNameEdited(true)
       })
       .catch((err) => console.log(err));
   };
@@ -71,11 +77,12 @@ export const PersonalInfoLayout = () => {
                   <input
                     className="col-dark-grey "
                     type="text"
-                    onChange={(e) => setFullName(e.target.value)}
+                    onChange={(e) => onEditName(e.target.value)}
                     value={userName}
                   />
                 </div>
-                {userName !== user.userName ? (
+                {
+                  userName !== user.userName && isNameEdited == false ?
                   <Link
                     style={{
                       fontSize: "18px",
@@ -84,11 +91,25 @@ export const PersonalInfoLayout = () => {
                       color: "#6379F4",
                     }}
                     className="col-secondary"
-                    onClick={() => changeName(user.fullName)}
+                    onClick={changeName}
                   >
                     Submit
                   </Link>
-                ) : null}
+                  : isNameEdited == true ?
+                  <Link
+                    style={{
+                      fontSize: "18px",
+                      textDecoration: "none",
+                      paddingLeft: "0vw",
+                      color: "#6379F4",
+                      cursor: 'default'
+                    }}
+                    className="col-secondary"
+                  >
+                    Name successfully changed.
+                  </Link>
+                  : null
+                }
               </div>
             </div>
           </li>
@@ -101,11 +122,12 @@ export const PersonalInfoLayout = () => {
                   <input
                     className="col-dark-grey"
                     type="text"
-                    onInput={(e) => setEmail(e.target.value)}
+                    onInput={(e) => onEditEmail(e.target.value)}
                     value={email}
                   />
                 </div>
-                {email !== user.userEmail ? (
+                {
+                  email !== user.userEmail && isEmailEdited == false ?
                   <Link
                     style={{
                       fontSize: "18px",
@@ -113,11 +135,25 @@ export const PersonalInfoLayout = () => {
                       paddingLeft: "0vw",
                       color: "#6379F4",
                     }}
-                    onClick={() => changeEmail(email)}
+                    onClick={changeEmail}
                   >
                     Submit
                   </Link>
-                ) : null}
+                  : isEmailEdited == true ?
+                  <Link
+                    style={{
+                      fontSize: "18px",
+                      textDecoration: "none",
+                      paddingLeft: "0vw",
+                      color: "#6379F4",
+                      cursor: 'default'
+                    }}
+                    onClick={changeEmail}
+                  >
+                    Email successfully changed.
+                  </Link>
+                  : null
+                }
               </div>
             </div>
           </li>
@@ -135,7 +171,6 @@ export const PersonalInfoLayout = () => {
                   />
                 </div>
                 <Link className="col-secondary" to="/profil/managephone">
-                  {" "}
                   Manage
                 </Link>
               </div>
