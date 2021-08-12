@@ -1,24 +1,48 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import PLN from '../../asset/image/pln.jpg'
+import axios from "axios";
+import React from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import PLN from "../../asset/image/pln.jpg";
+import { urlAPI } from "../../asset/urls";
+import { ModalStatus } from "../../component/ModalStatus";
+import { inRupiah } from "../../global";
 
 const ElectricityBill = () => {
+  const nominalTransaksi = 102500;
+  const transfer = useSelector((state) => state.transfer);
+  const user = useSelector((state) => state.user);
+  const body = {
+    transactionAmount: nominalTransaksi,
+    transactionNotes: "Tagihan Listrik",
+    toAccountId: user.accountId,
+  };
+  const onPost = () => {
+    axios
+      .post(`${urlAPI}/transaction/payments/PLN`, body)
+      .then((res) => {
+        if (res.data.message.includes("Success")) {
+        } else {
+          console.log(res);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
-    <div className='right'>
+    <div className="right">
       <div className="transfer-right-top">
-        <img
-          src={PLN}
-          style={{height: '50px', width: '100px'}}
-        />
+        <img src={PLN} style={{ height: "50px", width: "100px" }} />
         <p className="transfer-primary-text"></p>
       </div>
       <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
         <p className="transfer-secondary-text">Customer ID</p>
-        <p className="transfer-primary-text">1234567890</p>
+        <p className="transfer-primary-text">{transfer.noteTransfer}</p>
       </div>
       <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
         <p className="transfer-secondary-text">Customer Name</p>
-        <p className="transfer-primary-text">La Casa de Papel</p>
+        <p className="transfer-primary-text">{user.userName}</p>
       </div>
       <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
         <p className="transfer-secondary-text">Billing Amount</p>
@@ -30,18 +54,47 @@ const ElectricityBill = () => {
       </div>
       <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
         <p className="transfer-secondary-text">Total</p>
-        <p className="transfer-primary-text">Rp. 102.500</p>
+        <p className="transfer-primary-text">{inRupiah(nominalTransaksi)}</p>
       </div>
+      <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
+        <p className="transfer-secondary-text">Balance</p>
+        <p className="transfer-primary-text">
+          {" "}
+          {inRupiah(user.accountBalance)}
+        </p>
+      </div>
+      <div className="transfer-item-wrapper transfer-confirmation-detail-wrapper">
+        <p className="transfer-secondary-text">Remaining Balance</p>
+        <p className="transfer-primary-text">
+          {" "}
+          {inRupiah(user.accountBalance - nominalTransaksi)}
+        </p>
+        {user.accountBalance - nominalTransaksi >= 0 ? null : (
+          <p className="col-red">
+            &nbsp; &nbsp; Sorry, Your Balance is not sufficient. Please top up
+            first
+          </p>
+        )}
+      </div>
+
       <div className="set-transfer-button-confirmation">
-        <Link to='/billing/electricity' style={{ textDecoration: "none" }} >
+        <Link to="/billing/electricity" style={{ textDecoration: "none" }}>
           <input type="button" value="Back" className="transfer-btn" />
         </Link>
         <Link>
-          <input type="button" value="Pay" className="transfer-btn"/>
+          <input
+            disabled={
+              user.accountBalance - nominalTransaksi >= 0 ? false : true
+            }
+            type="button"
+            value="Pay"
+            onClick={() => onPost()}
+            className="transfer-btn"
+          />
         </Link>
       </div>
-      </div>
-  )
-}
+    </div>
+  );
+};
 
-export default ElectricityBill
+export default ElectricityBill;

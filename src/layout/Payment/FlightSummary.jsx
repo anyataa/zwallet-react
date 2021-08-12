@@ -5,8 +5,32 @@ import CityLink from "../../asset/image/citylink.png";
 import { IoAirplane } from "react-icons/io5";
 import { GoPrimitiveDot } from "react-icons/go";
 import { AiOutlineCheckCircle } from "react-icons/ai";
+import { useSelector } from "react-redux";
+import { inRupiah } from "../../global";
+import axios from "axios";
+import { urlAPI } from "../../asset/urls";
 
 export const FlightSummary = () => {
+  const user = useSelector((state) => state.user);
+  const nominalTransaksi = 1215000;
+  const body = {
+    transactionAmount: nominalTransaksi,
+    transactionNotes: "Tiket Pesawat",
+    toAccountId: user.accountId,
+  };
+  const onPost = () => {
+    axios
+      .post(`${urlAPI}/transaction/payments/Citilink`, body)
+      .then((res) => {
+        if (res.data.message.includes("Success")) {
+        } else {
+          console.log(res);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div className="right-top-up">
       <div className="profile-page-container">
@@ -157,49 +181,85 @@ export const FlightSummary = () => {
             </div>
           </div>
         </div>
+
         {/* Bawah */}
         <div className="profile-bottom-container col-grey">
           <div className="left-profile-bottom-container">
-            <div style={{ color: "black"}}>
-              <h1 style={{ fontSize: '34px' }}>Additional Information</h1>
-              <h2 style={{ fontSize: '28px' }}>HLP → DPS</h2>
-              <p style={{ fontSize: '22px' }}>
-                <AiOutlineCheckCircle style={{color: 'green'}}/>
+            <div style={{ color: "black" }}>
+              <h1 style={{ fontSize: "34px" }}>Additional Information</h1>
+              <h2 style={{ fontSize: "28px" }}>HLP → DPS</h2>
+              <p style={{ fontSize: "22px" }}>
+                <AiOutlineCheckCircle style={{ color: "green" }} />
                 Refundable
               </p>
-              <p style={{ fontSize: '22px' }}>
-                <AiOutlineCheckCircle style={{color: 'green'}}/>
+              <p style={{ fontSize: "22px" }}>
+                <AiOutlineCheckCircle style={{ color: "green" }} />
                 Reschedule Available
               </p>
-              <h2 style={{ fontSize: '28px' }}>DPS → HLP</h2>
-              <p style={{ fontSize: '22px' }}>
-                <AiOutlineCheckCircle style={{color: 'green'}}/>
+              <h2 style={{ fontSize: "28px" }}>DPS → HLP</h2>
+              <p style={{ fontSize: "22px" }}>
+                <AiOutlineCheckCircle style={{ color: "green" }} />
                 Refundable
               </p>
-              <p style={{ fontSize: '22px' }}>
-                <AiOutlineCheckCircle style={{color: 'green'}}/>
+              <p style={{ fontSize: "22px" }}>
+                <AiOutlineCheckCircle style={{ color: "green" }} />
                 Reschedule Available
               </p>
             </div>
           </div>
           <div className="left-profile-bottom-container">
             <div style={{ color: "black" }}>
-              <h1 style={{ fontSize: '38px' }}>Price Details</h1>
-              <p style={{ fontSize: '34px' }}>Citilink (Adult) x1 Rp 1.215.000</p>
-              <p style={{ fontSize: '34px' }}>PCR Coupon FREE</p>
-              <p style={{ fontSize: '34px' }}>Free Protection FREE</p>
-              <h2 style={{ fontSize: '34px' }}>Price you pay <span style={{color : '#6379F4'}}>Rp 1.215.000</span></h2>
+              <h1 style={{ fontSize: "38px" }}>Price Details</h1>
+              <p style={{ fontSize: "34px" }}>
+                Citilink (Adult) x1 Rp 1.215.000
+              </p>
+              <p style={{ fontSize: "34px" }}>PCR Coupon FREE</p>
+              <p style={{ fontSize: "34px" }}>Free Protection FREE</p>
+              <h2 style={{ fontSize: "34px" }}>
+                Price you pay{" "}
+                <span style={{ color: "#6379F4" }}>Rp 1.215.000</span>
+              </h2>
             </div>
           </div>
         </div>
+
         <div className="set-transfer-button-confirmation">
-        <Link to='/billing' style={{ textDecoration: "none" }} >
-          <input type="button" value="Cancel" className="transfer-btn" />
-        </Link>
-        <Link >
-          <input type="button" value="Pay" className="transfer-btn"/>
-        </Link>
-      </div>
+          <Link to="/billing" style={{ textDecoration: "none" }}>
+            <input type="button" value="Cancel" className="transfer-btn" />
+          </Link>
+          <div
+            className="transfer-item-wrapper transfer-confirmation-detail-wrapper"
+            style={{ width: "20rem", height: "5rem" }}
+          >
+            <p className="transfer-secondary-text">Current Balance</p>
+            <p className="transfer-primary-text">
+              {inRupiah(user.accountBalance)}
+            </p>
+          </div>
+          <div
+            className="transfer-item-wrapper transfer-confirmation-detail-wrapper"
+            style={{ width: "20rem", height: "5rem" }}
+          >
+            <p className="transfer-secondary-text">Remaining Balance</p>
+            <p className="transfer-primary-text">
+              {inRupiah(user.accountBalance - nominalTransaksi)}
+            </p>
+            {user.accountBalance - nominalTransaksi >= 0 ? null : (
+              <p className="col-red">Please top up first</p>
+            )}
+          </div>
+          <Link>
+            <input
+              disabled={
+                user.accountBalance - nominalTransaksi >= 0 ? false : true
+              }
+              type="button"
+              value="Pay"
+              className="transfer-btn"
+              onClick={() => onPost()}
+            />
+          </Link>
+        </div>
       </div>
     </div>
   );
