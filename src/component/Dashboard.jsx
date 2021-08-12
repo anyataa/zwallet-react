@@ -2,6 +2,7 @@ import React, { useReducer } from "react";
 import {
   FaBorderAll,
   FaLongArrowAltUp,
+  FaMoneyBill,
   FaPlus,
   FaServicestack,
   FaUserAlt,
@@ -64,7 +65,7 @@ export default function Dashboard() {
               path == "/billing" ? "item-wrapper active" : "item-wrapper"
             }
           >
-            <FaServicestack className="label-size" />
+            <FaMoneyBill className="label-size"></FaMoneyBill>
             <p className="label label-size">Payments</p>
           </div>
         </Link>

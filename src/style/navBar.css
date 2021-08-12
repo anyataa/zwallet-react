@@ -765,9 +765,6 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
   -webkit-box-orient: vertical;

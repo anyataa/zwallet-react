@@ -4,7 +4,7 @@ import { useReducer } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { urlAPI } from "../asset/urls";
+import { urlAPI, urlFile } from "../asset/urls";
 import { setTransactionData } from "../global";
 
 export const SeeAllTransactionItem = (props) => {
@@ -40,8 +40,12 @@ export const SeeAllTransactionItem = (props) => {
             <div className="profile-img">
               <img
                 src={
-                  item.userImage
-                    ? item.userImage
+                  item.senderImage
+                    ? `${urlFile}/${
+                        item.sender == user.userName
+                          ? item.receiverImage
+                          : item.senderImage
+                      }`
                     : "https://i.ibb.co/FHLx6h9/default.png"
                 }
                 alt=""
