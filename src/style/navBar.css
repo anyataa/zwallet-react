@@ -231,10 +231,24 @@
   color: #6379f4;
 }
 
-.card-notification-button-big {
+.photo-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 105%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.photo-row .card-notification-button-big {
   background-color: #6379f4;
   padding: 20px 20px;
-  width: 100%;
+  width: 45%;
   height: 5rem;
   border-radius: 20px;
   -webkit-box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
@@ -258,7 +272,7 @@
   cursor: pointer;
 }
 
-.card-notification-button-big h2 {
+.photo-row .card-notification-button-big h2 {
   color: white;
 }
 
