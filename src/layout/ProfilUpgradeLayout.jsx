@@ -11,9 +11,8 @@ export const ProfilUpgradeLayout = () => {
       <div className="personal-information-top-container">
         {/* <div className="set-to-left"> */}
         <h1 className="col-dark-grey">
-          Upgrade Your Zwallet Account To{" "}
+          Upgrade Your Zwallet Account To <br />
           <span className="col-secondary">
-            {" "}
             Zwallet Premium Account
             <AiFillStar />
           </span>
