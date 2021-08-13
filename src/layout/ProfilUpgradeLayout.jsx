@@ -10,7 +10,7 @@ export const ProfilUpgradeLayout = () => {
       {/* Top */}
       <div className="personal-information-top-container">
         {/* <div className="set-to-left"> */}
-        <h1 className="col-dark-grey">
+        <h1 className="col-dark-grey" style={{ marginRight: "2rem" }}>
           Upgrade Your Zwallet Account To <br />
           <span className="col-secondary">
             Zwallet Premium Account
@@ -84,6 +84,7 @@ export const ProfilUpgradeLayout = () => {
                 <h2 style={{ textAlign: "center" }}>
                   Upload your National Identity Card Photo
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <br />
                   <FaPhotoVideo size={50}></FaPhotoVideo>
                 </h2>
               </div>
@@ -95,6 +96,7 @@ export const ProfilUpgradeLayout = () => {
               <div className="card-notification-button-big ">
                 <h2 style={{ textAlign: "center" }}>
                   Upload Your Photo with National Id Card
+                  <br />
                   <BsPersonSquare size={50} />
                 </h2>
               </div>
