@@ -3,6 +3,7 @@ import { AiFillStar } from "react-icons/ai";
 import { BsPersonSquare } from "react-icons/bs";
 import { FaPersonBooth, FaPhotoVideo } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { ModalStatus } from "../component/ModalStatus";
 
 export const ProfilUpgradeLayout = () => {
   return (
