@@ -53,7 +53,7 @@ export const SeeAllTransactionItem = (props) => {
             </div>
             <div className="profile-data">
               {/* 0 : in , 1 : out */}
-              {item.transactionType > 0 ? (
+              {user.userName != item.sender ? (
                 <h3 className="col-grey">{item.sender}</h3>
               ) : (
                 <h3 className="col-grey">{item.receiver}</h3>
